@@ -1,7 +1,7 @@
 ---
 
 LongMethod:
-  max_statements: 5
+  max_statements: 8
 FeatureEnvy:
   enabled: false
 IrresponsibleModule:
