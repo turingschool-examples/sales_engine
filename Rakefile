@@ -12,7 +12,7 @@ namespace :sanitation do
   task :methods do
     puts ""
     puts "== using reek to check method length =="
-    system("reek -n lib/**/*.rb 2>&1 | grep -v ' 0 warnings'")
+    system("reek -n lib/*.rb 2>&1 | grep -v ' 0 warnings'")
     puts "== done checking method length =="
     puts ""
   end
