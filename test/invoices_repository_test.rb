@@ -13,22 +13,22 @@ class InvoicesRepositoryTest < Minitest::Test
   end
 
   def test_find_by_id
-    entries = respository.find_by_id('10')
+    entries = repository.find_by_id('10')
     assert_equal 1, entries.length
     entries.each do |entry|
       assert_equal "10", entry.id
     end
   end
 
-  def test_find_by_customer_id
-    skip
-  end
-
-  def test_find_by_merchant_id
-    skip
-  end
-
-  def test_find_by_status
-    skip
-  end
+  # def test_find_by_customer_id
+  #   skip
+  # end
+  #
+  # def test_find_by_merchant_id
+  #   skip
+  # end
+  #
+  # def test_find_by_status
+  #   skip
+  # end
 end
