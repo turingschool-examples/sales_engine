@@ -1,6 +1,5 @@
-require          'csv'
+require          'csv' && 'pry'
 require_relative 'entry_merchant'
-require 'pry'
 
 class MerchantRepository
 
