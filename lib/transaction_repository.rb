@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'entry_transaction'
+require_relative 'transaction_entry'
 
 class TransactionRepository
 
@@ -24,6 +24,7 @@ class TransactionRepository
   def find_by_invoice_id(id)
     entries.detect { |entry| entry.invoice_id == id}
   end
+
 
   def find_all_invoice_id(id)
     entries.select { |entry| entry.invoice_id == id }

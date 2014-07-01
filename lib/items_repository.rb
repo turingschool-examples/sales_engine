@@ -1,5 +1,5 @@
 require          'csv'
-require_relative 'entry_items'
+require_relative 'items_entry'
 
 class ItemsRepository
 
@@ -40,7 +40,7 @@ class ItemsRepository
   def find_all_by_merchant_id(merchant_id)
     entries.select { |entry| entry.merchant_id == merchant_id }
   end
-
+  
 
 
 end

@@ -1,5 +1,5 @@
 require          'csv'
-require_relative 'entry_invoices'
+require_relative 'invoices_entry'
 
 class InvoicesRepository
 
@@ -34,7 +34,7 @@ class InvoicesRepository
   end
 
   def find_all_by_merchant_id(merchant_id)
-    
+
     entries.select { |entry| entry.merchant_id == merchant_id }.sort_by {|e| e.merchant_id}
   end
 

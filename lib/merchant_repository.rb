@@ -1,5 +1,6 @@
-require          'csv' 
-require_relative 'entry_merchant'
+require          'csv'
+require_relative 'merchant_entry'
+require_relative 'items_repository'
 
 class MerchantRepository
 
@@ -11,18 +12,19 @@ class MerchantRepository
     new(rows)
   end
 
-  attr_reader :entries
+  attr_reader :entries, :items
 
   def initialize(entries)
     @entries = entries
+    @items = ItemsRepository.load
   end
 
   def find_by_id(id)
-    entries.select { |entry| entry.id == id }.sort_by {|e| e.id}
+    entries.select { |entry| entry.id == id }
   end
 
   def find_all_by_name(name)
-    entries.select { |entry| entry.send(:name) == name }#.sort_by {|e| e.name}
+    entries.select { |entry| entry.send(:name) == name }
   end
 
   def find_by_name(name)
@@ -32,6 +34,11 @@ class MerchantRepository
   def randomize
     entries.shuffle.first
   end
+
+  # def item
+  #   entry = find_by_name(merchant_name)
+  #   items.find_all_by_merchant_id(entry.id)
+  # end
 
 
 end

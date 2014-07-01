@@ -1,5 +1,5 @@
 require          'csv'
-require_relative 'entry_invoice_items'
+require_relative 'invoice_items_entry'
 
 class InvoiceItemsRepository
 
@@ -52,5 +52,5 @@ class InvoiceItemsRepository
   def find_all_by_unit_price(unit_price)
     entries.select {|entry| entry.unit_price == unit_price }
   end
-  
+
 end
