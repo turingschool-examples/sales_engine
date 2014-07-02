@@ -3,18 +3,16 @@ require_relative 'customer_entry'
 
 class CustomerRepository
 
-  def self.load
-    data = CSV.open('test/fixtures/small_customers.csv', headers: true, header_converters: :symbol)
-    rows = data.map do |row|
-      CustomerEntry.new(row)
+  def load(filename)
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
+      @entries << EntryCustomer.new(row)
     end
-    new(rows)
   end
 
   attr_reader :entries
 
   def initialize(entries)
-    @entries = entries
+    @entries = []
   end
 
   def find_by_id(id)

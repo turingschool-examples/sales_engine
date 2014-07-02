@@ -3,18 +3,16 @@ require_relative 'invoice_items_entry'
 
 class InvoiceItemsRepository
 
-  def self.load
-    data = CSV.open('test/fixtures/small_invoice_items.csv', headers: true, header_converters: :symbol)
-    rows = data.map do |row|
-      EntryInvoiceItems.new(row)
+  def load(filename)
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
+      @entries << EntryInvoiceItems.new(row)
     end
-    new(rows)
   end
 
   attr_reader :entries
 
-  def initialize(entries)
-    @entries = entries
+  def initialize
+    @entries = []
   end
 
   def find_by_id(id)

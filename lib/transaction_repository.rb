@@ -3,18 +3,16 @@ require_relative 'transaction_entry'
 
 class TransactionRepository
 
-  def self.load
-    data = CSV.open('test/fixtures/small_transaction.csv', headers: true, header_converters: :symbol)
-    rows = data.map do |row|
-      EntryTransaction.new(row)
+  def load(filename)
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
+      @entries << EntryItems.new(row)
     end
-    new(rows)
   end
 
   attr_reader :entries
 
-  def initialize(entries)
-    @entries = entries
+  def initialize
+    @entries = []
   end
 
   def find_by_id(id)

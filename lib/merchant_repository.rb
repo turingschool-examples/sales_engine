@@ -4,18 +4,16 @@ require_relative 'items_repository'
 
 class MerchantRepository
 
-  def self.load
-    data = CSV.open('test/fixtures/small_merchants.csv', headers: true, header_converters: :symbol)
-    rows = data.map do |row|
-      EntryMerchant.new(row)
+  def load(filename)
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
+      @entries << EntryMerchant.new(row)
     end
-    new(rows)
   end
 
   attr_reader :entries, :items
 
-  def initialize(entries)
-    @entries = entries
+  def initialize
+    @entries = []
     # @items = ItemsRepository.load
   end
 
