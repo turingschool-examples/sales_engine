@@ -32,11 +32,11 @@ class MerchantRepositoryTest < Minitest::Test
       assert_equal "Bosco, Howe and Davis", entry.name
     end
   end
-
-  def test_random_merchant
-    entry = repository.randomize
-    assert entry.respond_to?(:name)
-  end
+  #
+  # def test_random_merchant
+  #   entry = repository.randomize
+  #   assert entry.respond_to?(:name)
+  # end
 
   # def test_finds_matching_items_for_merchant_name
   #   entry = repository.find_by_name("Schroeder-Jerde")

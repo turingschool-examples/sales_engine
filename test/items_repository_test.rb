@@ -9,7 +9,8 @@ class ItemsRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository ||= ItemsRepository.load
+    @repository = ItemsRepository.new()
+    @repository.load('test/fixtures/small_items.csv')
   end
 
   def test_find_by_id
@@ -51,4 +52,5 @@ class ItemsRepositoryTest < Minitest::Test
       assert_equal "999", entry.merchant_id
     end
   end
+
 end

@@ -16,7 +16,7 @@ class MerchantRepository
 
   def initialize(entries)
     @entries = entries
-    @items = ItemsRepository.load
+    # @items = ItemsRepository.load
   end
 
   def find_by_id(id)

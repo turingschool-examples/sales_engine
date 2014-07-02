@@ -3,18 +3,16 @@ require_relative 'items_entry'
 
 class ItemsRepository
 
-  def self.load
-    data = CSV.open('test/fixtures/small_items.csv', headers: true, header_converters: :symbol)
-    rows = data.map do |row|
-      EntryItems.new(row)
+  def load(filename)
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
+      @entries << EntryItems.new(row)
     end
-    new(rows)
   end
 
   attr_reader :entries
 
-  def initialize(entries)
-    @entries = entries
+  def initialize
+    @entries = []
   end
 
   def find_by_id(id)
@@ -40,7 +38,7 @@ class ItemsRepository
   def find_all_by_merchant_id(merchant_id)
     entries.select { |entry| entry.merchant_id == merchant_id }
   end
-  
+
 
 
 end
