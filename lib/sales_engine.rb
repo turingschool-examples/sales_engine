@@ -4,32 +4,36 @@ require_relative 'items_repository'
 require_relative 'invoice_items_repository'
 require_relative 'customer_repository'
 require_relative 'transaction_repository'
+require 'pry'
 
 class Engine
+
   attr_accessor :merchant_repository,
                 :invoice_repository,
                 :item_repository,
-                :transaction_repository
+                :transaction_repository,
+                :invoice_items_repository
+
 
   def initialize(test_mode = false)
     @test_mode = test_mode
   end
 
   def startup
-    case
-    when @test_mode then test_mode_repositories
-    else real_life_repositories
+    case @test_mode
+    when true  then the_test_mode_repositories
+    when false then real_life_repositories
     end
-    
+
     merchant_relationship
     invoice_relationship
   end
 
-  def test_mode_repositories
+  def the_test_mode_repositories
     @merchant_repository     ||= MerchantRepository.new
-    @invoice_repository      ||=  InvoicesRepository.new
+    @invoice_repository      ||= InvoicesRepository.new
     @item_repository         ||= ItemsRepository.new
-    @invoice_item_repository ||= InvoiceItemsRepository.new
+    @invoice_items_repository ||= InvoiceItemsRepository.new
     @customer_repository     ||= CustomerRepository.new
     @transaction_repository  ||= TransactionRepository.new
   end
@@ -44,15 +48,17 @@ class Engine
   end
 
   def merchant_relationship
-    merchant_repository.all.each do |merchant|
+    @merchant_repository.all.each do |merchant|
       merchant.invoices = invoice_repository.find_all_by_merchant_id(merchant.id)
       merchant.items    = item_repository.find_all_by_merchant_id(merchant.id)
     end
   end
 
   def invoice_relationship
-    invoice_repository.all.each do |invoice|
-      invoice.transaction = transaction_repository.find_by_invoice_id(invoice.id)
+    @invoice_repository.all.each do |invoice|
+      invoice.transaction   = transaction_repository.find_by_invoice_id(invoice.id)
+      invoice.invoice_items = invoice_items_repository.find_by_invoice_id(invoice.id)
+      invoice.items         = items_repository.find_all_by_invoice_id(id)
     end
   end
 
