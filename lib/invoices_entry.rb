@@ -9,7 +9,8 @@ class InvoiceEntry
 
   attr_accessor :transaction,
                 :invoice_items,
-                :items
+                :items,
+                :customer
 
   def initialize(data)
     @id           = data[:id]

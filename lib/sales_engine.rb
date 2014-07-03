@@ -12,7 +12,8 @@ class Engine
                 :invoice_repository,
                 :item_repository,
                 :transaction_repository,
-                :invoice_items_repository
+                :invoice_items_repository,
+                :customer_repository
 
 
   def initialize(test_mode = false)
@@ -20,9 +21,9 @@ class Engine
   end
 
   def startup
-    case @test_mode
-    when true  then the_test_mode_repositories
-    when false then real_life_repositories
+    case
+    when @test_mode then the_test_mode_repositories
+    else real_life_repositories
     end
 
     merchant_relationship
@@ -30,12 +31,12 @@ class Engine
   end
 
   def the_test_mode_repositories
-    @merchant_repository     ||= MerchantRepository.new
-    @invoice_repository      ||= InvoicesRepository.new
-    @item_repository         ||= ItemsRepository.new
+    @merchant_repository      ||= MerchantRepository.new
+    @invoice_repository       ||= InvoicesRepository.new
+    @item_repository          ||= ItemsRepository.new
     @invoice_items_repository ||= InvoiceItemsRepository.new
-    @customer_repository     ||= CustomerRepository.new
-    @transaction_repository  ||= TransactionRepository.new
+    @customer_repository      ||= CustomerRepository.new
+    @transaction_repository   ||= TransactionRepository.new
   end
 
   def real_life_repositories
@@ -56,9 +57,11 @@ class Engine
 
   def invoice_relationship
     @invoice_repository.all.each do |invoice|
-      invoice.transaction   = transaction_repository.find_by_invoice_id(invoice.id)
-      invoice.invoice_items = invoice_items_repository.find_by_invoice_id(invoice.id)
-      invoice.items         = items_repository.find_all_by_invoice_id(id)
+      invoice.transaction   = transaction_repository.find_all_by_invoice_id(invoice.id)
+      invoice.invoice_items = invoice_items_repository.find_all_by_invoice_id(invoice.id)
+      invoice.customer      = customer_repository.find_by_id(invoice.customer_id)
+      # invoice.items         = item_repository.find_all_by_id(invoice.invoice_items)
+
     end
   end
 
