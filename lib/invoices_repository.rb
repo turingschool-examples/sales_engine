@@ -6,7 +6,7 @@ class InvoicesRepository < Repository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryInvoice.new(row, self)
+      @entries << EntryInvoice.new(row)
     end
   end
 

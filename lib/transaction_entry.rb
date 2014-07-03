@@ -6,8 +6,7 @@ class TransactionEntry
               :credit_card_expiration_date,
               :result,
               :created_at,
-              :updated_at,
-              :repo
+              :updated_at
 
   def initialize(data)
     @id                          = data[:id]
@@ -17,7 +16,6 @@ class TransactionEntry
     @result                      = data[:result]
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
-    @repo                        = repo
   end
 
 end

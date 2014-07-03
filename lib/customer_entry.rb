@@ -4,8 +4,7 @@ class CustomerEntry
               :first_name,
               :last_name,
               :created_at,
-              :updated_at,
-              :repo
+              :updated_at
 
   def initialize(data, repo)
     @id         = data[:id]
@@ -13,6 +12,5 @@ class CustomerEntry
     @last_name  = data[:last_name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @repo       = repo
   end
 end

@@ -3,8 +3,7 @@ class MerchantEntry
   attr_reader :id,
               :name,
               :created_at,
-              :updated_at,
-              :repo
+              :updated_at
 
   attr_accessor :invoices, :items
 
@@ -13,6 +12,6 @@ class MerchantEntry
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    # @repo       = repo
+
   end
 end

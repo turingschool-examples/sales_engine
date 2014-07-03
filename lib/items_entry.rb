@@ -5,8 +5,7 @@ class ItemEntry
               :unit_price,
               :merchant_id,
               :created_at,
-              :updated_at,
-              :repo
+              :updated_at
 
   def initialize(data)
     @id          = data[:id]
@@ -15,6 +14,5 @@ class ItemEntry
     @merchant_id = data[:merchant_id]
     @created_at  = data[:created_at]
     @updated_at  = data[:updated_at]
-    @repo        = repo
   end
 end
