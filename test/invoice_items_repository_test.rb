@@ -4,21 +4,18 @@ require 'minitest/pride'
 require_relative '../lib/invoice_items_repository'
 require 'pry'
 
-class InvoicesRepositoryTest < Minitest::Test
+class InvoiceItemRepositoryTest < Minitest::Test
 
   attr_reader :repository
 
   def setup
-    @repository = ItemsRepository.new()
-    @repository.load('test/fixtures/small_items.csv')
+    @repository = InvoiceItemsRepository.new()
+    @repository.load('test/fixtures/small_invoice_items.csv')
   end
 
   def test_find_by_id
-    entries = repository.find_by_id('8')
-    assert_equal 1, entries.length
-    entries.each do |entry|
-      assert_equal "8", entry.id
-    end
+    entry = repository.find_by_id('8')
+    assert_equal "8", entry.id
   end
 
   def test_find_by_item_id
@@ -72,6 +69,11 @@ class InvoicesRepositoryTest < Minitest::Test
     entries.each do |entry|
       assert_equal "1999", entry.unit_price
     end
+  end
+
+  def test_random
+    entry = repository.randomize
+    assert entry.respond_to?(:quantity)
   end
 
 end

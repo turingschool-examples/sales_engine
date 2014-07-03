@@ -6,10 +6,10 @@ class MerchantRepository < Repository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryMerchant.new(row)
+      @objects << MerchantEntry.new(row)
     end
   end
 
-  attr_reader :entries
+  attr_reader :objects
 
 end

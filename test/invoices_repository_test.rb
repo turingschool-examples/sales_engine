@@ -9,16 +9,13 @@ class InvoicesRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository = ItemsRepository.new()
-    @repository.load('test/fixtures/small_items.csv')
+    @repository = InvoicesRepository.new()
+    @repository.load('test/fixtures/small_invoices.csv')
   end
 
   def test_find_by_id
-    entries = repository.find_by_id('10')
-    assert_equal 1, entries.length
-    entries.each do |entry|
-      assert_equal "10", entry.id
-    end
+    entry = repository.find_by_id('10')
+    assert_equal "10", entry.id
   end
 
   def test_find_by_customer_id
@@ -58,5 +55,10 @@ class InvoicesRepositoryTest < Minitest::Test
     entries.each do |entry|
       assert_equal "shipped", entry.status
     end
+  end
+
+  def test_random
+    entry = repository.randomize
+    assert entry.respond_to?(:status)
   end
 end

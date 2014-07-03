@@ -6,7 +6,7 @@ class CustomerEntry
               :created_at,
               :updated_at
 
-  def initialize(data, repo)
+  def initialize(data)
     @id         = data[:id]
     @first_name = data[:first_name]
     @last_name  = data[:last_name]

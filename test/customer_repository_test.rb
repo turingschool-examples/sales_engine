@@ -7,16 +7,13 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository = ItemsRepository.new()
-    @repository.load('test/fixtures/small_items.csv')
+    @repository = CustomerRepository.new
+    @repository.load('test/fixtures/small_customers.csv')
   end
 
   def test_find_by_id
-    entries = repository.find_by_id('16')
-    assert_equal 1, entries.length
-    entries.each do |entry|
-      assert_equal "16", entry.id
-    end
+    entry = repository.find_by_id('16')
+    assert_equal "16", entry.id
   end
 
   def test_find_by_first_name
@@ -25,7 +22,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_first_name
-    entries = repository.find_all_first_name('Joey')
+    entries = repository.find_all_by_first_name('Joey')
     assert_equal 2, entries.length
     entries.each do |entry|
       assert_equal 'Joey', entry.first_name
@@ -38,7 +35,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_find_all_last_name
-    entries = repository.find_all_last_name('Kris')
+    entries = repository.find_all_by_last_name('Kris')
     assert_equal 2, entries.length
     entries.each do |entry|
       assert_equal 'Kris', entry.last_name

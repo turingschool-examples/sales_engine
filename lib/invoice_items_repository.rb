@@ -6,8 +6,10 @@ class InvoiceItemsRepository < Repository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryInvoiceItems.new(row)
+      @objects << InvoiceItemsEntry.new(row)
     end
   end
-  attr_reader :entries
+
+  attr_reader :objects
+
 end

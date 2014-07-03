@@ -14,11 +14,8 @@ class ItemsRepositoryTest < Minitest::Test
   end
 
   def test_find_by_id
-    entries = repository.find_by_id('10')
-    assert_equal 1, entries.length
-    entries.each do |entry|
-      assert_equal "10", entry.id
-    end
+    entry = repository.find_by_id('10')
+    assert_equal "10", entry.id
   end
 
   def test_find_by_name
@@ -51,6 +48,11 @@ class ItemsRepositoryTest < Minitest::Test
     entries.each do |entry|
       assert_equal "999", entry.merchant_id
     end
+  end
+
+  def test_random
+    entry = repository.randomize
+    assert entry.respond_to?(:merchant_id)
   end
 
 end

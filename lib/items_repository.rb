@@ -6,10 +6,10 @@ class ItemsRepository < Repository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryItems.new(row)
+      @objects << ItemEntry.new(row)
     end
   end
 
-  attr_reader :entries
+  attr_reader :objects
 
 end
