@@ -5,14 +5,14 @@ class CustomerRepository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryCustomer.new(row)
+      @entries << EntryCustomer.new(row, self)
     end
   end
 
   attr_reader :entries
 
-  def initialize(entries)
-    @entries = []
+  def initialize(entries = [])
+    @entries = entries
   end
 
   def find_by_id(id)

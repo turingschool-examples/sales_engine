@@ -7,7 +7,8 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository ||= TransactionRepository.load
+    @repository = TransactionRepository.new(self)
+    @repository.load('test/fixtures/small_transaction.csv')
   end
 
   def test_find_by_id

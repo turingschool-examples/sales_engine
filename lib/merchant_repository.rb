@@ -1,36 +1,28 @@
 require          'csv'
 require_relative 'merchant_entry'
 require_relative 'items_repository'
+require_relative 'repository'
 
-class MerchantRepository
+class MerchantRepository < Repository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryMerchant.new(row)
+      @entries << EntryMerchant.new(row, self)
     end
   end
 
-  attr_reader :entries, :items
-
-  def initialize
-    @entries = []
-    # @items = ItemsRepository.load
-  end
-
-  def find_by_id(id)
-    entries.select { |entry| entry.id == id }
-  end
+  attr_reader :entries
 
   def find_all_by_name(name)
-    entries.select { |entry| entry.send(:name) == name }
+    objects.select { |entry| entry.send(:name) == name }
   end
 
   def find_by_name(name)
-    entries.detect { |entry| entry.name == name}
+    objects.detect { |entry| entry.name == name}
   end
 
   def randomize
-    entries.shuffle.first
+    objects.shuffle.first
   end
 
   # def item

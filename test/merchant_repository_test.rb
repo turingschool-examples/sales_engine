@@ -9,7 +9,8 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository ||= MerchantRepository.load
+    @repository = ItemsRepository.new()
+    @repository.load('test/fixtures/small_items.csv')
   end
 
   def test_find_by_id

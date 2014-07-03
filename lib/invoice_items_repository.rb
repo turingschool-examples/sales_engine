@@ -5,14 +5,15 @@ class InvoiceItemsRepository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @entries << EntryInvoiceItems.new(row)
+      @entries << EntryInvoiceItems.new(row, self)
     end
   end
 
   attr_reader :entries
 
-  def initialize
-    @entries = []
+  def initialize(entries = [])
+    @entries = entries
+
   end
 
   def find_by_id(id)

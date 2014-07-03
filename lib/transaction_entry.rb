@@ -1,4 +1,4 @@
-class EntryTransaction
+class TransactionEntry
 
   attr_reader :id,
               :invoice_id,
@@ -6,7 +6,8 @@ class EntryTransaction
               :credit_card_expiration_date,
               :result,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repo
 
   def initialize(data)
     @id                          = data[:id]
@@ -16,6 +17,7 @@ class EntryTransaction
     @result                      = data[:result]
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
+    @repo                        = repo
   end
 
 end

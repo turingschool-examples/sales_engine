@@ -1,4 +1,4 @@
-class EntryInvoices
+class InvoiceEntry
 
   attr_reader :id,
               :customer_id,
@@ -7,6 +7,8 @@ class EntryInvoices
               :created_at,
               :updated_at
 
+  attr_accessor :transaction
+
   def initialize(data)
     @id           = data[:id]
     @customer_id  = data[:customer_id]
@@ -14,5 +16,6 @@ class EntryInvoices
     @status       = data[:status]
     @created_at   = data[:created_at]
     @updated_at   = data[:updated_at]
+    # @repo         = repo
   end
 end
