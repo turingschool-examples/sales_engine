@@ -23,19 +23,6 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal "Item Qui Esse", entry.name
   end
 
-  def test_find_by_unit_price
-    entry = repository.find_by_unit_price('4291')
-    assert_equal "4291", entry.unit_price
-  end
-
-  def test_find_all_by_unit_price
-    entries = repository.find_all_by_unit_price('75107')
-    assert_equal 2, entries.length
-    entries.each do |entry|
-      assert_equal "75107", entry.unit_price
-    end
-  end
-
   def test_find_by_merchant_id
     entry = repository.find_by_merchant_id('777')
     assert_equal "777", entry.merchant_id
@@ -53,6 +40,11 @@ class ItemRepositoryTest < Minitest::Test
   def test_random
     entry = repository.random
     assert entry.respond_to?(:merchant_id)
+  end
+
+  def test_find_by_unit_price
+    entry = repository.find_by_unit_price(BigDecimal.new("935.19"))
+    assert_equal 'Item Dolorem Et', entry.name
   end
 
 end
