@@ -1,7 +1,7 @@
 gem 'minitest', '~>5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/invoice_items_repository'
+require_relative '../lib/invoice_item_repository'
 require 'pry'
 
 class InvoiceItemRepositoryTest < Minitest::Test
@@ -9,7 +9,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository = InvoiceItemsRepository.new()
+    @repository = InvoiceItemRepository.new()
     @repository.load('test/fixtures/small_invoice_items.csv')
   end
 
@@ -45,7 +45,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_quantity
-
     entry = repository.find_by_quantity('5')
     assert_equal "5", entry.quantity
   end
@@ -72,7 +71,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_random
-    entry = repository.randomize
+    entry = repository.random
     assert entry.respond_to?(:quantity)
   end
 

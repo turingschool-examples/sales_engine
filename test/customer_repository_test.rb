@@ -43,7 +43,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_random
-    entry = repository.randomize
+    entry = repository.random
     assert entry.respond_to?(:first_name)
   end
 end

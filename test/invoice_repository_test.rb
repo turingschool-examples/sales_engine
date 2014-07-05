@@ -1,15 +1,15 @@
 gem 'minitest', '~>5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/invoices_repository'
+require_relative '../lib/invoice_repository'
 require 'pry'
 
-class InvoicesRepositoryTest < Minitest::Test
+class InvoiceRepositoryTest < Minitest::Test
 
   attr_reader :repository
 
   def setup
-    @repository = InvoicesRepository.new()
+    @repository = InvoiceRepository.new()
     @repository.load('test/fixtures/small_invoices.csv')
   end
 
@@ -58,7 +58,7 @@ class InvoicesRepositoryTest < Minitest::Test
   end
 
   def test_random
-    entry = repository.randomize
+    entry = repository.random
     assert entry.respond_to?(:status)
   end
 end

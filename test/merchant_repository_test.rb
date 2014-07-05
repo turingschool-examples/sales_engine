@@ -32,7 +32,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_random_merchant
-    entry = repository.randomize
+    entry = repository.random
     assert entry.respond_to?(:name)
   end
 

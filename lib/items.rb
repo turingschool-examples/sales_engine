@@ -1,4 +1,4 @@
-class ItemEntry
+class Item
 
   attr_reader :id,
               :name,

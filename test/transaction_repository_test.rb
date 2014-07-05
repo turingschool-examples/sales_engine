@@ -30,7 +30,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_random
-    entry = repository.randomize
+    entry = repository.random
     assert entry.respond_to?(:invoice_id)
   end
 end

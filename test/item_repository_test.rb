@@ -1,15 +1,15 @@
 gem 'minitest', '~>5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/items_repository'
+require_relative '../lib/item_repository'
 require 'pry'
 
-class ItemsRepositoryTest < Minitest::Test
+class ItemRepositoryTest < Minitest::Test
 
   attr_reader :repository
 
   def setup
-    @repository = ItemsRepository.new()
+    @repository = ItemRepository.new()
     @repository.load('test/fixtures/small_items.csv')
   end
 
@@ -51,7 +51,7 @@ class ItemsRepositoryTest < Minitest::Test
   end
 
   def test_random
-    entry = repository.randomize
+    entry = repository.random
     assert entry.respond_to?(:merchant_id)
   end
 

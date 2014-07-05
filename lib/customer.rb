@@ -1,16 +1,19 @@
-class MerchantEntry
+class Customer
 
   attr_reader :id,
-              :name,
+              :first_name,
+              :last_name,
               :created_at,
               :updated_at
 
-  attr_accessor :invoices, :items
+  attr_accessor :invoice
 
   def initialize(data)
     @id         = data[:id]
-    @name       = data[:name]
+    @first_name = data[:first_name]
+    @last_name  = data[:last_name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
+
   end
 end

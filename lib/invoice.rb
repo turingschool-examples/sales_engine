@@ -1,4 +1,4 @@
-class InvoiceEntry
+class Invoice
 
   attr_reader :id,
               :customer_id,
@@ -7,7 +7,7 @@ class InvoiceEntry
               :created_at,
               :updated_at
 
-  attr_accessor :transaction,
+  attr_accessor :transactions,
                 :invoice_items,
                 :items,
                 :customer,

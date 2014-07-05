@@ -1,4 +1,4 @@
-class InvoiceItemsEntry
+class InvoiceItem
 
   attr_reader :id,
               :item_id,
@@ -8,7 +8,7 @@ class InvoiceItemsEntry
               :created_at,
               :updated_at
 
-  attr_accessor :items
+  attr_accessor :item
 
   def initialize(data)
     @id         = data[:id]

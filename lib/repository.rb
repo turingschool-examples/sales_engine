@@ -9,7 +9,7 @@ class Repository
     @objects
   end
 
-  def randomize
+  def random
     @objects.sample
   end
 

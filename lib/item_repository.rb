@@ -1,12 +1,12 @@
 require          'csv'
-require_relative 'items_entry'
+require_relative 'items'
 require_relative 'repository'
 
-class ItemsRepository < Repository
+class ItemRepository < Repository
 
   def load(filename)
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @objects << ItemEntry.new(row)
+      @objects << Item.new(row)
     end
   end
 
