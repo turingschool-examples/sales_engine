@@ -6,6 +6,8 @@ class CustomerEntry
               :created_at,
               :updated_at
 
+  attr_accessor :invoices
+
   def initialize(data)
     @id         = data[:id]
     @first_name = data[:first_name]

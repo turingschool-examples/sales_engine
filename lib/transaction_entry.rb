@@ -8,6 +8,8 @@ class TransactionEntry
               :created_at,
               :updated_at
 
+  attr_accessor :invoice
+
   def initialize(data)
     @id                          = data[:id]
     @invoice_id                  = data[:invoice_id]

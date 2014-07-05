@@ -8,6 +8,8 @@ class InvoiceItemsEntry
               :created_at,
               :updated_at
 
+  attr_accessor :items
+
   def initialize(data)
     @id         = data[:id]
     @item_id    = data[:item_id]

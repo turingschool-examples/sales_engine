@@ -7,6 +7,9 @@ class ItemEntry
               :created_at,
               :updated_at
 
+  attr_accessor :invoice_items,
+                :merchant
+
   def initialize(data)
     @id          = data[:id]
     @name        = data[:name]

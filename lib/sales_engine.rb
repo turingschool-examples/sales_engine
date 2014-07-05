@@ -6,7 +6,7 @@ require_relative 'customer_repository'
 require_relative 'transaction_repository'
 require 'pry'
 
-class Engine
+class SalesEngine
 
   attr_accessor :merchant_repository,
                 :invoice_repository,
@@ -27,7 +27,11 @@ class Engine
     end
 
     merchant_relationship
+    invoice_items_relationship
     invoice_relationship
+    item_relationship
+    transaction_relationship
+    customer_relationship
   end
 
   def the_test_mode_repositories
@@ -55,14 +59,47 @@ class Engine
     end
   end
 
+  def invoice_items_relationship
+    @invoice_items_repository.all.each do |invoice_item|
+      invoice_item.items = item_repository.find_all_by_id(invoice_item.item_id)
+    end
+  end
+
+  def invoice_items_list(invoice)
+    @items = []
+    invoice.invoice_items.each do |invoice_item|
+      @items += invoice_item.items
+    end
+    return @items
+  end
+
   def invoice_relationship
     @invoice_repository.all.each do |invoice|
       invoice.transaction   = transaction_repository.find_all_by_invoice_id(invoice.id)
       invoice.invoice_items = invoice_items_repository.find_all_by_invoice_id(invoice.id)
       invoice.customer      = customer_repository.find_by_id(invoice.customer_id)
-      # invoice.items         = item_repository.find_all_by_id(invoice.invoice_items)
-
+      # binding.pry
+      invoice.items         = invoice_items_list(invoice)
+      invoice.merchant      = merchant_repository.find_by_id(invoice.merchant_id)
     end
   end
 
+  def item_relationship
+    @item_repository.all.each do |item|
+      item.invoice_items = invoice_items_repository.find_all_by_item_id(item.id)
+      item.merchant      = merchant_repository.find_by_id(item.merchant_id)
+    end
+  end
+
+  def transaction_relationship
+    @transaction_repository.all.each do |transaction|
+      transaction.invoice = invoice_repository.find_by_id(transaction.invoice_id)
+    end
+  end
+
+  def customer_relationship
+    @customer_repository.all.each do |customer|
+      customer.invoices = invoice_repository.find_all_by_customer_id(customer.id)
+    end
+  end
 end
