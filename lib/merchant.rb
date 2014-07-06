@@ -13,24 +13,21 @@ class Merchant
   def initialize(data)
     @id         = data[:id]
     @name       = data[:name]
-    @created_at = nil
-    @updated_at = nil
+    @created_at = data[:created_at]
+    @updated_at = data[:updated_at]
     @amount     = 0
-    @items      = data[:items]
+    @invoices   = data[:invoices]
   end
-
-
 
   def revenue(date = nil)
-    @items.each do |item|
-      if date != nil
-        if item.updated_at == date
-          @amount += item.unit_price
-        end
-      else
-        @amount += item.unit_price
+    @invoices.each do |invoice|
+      case date
+      when invoice.updated_at then @amount += invoice.revenue
+      when nil                then @amount += invoice.revenue
       end
     end
-    BigDecimal.new(@amount)
+    BigDecimal.new(@amount.to_s)
   end
+
+
 end

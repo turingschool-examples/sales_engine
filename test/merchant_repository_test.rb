@@ -2,6 +2,9 @@ gem 'minitest', '~>5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/merchant_repository'
+require_relative '../lib/invoice_item'
+require_relative '../lib/invoice'
+
 require 'pry'
 
 class MerchantRepositoryTest < Minitest::Test
@@ -38,12 +41,15 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_most_revenue
-    item = Item.new(unit_price: '1111')
-    item2 = Item.new(unit_price: '2222')
-    item3 = Item.new(unit_price: '3333')
-    merchant = Merchant.new(name: 'merchant', items: [item])
-    merchant2 = Merchant.new(name: 'merchant2', items: [item, item2])
-    merchant3 = Merchant.new(name: 'merchant3', items: [item, item2, item3])
+    invoice_item1 = InvoiceItem.new(quantity: '1', unit_price: '3333')
+    invoice_item2 = InvoiceItem.new(quantity: '2', unit_price: '4312')
+    invoice_item3 = InvoiceItem.new(quantity: '3', unit_price: '1234')
+    invoice1 = Invoice.new(invoice_items: [invoice_item1, invoice_item3], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
+    invoice2 = Invoice.new(invoice_items: [invoice_item1, invoice_item3], status: 'shipped', updated_at:'2012-03-24 09:54:09 UTC')
+    invoice3 = Invoice.new(invoice_items: [invoice_item2, invoice_item3], status: 'shipped', updated_at:'2012-03-26 09:54:09 UTC')
+    merchant = Merchant.new(name: 'merchant', invoices: [invoice1, invoice2])
+    merchant2 = Merchant.new(name: 'merchant2',invoices: [invoice2, invoice3])
+    merchant3 = Merchant.new(name: 'merchant3', invoices: [invoice3, invoice1])
     repository = MerchantRepository.new([merchant, merchant2, merchant3])
     most = repository.most_revenue(2)
     assert_equal 'merchant', most.first.name
