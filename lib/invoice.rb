@@ -25,16 +25,17 @@ class Invoice < Repository
     @created_at    = date_parse(data[:created_at])
     @updated_at    = date_parse(data[:updated_at])
     @invoice_items = data[:invoice_items]
-    @amount        = BigDecimal.new("0")
+    # @amount        = BigDecimal.new("0")
   end
 
   def revenue(date = nil)
+    amount = 0
     if status?
       @invoice_items.each do |invoice_items|
-        @amount += invoice_items.revenue
+        amount += invoice_items.revenue
       end
     end
-    @amount
+    amount
   end
 
   def date_parse(date)

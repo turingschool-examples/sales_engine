@@ -26,4 +26,7 @@ class MerchantRepository < Repository
     top_revenue[0..number]
   end
 
+  
+
+
 end
