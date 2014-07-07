@@ -15,18 +15,17 @@ class Merchant
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    @amount     = 0
+    @amount     = BigDecimal.new('0')
     @invoices   = data[:invoices]
   end
 
   def revenue(date = nil)
     @invoices.each do |invoice|
-      case date
-      when invoice.updated_at then @amount += invoice.revenue
-      when nil                then @amount += invoice.revenue
+      if date == nil || date == invoice.updated_at
+        @amount += invoice.revenue
       end
     end
-    BigDecimal.new(@amount.to_s)
+    @amount
   end
 
 

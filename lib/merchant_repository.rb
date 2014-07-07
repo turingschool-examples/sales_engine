@@ -15,6 +15,15 @@ class MerchantRepository < Repository
 
   attr_reader :objects
 
+  def revenue(date)
+
+    objects.reduce(0) do |sum, amount|
+      sum + amount
+    end
+
+
+  end
+
   def most_revenue(number)
     top_revenue = objects.sort_by { |merchant| merchant.revenue }
     top_revenue[0..number]

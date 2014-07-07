@@ -8,7 +8,7 @@ class InvoiceItemTest < Minitest::Test
 
   def test_revenue
     invoice_item = InvoiceItem.new(quantity: '2', unit_price: '21212')
-    assert_equal '00', invoice_item.revenue
+    assert_equal BigDecimal.new('424.24'), invoice_item.revenue
   end
 
 end

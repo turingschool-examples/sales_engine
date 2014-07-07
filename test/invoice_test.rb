@@ -10,6 +10,6 @@ class InvoiceTest < Minitest::Test
     @invoice_item1 = InvoiceItem.new(quantity: '1', unit_price: '1234')
     @invoice_item2 = InvoiceItem.new(quantity: '2', unit_price: '4321')
     @invoice       = Invoice.new(invoice_items: [@invoice_item1, @invoice_item2], status: 'shipped')
-    assert_equal 98.76, @invoice.revenue
+    assert_equal BigDecimal.new('98.76'), @invoice.revenue
   end
 end

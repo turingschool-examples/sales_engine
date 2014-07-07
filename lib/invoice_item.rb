@@ -24,13 +24,12 @@ class InvoiceItem
 
 
   def price(number)
-    price = number.to_f / 100
+    price = number.to_f / BigDecimal.new('100')
     BigDecimal.new(price.to_s)
   end
 
   def revenue
     amount = BigDecimal.new(@quantity) * @unit_price
-    amount.to_f
   end
 
 end

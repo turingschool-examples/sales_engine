@@ -25,7 +25,7 @@ class Invoice < Repository
     @created_at    = date_parse(data[:created_at])
     @updated_at    = date_parse(data[:updated_at])
     @invoice_items = data[:invoice_items]
-    @amount        = 0
+    @amount        = BigDecimal.new("0")
   end
 
   def revenue(date = nil)
