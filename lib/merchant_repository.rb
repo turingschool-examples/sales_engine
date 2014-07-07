@@ -16,12 +16,9 @@ class MerchantRepository < Repository
   attr_reader :objects
 
   def revenue(date)
-
-    objects.reduce(0) do |sum, amount|
-      sum + amount
+    objects.reduce(0) do |sum, object|
+      sum += object.revenue(date)
     end
-
-
   end
 
   def most_revenue(number)

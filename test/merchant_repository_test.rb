@@ -41,10 +41,10 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def setup
-    @invoice_item1 = InvoiceItem.new(quantity: '1', unit_price: '33133')
-    @invoice_item2 = InvoiceItem.new(quantity: '2', unit_price: '43121')
-    @invoice_item3 = InvoiceItem.new(quantity: '3', unit_price: '12314')
-    @invoice1 = Invoice.new(invoice_items: [@invoice_item1, @invoice_item3], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
+    @invoice_item1 = InvoiceItem.new(quantity: '1', unit_price: '3333')
+    @invoice_item2 = InvoiceItem.new(quantity: '2', unit_price: '4321')
+    @invoice_item3 = InvoiceItem.new(quantity: '3', unit_price: '1234')
+    @invoice1 = Invoice.new(invoice_items: [@invoice_item2], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
     @invoice2 = Invoice.new(invoice_items: [@invoice_item1, @invoice_item3], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
     @invoice3 = Invoice.new(invoice_items: [@invoice_item2, @invoice_item3], status: 'shipped', updated_at:'2012-03-26 09:54:09 UTC')
     @merchant = Merchant.new(name: 'merchant', invoices: [@invoice1, @invoice2])

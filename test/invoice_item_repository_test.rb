@@ -58,16 +58,14 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_unit_price
-    entry = repository.find_by_unit_price('2000')
-    assert_equal "2000", entry.unit_price
+    entry = repository.find_by_unit_price(BigDecimal.new('20.00'))
+    # binding.pry
+    assert_equal '10', entry.id
   end
 
   def test_find_all_by_unit_price
-    entries = repository.find_all_by_unit_price('1999')
+    entries = repository.find_all_by_unit_price(BigDecimal.new('19.99'))
     assert_equal 3, entries.length
-    entries.each do |entry|
-      assert_equal "1999", entry.unit_price
-    end
   end
 
   def test_random

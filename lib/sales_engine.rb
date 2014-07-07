@@ -75,10 +75,10 @@ class SalesEngine
 
   def invoice_relationship
     invoice_repository.all.each do |invoice|
-      invoice.transactions   = transaction_repository.find_all_by_invoice_id(invoice.id)
+      invoice.transactions  = transaction_repository.find_all_by_invoice_id(invoice.id)
       invoice.invoice_items = invoice_item_repository.find_all_by_invoice_id(invoice.id)
       invoice.customer      = customer_repository.find_by_id(invoice.customer_id)
-      invoice.items          = invoice_items_list(invoice)
+      invoice.items         = invoice_items_list(invoice)
       invoice.merchant      = merchant_repository.find_by_id(invoice.merchant_id)
     end
   end
