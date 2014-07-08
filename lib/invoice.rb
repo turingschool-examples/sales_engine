@@ -28,7 +28,7 @@ class Invoice < Repository
   end
 
   def revenue(date = nil)
-    amount     = BigDecimal.new("0")
+    amount     = BigDecimal.new('0')
     if status?
       @invoice_items.each do |invoice_items|
         amount += invoice_items.revenue
@@ -50,7 +50,7 @@ class Invoice < Repository
   # end
 
   def status?
-    status == 'shipped'
+    transactions.any? {|transaction| transaction.result == 'success'}
   end
 
 
