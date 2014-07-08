@@ -26,7 +26,7 @@ class MerchantRepository < Repository
     top_revenue[0..number]
   end
 
-  
-
-
+  def most_items(number)
+    objects.sort_by { |merchant| -merchant.total_items_sold }[0..(number-1)]
+  end
 end

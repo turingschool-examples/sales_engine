@@ -61,4 +61,32 @@ class MerchantRepositoryTest < Minitest::Test
   def test_revenue_by_date
     assert_equal BigDecimal.new('119.75'), @repository.revenue(Date.parse('2012-03-25'))
   end
+
+  def test_most_items
+    @invoice1 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '1'), InvoiceItem.new(quantity: '2')], status: 'shipped')
+    @invoice2 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '5')], status: 'shipped' )
+    @invoice3 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '100')], status: 'shipped' )
+    @invoice4 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '4')], status: 'shipped' )
+    @merchant = Merchant.new(name: 'merchant', invoices: [@invoice1, @invoice2])
+    @merchant2 = Merchant.new(name: 'merchant2',invoices: [@invoice3])
+    @merchant3 = Merchant.new(name: 'merchant3', invoices: [@invoice4])
+    @repository = MerchantRepository.new([@merchant, @merchant2, @merchant3])
+
+    assert_equal [@merchant2], @repository.most_items(1)
+    assert_equal [@merchant2, @merchant], @repository.most_items(2)
+  end
+
+  def test_most_items_without_failed_transaction
+    @invoice1 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '1'), InvoiceItem.new(quantity: '2')], status: 'shipped')
+    @invoice2 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '5')], status: 'shipped' )
+    @invoice3 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '100')], status: 'not shipped' )
+    @invoice4 = Invoice.new(invoice_items: [InvoiceItem.new(quantity: '4')], status: 'shipped' )
+    @merchant = Merchant.new(name: 'merchant', invoices: [@invoice1, @invoice2])
+    @merchant2 = Merchant.new(name: 'merchant2',invoices: [@invoice3])
+    @merchant3 = Merchant.new(name: 'merchant3', invoices: [@invoice4])
+    @repository = MerchantRepository.new([@merchant, @merchant2, @merchant3])
+
+    assert_equal [@merchant, @merchant3], @repository.most_items(2)
+  end
+
 end
