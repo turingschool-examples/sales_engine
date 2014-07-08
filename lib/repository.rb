@@ -1,8 +1,14 @@
+# require 'pry'
 class Repository
+
   attr_accessor :objects
 
-  def initialize(objects = [])
+  def initialize(objects =[])
     @objects = objects
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
   def all
@@ -15,7 +21,7 @@ class Repository
 
   def method_missing(meth, *args, &block)
     if meth.to_s    =~ /^find_by_(.+)$/
-      objects.detect { |object| object.send($1) == args.first }
+      @objects.detect { |object| object.send($1) == args.first }
     elsif meth.to_s =~ /^find_all_by_(.+)$/
       objects.select { |object| object.send($1) == args.first }
     else

@@ -1,5 +1,5 @@
 require_relative 'repository'
-require'pry'
+# require'pry'
 
 class Invoice < Repository
 
@@ -18,23 +18,23 @@ class Invoice < Repository
                 :merchant
 
   def initialize(data)
-    @id            = data[:id]
-    @customer_id   = data[:customer_id]
-    @merchant_id   = data[:merchant_id]
+    @id            = data[:id].to_i
+    @customer_id   = data[:customer_id].to_i
+    @merchant_id   = data[:merchant_id].to_i
     @status        = data[:status]
     @created_at    = date_parse(data[:created_at])
     @updated_at    = date_parse(data[:updated_at])
     @invoice_items = data[:invoice_items]
-    @amount        = BigDecimal.new("0")
   end
 
   def revenue(date = nil)
+    amount     = BigDecimal.new("0")
     if status?
       @invoice_items.each do |invoice_items|
-        @amount += invoice_items.revenue
+        amount += invoice_items.revenue
       end
     end
-    @amount
+    amount
   end
 
   def date_parse(date)

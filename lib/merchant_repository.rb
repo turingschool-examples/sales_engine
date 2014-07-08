@@ -2,15 +2,16 @@ require          'csv'
 require_relative 'merchant'
 require_relative 'items'
 require_relative 'repository'
-require 'pry'
+
 
 class MerchantRepository < Repository
 
-  def load(filename)
+  def self.load(filename)
+    objects = []
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @objects << Merchant.new(row)
+      objects << Merchant.new(row)
     end
-
+    new(objects)
   end
 
   attr_reader :objects

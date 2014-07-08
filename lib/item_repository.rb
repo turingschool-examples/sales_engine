@@ -4,10 +4,13 @@ require_relative 'repository'
 
 class ItemRepository < Repository
 
-  def load(filename)
+
+  def self.load(filename)
+    objects = []
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      @objects << Item.new(row)
+      objects << Item.new(row)
     end
+    new(objects)
   end
 
   attr_reader :objects

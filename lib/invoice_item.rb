@@ -1,5 +1,5 @@
 require 'bigdecimal'
-require 'pry'
+# require 'pry'
 class InvoiceItem
 
   attr_reader :id,
@@ -10,13 +10,15 @@ class InvoiceItem
               :created_at,
               :updated_at
 
-  attr_accessor :item
+  attr_accessor :item,
+                :items,
+                :invoice
 
   def initialize(data)
-    @id         = data[:id]
-    @item_id    = data[:item_id]
-    @invoice_id = data[:invoice_id]
-    @quantity   = data[:quantity]
+    @id         = data[:id].to_i
+    @item_id    = data[:item_id].to_i
+    @invoice_id = data[:invoice_id].to_i
+    @quantity   = data[:quantity].to_i
     @unit_price = price(data[:unit_price])
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
@@ -29,7 +31,7 @@ class InvoiceItem
   end
 
   def revenue
-    amount = BigDecimal.new(@quantity) * @unit_price
+    amount = BigDecimal.new("#{quantity}") * @unit_price
   end
 
 end
