@@ -40,6 +40,7 @@ class MerchantRepositoryTest < Minitest::Test
     assert entry.respond_to?(:name)
   end
 
+<<<<<<< HEAD
   # def setup
   #   skip
   #   @invoice_item1 = InvoiceItem.new(quantity: '1', unit_price: '3333')
@@ -53,6 +54,20 @@ class MerchantRepositoryTest < Minitest::Test
   #   @merchant3 = Merchant.new(name: 'merchant3', invoices: [@invoice3, @invoice1])
   #   @repository = MerchantRepository.new([@merchant, @merchant2, @merchant3])
   # end
+=======
+  def setup
+    @invoice_item1 = InvoiceItem.new(quantity: '1', unit_price: '3333')
+    @invoice_item2 = InvoiceItem.new(quantity: '2', unit_price: '4321')
+    @invoice_item3 = InvoiceItem.new(quantity: '3', unit_price: '1234')
+    @invoice1 = Invoice.new(invoice_items: [@invoice_item1], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
+    @invoice2 = Invoice.new(invoice_items: [@invoice_item2], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
+    @invoice3 = Invoice.new(invoice_items: [@invoice_item3], status: 'shipped', updated_at:'2012-03-26 09:54:09 UTC')
+    @merchant = Merchant.new(name: 'merchant', invoices: [@invoice1])
+    @merchant2 = Merchant.new(name: 'merchant2',invoices: [@invoice2])
+    @merchant3 = Merchant.new(name: 'merchant3', invoices: [@invoice3])
+    @repository = MerchantRepository.new([@merchant, @merchant2, @merchant3])
+  end
+>>>>>>> 7bf155ba7c2d3e71baf00406f43e95f0bf9a3445
 
   def test_most_revenue
     skip
@@ -61,7 +76,11 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_revenue_by_date
+<<<<<<< HEAD
     skip
     assert_equal BigDecimal.new('1401.50'), @repository.revenue(Date.parse('2012-03-25'))
+=======
+    assert_equal BigDecimal.new('119.75'), @repository.revenue(Date.parse('2012-03-25'))
+>>>>>>> 7bf155ba7c2d3e71baf00406f43e95f0bf9a3445
   end
 end
