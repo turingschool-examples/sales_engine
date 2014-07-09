@@ -2,10 +2,6 @@ require          'csv'
 require_relative 'merchant'
 require_relative 'items'
 require_relative 'repository'
-<<<<<<< HEAD
-=======
-
->>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
 
 class MerchantRepository < Repository
 
@@ -14,10 +10,7 @@ class MerchantRepository < Repository
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
       objects << Merchant.new(row)
     end
-<<<<<<< HEAD
-=======
     new(objects)
->>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
   end
 
   attr_reader :objects

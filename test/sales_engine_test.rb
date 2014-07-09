@@ -9,11 +9,7 @@ class SalesEngineTest < Minitest::Test
   attr_reader :engine
 
   def setup
-<<<<<<< HEAD
     @engine                          = SalesEngine.new(false)
-=======
-    @engine                          ||= SalesEngine.new(true)
->>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
     @invoice                         = Invoice.new(id: '1', merchant_id: '1', customer_id: '1')
     @invoice2                        = Invoice.new(merchant_id: '1', customer_id: '2')
     @invoice3                        = Invoice.new(merchant_id: '2')

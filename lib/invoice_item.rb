@@ -10,20 +10,6 @@ class InvoiceItem
                 :created_at,
                 :updated_at
 
-<<<<<<< HEAD
-  attr_accessor :item
-                :item_revenue
-
-  def initialize(data)
-    @id           = data[:id]
-    @item_id      = data[:item_id]
-    @invoice_id   = data[:invoice_id]
-    @quantity     = data[:quantity]
-    @unit_price   = price(data[:unit_price])
-    @created_at   = data[:created_at]
-    @updated_at   = data[:updated_at]
-    @item_revenue = 0
-=======
   attr_accessor :item,
                 :items,
                 :invoice
@@ -36,7 +22,6 @@ class InvoiceItem
     @unit_price = price(data[:unit_price])
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
->>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
   end
 
 

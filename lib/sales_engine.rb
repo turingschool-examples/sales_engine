@@ -46,21 +46,12 @@ class SalesEngine
   end
 
   def real_life_repositories
-<<<<<<< HEAD
-    @merchant_repository       = MerchantRepository.new.load('./data/merchants.csv')
-    @invoice_repository        = InvoiceRepository.new.load('./data/invoices.csv')
-    @item_repository           = ItemRepository.new.load('./data/items.csv')
-    @invoice_item_repository   = InvoiceItemRepository.new.load('./data/invoice_items.csv')
-    @customer_repository       = CustomerRepository.new.load('./data/customers.csv')
-    @transaction_repository    = TransactionRepository.new.load('./data/transactions.csv')
-=======
     @merchant_repository       ||= MerchantRepository.load(csv_dir + '/merchants.csv')
     @invoice_repository        ||= InvoiceRepository.load(csv_dir+'/invoices.csv')
     @item_repository           ||= ItemRepository.load(csv_dir+'/items.csv')
     @invoice_item_repository   ||= InvoiceItemRepository.load(csv_dir+'/invoice_items.csv')
     @customer_repository       ||= CustomerRepository.load(csv_dir+'/customers.csv')
     @transaction_repository    ||= TransactionRepository.load(csv_dir+'/transactions.csv')
->>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
   end
 
 

@@ -28,17 +28,11 @@ class Merchant
     amount
   end
 
-<<<<<<< HEAD
   def total_items_sold
     shipped_invoice_items.reduce(0) do |sum, invoice_item|
     sum += invoice_item.quantity.to_i
     end
   end
-=======
-
-
-
->>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
 
   private
 
