@@ -28,9 +28,15 @@ class InvoiceItem
     @unit_price * quantity
   end
 
+
   private
 
   def price(number)
     BigDecimal.new(number.to_s) / 100
   end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
 end

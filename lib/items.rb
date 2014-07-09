@@ -35,9 +35,15 @@ class Item
     BigDecimal.new(price.to_s)
   end
 
+
   def revenue
     invoice_items.reduce(0) do |sum, invoice_item|
       sum + invoice_item.revenue
     end
   end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
 end

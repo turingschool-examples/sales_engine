@@ -28,10 +28,14 @@ class Merchant
     amount
   end
 
+
   def total_items_sold
     shipped_invoice_items.reduce(0) do |sum, invoice_item|
     sum += invoice_item.quantity.to_i
     end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
   private

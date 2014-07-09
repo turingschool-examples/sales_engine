@@ -18,6 +18,15 @@ class Transaction
     @result                      = data[:result]
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
+    @invoice                     = data[:invoice]
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
+  def merchant
+    invoice.merchant
   end
 
 end
