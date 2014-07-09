@@ -26,10 +26,9 @@ class Invoice < Repository
     @updated_at    = date_parse(data[:updated_at])
     @invoice_items = data[:invoice_items]
   end
-  
+
   def revenue(date = nil)
     amount = 0
->>>>>>> 7bf155ba7c2d3e71baf00406f43e95f0bf9a3445
     if status?
       @invoice_items.each do |invoice_items|
         amount += invoice_items.revenue

@@ -16,4 +16,12 @@ class Customer
     @updated_at = data[:updated_at]
 
   end
+
+  def transactions
+    transactions = []
+    invoices.each do |invoice|
+      transactions += invoice.transactions
+    end
+    transactions
+  end
 end
