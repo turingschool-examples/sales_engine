@@ -1,5 +1,4 @@
 require_relative 'repository'
-# require'pry'
 
 class Invoice < Repository
 
@@ -25,13 +24,14 @@ class Invoice < Repository
     @created_at    = date_parse(data[:created_at])
     @updated_at    = date_parse(data[:updated_at])
     @invoice_items = data[:invoice_items]
+    @transactions  = data[:transactions]
   end
 
   def revenue(date = nil)
     amount = 0
     if status?
-      @invoice_items.each do |invoice_items|
-        amount += invoice_items.revenue
+      @invoice_items.each do |invoice_item|
+        amount += invoice_item.revenue
       end
     end
     amount
@@ -51,6 +51,7 @@ class Invoice < Repository
 
   def status?
     transactions.any? {|transaction| transaction.result == 'success'}
+
   end
 
 

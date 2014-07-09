@@ -26,7 +26,7 @@ class InvoiceItem
 
 
   def price(number)
-    price = number.to_f / 100
+    price = number.to_f/100
     BigDecimal.new(price.to_s)
   end
 

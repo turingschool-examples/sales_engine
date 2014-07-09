@@ -6,7 +6,8 @@ class Customer
               :created_at,
               :updated_at
 
-  attr_accessor :invoices
+  attr_accessor :invoices,
+                :transactions
 
   def initialize(data)
     @id         = data[:id].to_i
@@ -14,7 +15,6 @@ class Customer
     @last_name  = data[:last_name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-
   end
 
   def transactions
@@ -24,4 +24,6 @@ class Customer
     end
     transactions
   end
+
+
 end
