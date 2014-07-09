@@ -50,7 +50,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_most_revenue
-    #most_revenue(x) returns the top x item instances ranked by total revenue generated
+    # most_revenue(x) returns the top x item instances ranked by total revenue generated
 
     # BY TOTAL REVENUE GENERATED
     # transacction success?
@@ -59,32 +59,37 @@ class ItemRepositoryTest < Minitest::Test
     # sort_by -item_revenue[0...number-1]
     # id,name,description,unit_price,merchant_id,created_at,updated_at
 
-    @item1          = Item.new(name: 'ten', id: '10' )
-    @item11         = Item.new(name: 'eleven', id: '11')
-    @invoice_item1  = InvoiceItem.new(quantity: '1', unit_price: '1001', item_id: '10')
-    @invoice_item11 = InvoiceItem.new(quantity: '11', unit_price: '1011', item_id: '11')
-    @invoice1       = Invoice.new(invoice_items: [@invoice_item1, @invouce_item2], status: 'shipped')
-    @transaction1   = Transaction.new(invoice_id: '1', result: 'success')
+    # 1 * 1001 + 11 * 1011 = 12122
+    transaction1    = Transaction.new(result: 'success')
+    invoice1        = Invoice.new(status: 'shipped', transactions: [transaction1])
+    invoice_item1   = InvoiceItem.new(quantity: 1,  unit_price: 1001, invoice: invoice1)
+    invoice_item11  = InvoiceItem.new(quantity: 11, unit_price: 1011, invoice: invoice1)
+    item1           = Item.new(name: 'ten',    invoice_items: [invoice_item1])
+    item11          = Item.new(name: 'eleven', invoice_items: [invoice_item11])
 
-    @item2          = Item.new(name: 'twenty', id: '20' )
-    @item22         = Item.new(name: 'twenty two', id: '22' )
-    @invoice_item2  = InvoiceItem.new(quantity: '2', unit_price: '1002', item_id: '20')
-    @invoice_item22 = InvoiceItem.new(quantity: '22', unit_price: '1022', item_id: '22')
-    @invoice2       = Invoice.new(invoice_items: [@invoice_item2], status: 'shipped')
-    @transaction2   = Transaction.new(invoice_id: '2', result: 'failed')
+    # failed transaction
+    transaction2    = Transaction.new(result: 'failed')
+    invoice2        = Invoice.new(status: 'shipped', transactions: [transaction2])
+    invoice_item2   = InvoiceItem.new(quantity: 2,  unit_price: 1002,  invoice: invoice2)
+    invoice_item22  = InvoiceItem.new(quantity: 22, unit_price: 1022, invoice: invoice2)
+    item2           = Item.new(name: 'twenty',     invoice_items: [invoice_item2])
+    item22          = Item.new(name: 'twenty two', invoice_items: [invoice_item22])
 
-    @item3          = Item.new(name: 'thirty', id: '30')
-    @invoice_item3  = InvoiceItem.new(quantity: '3', unit_price: '1003', item_id: '30')
-    @invoice3       = Invoice.new(invoice_items: [@invoice_item3], status: 'shipped')
-    @transaction3   = Transaction.new(invoice_id: '3', result: 'success')
+    # 33 * 3003 = 99099
+    transaction3    = Transaction.new(result: 'success')
+    invoice3        = Invoice.new(status: 'shipped', transactions: [transaction3])
+    invoice_item3   = InvoiceItem.new(quantity: 33, unit_price: 3003, invoice: [invoice3])
+    item3           = Item.new(name: 'thirty', invoice_items: [invoice_item3])
 
-    @item4          = Item.new(name: 'forthy', id: '40')
-    @invoice_item4  = InvoiceItem.new(quantity: '4', unit_price: '1004', item_id: '40')
-    @invoice4       = Invoice.new(invoice_items: [@invoice_item4], status: 'shipped')
-    @transaction4   = Transaction.new(invoice_id: '4', result: 'failed')
+    # failed transaction
+    transaction4    = Transaction.new(result: 'failed')
+    invoice4        = Invoice.new(status: 'shipped', transactions: [transaction4])
+    invoice_item4   = InvoiceItem.new(quantity: 4, unit_price: 1004, invoice: invoice4)
+    item4           = Item.new(name: 'forthy', invoice_items: [invoice_item4])
 
-    @repository     = ItemRepository.new([@item1, @item11, @item2, @item22, @item3, @item4])
-    assert_equal 'thirty', @repository.most_revenue(1).first.name
+    repository      = ItemRepository.new([item1, item11, item2, item22, item3, item4])
+    assert_equal ['thirty'], repository.most_revenue(1).map(&:name)
+    assert_equal ['thirty', 'ten'], repository.most_revenue(2).map(&:name)
   end
 
 end
