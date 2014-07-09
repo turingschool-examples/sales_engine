@@ -5,16 +5,19 @@ require_relative '../lib/merchant'
 require_relative '../lib/items'
 require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
+require_relative '../lib/transaction'
 
 class MerchantTest < Minitest::Test
 
   def setup
+    @transaction1  = Transaction.new(result: 'success')
+    @transaction2  = Transaction.new(result: 'success')
     @invoice_item1 = InvoiceItem.new(quantity: '2', unit_price: '777777')
     @invoice_item2 = InvoiceItem.new(quantity: '1', unit_price: '88888888')
-    @invoice1 = Invoice.new(invoice_items: [@invoice_item1, @invoice_item2], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
+    @invoice1 = Invoice.new(invoice_items: [@invoice_item1, @invoice_item2], transactions: [@transaction2], status: 'shipped', updated_at:'2012-03-25 09:54:09 UTC')
     @invoice_item3 = InvoiceItem.new(quantity: '2', unit_price: '777777')
     @invoice_item4 = InvoiceItem.new(quantity: '1', unit_price: '88888888')
-    @invoice2 = Invoice.new(invoice_items: [@invoice_item3, @invoice_item4], status: 'shipped', updated_at:'2012-03-21 13:54:10 UTC' )
+    @invoice2 = Invoice.new(invoice_items: [@invoice_item3, @invoice_item4], transactions: [@transaction1], status: 'shipped', updated_at:'2012-03-21 13:54:10 UTC' )
     @merchant = Merchant.new(invoices: [@invoice1, @invoice2])
   end
 

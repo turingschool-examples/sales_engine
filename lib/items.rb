@@ -14,10 +14,10 @@ class Item
                 :revenue
 
   def initialize(data)
-    @id          = data[:id]
+    @id          = data[:id].to_i
     @name        = data[:name]
     @unit_price  = price(data[:unit_price])
-    @merchant_id = data[:merchant_id]
+    @merchant_id = data[:merchant_id].to_i
     @created_at  = date_parse(data[:created_at])
     @updated_at  = date_parse(data[:updated_at])
     @revenue     = 0

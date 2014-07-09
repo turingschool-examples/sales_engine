@@ -12,13 +12,12 @@ class ItemRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository = ItemRepository.new()
-    @repository.load('test/fixtures/small_items.csv')
+    @repository = ItemRepository.load('test/fixtures/small_items.csv')
   end
 
   def test_find_by_id
-    entry = repository.find_by_id('10')
-    assert_equal "10", entry.id
+    entry = repository.find_by_id(10)
+    assert_equal 10, entry.id
   end
 
   def test_find_by_name
@@ -27,16 +26,16 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_merchant_id
-    entry = repository.find_by_merchant_id('777')
-    assert_equal "777", entry.merchant_id
+    entry = repository.find_by_merchant_id(777)
+    assert_equal 777, entry.merchant_id
   end
 
 
   def test_find_all_by_merchant_id
-    entries = repository.find_all_by_merchant_id('999')
+    entries = repository.find_all_by_merchant_id(999)
     assert_equal 2, entries.length
     entries.each do |entry|
-      assert_equal "999", entry.merchant_id
+      assert_equal 999, entry.merchant_id
     end
   end
 

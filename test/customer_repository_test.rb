@@ -7,13 +7,12 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :repository
 
   def setup
-    @repository = CustomerRepository.new
-    @repository.load('test/fixtures/small_customers.csv')
+    @repository = CustomerRepository.load('test/fixtures/small_customers.csv')
   end
 
   def test_find_by_id
-    entry = repository.find_by_id('16')
-    assert_equal "16", entry.id
+    entry = repository.find_by_id(16)
+    assert_equal 16, entry.id
   end
 
   def test_find_by_first_name

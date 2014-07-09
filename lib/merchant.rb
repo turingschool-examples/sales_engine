@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 class Merchant
 
   attr_reader :id,
@@ -11,16 +11,15 @@ class Merchant
                 :items
 
   def initialize(data)
-    @id         = data[:id]
+    @id         = data[:id].to_i
     @name       = data[:name]
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
-    #@amount     = BigDecimal.new('0')
     @invoices   = data[:invoices]
   end
 
   def revenue(date = nil)
-    amount = 0
+    amount     = BigDecimal.new("0")
     @invoices.each do |invoice|
       if date == nil || date == invoice.updated_at
         amount += invoice.revenue
@@ -29,11 +28,17 @@ class Merchant
     amount
   end
 
+<<<<<<< HEAD
   def total_items_sold
     shipped_invoice_items.reduce(0) do |sum, invoice_item|
     sum += invoice_item.quantity.to_i
     end
   end
+=======
+
+
+
+>>>>>>> bbd86dd968d87e1d4a55ca950084c7037a349602
 
   private
 
