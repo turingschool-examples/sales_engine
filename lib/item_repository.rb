@@ -2,7 +2,7 @@ require          'csv'
 require_relative 'items'
 require_relative 'repository'
 require_relative 'transaction'
-require 'pry'
+# require 'pry'
 
 class ItemRepository < Repository
 
