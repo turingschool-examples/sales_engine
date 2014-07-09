@@ -29,7 +29,17 @@ class Merchant
     amount
   end
 
-  
+  def total_items_sold
+    shipped_invoice_items.reduce(0) do |sum, invoice_item|
+    sum += invoice_item.quantity.to_i
+    end
+  end
 
+  private
+
+  def shipped_invoice_items
+    shipped_invoices = invoices.select { |invoice| invoice.status == 'shipped' }
+    shipped_invoices.map(&:invoice_items).flatten
+  end
 
 end

@@ -44,12 +44,12 @@ class SalesEngine
   end
 
   def real_life_repositories
-    @merchant_repository       = MerchantRepository.new.load('test/fixtures/biggggg_items.csv')
-    @invoice_repository        = InvoiceRepository.new.load('test/fixtures/small_items.csv')
-    @item_repository           = ItemRepository.new.load('test/fixtures/small_items.csv')
-    @invoice_item_repository   = InvoiceItemRepository.new.load('test/fixtures/small_items.csv')
-    @customer_repository       = CustomerRepository.new.load('test/fixtures/small_items.csv')
-    @transaction_repository    = TransactionRepository.new.load('test/fixtures/small_items.csv')
+    @merchant_repository       = MerchantRepository.new.load('./data/merchants.csv')
+    @invoice_repository        = InvoiceRepository.new.load('./data/invoices.csv')
+    @item_repository           = ItemRepository.new.load('./data/items.csv')
+    @invoice_item_repository   = InvoiceItemRepository.new.load('./data/invoice_items.csv')
+    @customer_repository       = CustomerRepository.new.load('./data/customers.csv')
+    @transaction_repository    = TransactionRepository.new.load('./data/transactions.csv')
   end
 
   def merchant_relationship

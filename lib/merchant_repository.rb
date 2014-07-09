@@ -2,7 +2,6 @@ require          'csv'
 require_relative 'merchant'
 require_relative 'items'
 require_relative 'repository'
-require 'pry'
 
 class MerchantRepository < Repository
 
@@ -10,7 +9,6 @@ class MerchantRepository < Repository
     CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
       @objects << Merchant.new(row)
     end
-
   end
 
   attr_reader :objects
@@ -24,6 +22,10 @@ class MerchantRepository < Repository
   def most_revenue(number)
     top_revenue = objects.sort_by { |merchant| merchant.revenue }
     top_revenue[0..number]
+  end
+
+  def most_items(number)
+    objects.sort_by { |merchant| -merchant.total_items_sold }[0..(number-1)]
   end
 
 end
