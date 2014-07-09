@@ -28,6 +28,9 @@ class Merchant
     amount
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 
 
 

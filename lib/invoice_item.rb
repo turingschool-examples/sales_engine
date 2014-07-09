@@ -34,4 +34,9 @@ class InvoiceItem
     amount = BigDecimal.new("#{quantity}") * @unit_price
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
+
 end

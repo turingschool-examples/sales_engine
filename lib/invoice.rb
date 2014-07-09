@@ -25,6 +25,7 @@ class Invoice < Repository
     @updated_at    = date_parse(data[:updated_at])
     @invoice_items = data[:invoice_items]
     @transactions  = data[:transactions]
+    @merchant      = data[:merchant]
   end
 
   def revenue(date = nil)
@@ -41,18 +42,14 @@ class Invoice < Repository
     Date.parse(date) if date != nil
   end
 
-  #   if status == 'shipped'
-  #     @invoice_items.each do |invoice_items|
-  #       @amount += invoice_items.revenue
-  #     end
-  #   end
-  #   @amount
-  # end
-
   def status?
     transactions.any? {|transaction| transaction.result == 'success'}
-
   end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
 
 
 end

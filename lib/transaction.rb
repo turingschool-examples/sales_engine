@@ -8,7 +8,8 @@ class Transaction
               :created_at,
               :updated_at
 
-  attr_accessor :invoice
+  attr_accessor :invoice,
+                :merchant
 
   def initialize(data)
     @id                          = data[:id].to_i
@@ -18,6 +19,16 @@ class Transaction
     @result                      = data[:result]
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
+    @invoice                     = data[:invoice]
+    @merchant                    = data[:merchant]
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
+  def merchant
+    @invoice.merchant
   end
 
 end

@@ -33,4 +33,9 @@ class Item
     price = number.to_f / 100
     BigDecimal.new(price.to_s)
   end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
+
 end

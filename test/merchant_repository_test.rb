@@ -56,7 +56,7 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_most_revenue
     most = @repository.most_revenue(2)
-    assert_equal 'merchant', most.first.name
+    assert_equal 'merchant2', most.first.name
   end
 
   def test_revenue_by_date
