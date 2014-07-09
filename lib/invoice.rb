@@ -26,6 +26,7 @@ class Invoice < Repository
     @invoice_items = data[:invoice_items]
     @transactions  = data[:transactions]
     @merchant      = data[:merchant]
+    @customer      = data[:customer]
   end
 
   def revenue(date = nil)
@@ -44,6 +45,10 @@ class Invoice < Repository
 
   def status?
     transactions.any? {|transaction| transaction.result == 'success'}
+  end
+
+  def none?
+    transactions.all? {|transaction| transaction.result == 'failed' or nil}
   end
 
   def inspect

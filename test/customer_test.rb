@@ -31,7 +31,7 @@ class CustomerTest < Minitest::Test
   end
 
   def test_customer_favorite_merchant
-    binding.pry
     assert @customer.favorite_merchant ==  @merchant1
   end
+
 end

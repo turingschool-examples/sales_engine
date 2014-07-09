@@ -1,5 +1,5 @@
 require 'bigdecimal'
-# require 'pry'
+
 class InvoiceItem
 
   attr_reader   :id,
@@ -27,7 +27,6 @@ class InvoiceItem
   def revenue
     @unit_price * quantity
   end
-
 
   private
 

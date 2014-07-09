@@ -1,4 +1,3 @@
-# require 'pry'
 class Merchant
 
   attr_reader :id,
@@ -35,8 +34,18 @@ class Merchant
     end
   end
 
+  def favorite_customer
+    customers = invoices.collect { |invoice| invoice.customer if invoice.status? }.compact
+    # binding.pry
+    customers.group_by { |item| item }.values.max_by(&:size).first
+  end
+
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"
+  end
+
+  def customers_with_pending_invoices
+    invoices.collect{ |invoice| invoice.customer if invoice.none?}.compact
   end
 
   private
