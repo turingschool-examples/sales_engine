@@ -46,7 +46,6 @@ class SalesEngineTest < Minitest::Test
   def test_invoice_items_items_relationship
     invoice_item               = engine.invoice_item_repository.find_by_id(1)
     assert invoice_item.item   == @item
-    assert invoice_item.items  == [@item, @item2]
   end
 
   def test_invoice_relationships
@@ -57,11 +56,6 @@ class SalesEngineTest < Minitest::Test
   def test_invoice_invoice_items_relationships
     invoice                        = engine.invoice_repository.find_by_id(1)
     assert invoice.invoice_items  == [@invoice_items1]
-  end
-
-  def test_invoice_items_relationship
-    invoice               = engine.invoice_repository.find_by_id(1)
-    assert invoice.items == [@item, @item2]
   end
 
   def test_invoice_customer_relationships

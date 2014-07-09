@@ -11,7 +11,6 @@ class InvoiceItem
                 :updated_at
 
   attr_accessor :item,
-                :items,
                 :invoice
 
   def initialize(data)

@@ -66,17 +66,13 @@ class SalesEngine
     invoice_item_repository.all.each do |invoice_item|
       invoice_item.invoice = invoice_repository.find_by_id(invoice_item.invoice_id)
       invoice_item.item    = item_repository.find_by_id(invoice_item.item_id)
-      invoice_item.items   = item_repository.find_all_by_id(invoice_item.item_id)
     end
   end
 
   def invoice_items_list(invoice)
-    @items =[]
-    invoice.invoice_items.each do |invoice_item|
-      @items += invoice_item.items
+    invoice.invoice_items.map do |invoice_item|
+      invoice_item.item
     end
-    @items
-    #  invoice_item.items.map {|invoice_item| invoice_item.item}
   end
 
   def invoice_relationship

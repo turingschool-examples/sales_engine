@@ -1,6 +1,6 @@
 require 'bigdecimal'
 require_relative 'invoice_item'
-class Item 
+class Item
 
   attr_reader :id,
               :name,
@@ -9,18 +9,19 @@ class Item
               :created_at,
               :updated_at
 
-  attr_accessor :invoice_item,
+  attr_accessor :invoice_items,
                 :merchant
                 :revenue
 
   def initialize(data)
-    @id          = data[:id].to_i
-    @name        = data[:name]
-    @unit_price  = price(data[:unit_price])
-    @merchant_id = data[:merchant_id].to_i
-    @created_at  = date_parse(data[:created_at])
-    @updated_at  = date_parse(data[:updated_at])
-    @revenue     = 0
+    @id            = data[:id].to_i
+    @name          = data[:name]
+    @unit_price    = price(data[:unit_price])
+    @merchant_id   = data[:merchant_id].to_i
+    @created_at    = date_parse(data[:created_at])
+    @updated_at    = date_parse(data[:updated_at])
+    @revenue       = 0
+    @invoice_items = []
   end
 
   def date_parse(date)
@@ -37,35 +38,8 @@ class Item
   end
 
   def revenue
-    items = inovice_item.select { |invoice_item| item_id == id }
-    items.reduce(0) do |sum, invoice_item|
-      sum += invoice_item.item_revenue
+    invoice_items.reduce(0) do |sum, invoice_item|
+      sum + invoice_item.item_revenue
     end
-    sum
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end
