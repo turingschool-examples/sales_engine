@@ -31,6 +31,6 @@ class InvoiceItem
   private
 
   def price(number)
-    BigDecimal.new(number) / 100
+    BigDecimal.new(number.to_s) / 100
   end
 end
