@@ -28,12 +28,8 @@ class Customer
   end
 
   def favorite_merchant
-    binding.pry
-    @transactions.group_by do |transaction|
-      if transaction.result == 'success'
-        transaction.merchant
-      end
-    end
+    merchants = @transactions.collect { |t| t.merchant if t.result == 'success'}.flatten
+    merchants.group_by { |item| item }.values.max_by(&:size).first
   end
 
   def inspect
