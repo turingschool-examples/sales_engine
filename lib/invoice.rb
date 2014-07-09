@@ -51,7 +51,6 @@ class Invoice < Repository
 
   def status?
     transactions.any? {|transaction| transaction.result == 'success'}
-
   end
 
 

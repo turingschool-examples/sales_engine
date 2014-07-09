@@ -33,4 +33,5 @@ class InvoiceItem
   def price(number)
     BigDecimal.new(number) / 100
   end
+
 end
