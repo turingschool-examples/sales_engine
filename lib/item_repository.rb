@@ -1,20 +1,10 @@
-require          'csv'
-require_relative 'items'
-require_relative 'repository'
-require_relative 'invoice_item'
-
-require_relative 'transaction'
-
-
+require_relative 'item_repository_helper'
 
 class ItemRepository < Repository
 
-
   def self.load(filename)
     objects = []
-    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      objects << Item.new(row)
-    end
+    CSV.foreach(filename, headers: true, header_converters: :symbol) { |row| objects << Item.new(row) }
     new(objects)
   end
 
@@ -22,9 +12,9 @@ class ItemRepository < Repository
 
 
   def most_revenue(number)
-    top_revenue = objects.sort_by { |item| item.revenue }.reverse
-    top_revenue.first(number)
+    top_revenue = objects.sort_by { |item| item.revenue }.reverse.first(number)
   end
+
 
     #if item.status?
       #objects.invoice_item.sort_by { |item| -item.revenue }[0..number-1]
@@ -32,11 +22,10 @@ class ItemRepository < Repository
 
 
   def paid_transactions
-    successuful_transactions = transactions.select { |invoice| transactions.status == 'success' }
-    successuful_transactions.map(&:invoice_id).flatten
+    transactions.select { |invoice| transactions.status == 'success' }.map(&:invoice_id).flatten
   end
 
-  #most_items(x) returns the top x item instances ranked by total number sold
 
+  #most_items(x) returns the top x item instances ranked by total number sold
 
 end

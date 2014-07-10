@@ -1,10 +1,10 @@
 class Customer
 
-  attr_reader :id,
-              :first_name,
-              :last_name,
-              :created_at,
-              :updated_at
+  attr_reader   :id,
+                :first_name,
+                :last_name,
+                :created_at,
+                :updated_at
 
   attr_accessor :invoices,
                 :transactions
@@ -20,21 +20,12 @@ class Customer
   end
 
   def transactions
-    transactions = []
-    @invoices.each do |invoice|
-      transactions += invoice.transactions
-    end
-    transactions
+    @invoices.reduce([]) { |sum, invoice| sum += invoice.transactions }
   end
-
 
   def favorite_merchant
     merchants = transactions.collect { |t| t.merchant if t.result == 'success'}.flatten
     merchants.group_by { |item| item }.values.max_by(&:size).first
-  end
-
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

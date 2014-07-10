@@ -1,15 +1,13 @@
-require 'bigdecimal'
-require_relative 'invoice_item'
-require_relative 'transaction'
+require_relative 'items_helper'
 
 class Item
 
-  attr_reader :id,
-              :name,
-              :unit_price,
-              :merchant_id,
-              :created_at,
-              :updated_at
+  attr_reader   :id,
+                :name,
+                :unit_price,
+                :merchant_id,
+                :created_at,
+                :updated_at
 
   attr_accessor :invoice_items,
                 :merchant
@@ -21,38 +19,25 @@ class Item
     @merchant_id   = data[:merchant_id].to_i
     @created_at    = date_parse(data[:created_at])
     @updated_at    = date_parse(data[:updated_at])
-
     @invoice_items = data[:invoice_items]
   end
 
   def date_parse(date)
-    if date != nil
-      Date.parse(date)
-    else
-      date
-    end
+    date != nil ? Date.parse(date) : date
   end
 
   def price(number)
-    price = number.to_f / 100
-    BigDecimal.new(price.to_s)
+    BigDecimal.new((number.to_f / 100).to_s)
   end
-
 
   def revenue
     if status?
-      invoice_items.reduce(0) do |sum, invoice_item|
-        sum + invoice_item.revenue
-      end
+      invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.revenue }
     end
   end
 
   def status?
     @invoice_items.any?(&:status?)
-  end
-
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

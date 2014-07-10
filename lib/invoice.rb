@@ -3,13 +3,13 @@ require 'pry'
 
 class Invoice < Repository
 
-  attr_reader :id,
-              :customer_id,
-              :merchant_id,
-              :status,
-              :created_at,
-              :updated_at,
-              :objects
+  attr_reader   :id,
+                :customer_id,
+                :merchant_id,
+                :status,
+                :created_at,
+                :updated_at,
+                :objects
 
   attr_accessor :transactions,
                 :invoice_items,
@@ -32,6 +32,7 @@ class Invoice < Repository
   end
 
   def revenue(date = nil)
+<<<<<<< HEAD
     amount = 0
     if status?
       binding.pry
@@ -40,6 +41,9 @@ class Invoice < Repository
       end
     end
     amount
+=======
+    case when status? then @invoice_items.reduce(0) { |sum, invoice_item| sum += invoice_item.revenue } end
+>>>>>>> 60647e6b3049b30aa7956fb3ef2fb85697e69e1b
   end
 
   def status?
@@ -49,6 +53,7 @@ class Invoice < Repository
   def none?
     transactions.all? {|transaction| transaction.result == 'failed' or nil}
   end
+
 
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"

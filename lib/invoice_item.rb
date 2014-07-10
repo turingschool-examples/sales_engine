@@ -1,6 +1,5 @@
 require 'bigdecimal'
 
-
 class InvoiceItem
 
   attr_reader   :id,
@@ -25,7 +24,7 @@ class InvoiceItem
   end
 
   def revenue
-    @unit_price * quantity
+    unit_price * quantity
   end
 
   def status?
@@ -36,10 +35,6 @@ class InvoiceItem
 
   def price(number)
     BigDecimal.new(number.to_s) / 100
-  end
-
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

@@ -1,4 +1,5 @@
-# 
+require 'csv'
+
 class Repository
 
   attr_accessor :objects
@@ -11,33 +12,23 @@ class Repository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
-  def all
-    @objects
-  end
+  def all() @objects end
 
-  def random
-    @objects.sample
-  end
+  def random() @objects.sample end
 
   def method_missing(meth, *args, &block)
-    if meth.to_s    =~ /^find_by_(.+)$/
-      @objects.detect { |object| object.send($1) == args.first }
-    elsif meth.to_s =~ /^find_all_by_(.+)$/
-      objects.select { |object| object.send($1) == args.first }
-    else
-      super
+    case
+    when meth.to_s =~ /^find_by_(.+)$/     then @objects.detect { |object| object.send($1) == args.first }
+    when meth.to_s =~ /^find_all_by_(.+)$/ then @objects.select { |object| object.send($1) == args.first }
+    else super
     end
   end
 
   def respond_to?(meth)
-    if meth.to_s =~ /^find_by_.*$/
-      true
-    elsif meth.to_s =~ /^find_all_by_.*$/
-      true
-    else
-      super
+    case
+    when meth.to_s =~ /^find_by_.*$/ || meth.to_s =~ /^find_all_by_.*$/ then true
+    else super
     end
   end
-
 
 end
