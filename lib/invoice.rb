@@ -32,7 +32,7 @@ class Invoice < Repository
 
   def revenue(date = nil)
     case when status? then @invoice_items.reduce(0) do |sum, invoice_item|
-      sum += invoice_item.revenue if invoice_item.revenue != nil}
+      sum += invoice_item.revenue if invoice_item.revenue != nil
     end
     end
   end

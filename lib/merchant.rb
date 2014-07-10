@@ -23,6 +23,7 @@ class Merchant
       if (date == nil || date == invoice.updated_at) && invoice.revenue != nil
        amount += invoice.revenue
      end
+     end
     amount
   end
 

@@ -26,7 +26,8 @@ class Repository
 
   def respond_to?(meth)
     case
-    when meth.to_s =~ /^find_by_.*$/ || meth.to_s =~ /^find_all_by_.*$/ then true
+    when meth.to_s =~ /^find_by_.*$/ ||
+       meth.to_s =~ /^find_all_by_.*$/ then true
     else super
     end
   end
