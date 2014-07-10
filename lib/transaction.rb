@@ -1,12 +1,12 @@
 class Transaction
 
-  attr_reader :id,
-              :invoice_id,
-              :credit_card_number,
-              :credit_card_expiration_date,
-              :result,
-              :created_at,
-              :updated_at
+  attr_reader   :id,
+                :invoice_id,
+                :credit_card_number,
+                :credit_card_expiration_date,
+                :result,
+                :created_at,
+                :updated_at
 
   attr_accessor :invoice
 
@@ -21,16 +21,6 @@ class Transaction
     @invoice                     = data[:invoice]
   end
 
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
-  end
-
-  def merchant
-    invoice.merchant
-  end
-
-  def transaction_paid?
-
-  end
+  def merchant() invoice.merchant end
 
 end
