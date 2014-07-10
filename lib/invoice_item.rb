@@ -1,5 +1,6 @@
 require 'bigdecimal'
 
+
 class InvoiceItem
 
   attr_reader   :id,
@@ -23,9 +24,12 @@ class InvoiceItem
     @updated_at = data[:updated_at]
   end
 
-
   def revenue
     @unit_price * quantity
+  end
+
+  def status?
+    invoice.any?(&:status?)
   end
 
   private

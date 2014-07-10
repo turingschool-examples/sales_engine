@@ -7,7 +7,7 @@ require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
 require_relative '../lib/transaction'
 require_relative '../lib/customer'
-require 'pry'
+
 
 class MerchantTest < Minitest::Test
 
@@ -50,7 +50,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_customers_with_pending_transactions
-    # binding.pry
     assert @merchant.customers_with_pending_invoices == [@customer3, @customer4]
   end
 end

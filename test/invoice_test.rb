@@ -4,7 +4,7 @@ require 'minitest/pride'
 require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
 require_relative '../lib/transaction'
-require 'pry'
+
 
 class InvoiceTest < Minitest::Test
   def test_revenue

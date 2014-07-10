@@ -2,7 +2,7 @@ gem 'minitest', '~>5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/invoice_item_repository'
-require 'pry'
+
 
 class InvoiceItemRepositoryTest < Minitest::Test
 
@@ -58,7 +58,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_find_by_unit_price
     entry = repository.find_by_unit_price(BigDecimal.new('20.00'))
-    # binding.pry
     assert_equal 10, entry.id
   end
 

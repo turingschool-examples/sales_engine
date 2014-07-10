@@ -29,4 +29,8 @@ class Transaction
     invoice.merchant
   end
 
+  def transaction_paid?
+
+  end
+
 end

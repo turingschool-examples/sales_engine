@@ -4,7 +4,7 @@ require_relative 'item_repository'
 require_relative 'invoice_item_repository'
 require_relative 'customer_repository'
 require_relative 'transaction_repository'
-# require 'pry'
+#
 
 class SalesEngine
 
@@ -37,12 +37,12 @@ class SalesEngine
   end
 
   def the_test_mode_repositories
-    @merchant_repository      ||= MerchantRepository.new()
-    @invoice_repository       ||= InvoiceRepository.new()
-    @item_repository          ||= ItemRepository.new()
-    @invoice_item_repository  ||= InvoiceItemRepository.new()
-    @customer_repository      ||= CustomerRepository.new()
-    @transaction_repository   ||= TransactionRepository.new()
+    @merchant_repository      ||= MerchantRepository.load('test/fixtures/small_merchants.csv')
+    @invoice_repository       ||= InvoiceRepository.load('test/fixtures/small_invoices.csv')
+    @item_repository          ||= ItemRepository.load('test/fixtures/small_items.csv')
+    @invoice_item_repository  ||= InvoiceItemRepository.load('test/fixtures/small_invoice_items.csv')
+    @customer_repository      ||= CustomerRepository.load('test/fixtures/small_customers.csv')
+    @transaction_repository   ||= TransactionRepository.load('test/fixtures/small_transaction.csv')
   end
 
   def real_life_repositories

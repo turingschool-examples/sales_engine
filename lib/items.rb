@@ -1,5 +1,7 @@
 require 'bigdecimal'
 require_relative 'invoice_item'
+require_relative 'transaction'
+
 class Item
 
   attr_reader :id,
@@ -19,7 +21,8 @@ class Item
     @merchant_id   = data[:merchant_id].to_i
     @created_at    = date_parse(data[:created_at])
     @updated_at    = date_parse(data[:updated_at])
-    @invoice_items = data[:invoice_items] 
+
+    @invoice_items = data[:invoice_items]
   end
 
   def date_parse(date)
@@ -37,9 +40,15 @@ class Item
 
 
   def revenue
-    invoice_items.reduce(0) do |sum, invoice_item|
-      sum + invoice_item.revenue
+    if status?
+      invoice_items.reduce(0) do |sum, invoice_item|
+        sum + invoice_item.revenue
+      end
     end
+  end
+
+  def status?
+    @invoice_items.any?(&:status?)
   end
 
   def inspect

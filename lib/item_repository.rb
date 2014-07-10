@@ -1,8 +1,11 @@
 require          'csv'
 require_relative 'items'
 require_relative 'repository'
+require_relative 'invoice_item'
+
 require_relative 'transaction'
-# require 'pry'
+
+
 
 class ItemRepository < Repository
 
@@ -17,15 +20,23 @@ class ItemRepository < Repository
 
   attr_reader :objects
 
+
   def most_revenue(number)
-    top_revenue = objects.sort_by { |item| -item.revenue }
-    top_revenue[0..number-1]
+    top_revenue = objects.sort_by { |item| item.revenue }.reverse
+    top_revenue.first(number)
   end
-  # 
-  # def paid_transactions
-  #   successuful_transactions = tranactions.select { |invoice| transactions.status == 'success' }
-  #   successuful_transactions.map(&:invoice_id).flatten
-  # end
+
+    #if item.status?
+      #objects.invoice_item.sort_by { |item| -item.revenue }[0..number-1]
+    #end
+
+
+  def paid_transactions
+    successuful_transactions = transactions.select { |invoice| transactions.status == 'success' }
+    successuful_transactions.map(&:invoice_id).flatten
+  end
+
+  #most_items(x) returns the top x item instances ranked by total number sold
 
 
 end

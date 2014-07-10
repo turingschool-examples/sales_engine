@@ -15,5 +15,4 @@ class TransactionRepository < Repository
 
   attr_reader :objects
 
-
 end

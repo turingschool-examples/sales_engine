@@ -27,6 +27,7 @@ class Customer
     transactions
   end
 
+
   def favorite_merchant
     merchants = transactions.collect { |t| t.merchant if t.result == 'success'}.flatten
     merchants.group_by { |item| item }.values.max_by(&:size).first
