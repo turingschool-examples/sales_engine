@@ -1,31 +1,21 @@
-require          'csv'
-require_relative 'merchant'
-require_relative 'items'
-require_relative 'repository'
+require_relative 'merchant_repository_helper'
 
 class MerchantRepository < Repository
 
   def self.load(filename)
     objects = []
-    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      objects << Merchant.new(row)
-    end
+    CSV.foreach(filename, headers: true, header_converters: :symbol ) {|row| objects << Merchant.new(row)}
     new(objects)
   end
 
   attr_reader :objects
 
   def revenue(date)
-    objects.reduce(0) do |sum, object|
-      sum += object.revenue(date)
-    end
+    objects.reduce(0) { |sum, object| sum += object.revenue(date) }
   end
 
   def most_revenue(number)
-    top_revenue = objects.sort_by do |merchant|
-      -merchant.revenue
-     end
-    top_revenue[0..(number-1)]
+    objects.sort_by { |merchant| -merchant.revenue }[0..(number-1)]
   end
 
   def most_items(number)
