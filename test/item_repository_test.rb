@@ -6,7 +6,7 @@ require_relative '../lib/invoice_repository'
 require_relative '../lib/invoice_item_repository'
 require_relative '../lib/item_repository'
 require_relative '../lib/sales_engine'
-require 'pry'
+
 
 class ItemRepositoryTest < Minitest::Test
 

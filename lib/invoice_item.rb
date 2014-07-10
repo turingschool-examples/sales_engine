@@ -1,5 +1,5 @@
 require 'bigdecimal'
-require 'pry'
+
 
 class InvoiceItem
 
@@ -37,7 +37,6 @@ class InvoiceItem
   def price(number)
     BigDecimal.new(number.to_s) / 100
   end
-
 
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"

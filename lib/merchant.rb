@@ -36,7 +36,6 @@ class Merchant
 
   def favorite_customer
     customers = invoices.collect { |invoice| invoice.customer if invoice.status? }.compact
-    # binding.pry
     customers.group_by { |item| item }.values.max_by(&:size).first
   end
 

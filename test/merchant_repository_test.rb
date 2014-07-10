@@ -6,7 +6,7 @@ require_relative '../lib/invoice_item'
 require_relative '../lib/invoice'
 require_relative '../lib/transaction'
 
-require 'pry'
+
 
 class MerchantRepositoryTest < Minitest::Test
 

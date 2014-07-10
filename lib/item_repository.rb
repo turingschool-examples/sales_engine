@@ -2,7 +2,7 @@ require          'csv'
 require_relative 'items'
 require_relative 'repository'
 require_relative 'invoice_item'
-require 'pry'
+
 require_relative 'transaction'
 
 

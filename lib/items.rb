@@ -1,7 +1,7 @@
 require 'bigdecimal'
 require_relative 'invoice_item'
 require_relative 'transaction'
-require 'pry'
+
 class Item
 
   attr_reader :id,

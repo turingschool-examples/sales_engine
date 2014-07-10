@@ -2,7 +2,7 @@ gem 'minitest', '~>5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/invoice_repository'
-require 'pry'
+
 
 class InvoiceRepositoryTest < Minitest::Test
 
