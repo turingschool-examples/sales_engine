@@ -57,8 +57,8 @@ class SalesEngine
 
   def merchant_relationship
     merchant_repository.all.each do |merchant|
-      merchant.invoices  = invoice_repository.find_all_by_merchant_id(merchant.id)
-      merchant.items     = item_repository.find_all_by_merchant_id(merchant.id)
+      merchant.invoices  ||= invoice_repository.find_all_by_merchant_id(merchant.id)
+      merchant.items     ||= item_repository.find_all_by_merchant_id(merchant.id)
     end
   end
 
@@ -77,30 +77,30 @@ class SalesEngine
 
   def invoice_relationship
     invoice_repository.all.each do |invoice|
-      invoice.transactions  = transaction_repository.find_all_by_invoice_id(invoice.id)
-      invoice.invoice_items = invoice_item_repository.find_all_by_invoice_id(invoice.id)
-      invoice.customer      = customer_repository.find_by_id(invoice.customer_id)
-      invoice.items         = invoice_items_list(invoice)
-      invoice.merchant      = merchant_repository.find_by_id(invoice.merchant_id)
+      invoice.transactions  ||= transaction_repository.find_all_by_invoice_id(invoice.id)
+      invoice.invoice_items ||= invoice_item_repository.find_all_by_invoice_id(invoice.id)
+      invoice.customer      ||= customer_repository.find_by_id(invoice.customer_id)
+      invoice.items         ||= invoice_items_list(invoice)
+      invoice.merchant      ||= merchant_repository.find_by_id(invoice.merchant_id)
     end
   end
 
   def item_relationship
     item_repository.all.each do |item|
-      item.invoice_items = invoice_item_repository.find_all_by_item_id(item.id)
-      item.merchant      = merchant_repository.find_by_id(item.merchant_id)
+      item.invoice_items ||= invoice_item_repository.find_all_by_item_id(item.id)
+      item.merchant      ||= merchant_repository.find_by_id(item.merchant_id)
     end
   end
 
   def transaction_relationship
     transaction_repository.all.each do |transaction|
-      transaction.invoice = invoice_repository.find_by_id(transaction.invoice_id)
+      transaction.invoice ||= invoice_repository.find_by_id(transaction.invoice_id)
     end
   end
 
   def customer_relationship
     customer_repository.all.each do |customer|
-      customer.invoices = invoice_repository.find_all_by_customer_id(customer.id)
+      customer.invoices ||= invoice_repository.find_all_by_customer_id(customer.id)
     end
   end
 end

@@ -1,5 +1,9 @@
 require 'bigdecimal'
+<<<<<<< HEAD
 require 'pry'
+=======
+
+>>>>>>> dcca3ac642d89fe027dbfdf10040366c6f79418a
 class InvoiceItem
 
   attr_reader   :id,
@@ -35,6 +39,11 @@ class InvoiceItem
 
   def price(number)
     BigDecimal.new(number.to_s) / 100
+  end
+
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end
