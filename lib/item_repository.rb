@@ -10,12 +10,22 @@ class ItemRepository < Repository
 
   attr_reader :objects
 
+
   def most_revenue(number)
     top_revenue = objects.sort_by { |item| item.revenue }.reverse.first(number)
   end
 
+
+    #if item.status?
+      #objects.invoice_item.sort_by { |item| -item.revenue }[0..number-1]
+    #end
+
+
   def paid_transactions
     transactions.select { |invoice| transactions.status == 'success' }.map(&:invoice_id).flatten
   end
+
+
+  #most_items(x) returns the top x item instances ranked by total number sold
 
 end
