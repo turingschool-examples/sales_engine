@@ -1,9 +1,6 @@
 require 'bigdecimal'
-<<<<<<< HEAD
 require 'pry'
-=======
 
->>>>>>> dcca3ac642d89fe027dbfdf10040366c6f79418a
 class InvoiceItem
 
   attr_reader   :id,

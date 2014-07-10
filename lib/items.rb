@@ -49,6 +49,7 @@ class Item
 
   def status?
     @invoice_items.any?(&:status?)
+  end
 
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"
