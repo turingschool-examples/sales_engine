@@ -2,13 +2,13 @@ require_relative 'repository'
 
 class Invoice < Repository
 
-  attr_reader :id,
-              :customer_id,
-              :merchant_id,
-              :status,
-              :created_at,
-              :updated_at,
-              :objects
+  attr_reader   :id,
+                :customer_id,
+                :merchant_id,
+                :status,
+                :created_at,
+                :updated_at,
+                :objects
 
   attr_accessor :transactions,
                 :invoice_items,
@@ -30,13 +30,7 @@ class Invoice < Repository
   end
 
   def revenue(date = nil)
-    amount = 0
-    if status?
-      @invoice_items.each do |invoice_item|
-        amount += invoice_item.revenue
-      end
-    end
-    amount
+    case when status? then @invoice_items.reduce(0) { |sum, invoice_item| sum += invoice_item.revenue } end
   end
 
   def date_parse(date)
@@ -51,7 +45,4 @@ class Invoice < Repository
     transactions.all? {|transaction| transaction.result == 'failed' or nil}
   end
 
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
-  end
 end
