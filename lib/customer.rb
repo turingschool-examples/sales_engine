@@ -24,6 +24,5 @@ class Customer
     end
     transactions
   end
-
-
+  
 end

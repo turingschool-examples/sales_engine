@@ -20,4 +20,8 @@ class Transaction
     @updated_at                  = data[:updated_at]
   end
 
+  def transaction_paid?
+
+  end
+
 end
