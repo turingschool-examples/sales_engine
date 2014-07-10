@@ -28,7 +28,7 @@ class Item
   end
 
   def price(number)
-    BigDecimal.new((number.to_f / 100).to_s)
+    BigDecimal.new((number.to_f/100).to_s)
   end
 
   def revenue
