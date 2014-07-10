@@ -1,4 +1,5 @@
 require_relative 'repository'
+require 'pry'
 
 class Invoice < Repository
 
@@ -33,6 +34,7 @@ class Invoice < Repository
   def revenue(date = nil)
     amount = 0
     if status?
+      binding.pry
       @invoice_items.each do |invoice_item|
         amount += invoice_item.revenue
       end
