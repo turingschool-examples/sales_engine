@@ -4,7 +4,9 @@ class TransactionRepository < Repository
 
   def self.load(filename)
     objects = []
-    CSV.foreach(filename, headers: true, header_converters: :symbol) { |row| objects << Transaction.new(row) }
+    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
+      objects << Transaction.new(row)
+    end
     new(objects)
   end
 

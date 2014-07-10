@@ -19,16 +19,23 @@ class Merchant
 
   def revenue(date = nil)
     amount = BigDecimal.new("0")
-    @invoices.each {|invoice| amount += invoice.revenue if (date == nil || date == invoice.updated_at) && invoice.revenue != nil }
+    @invoices.each do |invoice|
+      if (date == nil || date == invoice.updated_at) && invoice.revenue != nil
+       amount += invoice.revenue
+     end
     amount
   end
 
   def total_items_sold
-    successful_invoice_items.reduce(0) { |sum, invoice_item| sum += invoice_item.quantity.to_i }
+    successful_invoice_items.reduce(0) do |sum, invoice_item|
+      sum += invoice_item.quantity.to_i
+    end
   end
 
   def favorite_customer
-    customers = invoices.collect { |invoice| invoice.customer if invoice.status? }.compact
+    customers = invoices.collect do |invoice|
+      invoice.customer if invoice.status?
+    end.compact
     customers.group_by { |item| item }.values.max_by(&:size).first
   end
 

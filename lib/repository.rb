@@ -14,8 +14,12 @@ class Repository
 
   def method_missing(meth, *args, &block)
     case
-    when meth.to_s =~ /^find_by_(.+)$/     then @objects.detect { |object| object.send($1) == args.first }
-    when meth.to_s =~ /^find_all_by_(.+)$/ then @objects.select { |object| object.send($1) == args.first }
+    when meth.to_s =~ /^find_by_(.+)$/     then @objects.detect do |object|
+      object.send($1) == args.first
+    end
+  when meth.to_s =~ /^find_all_by_(.+)$/ then @objects.select do |object|
+     object.send($1) == args.first
+   end
     else super
     end
   end

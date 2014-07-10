@@ -12,15 +12,15 @@ class Relationships
 
   def merchant_relationship
     merchant_repository.all.each do |merchant|
-      merchant.invoices  ||= invoice_repository.find_all_by_merchant_id(merchant.id)
-      merchant.items     ||= item_repository.find_all_by_merchant_id(merchant.id)
+      merchant.invoices ||= invoice_repository.find_all_by_merchant_id(merchant.id)
+      merchant.items    ||= item_repository.find_all_by_merchant_id(merchant.id)
     end
   end
 
   def invoice_item_relationship
     invoice_item_repository.all.each do |invoice_item|
-      invoice_item.invoice = invoice_repository.find_by_id(invoice_item.invoice_id)
-      invoice_item.item    = item_repository.find_by_id(invoice_item.item_id)
+      invoice_item.invoice ||= invoice_repository.find_by_id(invoice_item.invoice_id)
+      invoice_item.item    ||= item_repository.find_by_id(invoice_item.item_id)
     end
   end
 

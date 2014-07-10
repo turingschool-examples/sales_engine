@@ -42,8 +42,7 @@ class Item
   end
 
   def best_day
-    sorted_invoice = invoice.sort_by {|invoice| invoice.revenue(invoice.updated_at).to_f if invoice.status?}
-    sorted_invoice.last.updated_at
+w    sorted_invoice.last.updated_at
   end
 
   def status?
