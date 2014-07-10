@@ -13,7 +13,6 @@ class InvoiceRepository < Repository
   attr_reader :objects
 
   def create(data)
-
     objects << Invoice.new(data) << Item.new(data[:items])
   end
 

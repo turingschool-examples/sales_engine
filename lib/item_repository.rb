@@ -10,16 +10,17 @@ class ItemRepository < Repository
 
   attr_reader :objects
 
-
   def most_revenue(number)
     top_revenue = objects.sort_by { |item| item.revenue }.reverse.first(number)
   end
 
+  def most_items(number)
+    top_item = objects.sort_by {|item| -item.invoice.status? }.first
+  end
 
     #if item.status?
       #objects.invoice_item.sort_by { |item| -item.revenue }[0..number-1]
     #end
-
 
   def paid_transactions
     transactions.select { |invoice| transactions.status == 'success' }.map(&:invoice_id).flatten

@@ -7,7 +7,7 @@ require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
 require_relative '../lib/transaction'
 require_relative '../lib/customer'
-
+require 'pry'
 
 class MerchantTest < Minitest::Test
 

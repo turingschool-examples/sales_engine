@@ -10,7 +10,8 @@ class Item
                 :updated_at
 
   attr_accessor :invoice_items,
-                :merchant
+                :merchant,
+                :invoice
 
   def initialize(data)
     @id            = data[:id].to_i
@@ -34,6 +35,14 @@ class Item
     if status?
       invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.revenue }
     end
+  end
+
+  def invoice
+    invoice_items.invoice
+  end
+
+  def best_day
+    invoice.collect {|invoice| [invoice.updated_at, invoice.revenue]}
   end
 
   def status?

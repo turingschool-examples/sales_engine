@@ -31,6 +31,8 @@ class InvoiceItem
     invoice.any?(&:status?)
   end
 
+  
+
   private
 
   def price(number)
