@@ -38,11 +38,12 @@ class Item
   end
 
   def invoice
-    invoice_items.invoice
+    invoice_items.map {|invoice_item| invoice_item.invoice}
   end
 
   def best_day
-    invoice.collect {|invoice| [invoice.updated_at, invoice.revenue]}
+    sorted_invoice = invoice.sort_by {|invoice| invoice.revenue(invoice.updated_at).to_f if invoice.status?}
+    sorted_invoice.last.updated_at
   end
 
   def status?

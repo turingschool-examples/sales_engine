@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 class Merchant
 
   attr_reader   :id,
@@ -19,12 +19,12 @@ class Merchant
 
   def revenue(date = nil)
     amount = BigDecimal.new("0")
-    @invoices.each {|invoice| amount += invoice.revenue if date == nil || date == invoice.updated_at }
+    @invoices.each {|invoice| amount += invoice.revenue if (date == nil || date == invoice.updated_at) && invoice.revenue != nil }
     amount
   end
 
   def total_items_sold
-    shipped_invoice_items.reduce(0) { |sum, invoice_item| sum += invoice_item.quantity.to_i }
+    successful_invoice_items.reduce(0) { |sum, invoice_item| sum += invoice_item.quantity.to_i }
   end
 
   def favorite_customer
@@ -38,9 +38,9 @@ class Merchant
 
   private
 
-  def shipped_invoice_items
-    shipped_invoices = invoices.select { |invoice| invoice.status == 'shipped' }
-    shipped_invoices.map(&:invoice_items).flatten
+  def successful_invoice_items
+    successful_invoices = invoices.select { |invoice| invoice.status? }
+    successful_invoices.map(&:invoice_items).flatten
   end
 
 

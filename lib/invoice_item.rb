@@ -28,10 +28,8 @@ class InvoiceItem
   end
 
   def status?
-    invoice.any?(&:status?)
+    invoice.status?
   end
-
-  
 
   private
 

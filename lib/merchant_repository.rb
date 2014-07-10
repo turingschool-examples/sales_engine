@@ -13,7 +13,7 @@ class MerchantRepository < Repository
   end
 
   def most_revenue(number)
-    objects.sort_by { |merchant| -merchant.revenue }[0..(number-1)]
+    objects.sort_by { |merchant| -merchant.revenue.to_i }[0..(number-1)]
   end
 
   def most_items(number)

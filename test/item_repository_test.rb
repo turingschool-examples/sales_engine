@@ -54,8 +54,8 @@ class ItemRepositoryTest < Minitest::Test
   def test_most_revenue
     @sales_engine = SalesEngine.new(nil, true)
     sales_engine.startup
-    assert_equal ['Item Dolorem Et'], sales_engine.item_repository.most_revenue(1).map(&:name)
-    assert_equal ['Item Dolorem Et', 'Item Rerum Saepe'], sales_engine.item_repository.most_revenue(2).map(&:name)
+    assert_equal ["Item Qui Esse"], sales_engine.item_repository.most_revenue(1).map(&:name)
+    assert_equal ["Item Qui Esse", "Item Autem Minima"], sales_engine.item_repository.most_revenue(2).map(&:name)
   end
 
 end

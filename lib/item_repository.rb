@@ -11,22 +11,13 @@ class ItemRepository < Repository
   attr_reader :objects
 
   def most_revenue(number)
-    top_revenue = objects.sort_by { |item| item.revenue }.reverse.first(number)
+    top_revenue = objects.sort_by { |item| -item.revenue.to_i }.first(number)
   end
 
   def most_items(number)
-    top_item = objects.sort_by {|item| -item.invoice.status? }.first
+    items = objects.collect {|item| item if item.status?}
+    top_items = items.group_by { |item| item }.values.sort_by(&:size).reverse
+    top_items.flatten.compact.uniq[0..(number-1)]
   end
-
-    #if item.status?
-      #objects.invoice_item.sort_by { |item| -item.revenue }[0..number-1]
-    #end
-
-  def paid_transactions
-    transactions.select { |invoice| transactions.status == 'success' }.map(&:invoice_id).flatten
-  end
-
-
-  #most_items(x) returns the top x item instances ranked by total number sold
 
 end
