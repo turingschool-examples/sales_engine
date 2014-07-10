@@ -8,10 +8,6 @@ class Repository
     @objects = objects
   end
 
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
-  end
-
   def all() @objects end
 
   def random() @objects.sample end
@@ -29,6 +25,10 @@ class Repository
     when meth.to_s =~ /^find_by_.*$/ || meth.to_s =~ /^find_all_by_.*$/ then true
     else super
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchant.size} rows>"
   end
 
 end

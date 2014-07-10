@@ -1,18 +1,11 @@
-require 'csv'
-require_relative 'transaction'
-require_relative 'repository'
+require_relative 'transaction_repository_helper'
 
 class TransactionRepository < Repository
 
-
   def self.load(filename)
     objects = []
-    CSV.foreach(filename, headers: true, header_converters: :symbol) do |row|
-      objects << Transaction.new(row)
-    end
+    CSV.foreach(filename, headers: true, header_converters: :symbol) { |row| objects << Transaction.new(row) }
     new(objects)
   end
-
-  attr_reader :objects
 
 end

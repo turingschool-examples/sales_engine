@@ -8,8 +8,6 @@ class MerchantRepository < Repository
     new(objects)
   end
 
-  attr_reader :objects
-
   def revenue(date)
     objects.reduce(0) { |sum, object| sum += object.revenue(date) }
   end
