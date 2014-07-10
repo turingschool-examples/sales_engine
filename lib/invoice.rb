@@ -27,6 +27,7 @@ class Invoice < Repository
     @transactions  = data[:transactions]
     @merchant      = data[:merchant]
     @customer      = data[:customer]
+    @items         = data[:items]
   end
 
   def revenue(date = nil)
@@ -38,11 +39,7 @@ class Invoice < Repository
     end
     amount
   end
-
-  def date_parse(date)
-    Date.parse(date) if date != nil
-  end
-
+  
   def status?
     transactions.any? {|transaction| transaction.result == 'success'}
   end
@@ -55,6 +52,15 @@ class Invoice < Repository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
+  def charge(data)
+    transactions << Transaction.new(data)
+  end
+
+  private
+
+  def date_parse(date)
+    Date.parse(date) if date != nil
+  end
 
 
 end

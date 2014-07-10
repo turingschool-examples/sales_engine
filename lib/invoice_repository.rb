@@ -1,5 +1,6 @@
 require          'csv'
 require_relative 'invoice'
+require_relative 'items'
 require_relative 'repository'
 
 class InvoiceRepository < Repository
@@ -14,8 +15,9 @@ class InvoiceRepository < Repository
 
   attr_reader :objects
 
+  def create(data)
 
-
-
+    objects << Invoice.new(data) << Item.new(data[:items])
+  end
 
 end
