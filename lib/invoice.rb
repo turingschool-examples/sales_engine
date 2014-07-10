@@ -1,5 +1,5 @@
 require_relative 'repository'
-require 'pry'
+
 
 class Invoice < Repository
 
@@ -41,11 +41,6 @@ class Invoice < Repository
 
   def none?
     transactions.all? {|transaction| transaction.result == 'failed' or nil}
-  end
-
-
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 

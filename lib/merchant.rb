@@ -42,4 +42,5 @@ class Merchant
     shipped_invoices.map(&:invoice_items).flatten
   end
 
+
 end
