@@ -32,18 +32,7 @@ class Invoice < Repository
   end
 
   def revenue(date = nil)
-<<<<<<< HEAD
-    amount = 0
-    if status?
-      binding.pry
-      @invoice_items.each do |invoice_item|
-        amount += invoice_item.revenue
-      end
-    end
-    amount
-=======
     case when status? then @invoice_items.reduce(0) { |sum, invoice_item| sum += invoice_item.revenue } end
->>>>>>> 60647e6b3049b30aa7956fb3ef2fb85697e69e1b
   end
 
   def status?
