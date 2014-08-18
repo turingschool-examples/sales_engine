@@ -1,3 +1,9 @@
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
+
 namespace :sanitation do
   desc "Check line lengths & whitespace with Cane"
   task :lines do
