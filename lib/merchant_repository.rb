@@ -1,4 +1,5 @@
 require_relative 'merchant'
+require_relative 'repository'
 require_relative 'parser'
 
 class MerchantRepository < Repository

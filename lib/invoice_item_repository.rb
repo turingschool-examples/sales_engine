@@ -1,4 +1,5 @@
 require_relative 'invoice_item'
+require_relative 'repository'
 require_relative 'parser'
 
 class InvoiceItemRepository < Repository

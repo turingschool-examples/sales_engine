@@ -1,4 +1,5 @@
 require_relative 'customer'
+require_relative 'repository'
 require_relative 'parser'
 
 class CustomerRepository < Repository
@@ -6,9 +7,7 @@ class CustomerRepository < Repository
 
   def self.collection
     @collection ||= load_entries(Customer, 'customers.csv')
-    "test"
   end
-
 end
 
 

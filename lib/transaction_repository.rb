@@ -1,4 +1,5 @@
 require_relative 'transaction'
+require_relative 'repository'
 require_relative 'parser'
 
 class TransactionRepository < Repository
