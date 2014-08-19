@@ -10,13 +10,16 @@ class Repository
 
   def self.find_by_X(attribute)
     # X = attribute, returns a single case-insensitive match
-    @collection.find_by(:name, "Bob")
+    @collection.find do
+      |element| element.call(attribute) == attribute
+    end
   end
 
   def self.find_all_by_X(attribute)
-    return [] if f.nil?
     # find_by_X that returns a collection.if no match,returns []
-    f = @collection.select(:name, "Bob")
+    @collection.find_all do
+      |element| element.call(attribute) == attribute
+    end
   end
 
 end
