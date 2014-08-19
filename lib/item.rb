@@ -1,3 +1,5 @@
+require_relative 'item_repository'
+
 class Item
   attr_reader :id,
               :name,
@@ -16,4 +18,5 @@ class Item
     @created_at  = data[:created_at]
     @updated_at  = data[:updated_at]
   end
+
 end

@@ -4,6 +4,7 @@ source "https://rubygems.org"
 group :development do
   gem 'cane', '~> 2.6.2'
   gem 'pry', '~> 0.10.1'
+  gem 'pry-doc'
   gem 'reek', '~> 1.3.8'
 end
 

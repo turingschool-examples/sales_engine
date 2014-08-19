@@ -1,3 +1,5 @@
+require_relative 'transaction_repository'
+
 class Transaction
   attr_reader :id,
               :invoice_id,
@@ -16,4 +18,5 @@ class Transaction
     @created_at                  = data[:created_at]
     @updated_at                  = data[:updated_at]
   end
+
 end

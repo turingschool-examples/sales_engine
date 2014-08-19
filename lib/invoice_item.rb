@@ -1,3 +1,5 @@
+require_relative 'invoice_item_repository'
+
 class InvoiceItem
   attr_reader :id,
               :item_id,
@@ -16,4 +18,5 @@ class InvoiceItem
     @created_at  = data[:created_at]
     @updated_at  = data[:updated_at]
   end
+
 end

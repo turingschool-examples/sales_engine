@@ -1,3 +1,5 @@
+require_relative 'invoice_repository'
+
 class Invoice
   attr_reader :id,
               :customer_id,
@@ -14,4 +16,5 @@ class Invoice
     @created_at  = data[:created_at]
     @updated_at  = data[:updated_at]
   end
+
 end
