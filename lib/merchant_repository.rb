@@ -1,7 +1,7 @@
 require_relative 'merchant'
 require_relative 'parser'
 
-class MerchantRepository
+class MerchantRepository < Repository
   extend Parser
 
   def self.collection
@@ -9,4 +9,3 @@ class MerchantRepository
   end
 
 end
-

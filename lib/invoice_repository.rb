@@ -1,10 +1,10 @@
 require_relative 'invoice'
 require_relative 'parser'
 
-class InvoiceRepository
+class InvoiceRepository < Repository
   extend Parser
 
-  def self.collection  
+  def self.collection
     @collection ||= load_entries(Invoice, 'invoices.csv')
   end
 

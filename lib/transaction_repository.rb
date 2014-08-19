@@ -1,7 +1,7 @@
 require_relative 'transaction'
 require_relative 'parser'
 
-class TransactionRepository
+class TransactionRepository < Repository
   extend Parser
 
   def self.collection
@@ -9,4 +9,3 @@ class TransactionRepository
   end
 
 end
-

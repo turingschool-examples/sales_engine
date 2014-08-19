@@ -1,7 +1,7 @@
 require_relative 'item'
 require_relative 'parser'
 
-class ItemRepository
+class ItemRepository < Repository
   extend Parser
 
   def self.collection
@@ -9,4 +9,3 @@ class ItemRepository
   end
 
 end
-

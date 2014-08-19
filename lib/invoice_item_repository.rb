@@ -1,7 +1,7 @@
 require_relative 'invoice_item'
 require_relative 'parser'
 
-class InvoiceItemRepository
+class InvoiceItemRepository < Repository
   extend Parser
 
   def self.collection
