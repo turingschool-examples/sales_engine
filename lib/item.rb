@@ -13,14 +13,14 @@ class Item
               :repo
 
   def initialize(data, repo)
-    @id = data[:id].to_i
-    @name = data[:name]
+    @id =          data[:id].to_i
+    @name =        data[:name]
     @description = data[:description]
-    @unit_price = data[:unit_price].to_d
+    @unit_price =  data[:unit_price].to_d
     @merchant_id = data[:merchant_id].to_i
-    @created_at = Time.parse(data[:created_at])
-    @updated_at = Time.parse(data[:updated_at])
-    @repo = repo
+    @created_at =  Time.parse(data[:created_at])
+    @updated_at =  Time.parse(data[:updated_at])
+    @repo =        repo
   end
 
   def invoice_items

@@ -8,11 +8,11 @@ class Merchant
               :repo
 
   def initialize(data, repo)
-    @id = data[:id].to_i
-    @name = data[:name]
+    @id =         data[:id].to_i
+    @name =       data[:name]
     @created_at = Time.parse(data[:created_at])
     @updated_at = Time.parse(data[:updated_at])
-    @repo = repo
+    @repo =       repo
   end
 
   def items
