@@ -28,5 +28,4 @@ class Item
 
   def merchant
   end
-
 end

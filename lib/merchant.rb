@@ -20,5 +20,4 @@ class Merchant
 
   def invoices
   end
-
 end
