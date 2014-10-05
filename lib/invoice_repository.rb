@@ -17,19 +17,19 @@ class InvoiceRepository
     @invoices = invoices
   end
 
-  # def all
-  #   merchants
-  # end
-  #
-  # def random
-  #   merchants.sample
-  # end
-  #
-  # def find_by_x(match)
-  #
-  # end
-  #
-  # def find_all_by_x(match)
-  #
-  # end
+  def all
+    invoices
+  end
+
+  def random
+    invoices.sample
+  end
+
+  def find_by_x(match)
+
+  end
+
+  def find_all_by_x(match)
+
+  end
 end
