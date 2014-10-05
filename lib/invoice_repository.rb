@@ -1,35 +1,15 @@
 require_relative 'invoice'
+require_relative 'finder_methods'
 require 'csv'
 
 class InvoiceRepository
-  attr_reader :invoices
+  include FinderMethods
 
-  def self.load_invoices(directory)
-    file = File.join(directory, 'invoices.csv')
-    data = CSV.open(file, headers: true, header_converters: :symbol)
-    rows = data.map do |row|
-      Invoice.new(row)
-    end
-    new(rows) # => InvoiceRepository.new(rows)
-  end
+  attr_reader :instances
 
-  def initialize(invoices)
-    @invoices = invoices
-  end
-
-  def all
-    invoices
-  end
-
-  def random
-    invoices.sample
-  end
-
-  def find_by_x(match)
-
-  end
-
-  def find_all_by_x(match)
-
+  def initialize(directory)
+    file =    File.join(directory, 'invoices.csv')
+    data =    CSV.open(file, headers: true, header_converters: :symbol)
+    @instances =  data.map { |row| Invoice.new(row.to_hash, self) }
   end
 end

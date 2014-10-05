@@ -1,23 +1,15 @@
+require_relative 'merchant'
+require_relative 'finder_methods'
+require 'csv'
+
 class MerchantRepository
-  attr_reader :engine
-  
-  def initialize(engine)
-    @engine = engine
-  end
+  include FinderMethods
 
-  def all
-    merchants
-  end
+  attr_reader :instances
 
-  def random
-    merchants.sample
-  end
-
-  def find_by_x(match)
-
-  end
-
-  def find_all_by_x(match)
-
+  def initialize(directory)
+    file =    File.join(directory, 'merchants.csv')
+    data =    CSV.open(file, headers: true, header_converters: :symbol)
+    @instances =  data.map { |row| Merchant.new(row.to_hash, self) }
   end
 end
