@@ -1,5 +1,3 @@
-require_relative 'item_repository'
-
 module FinderMethods
   # TODO use only correct attriutes for type?
   def self.attributes

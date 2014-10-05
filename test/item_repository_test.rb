@@ -6,7 +6,7 @@ require 'time'
 
 class ItemRepositoryTest < Minitest::Test
   def setup
-    @repo = ItemRepository.new('test/data')
+    @repo = ItemRepository.new('test/data',nil)
     @data = {
       id: 1,
       name:         "item 1",
