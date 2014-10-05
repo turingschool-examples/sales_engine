@@ -1,10 +1,21 @@
 require_relative 'item_repository'
 
 module FinderMethods
-  # TODO use only correct attriutes for type
+  # TODO use only correct attriutes for type?
   def self.attributes
     [
     'id',
+    'customer_id',
+    'merchant_id',
+    'item_id',
+    'invoice_id',
+    'credit_card_number',
+    'credit_card_expiration_date',
+    'result',
+    'quantity',
+    'first_name',
+    'last_name',
+    'status',
     'name',
     'description',
     'unit_price',
