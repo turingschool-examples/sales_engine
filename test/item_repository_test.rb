@@ -18,22 +18,14 @@ class ItemRepositoryTest < Minitest::Test
     }
   end
 
-  # def test_correct_attribute_array
-  #   assert_equal @repo.attributes, [
-  #     :id,
-  #     :name,
-  #     :description,
-  #     :unit_price,
-  #     :merchant_id,
-  #     :created_at,
-  #     :updated_at
-  #   ]
-  # end
-
   def test_find_by_attribute
     @data.each do |attribute, data|
       assert_equal 1, @repo.send("find_by_#{attribute}", data).id
     end
+  end
+
+  def test_find_returns_nil_if_no_match
+    assert_nil @repo.find_by_name("no name")
   end
 
   def test_single_find_all_matches
@@ -55,6 +47,10 @@ class ItemRepositoryTest < Minitest::Test
       assert_kind_of Item, match[1]
       assert_equal 2, match.size
     end
+  end
+
+  def test_find_all_returns_empty_array_if_no_match
+    assert_equal [], @repo.find_all_by_name("no name")
   end
 
   def test_random_method_returns_one_instance

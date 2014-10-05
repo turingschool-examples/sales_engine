@@ -10,8 +10,7 @@ class Item
               :merchant_id,
               :created_at,
               :updated_at,
-              :repo # ,
-              # :attributes
+              :repo
 
   def initialize(data, repo)
     @id = data[:id].to_i
@@ -22,7 +21,6 @@ class Item
     @created_at = Time.parse(data[:created_at])
     @updated_at = Time.parse(data[:updated_at])
     @repo = repo
-    # @attributes = data.keys
   end
 
   def invoice_items

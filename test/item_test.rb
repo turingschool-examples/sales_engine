@@ -18,18 +18,6 @@ class ItemTest < Minitest::Test
     @item = Item.new(data, nil)
   end
 
-  # def test_correct_attribute_array
-  #   assert_equal @item.attributes, [
-  #     :id,
-  #     :name,
-  #     :description,
-  #     :unit_price,
-  #     :merchant_id,
-  #     :created_at,
-  #     :updated_at
-  #   ]
-  # end
-
   def test_item_attribute_matches
     assert_equal 1, @item.id
     assert_equal 'Qui Esse', @item.name
