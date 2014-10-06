@@ -1,0 +1,3 @@
+class InvoiceItemRepository
+
+end
