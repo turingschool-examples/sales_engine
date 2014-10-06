@@ -14,11 +14,11 @@ class SalesEngine
               :transaction_repository,
               :invoice_repository
 
-  def initialize(directory)
+  def initialize(directory='data')
     @directory = directory
   end
 
-  def start
+  def startup
     @item_repository =         ItemRepository.new(directory,self)
     @merchant_repository =     MerchantRepository.new(directory,self)
     @customer_repository =     CustomerRepository.new(directory,self)
