@@ -1,0 +1,4 @@
+id,name,description,unit_price,merchant_id,created_at,updated_at
+1,Item 1,stuff about 1,75107,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+2,Item 2,stuff about 2,85107,1,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+3,Item 2,stuff about 3,95107,2,2012-03-27 15:53:59 UTC,2012-03-27 16:53:59 UTC

@@ -1,8 +1,9 @@
 # Sales Engine
+First check in:
+Have everything done through Listing and Searching Collections
 
-(insert project completion goals for first check-in here)
-
-(insert project completion goals for second check-in here)
+Second check in:
+First working implementation of full project completed
 
 # Check-in Rubrics
 
