@@ -1,8 +1,12 @@
 # Sales Engine
 
-(insert project completion goals for first check-in here)
+-First Check In
+  -Have completed all of the searching and collecting and have started (and hopefully made good headway)
+  building the relationships model
 
-(insert project completion goals for second check-in here)
+-Second Check In
+  -Relationships model built and completed.  Started and/or made some progress in the Business Intelligence.
+
 
 # Check-in Rubrics
 
