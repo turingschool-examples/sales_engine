@@ -4,9 +4,9 @@ require_relative '../lib/item'
 
 class ItemRepositoryTest < Minitest::Test
   def setup
-    item_one = Item.new {id: "1" name: "fork" description: "aa" unit_price: "3" merchant_id: "5" created_at: "89" updated_at: "99" }
-    item_two = Item.new {id: "2" name: "tree" description: "aa" unit_price: "8" merchant_id: "5" created_at: "92" updated_at: "103" }
-    item_three = Item.new {id: "3" name: "dog" description: "c" unit_price: "2" merchant_id: "0" created_at: "64" updated_at: "103" }
+    item_one = Item.new({id: "1", name: "fork", description: "aa", unit_price: "3", merchant_id: "5", created_at: "89", updated_at: "99" })
+    item_two = Item.new({id: "2", name: "tree", description: "aa", unit_price: "8", merchant_id: "5", created_at: "92", updated_at: "103" })
+    item_three = Item.new({id: "3", name: "dog", description: "c", unit_price: "2", merchant_id: "0", created_at: "64", updated_at: "103" })
     @items = [item_one, item_two, item_three]
     @repository = ItemRepository.new(@items)
   end

@@ -4,9 +4,9 @@ require_relative '../lib/customer'
 
 class CustomerRepositoryTest < Minitest::Test
   def setup
-    customer_one = Customer.new {id: "12" first_name: "john" last_name: "smith" created_at: "a" updated_at: "e" }
-    customer_two = Customer.new {id: "231" first_name: "bob" last_name: "brown" created_at: "b" updated_at: "d" }
-    customer_three = Customer.new {id: "1" first_name: "joe" last_name: "brown" created_at: "c" updated_at: "d" }
+    customer_one = Customer.new({id: "12", first_name: "john", last_name: "smith", created_at: "a", updated_at: "e" })
+    customer_two = Customer.new({id: "231", first_name: "bob", last_name: "brown", created_at: "b", updated_at: "d" })
+    customer_three = Customer.new({id: "1", first_name: "joe", last_name: "brown", created_at: "c", updated_at: "d" })
     @customers = [customer_one, customer_two, customer_three]
     @repository = CustomerRepository.new(@customers)
   end

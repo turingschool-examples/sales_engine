@@ -4,9 +4,9 @@ require_relative '../lib/merchant'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    merchant_one = Merchant.new {id: "1", name: "Adam", created_at: "a", updated_at: "d" }
-    merchant_two = Merchant.new {id: "2", name: "Alex", created_at: "a", updated_at: "c" }
-    merchant_three = Merchant.new {id: "3", name: "Herbert", created_at: "b", updated_at: "c" }
+    merchant_one = Merchant.new({id: "1", name: "Adam", created_at: "a", updated_at: "d" })
+    merchant_two = Merchant.new({id: "2", name: "Alex", created_at: "a", updated_at: "c" })
+    merchant_three = Merchant.new({id: "3", name: "Herbert", created_at: "b", updated_at: "c" })
     @merchants = [merchant_one, merchant_two, merchant_three]
     @repository = MerchantRepository.new(@merchants)
   end

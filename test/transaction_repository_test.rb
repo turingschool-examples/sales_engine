@@ -4,9 +4,9 @@ require_relative '../lib/transaction'
 
 class TransactionRepositoryTest < Minitest::Test
   def setup
-    transaction_one = Transaction.new {id: "1" invoice_id: "4" credit_card_number: "7" credit_card_expiration_date: "12" result: "fail" created_at: "b" updated_at: "q"}
-    transaction_two = Transaction.new {id: "2" invoice_id: "5" credit_card_number: "8" credit_card_expiration_date: "13" result: "pass" created_at: "b" updated_at: "w"}
-    transaction_three = Transaction.new {id: "3" invoice_id: "6" credit_card_number: "9" credit_card_expiration_date: "14" result: "pass" created_at: "c" updated_at: "q"}
+    transaction_one = Transaction.new({id: "1", invoice_id: "4", credit_card_number: "7", credit_card_expiration_date: "12", result: "fail", created_at: "b", updated_at: "q"})
+    transaction_two = Transaction.new({id: "2", invoice_id: "5", credit_card_number: "8", credit_card_expiration_date: "13", result: "pass", created_at: "b", updated_at: "w"})
+    transaction_three = Transaction.new({id: "3", invoice_id: "6", credit_card_number: "9", credit_card_expiration_date: "14", result: "pass", created_at: "c", updated_at: "q"})
     @transactions = [transaction_one, transaction_two, transaction_three]
     @repository = TransactionRepository.new(@transactions)
   end

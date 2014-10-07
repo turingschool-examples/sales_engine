@@ -4,9 +4,9 @@ require_relative '../lib/invoice'
 
 class InvoiceRepositoryTest < Minitest::Test
   def setup
-    invoice_one = Invoice.new {id: "1" customer_id: "16" merchant_id: "41" status: "pass" created_at: "month" updated_at: "190" }
-    invoice_two = Invoice.new {id: "3" customer_id: "10" merchant_id: "23" status: "fail" created_at: "week" updated_at: "190" }
-    invoice_three = Invoice.new {id: "2" customer_id: "8" merchant_id: "9" status: "fail" created_at: "week" updated_at: "hhh" }
+    invoice_one = Invoice.new({id: "1", customer_id: "16", merchant_id: "41", status: "pass", created_at: "month", updated_at: "190" })
+    invoice_two = Invoice.new({id: "3", customer_id: "10", merchant_id: "23", status: "fail", created_at: "week", updated_at: "190" })
+    invoice_three = Invoice.new({id: "2", customer_id: "8", merchant_id: "9", status: "fail", created_at: "week", updated_at: "hhh" })
     @invoices = [invoice_one, invoice_two, invoice_three]
     @repository = InvoiceRepository.new(@invoices)
   end
