@@ -6,17 +6,17 @@ class MerchantTest < Minitest::Test
 
   def setup
     @merchant = Merchant.new({
-      id:                     =>  4,
-      name                    =>  "Cummings-Thiel"
-      created_at:             =>  DateTime.parse("2012-03-27 14:53:59 UTC"),
-      updated_at:             =>  DateTime.parse("2012-03-27 14:53:59 UTC")
+      :id                     4,
+      :name                   "Cummings-Thiel",
+      :created_at             "2012-03-27 14:53:59 UTC",
+      :updated_at             "2012-03-27 14:53:59 UTC"
       })
   end
 
   def test_successful_initialize_with_properties
-    assert_equal                              4, @merchant.id
-    assert_instance_of                 DateTime, @merchant.created_at
-    assert_instance_of                 DateTime, @merchant.updated_at
+    assert_equal                            "4", @merchant.id
+    assert_includes                      "2012", @merchant.created_at
+    assert_instance_of                   "2012", @merchant.updated_at
   end
 
   def test_associated_item_with_object
