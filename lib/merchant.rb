@@ -1,6 +1,6 @@
 class Merchant
 
-  attr_reader :id, :name, :created_at, :updated_at
+  attr_reader :id, :name, :created_at, :updated_at, :items
 
   def initialize(data)
     @id                 = data[:id]
@@ -9,11 +9,11 @@ class Merchant
     @updated_at         = data[:updated_at]
   end
 
-  def items
-    #return array of associated item objects
+  def give_items(items)
+    @items = items
   end
 
   def invoices
-    #returns array of invoice objects
+    
   end
 end

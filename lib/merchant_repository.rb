@@ -8,6 +8,12 @@ class MerchantRepository
     create_methods
   end
 
+  def give_items_from(item_repository)
+    entries.each do |merchant|
+      merchant.give_items(item_repository.find_all_by_merchant_id(merchant.id))
+    end
+  end
+
   private
 
   def attributes
