@@ -18,7 +18,7 @@ class Repository
 
 
   def finder(attribute, criteria)
-    repo.find {|instance| instance.attribute == criteria}
+    repo.find {|instance| instance.send(attribute).downcase == criteria.downcase}
   end
 
 end
