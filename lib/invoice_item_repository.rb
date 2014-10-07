@@ -5,6 +5,7 @@ class InvoiceItemRepository
 
   def initialize(invoice_items)
     @entries = invoice_items
+    create_methods
   end
 
   def attributes
