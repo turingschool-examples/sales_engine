@@ -22,8 +22,8 @@ class ItemTest < Minitest::Test
     assert_equal      "Sunt eum id eius magni.", @item.description
     assert_equal                         "4291", @item.unit_price
     assert_equal                            "1", @item.merchant_id
-    assert_instance_of                   "2012", @item.created_at
-    assert_instance_of                   "2012", @item.updated_at
+    assert_includes                   @item.created_at, "2012"
+    assert_includes                   @item.updated_at, "2012"
   end
 
   def test_associated_item_with_object
