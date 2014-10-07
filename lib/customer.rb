@@ -8,4 +8,8 @@ class Customer
 		@created_at = data[:created_at]
 		@updated_at = data[:updated_at]
 	end
+
+	def give_invoices(invoice_repository)
+		@invoices = invoices
+	end
 end
