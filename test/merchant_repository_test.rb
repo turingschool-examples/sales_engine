@@ -20,7 +20,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_finds_by_id
-    assert_equal @merchants[1], @repository.find_by_id("1")
+    assert_equal @merchants[0], @repository.find_by_id("1")
   end
 
   def test_finds_by_name
