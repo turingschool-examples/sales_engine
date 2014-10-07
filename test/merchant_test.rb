@@ -7,6 +7,7 @@ class MerchantTest < Minitest::Test
   def setup
     @merchant = Merchant.new({
       id:                     =>  4,
+      name                    =>  "Cummings-Thiel"
       created_at:             =>  DateTime.parse("2012-03-27 14:53:59 UTC"),
       updated_at:             =>  DateTime.parse("2012-03-27 14:53:59 UTC")
       })
@@ -19,7 +20,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_associated_item_with_object
-    skip
     assert_instance_of                  Invoice, @merchant.invoices[0]
     assert_instance_of                     Item, @merchant.items[1]
   end
