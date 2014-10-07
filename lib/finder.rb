@@ -11,4 +11,7 @@
 # end
 
 
-# def find_by_first_name(value) find_by_all(first_name, value) end
+# def find_by_first_name(value); find_by_all(first_name, value); end
+# def find_all_by_first_name(value); find_by_all(first_name, value); end
+
+# need all and random methods
