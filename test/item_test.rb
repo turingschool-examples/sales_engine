@@ -5,11 +5,11 @@ class ItemTest < Minitest::Test
 	attr_reader :item
 
 	def setup
-		data = {id: 1,
+		data = {id: "1",
 						name:"Item Qui Esse",
 						description: "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", 
-						unit_price: 75107,
-						merchant_id: 1,
+						unit_price: "75107",
+						merchant_id: "1",
 						created_at: "2012-03-27 14:53:59 UTC",
 						updated_at: "2012-03-27 14:53:59 UTC"
 						}
@@ -19,7 +19,7 @@ class ItemTest < Minitest::Test
 
 	def test_it_has_an_id
 		setup
-		assert_equal 1, item.id
+		assert_equal "1", item.id
 	end
 
 	def test_an_item_has_a_name
@@ -34,12 +34,12 @@ class ItemTest < Minitest::Test
 
 	def test_an_item_has_a_unit_price
 		setup
-		assert_equal 75107, item.unit_price
+		assert_equal "75107", item.unit_price
 	end
 
 	def test_an_item_has_a_merchant_id
 		setup
-		assert_equal 1, item.merchant_id
+		assert_equal "1", item.merchant_id
 	end
 
 	def test_an_item_has_meta_data
