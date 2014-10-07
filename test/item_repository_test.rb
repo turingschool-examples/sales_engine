@@ -20,4 +20,5 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def find_by_description
+  end
 end

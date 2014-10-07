@@ -1,10 +1,15 @@
 require_relative 'test_helper'
-require './lib/repository'
 require './lib/merchant_repository'
-require './lib/merchant'
 
 
 class MerchantRepositoryTest < Minitest::Test
 
-  def test_
+  def test_repo_gets_populated
+    raw_csv = CSVParser.new.load_csv('./data/merchants_test.csv')
+    merchant_repo = MerchantRepository.new
+    merchant_repo.populate_repository(raw_csv, Merchant)
+    assert_instance_of Merchant, merchant_repo.repo[0], "not instance of Merchant"
+    assert_instance_of Merchant, merchant_repo.repo[-1], "not instance of Merchant"
+  end
+
 end

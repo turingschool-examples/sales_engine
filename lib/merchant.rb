@@ -21,7 +21,7 @@ class Merchant
     #all revenues must be BigDecimal
   end
 
-  def revenue(date arg)
+  def revenue(date_arg)
   end
 
   def favorite_customer

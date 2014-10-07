@@ -1,5 +1,9 @@
-class InvoiceRepository
+require_relative 'repository'
+require_relative 'invoice'
 
+class InvoiceRepository < Repository
+
+  attr_reader :repo
   def initialize
     @repo = []
   end
