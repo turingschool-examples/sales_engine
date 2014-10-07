@@ -19,17 +19,17 @@ class SalesEngine
     merchant_repository.give_items_from(item_repository)
     merchant_repository.give_invoices_from(invoice_repository)
 
+    invoice_item_repository.give_invoices_from(invoice_repository)
+    invoice_item_repository.give_items_from(item_repository)
+
     invoice_repository.give_transactions_from(transaction_repository)
     invoice_repository.give_invoice_items_from(invoice_item_repository)
     invoice_repository.give_items_from(item_repository)
     invoice_repository.give_customers_from(customer_repository)
     invoice_repository.give_merchants_from(merchant_repository)
 
-    invoice_item_repository.give_invoice_from(invoice_repository)
-    invoice_item_repository.give_item_from(item_repository)
-
     item_repository.give_invoice_items_from(invoice_item_repository)
-    item_repository.give_merchant_from(merchant_repository)
+    item_repository.give_merchants_from(merchant_repository)
 
     transaction_repository.give_invoices_from(invoice_repository)
 
