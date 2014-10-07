@@ -41,37 +41,36 @@ class ParserTest < MiniTest::Test
 	end
 
 	def test_loads_a_customer_csv
-		file_path = "./test/support/test_invoice_items.csv"
-		invoice_items = CustomerParser.new(file_path)
+		file_path = "./test/support/test_customers.csv"
+		customer = CustomerParser.new(file_path).all
 
 		assert_equal "1", customer[0].id
-		assert_equal "Joey", customer[1].first_name
-		assert_equal "Ondricka", customer[2].last_name
-		assert_equal "2012-03-27", customer[3].created_at
-		assert_equal "2012-03-27", customer[4].updated_at
+		assert_equal "joey", customer[0].first_name
+		assert_equal "ondricka", customer[0].last_name
+		assert_equal "2012-03-27", customer[0].created_at
+		assert_equal "2012-03-27", customer[0].updated_at
 	end
 
 	def test_loads_a_merchant_csv
-		file_path = "./test/support/test_invoice_items.csv"
-		invoice_items = MerchantsParser.new(file_path)
+		file_path = "./test/support/test_merchants.csv"
+		merchants = MerchantsParser.new(file_path).all
 
 		assert_equal "1", merchants[0].id
-		assert_equal "Schroeder-Jerde", merchants[1].name
-		assert_equal "2012-03-27", merchants[2].created_at
-		assert_equal "2012-03-27", merchants[3].updated_at
+		assert_equal "schroeder-jerde", merchants[0].name
+		assert_equal "2012-03-27", merchants[0].created_at
+		assert_equal "2012-03-27", merchants[0].updated_at
 	end
 
 	def test_loads_a_transaction_csv
-		file_path = "./test/support/test_invoice_items.csv"
-		invoice_items = TransactionsParser.new(file_path)
+		file_path = "./test/support/test_transactions.csv"
+		transactions = TransactionsParser.new(file_path).all
 
 		assert_equal "1", transactions[0].id
-		assert_equal "1", transactions[1].invoice_id
-		assert_equal "4654405418249632", transactions[2].credit_card_number
-		assert_equal " ", transactions[3].credit_card_expiration_date
-		assert_equal "success", transactions[4].result
-		assert_equal "2012-03-27", transactions[5].created_at
-		assert_equal "2012-03-27", transactions[6].updated_at
+		assert_equal "1", transactions[0].invoice_id
+		assert_equal "4654405418249632", transactions[0].credit_card_number
+		assert_equal "success", transactions[0].result
+		assert_equal "2012-03-27", transactions[0].created_at
+		assert_equal "2012-03-27", transactions[0].updated_at
 	end
 
 end
