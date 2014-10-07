@@ -1,6 +1,6 @@
 class Merchant
 
-  attr_reader :id, :name, :created_at, :updated_at, :items
+  attr_reader :id, :name, :created_at, :updated_at, :items, :invoices
 
   def initialize(data)
     @id                 = data[:id]
@@ -13,7 +13,7 @@ class Merchant
     @items = items
   end
 
-  def invoices
-    
+  def give_invoices(invoices)
+    @invoices = invoices
   end
 end

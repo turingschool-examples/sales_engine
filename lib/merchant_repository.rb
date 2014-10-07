@@ -14,6 +14,12 @@ class MerchantRepository
     end
   end
 
+  def give_invoices_from(invoice_repository)
+    entries.each do |merchant|
+      merchant.give_items(invoice_repository.find_all_by_merchant_id(merchant.id))
+    end
+  end
+
   private
 
   def attributes

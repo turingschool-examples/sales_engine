@@ -1,6 +1,7 @@
 class Invoice
 	attr_reader :id, :customer_id, :merchant_id, :status, :created_at,
-							:updated_at
+							:updated_at, :transactions, :invoice_items, :items,
+							:customer, :merchant
 
 	def initialize(data)
 		@id = data[:id]
@@ -10,4 +11,25 @@ class Invoice
 		@created_at = data[:created_at]
 		@updated_at = data[:updated_at]
 	end
+
+	def give_transactions(transactions)
+		@transactions = transactions
+	end
+
+  def give_invoice_items(invoice_items)
+		@invoice_items = invoice_items
+	end
+
+  def give_items(items)
+		@items = items
+	end
+
+  def give_customer(customer)
+		@customer = customer
+	end
+
+  def give_merchant(merchant)
+		@merchant = merchant
+	end
+
 end
