@@ -1,5 +1,6 @@
 class InvoiceItem
-  attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+  attr_reader :id, :item_id, :invoice_id, :quantity, :unit_price,
+              :created_at,   :updated_at, :item,     :invoice
 
   def initialize(data)
     @id                 = data[:id]
@@ -11,9 +12,11 @@ class InvoiceItem
     @updated_at         = data[:updated_at]
   end
 
-  def item
+  def give_item(item)
+    @item = item
   end
 
-  def invoice
+  def give_invoice(invoice)
+    @invoice = invoice
   end
 end
