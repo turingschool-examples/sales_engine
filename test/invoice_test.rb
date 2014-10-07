@@ -1,9 +1,7 @@
-gem 'minitest'
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require_relative '../lib/invoice'
 
-class InvoiceTest < Minitest::Test 
+class InvoiceTest < Minitest::Test
 	def setup
 		@invoice = Invoice.new ({
 			id:     									"7",
@@ -14,7 +12,7 @@ class InvoiceTest < Minitest::Test
 			updated_at:  							"2012-04-27 14:53:59 UTC"
 			})
 	end
-	
+
 	def test_it_initializes_with_properties
 		assert_equal "7", @invoice.id
 		assert_equal "99-111", @invoice.customer_id

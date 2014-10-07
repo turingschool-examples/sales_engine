@@ -25,10 +25,4 @@ class ItemTest < Minitest::Test
     assert_includes            @item.created_at, "2012"
     assert_includes            @item.updated_at, "2012"
   end
-
-  def test_associated_item_with_object
-    skip
-    assert_instance_of       InvoiceItem, @item.invoice_items[0]
-    assert_instance_of          Merchant, @item.merchant
-  end
 end
