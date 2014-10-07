@@ -9,3 +9,4 @@ class InvoiceItemParser
 		@invoice_items = parser.rows.map {|row| InvoiceItem.new(row)}
 	end
 end
+
