@@ -22,8 +22,8 @@ class InvoiceItemTest < Minitest::Test
     assert_equal              "55", @invoice_item.invoice_id
     assert_equal               "5", @invoice_item.quantity
     assert_equal              "12", @invoice_item.unit_price
-    assert_includes         "2012", @invoice_item.created_at
-    assert_instance_of      "2012", @invoice_item.updated_at
+    assert_includes           @invoice_item.created_at, "2012"
+    assert_includes           @invoice_item.updated_at, "2012"
   end
 
   def test_associated_item_with_object

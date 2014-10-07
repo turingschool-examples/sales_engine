@@ -1,0 +1,28 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "/Users/herbertjoseph/TuringSchool/sales_engine/lib/item.rb": [
+        1,
+        1,
+        null,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1412696912
+  }
+}
