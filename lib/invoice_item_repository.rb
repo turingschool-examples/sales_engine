@@ -3,16 +3,10 @@ require_relative 'invoice_item'
 
 class InvoiceItemRepository < Repository
 
+  attr_reader :repo
+
   def initialize
     @repo = []
-  end
-
-  def populate_repository(parsed_csv, InvoiceItem.new)
-    parsed_csv.map do |hash|
-      hash.map do |key, value|
-        instance_class.key = value
-      end
-    end
   end
 
   def find_by_id(arg); finder(:id, arg); end
