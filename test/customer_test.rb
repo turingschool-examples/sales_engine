@@ -23,5 +23,4 @@ class CustomerTest < Minitest::Test
 		assert_includes @customer.updated_at, "2012"	
 	end
 
-	def test_it
 end
