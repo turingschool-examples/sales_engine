@@ -10,13 +10,13 @@ class ItemRepository
 
   def give_invoice_items_from(invoice_item_repo)
     @entries.each do |item|
-      item.give_invoice_items(invoice_item_repo.find_all_by_id(item.id))
+      item.give_invoice_items(invoice_item_repo.find_all_by_item_id(item.id))
     end
   end
 
   def give_merchants_from(merchant_repo)
     @entries.each do |item|
-      item.give_merchant(merchant_repo.find_all_by_id(item.merchant_id))
+      item.give_merchant(merchant_repo.find_by_id(item.merchant_id))
     end
   end
 
