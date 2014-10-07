@@ -9,8 +9,8 @@ class TransactionRepository
   end
 
   def give_invoices_from(invoice_repository)
-  	entries.each do |invoice|
-  		transacation.give_invoice(invoice_repository.find_all_by_transaction_id(transacation.id))
+  	entries.each do |transaction|
+  		transaction.give_invoice(invoice_repository.find_by_id(transaction.invoice_id))
   	end
   end
 
