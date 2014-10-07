@@ -19,25 +19,25 @@ class ParserTest < MiniTest::Test
 		file_path = "./test/support/test_invoices.csv"
 		invoices = InvoiceParser.new(file_path).all
 
-		assert_equal "6", parser.parsed_array[5].id
-		assert_equal "1", parser.parsed_array[1].customer_id
-		assert_equal "78", parser.parsed_array[2].merchant_id
-		assert_equal "shipped", parser.parsed_array[3].status
-		assert_equal "2012-03-07", parser.parsed_array[5].created_at
-		assert_equal "2012-03-09", parser.parsed_array[6].updated_at
+		assert_equal "6", invoices[5].id
+		assert_equal "1", invoices[1].customer_id
+		assert_equal "78", invoices[2].merchant_id
+		assert_equal "shipped", invoices[3].status
+		assert_equal "2012-03-07", invoices[5].created_at
+		assert_equal "2012-03-09", invoices[6].updated_at
 	end
 
 	def test_loads_an_invoice_item_csv
 		file_path = "./test/support/test_invoice_items.csv"
 		invoice_items = InvoiceItemParser.new(file_path)
 
-		assert_equal "1", parser.parsed_array[0].id
-		assert_equal "528", parser.parsed_array[1].item_id
-		assert_equal "1", parser.parsed_array[2].invoice_id
-		assert_equal "3", parser.parsed_array[3].quantity
-		assert_equal "79140", parser.parsed_array[4].unit_price
-		assert_equal "2012-03-27", parser.parsed_array[5].created_at
-		assert_equal "2012-03-27", parser.parsed_array[6].updated_at
+		assert_equal "1", invoice_items[0].id
+		assert_equal "528", invoice_items[1].item_id
+		assert_equal "1", invoice_items[2].invoice_id
+		assert_equal "3", invoice_items[3].quantity
+		assert_equal "79140", invoice_items[4].unit_price
+		assert_equal "2012-03-27", invoice_items[5].created_at
+		assert_equal "2012-03-27", invoice_items[6].updated_at
 	end
 
 	def test_loads_a_customer_csv
