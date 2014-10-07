@@ -1,18 +1,18 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/Users/Greg/turing/sales_engine/lib/invoice_repository.rb": [
+      "/Users/Greg/turing/sales_engine/lib/customer_repository.rb": [
         1,
         1,
         null,
         1,
         null,
         1,
+        null,
         1,
         1,
         null,
         null,
-        1,
         1,
         1,
         1,
@@ -36,7 +36,7 @@
         null,
         1,
         15,
-        90,
+        75,
         null,
         null,
         null,
@@ -63,10 +63,9 @@
         null,
         null
       ],
-      "/Users/Greg/turing/sales_engine/lib/invoice.rb": [
+      "/Users/Greg/turing/sales_engine/lib/customer.rb": [
         1,
         1,
-        null,
         null,
         null,
         null,
@@ -78,7 +77,6 @@
         15,
         15,
         15,
-        15,
         null,
         null,
         1,
@@ -89,16 +87,11 @@
         null,
         1,
         null,
-        null,
-        1,
-        null,
-        null,
-        1,
         null,
         null,
         null
       ]
     },
-    "timestamp": 1412722150
+    "timestamp": 1412723467
   }
 }
