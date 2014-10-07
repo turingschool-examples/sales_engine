@@ -20,23 +20,23 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_finds_by_id
-  	assert_equal @items[0], @repository.find_by_id("12")
+  	assert_equal @customers[0], @repository.find_by_id("12")
   end
 
   def test_finds_by_first_name
-  	assert_equal @items[1], @repository.find_by_first_name("bob")
+  	assert_equal @customers[1], @repository.find_by_first_name("bob")
   end
 
   def test_finds_by_last_name
-  	assert_equal @items[0], @repository.find_by_last_name("smith")
+  	assert_equal @customers[0], @repository.find_by_last_name("smith")
   end
 
   def test_finds_by_created_at
-  	assert_equal @items[2], @repository.find_by_created_at("c")
+  	assert_equal @customers[2], @repository.find_by_created_at("c")
   end
 
   def test_finds_by_updated_at
-  	assert_equal @items[0], @repository.find_by_updated_at("e")
+  	assert_equal @customers[0], @repository.find_by_updated_at("e")
   end
 
   def test_finds_all_by_id
