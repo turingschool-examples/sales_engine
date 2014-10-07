@@ -17,4 +17,4 @@ class InvoiceItemRepository < Repository
   def find_by_created_at(arg); finder(:created_at, arg); end
   def find_by_updated_at(arg); finder(:updated_at, arg); end
 
-endaw4
+end
