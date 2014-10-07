@@ -17,8 +17,4 @@ class InvoiceItem
     @updated_at    = ""
   end
 
-  def id
-    @id
-  end
-
 end
