@@ -8,7 +8,7 @@ class Item
               :updated_at
 
   def initialize
-    @id = ""
+    @id
     @name
     @description
     @unit_price
