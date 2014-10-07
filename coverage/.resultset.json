@@ -1,7 +1,7 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/Users/Greg/turing/sales_engine/lib/customer_repository.rb": [
+      "/Users/Greg/turing/sales_engine/lib/invoice_item_repository.rb": [
         1,
         1,
         null,
@@ -13,6 +13,8 @@
         1,
         null,
         null,
+        1,
+        1,
         1,
         1,
         1,
@@ -36,7 +38,7 @@
         null,
         1,
         15,
-        75,
+        105,
         null,
         null,
         null,
@@ -63,9 +65,11 @@
         null,
         null
       ],
-      "/Users/Greg/turing/sales_engine/lib/customer.rb": [
+      "/Users/Greg/turing/sales_engine/lib/invoice_item.rb": [
         1,
         1,
+        null,
+        null,
         null,
         null,
         null,
@@ -77,21 +81,13 @@
         15,
         15,
         15,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        null,
+        15,
+        15,
         null,
         null,
         null
       ]
     },
-    "timestamp": 1412723467
+    "timestamp": 1412723644
   }
 }
