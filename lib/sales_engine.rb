@@ -29,7 +29,6 @@ class SalesEngine
 
     invoice_repository.give_transactions_from(transaction_repository)
     invoice_repository.give_invoice_items_from(invoice_item_repository)
-    # invoice_repository.give_items_from(item_repository)
     invoice_repository.give_customers_from(customer_repository)
     invoice_repository.give_merchants_from(merchant_repository)
 
