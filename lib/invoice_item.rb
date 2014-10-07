@@ -8,7 +8,7 @@ class InvoiceItem
                 :updated_at
 
   def initialize
-    @id            = 0
+    @id            = ""
     @item_id       = ""
     @invoice_id    = ""
     @quantity      = ""
