@@ -1,5 +1,11 @@
 class InvoiceItem
-attr_reader :id
+  attr_accessor :id,
+                :item_id,
+                :invoice_id,
+                :quantity,
+                :unit_price,
+                :created_at,
+                :updated_at
 
   def initialize
     @id            = ""
@@ -11,10 +17,8 @@ attr_reader :id
     @updated_at    = ""
   end
 
-  def find_by_id
-  end
-
-  def item
+  def id
+    @id
   end
 
 end

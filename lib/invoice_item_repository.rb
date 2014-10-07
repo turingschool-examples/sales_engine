@@ -3,6 +3,8 @@ require_relative 'invoice_item'
 
 class InvoiceItemRepository < Repository
 
+  attr_reader :repo
+
   def initialize
     @repo = []
   end
