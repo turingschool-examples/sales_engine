@@ -1,5 +1,5 @@
 class Item
-  attr_reader :id, :description, :name, :created_at, :updated_at
+  attr_reader :id, :description, :name, :created_at, :updated_at, :unit_price, :merchant_id
 
   def initialize(data)
     @id                 = data[:id]
