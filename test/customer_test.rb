@@ -2,6 +2,7 @@ gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/customer'
+require_relative '../lib/invoice'
 
 class CustomerTest < Minitest::Test
 	def setup
@@ -21,4 +22,6 @@ class CustomerTest < Minitest::Test
 		assert_includes @customer.created_at, "2012"
 		assert_includes @customer.updated_at, "2012"	
 	end
+
+	def test_it
 end
