@@ -1,5 +1,4 @@
 module Repository
-  attr_reader :entries
 
   def create_methods
     attributes.each do |attribute|
@@ -22,6 +21,7 @@ module Repository
   end
 
   private
+  attr_reader :entries
 
   def find_by(key, value)
     entries.find { |entry| entry.send(key.to_sym) == value }
