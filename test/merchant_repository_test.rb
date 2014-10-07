@@ -8,7 +8,7 @@ class MerchantRepositoryTest < Minitest::Test
     merchant_two = Merchant.new {id: "2", name: "Alex", created_at: "a", updated_at: "c" }
     merchant_three = Merchant.new {id: "3", name: "Herbert", created_at: "b", updated_at: "c" }
     @merchants = [merchant_one, merchant_two, merchant_three]
-    @repository = MerchantRepository.new(merchants)
+    @repository = MerchantRepository.new(@merchants)
   end
 
   def test_returns_all
