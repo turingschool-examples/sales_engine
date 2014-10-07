@@ -15,4 +15,5 @@ class Transaction
 	def give_invoice(invoice)
 		@invoice = invoice
 	end
+	
 end

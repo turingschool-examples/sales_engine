@@ -8,6 +8,12 @@ class TransactionRepository
     create_methods
   end
 
+  def give_invoice_from(invoice_repository)
+  	entries.each do |invoice|
+  		transacation.give_invoice(invoice_repository.find_all_by_transaction_id(transacation.id))
+  	end
+  end
+
   private
 
   def attributes
