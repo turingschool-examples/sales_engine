@@ -17,6 +17,7 @@ class Item
     @updated_at
   end
 
+
   def invoice_items
   end
 
