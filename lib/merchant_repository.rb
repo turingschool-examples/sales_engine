@@ -8,6 +8,8 @@ class MerchantRepository
     create_methods
   end
 
+  private
+
   def attributes
     %w(id name created_at updated_at)
   end

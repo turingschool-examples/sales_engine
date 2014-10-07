@@ -21,6 +21,8 @@ module Repository
     entries.sample
   end
 
+  private
+
   def find_by(key, value)
     entries.find { |entry| entry.send(key.to_sym) == value }
   end
