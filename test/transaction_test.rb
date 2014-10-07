@@ -1,6 +1,4 @@
-gem 'minitest'
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require_relative '../lib/transaction'
 
 class TransactionTest < Minitest::Test
@@ -23,5 +21,5 @@ class TransactionTest < Minitest::Test
 		assert_equal "03-2015", @transaction.credit_card_expiration_date
 		assert_includes @transaction.created_at, "2012"
 		assert_includes @transaction.updated_at, "2013"
-	end  
+	end
 end
