@@ -1,6 +1,9 @@
+[![Stories in Ready](https://badge.waffle.io/dglunz/sales_engine.png?label=ready&title=Ready)](https://waffle.io/dglunz/sales_engine)
 # Sales Engine
 
-(insert project completion goals for first check-in here)
+### Check-in Goals
+
+  1. Have each repository class setup with listing/searching features in place.
 
 (insert project completion goals for second check-in here)
 
