@@ -20,58 +20,58 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_finds_by_id
-  	assert_equal @transactions[0], @repository.find_by_id("1")
+    assert_equal @transactions[0], @repository.find_by_id("1")
   end
 
   def test_finds_by_invoice_id
-  	assert_equal @transactions[1], @repository.find_by_invoice_id("5")
+    assert_equal @transactions[1], @repository.find_by_invoice_id("5")
   end
 
   def test_finds_by_credit_card_number
-  	assert_equal @transactions[2], @repository.find_by_credit_card_number("9")
+    assert_equal @transactions[2], @repository.find_by_credit_card_number("9")
   end
 
   def test_finds_by_credit_card_expiration_date
-  	assert_equal @transactions[1], @repository.find_by_credit_card_expiration_date("13")
+    assert_equal @transactions[1], @repository.find_by_credit_card_expiration_date("13")
   end
 
   def test_finds_by_result
-  	assert_equal @transactions[0], @repository.find_by_result("fail")
+    assert_equal @transactions[0], @repository.find_by_result("fail")
   end
 
   def test_finds_by_created_at
-  	assert_equal @transactions[2], @repository.find_by_created_at("c")
+    assert_equal @transactions[2], @repository.find_by_created_at("c")
   end
 
   def test_finds_by_updated_at
-  	assert_equal @transactions[1], @repository.find_by_updated_at("w")
+    assert_equal @transactions[1], @repository.find_by_updated_at("w")
   end
 
   def test_finds_all_by_id
-  	assert_equal 1, @repository.find_all_by_id("1").size
+    assert_equal 1, @repository.find_all_by_id("1").size
   end
 
   def test_finds_all_by_invoice_id
-  	assert_equal 0, @repository.find_all_by_invoice_id("pqweqwe").size
+    assert_equal 0, @repository.find_all_by_invoice_id("pqweqwe").size
   end
 
   def test_finds_all_by_credit_card_number
-  	assert_equal 1, @repository.find_all_by_credit_card_number("9").size
+    assert_equal 1, @repository.find_all_by_credit_card_number("9").size
   end
 
   def test_finds_all_by_credit_card_expiration_date
-  	assert_equal 1, @repository.find_all_by_credit_card_expiration_date("14").size
+    assert_equal 1, @repository.find_all_by_credit_card_expiration_date("14").size
   end
 
   def test_finds_all_by_result
-  	assert_equal 2, @repository.find_all_by_result("pass").size
+    assert_equal 2, @repository.find_all_by_result("pass").size
   end
 
   def test_finds_all_by_created_at
-  	assert_equal 2, @repository.find_all_by_created_at("b").size
+    assert_equal 2, @repository.find_all_by_created_at("b").size
   end
 
   def test_finds_all_by_updated_at
-  	assert_equal 2, @repository.find_all_by_updated_at("q").size
+    assert_equal 2, @repository.find_all_by_updated_at("q").size
   end
 end

@@ -4,11 +4,11 @@ module Repository
   def create_methods
     attributes.each do |attribute|
       self.class.send:define_method, "find_by_#{attribute}" do |value|
-        find_by(__method__[8..-1], value)
+        find_by(attribute, value)
       end
 
       self.class.send :define_method, "find_all_by_#{attribute}" do |value|
-        find_all_by(__method__[12..-1], value)
+        find_all_by(attribute, value)
       end
     end
   end
