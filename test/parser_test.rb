@@ -1,6 +1,6 @@
 require_relative 'test_helper'
 
-class ParserTest < MiniTest::Test 
+class ParserTest < MiniTest::Test
 
 	def test_loads_an_item_csv
 		file_path = "./test/support/test_items.csv"
@@ -23,13 +23,13 @@ class ParserTest < MiniTest::Test
 		assert_equal "1", invoices[1].customer_id
 		assert_equal "78", invoices[2].merchant_id
 		assert_equal "shipped", invoices[3].status
-		assert_equal "2012-03-07", invoices[5].created_at
-		assert_equal "2012-03-09", invoices[6].updated_at
+		assert_equal "2012-03-09", invoices[5].created_at
+		assert_equal "2012-03-07", invoices[6].updated_at
 	end
 
 	def test_loads_an_invoice_item_csv
 		file_path = "./test/support/test_invoice_items.csv"
-		invoice_items = InvoiceItemParser.new(file_path)
+		invoice_items = InvoiceItemParser.new(file_path).all
 
 		assert_equal "1", invoice_items[0].id
 		assert_equal "528", invoice_items[1].item_id
@@ -41,15 +41,37 @@ class ParserTest < MiniTest::Test
 	end
 
 	def test_loads_a_customer_csv
-		skip
+		file_path = "./test/support/test_invoice_items.csv"
+		invoice_items = CustomerParser.new(file_path)
+
+		assert_equal "1", customer[0].id
+		assert_equal "Joey", customer[1].first_name
+		assert_equal "Ondricka", customer[2].last_name
+		assert_equal "2012-03-27", customer[3].created_at
+		assert_equal "2012-03-27", customer[4].updated_at
 	end
 
 	def test_loads_a_merchant_csv
-		skip
+		file_path = "./test/support/test_invoice_items.csv"
+		invoice_items = MerchantsParser.new(file_path)
+
+		assert_equal "1", merchants[0].id
+		assert_equal "Schroeder-Jerde", merchants[1].name
+		assert_equal "2012-03-27", merchants[2].created_at
+		assert_equal "2012-03-27", merchants[3].updated_at
 	end
 
 	def test_loads_a_transaction_csv
-		skip
+		file_path = "./test/support/test_invoice_items.csv"
+		invoice_items = TransactionsParser.new(file_path)
+
+		assert_equal "1", transactions[0].id
+		assert_equal "1", transactions[1].invoice_id
+		assert_equal "4654405418249632", transactions[2].credit_card_number
+		assert_equal " ", transactions[3].credit_card_expiration_date
+		assert_equal "success", transactions[4].result
+		assert_equal "2012-03-27", transactions[5].created_at
+		assert_equal "2012-03-27", transactions[6].updated_at
 	end
 
 end
