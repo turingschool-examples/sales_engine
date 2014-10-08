@@ -13,6 +13,11 @@ class Merchant
   end
 
   def items
+    repository.find_items_by_id(self.id)
+  end
+
+  def invoices
+    repository.find_invoices_by_id(self.id)
   end
 
   def invoices
