@@ -73,7 +73,7 @@ class CSVReaderTest < Minitest::Test
     assert_equal "1",                       transactions[0][:id]
     assert_equal "1",                       transactions[0][:invoice_id]
     assert_equal "4654405418249632",        transactions[0][:credit_card_number]
-    assert_equal nil,                       transactions[0][:credit_card_expiration_date]
+    assert_equal  nil,                      transactions[0][:credit_card_expiration_date]
     assert_equal "success",                 transactions[0][:result]
     assert_equal "2012-03-27 14:54:09 UTC", transactions[0][:created_at]
     assert_equal "2012-03-27 14:54:09 UTC", transactions[0][:updated_at]
