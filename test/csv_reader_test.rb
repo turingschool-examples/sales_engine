@@ -6,6 +6,7 @@ class CSVReaderTest < Minitest::Test
               :merchants, :transactions
 
   def setup
+    skip
     @reader  = CSVReader.new
     binding.pry
     first_50 = 0..50
