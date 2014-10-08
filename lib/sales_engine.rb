@@ -20,4 +20,12 @@ class SalesEngine
 
   def distribute
   end
+
+  def find_merchant_by_id(merchant_id)
+    merchant_repository.find_by_id(merchant_id)
+  end
+
+  def find_invoice_items(item_id)
+    invoice_item_repository.find_all_by_item_id(item_id)
+  end
 end

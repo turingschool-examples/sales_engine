@@ -20,12 +20,13 @@ class Item
 
 
   def invoice_items
+    repository.find_invoice_items_by_item_id(self.id)
   end
 
   def merchant
+    repository.find_merchant_by_id(self.merchant_id)
   end
 
   def best_day
   end
-
 end

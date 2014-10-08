@@ -1,10 +1,11 @@
 require_relative 'test_helper'
 require './lib/item'
+require './sales_engine'
 
 class ItemTest < Minitest::Test
 
   def test_entry_attributes
-
+    skip
     item = Item.new(nil)
 
     item.id = 4
@@ -23,6 +24,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_different_entry_attributes
+    skip
     item = Item.new(nil)
 
     item.id = 8
@@ -33,4 +35,9 @@ class ItemTest < Minitest::Test
     assert_equal 8888, item.unit_price
     assert_equal 0, item.merchant_id
   end
+
+  def test_merchant
+    SalesEngine.new
+  end
+
 end
