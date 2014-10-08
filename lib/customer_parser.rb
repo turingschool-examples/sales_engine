@@ -1,12 +1,11 @@
 class CustomerParser
-  attr_reader :path, :items
+  attr_reader :parser
 
   def initialize(file_path)
-    @path = file_path
+    @parser = Parser.new(file_path)
   end
 
   def all
-    parser = Parser.new(path)
-    @items = parser.rows.map {|row| Customer.new(row)}
+    parser.rows.map {|row| Customer.new(row)}
   end
 end
