@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 class MerchantsTest < Minitest::Test
 
-  attr_reader :merchants
+  attr_reader :merchant, :repository
 
   def setup
     data = {id: "1",
@@ -10,23 +10,37 @@ class MerchantsTest < Minitest::Test
             created_at: "2012-03-27 14:53:59 UTC",
             updated_at: "2012-03-27 14:53:59 UTC"
           }
-    @merchants = Merchants.new(data)
+    @repository = Minitest::Mock.new
+    @merchant = Merchants.new(data, repository)
+  end
+
+  def test_it_has_a_repository
+    assert merchant.repository
   end
 
   def test_it_has_an_id
-    setup
-    assert_equal "1", merchants.id
+    assert_equal "1", merchant.id
   end
 
   def test_it_has_a_name
-    setup
-    assert_equal "schroeder-jerde", merchants.name
+    assert_equal "schroeder-jerde", merchant.name
   end
 
   def test_it_has_meta_data
-    setup
-    assert_equal "2012-03-27", merchants.created_at
-    assert_equal "2012-03-27", merchants.updated_at
+    assert_equal "2012-03-27", merchant.created_at
+    assert_equal "2012-03-27", merchant.updated_at
+  end
+
+  def test_it_delegates_items_to_repository
+    repository.expect(:find_items_for, [], ["1"])
+    merchant.items
+    repository.verify
+  end
+
+  def test_it_delagates_invoices_to_repository
+    repository.expect(:find_invoices_for, [], ["1"])
+    merchant.invoices
+    repository.verify
   end
 
 end
