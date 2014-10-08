@@ -35,56 +35,7 @@ class ItemRepository
     @items
   end
 
-  # def random
-  #   @items.sample
-  # end
-  #
-  # def find_by_id(value)
-  #   @items.find do |item|
-  #     item.id == value
-  #   end
-  # end
-  #
-  # def find_by_name(value)
-  #   @items.find do |item|
-  #     item.name == value.downcase
-  #   end
-  # end
-  #
-  # def find_by_description(value)
-  #   @items.find do |item|
-  #     item.description == value.downcase
-  #   end
-  # end
-  #
-  # def find_by_unit_price(value)
-  #   @items.find do |item|
-  #     item.unit_price == value.downcase
-  #   end
-  # end
-  #
-  # def find_by_merchant_id(value)
-  #   @items.find do |item|
-  #     item.merchant_id == value.downcase
-  #   end
-  # end
-  #
-  # def find_by_created_at(value)
-  #   @items.find do |item|
-  #     item.created_at == value.downcase
-  #   end
-  # end
-  #
-  # def find_by_update_at(value)
-  #   @items.find do |item|
-  #     item.created_at == value.downcase
-  #   end
-  # end
-  #
-  # def find_all_by_id(value)
-  #   @items.find_all do |item|
-  #     item.created_at == value.downcase
-  #   end
-  # end
-
+  def random
+    @items.sample
+  end
 end
