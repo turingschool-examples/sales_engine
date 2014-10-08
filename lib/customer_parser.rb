@@ -1,10 +1,10 @@
 class CustomerParser
 
   def initialize(file_path)
-    @parser = Parser.new(file_path)
+    @rows = CSV.open(file_path, headers: true, header_converters: :symbol)
   end
 
   def all
-    @parser.rows.map {|row| Customer.new(row)}
+    @rows.map {|row| Customer.new(row)}
   end
 end

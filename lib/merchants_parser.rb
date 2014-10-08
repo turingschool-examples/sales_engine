@@ -1,10 +1,10 @@
 class MerchantsParser
 
   def initialize(file_path)
-    @parser = Parser.new(file_path)
+    @rows = CSV.open(file_path, headers: true, header_converters: :symbol)
   end
 
   def all
-    @parser.rows.map {|row| Merchants.new(row)}
+    @rows.map {|row| Merchants.new(row)}
   end
 end
