@@ -42,13 +42,13 @@ class ParserTest < MiniTest::Test
 
 	def test_loads_a_customer_csv
 		file_path = "./test/support/test_customers.csv"
-		customer = CustomerParser.new(file_path).all
+		customers = CustomerParser.new(file_path).all
 
-		assert_equal "1", customer[0].id
-		assert_equal "joey", customer[0].first_name
-		assert_equal "ondricka", customer[0].last_name
-		assert_equal "2012-03-27", customer[0].created_at
-		assert_equal "2012-03-27", customer[0].updated_at
+		assert_equal "1", customers[0].id
+		assert_equal "joey", customers[0].first_name
+		assert_equal "ondricka", customers[0].last_name
+		assert_equal "2012-03-27", customers[0].created_at
+		assert_equal "2012-03-27", customers[0].updated_at
 	end
 
 	def test_loads_a_merchant_csv
