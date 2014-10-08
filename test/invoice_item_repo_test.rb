@@ -1,4 +1,4 @@
-require_relative 'test_helper'
+require_relative 'helper_test'
 require './lib/invoice_item_repository'
 require './lib/sales_engine'
 
