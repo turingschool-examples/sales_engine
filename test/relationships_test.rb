@@ -6,6 +6,7 @@ require_relative '../lib/invoice_item'
 require_relative '../lib/item'
 require_relative '../lib/customer'
 require_relative '../lib/transaction'
+require 'pry'
 
 class RelationshipsTest < Minitest::Test
   def setup
@@ -27,6 +28,21 @@ class RelationshipsTest < Minitest::Test
   end
 
   def test_invoices_have_correct_relations
+    assert_equal @reader.transactions[0], @reader.invoices[2].transactions[0]
+    assert_equal @reader.transactions[1], @reader.invoices[0].transactions[0]
+    assert_equal @reader.transactions[2], @reader.invoices[1].transactions[0]
+
+    assert_equal @reader.invoice_items[0], @reader.invoices[1].invoice_items[0]
+    assert_equal @reader.invoice_items[1], @reader.invoices[0].invoice_items[0]
+    assert_equal @reader.invoice_items[2], @reader.invoices[2].invoice_items[0]
+
+    assert_equal @reader.customers[0], @reader.invoices[0].customer
+    assert_equal @reader.customers[1], @reader.invoices[2].customer
+    assert_equal @reader.customers[2], @reader.invoices[1].customer
+
+    assert_equal @reader.merchants[0], @reader.invoices[0].merchant
+    assert_equal @reader.merchants[1], @reader.invoices[2].merchant
+    assert_equal @reader.merchants[2], @reader.invoices[1].merchant
   end
 
   def test_items_have_correct_relations
