@@ -12,11 +12,11 @@ class CustomerTest < Minitest::Test
 						updated_at: "2012-03-27 14:54:09 UTC"
 						}
 		@repository = Minitest::Mock.new
-		@customer = Customer.new(data)
+		@customer = Customer.new(data, repository)
 	end
 
 	def test_customer_has_a_repository
-		assert cutomer.repository
+		assert customer.repository
 	end
 
 	def test_customer_has_an_id
@@ -37,7 +37,8 @@ class CustomerTest < Minitest::Test
 	end
 
 	def test_delegates_invoices_to_repository
-		repository.expect(:find_invoices_for, [], [""])
-
+		repository.expect(:find_invoices_for, [], ["1"])
+		customer.invoices
+		repository.verify
 	end
 end

@@ -2,7 +2,7 @@ class MerchantRepository
 	attr_reader :merchants, :sales_engine
 
 	def initialize(merchants, sales_engine)
-		@merchants = merchants
+		@merchants    = merchants
 		@sales_engine = sales_engine
 	end
 

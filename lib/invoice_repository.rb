@@ -2,12 +2,16 @@ class InvoiceRepository
 	attr_reader :invoices, :sales_engine
 
 	def initialize(invoices, sales_engine)
-		@invoices = invoices
+		@invoices     = invoices
 		@sales_engine = sales_engine
 	end
 
 	def all
 		@invoices
+	end
+
+	def random
+		invoices
 	end
 
 	def find_by(attribute, value)

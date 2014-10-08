@@ -1,18 +1,17 @@
 class ItemRepository
-  attr_reader :items
-  attr_accessor :results
+  attr_reader :items, :sales_engine
 
   def initialize(items, sales_engine)
-    @items = items
-    @results = []
+    @items   = items
+    @results = sales_engine
   end
 
   def find_by(attribute, value)
-        items.find {|items| items.send(attribute.to_sym) == value}
+    items.find {|items| items.send(attribute.to_sym) == value}
   end
 
   def find_all_by(attribute, value)
-        items.find_all {|items| items.send(attribute.to_sym) == value}
+    items.find_all {|items| items.send(attribute.to_sym) == value}
   end
 
   def find_by_id(value); find_by(:id, value) end
@@ -32,10 +31,10 @@ class ItemRepository
   def find_all_by_updated_at(value); find_all_by(:updated_at, value) end
 
   def all
-    @items
+    items
   end
 
   def random
-    @items.sample
+    items.sample
   end
 end
