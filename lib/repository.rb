@@ -18,7 +18,3 @@ class Repository
   end
 
 end
-
-
-# InvoiceItemRepository.new                                                                        # ~> NameError: uninitialized constant InvoiceItemRepository
-# InvoiceItemRepository.populate_repository(parser.load_file("../test/csv.csv"), InvoiceItem.new)
