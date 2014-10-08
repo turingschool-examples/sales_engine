@@ -4,7 +4,7 @@ class Repository
 
   def populate_repository(parsed_csv, instance_class)     #####fix
     parsed_csv.map do |raw_element|
-      instance = instance_class.new                       #####(raw_element and self)
+      instance = instance_class.new(raw_element, self)                      #####(raw_element and self)
       set_attributes(raw_element, instance)
       repo << instance
     end

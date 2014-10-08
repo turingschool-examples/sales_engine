@@ -1,5 +1,5 @@
 class Item
-  attr_accessor :id,
+  attr_reader :id,
               :name,
               :description,
               :unit_price,
@@ -15,6 +15,7 @@ class Item
     @merchant_id  = data[:merchant_id]
     @created_at   = data[:created_at]
     @updated_at   = data[:updated_at]
+    @repository   = repository
   end
 
 

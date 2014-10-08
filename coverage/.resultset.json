@@ -52,11 +52,6 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "/Users/chandracarney/turing/projects/sales_engine/lib/csv_parser.rb": [
@@ -99,6 +94,6 @@
         null
       ]
     },
-    "timestamp": 1412779658
+    "timestamp": 1412790950
   }
 }
