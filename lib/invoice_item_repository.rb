@@ -18,6 +18,15 @@ class InvoiceItemRepository < Repository
   def find_by_created_at(arg); find_by(:created_at, arg); end
   def find_by_updated_at(arg); find_by(:updated_at, arg); end
 
+  def find_all_by_id(arg); find_all_by(:id, arg); end
+  def find_all_by_item_id(arg); find_all_by(:item_id, arg); end
+  def find_all_by_invoice_id(arg); find_all_by(:invoice_id, arg); end
+  def find_all_by_quantity(arg); find_all_by(:quantity, arg); end
+  def find_all_by_unit_price(arg); find_all_by(:unit_price, arg); end
+  def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
+  def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
+
+
   def find_invoice_by_invoice_id(invoice_id)
     sales_engine.find_invoice_by_id(invoice_id)
   end

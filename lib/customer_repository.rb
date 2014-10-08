@@ -15,6 +15,13 @@ class CustomerRepository < Repository
   def find_by_created_at(arg); find_by(:created_at, arg); end
   def find_by_updated_at(arg); find_by(:updated_at, arg); end
 
+  def find_all_by_id(arg); find_all_by(:id, arg); end
+  def find_all_by_first_name(arg); find_all_by(:first_name, arg); end
+  def find_all_by_last_name(arg); find_all_by(:last_name, arg); end
+  def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
+  def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
+
+
   def find_invoices_by_id(invoice_id)
     sales_engine.find_invoices_by_id(invoice_id)
   end
