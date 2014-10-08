@@ -20,6 +20,10 @@ class MerchantRepository
     end
   end
 
+  def most_items(top_x)
+    entries.sort_by { |merchant| merchant.items.size }.reverse[0, top_x]
+  end
+
   private
 
   def attributes
