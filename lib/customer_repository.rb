@@ -4,7 +4,8 @@ require_relative 'customer'
 class CustomerRepository < Repository
   attr_reader :repo
 
-  def initialize(customers)
+  def initialize(sales_engine)
+    @sales_engine = sales_engine
     @repo = []
   end
 

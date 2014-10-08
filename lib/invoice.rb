@@ -1,6 +1,6 @@
 class Invoice
   attr_reader :id,
-              :repository
+              :repository,
               :customer_id,
               :merchant_id,
               :status,

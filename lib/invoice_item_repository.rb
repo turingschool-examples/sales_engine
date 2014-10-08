@@ -5,7 +5,8 @@ class InvoiceItemRepository < Repository
 
   attr_reader :repo
 
-  def initialize
+  def initialize(sales_engine)
+    @sales_engine = sales_engine
     @repo = []
   end
 
