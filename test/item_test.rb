@@ -5,7 +5,7 @@ class ItemTest < Minitest::Test
 
   def test_entry_attributes
 
-    item = Item.new
+    item = Item.new(nil)
 
     item.id = 4
     item.name = "Item Nemo Facere"
@@ -23,7 +23,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_different_entry_attributes
-    item = Item.new
+    item = Item.new(nil)
 
     item.id = 8
     item.unit_price = 8888

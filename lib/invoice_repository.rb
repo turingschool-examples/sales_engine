@@ -5,7 +5,7 @@ class InvoiceRepository < Repository
   attr_reader :repo
 
   def initialize
-    @repo = invoices
+    @repo = []
   end
 
   def find_by_id(arg); find_by(:id, arg); find_all_by(:id, arg); end

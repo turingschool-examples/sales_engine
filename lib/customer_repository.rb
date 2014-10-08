@@ -5,7 +5,7 @@ class CustomerRepository < Repository
   attr_reader :repo
 
   def initialize(customers)
-    @repo = customers
+    @repo = []
   end
 
   def find_by_id(arg); find_by(:id, arg); end

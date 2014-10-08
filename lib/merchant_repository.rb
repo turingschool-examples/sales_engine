@@ -5,7 +5,7 @@ class MerchantRepository < Repository
   attr_reader :repo
 
   def initialize
-    @repo = merchants
+    @repo = []
   end
 
   def find_by_id(arg); find_by(:id, arg); end

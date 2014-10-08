@@ -5,7 +5,7 @@ class TransactionRepository < Repository
   attr_reader :repo
 
   def initialize
-    @repo = transactions
+    @repo = []
   end
 
   def find_by_id(arg); find_by(:id, arg); end
