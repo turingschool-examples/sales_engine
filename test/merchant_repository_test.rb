@@ -1,101 +1,74 @@
 require_relative 'test_helper'
 
-class ItemRepositoryTest < Minitest::Test 
-	attr_reader :item_repository
+class MerchantRepositoryTest < Minitest::Test 
+	attr_reader :merchant_repository
 
 	def setup
 		file_path = "./test/support/test_merchants.csv"
-		merchants = MerchantParser.new(file_path).all
+		merchants = MerchantsParser.new(file_path).all
+		@merchant_repository = MerchantRepository.new(merchants)
 	end
 
-	def test_instantiates_with_items_array
+	def test_instantiates_with_merchants_array
 		setup
 
-		assert_equal 14,item_repository.items.count
+		assert_equal 15, merchant_repository.merchants.count
 	end
 
 	def test_returns_all_items
 		setup
-		results = item_repository.all
+		results = merchant_repository.all
 
-		assert_equal item_repository.items.count, item_repository.results.count
-	end
-
-	def test_returns_a_random_item
-		setup
-		results = item_repository.random
-
-		assert_equal 1, results.count
-	end
-
-	def test_finds_by_missing_value_returns_an_empty_array
-		setup
-		results = item_repository.find_by_id("1000000")
-
-		assert_equal [], results
-	end
-
-		def test_finds_all_by_missing_value_returns_an_empty_array
-		setup
-		results = item_repository.find_all_by_id("1000000")
-
-		assert_equal [], results
+		assert_equal merchant_repository.merchants.count, results.count
 	end
 
 	def test_finds_by_id
 		setup
-		results = item_repository.find_by_id("4")
+		results = merchant_repository.find_by_id("4")
 
-		assert_equal "item nemo facere", results.name
+		assert_equal "cummings-thiel", results.name
 	end	
 
 	def test_finds_by_name
 		setup
-		results = item_repository.find_by_name("Item Expedita Fuga")
-
-		assert_equal "7", results.id
-	end	
-
-	def test_finds_by_description
-		setup
-		results = item_repository.find_by_description("sunt eum id eius magni consequuntur delectus veritatis. quisquam laborum illo ut ab. ducimus in est id voluptas autem.")
-
-		assert_equal "4", results.id
-	end	
-
-	def test_finds_by_unit_price
-		setup
-		results = item_repository.find_by_unit_price("67076")
-
-		assert_equal "2", results.id
-	end	
-
-	def test_finds_by_merchant_id
-		setup
-		results = item_repository.find_by_merchant_id("1")
+		results = merchant_repository.find_by_name("Schroeder-Jerde")
 
 		assert_equal "1", results.id
-	end
+	end	
 
 	def test_finds_by_create_date
 		setup
-		results = item_repository.find_by_merchant_id("2012-03-27")
+		results = merchant_repository.find_by_created_at("2012-03-27")
 
 		assert_equal "1", results.id
 	end
 
 	def test_finds_by_update_date
 		setup
-		results = item_repository.find_by_merchant_id("2012-03-27")
+		results = merchant_repository.find_by_updated_at("2012-03-27")
 
 		assert_equal "1", results.id
 	end
 
-	def test_finds_all_by_merchant_id
+	def test_finds_all_by_merchant_created_date
 		setup
-		results = item_repository.find_all_by_id("1")
+		results = merchant_repository.find_all_by_created_at("2012-03-27")
 
-		assert_equal 14, results.count
-		assert_equal "item itaque consequatur", found_items[13].name
+		assert_equal 15, results.count
+		assert_equal "dicki-bednar", results[13].name
+	end
+
+	def test_finds_by_missing_value_returns_an_empty_array
+		setup
+		results = merchant_repository.find_by_id("1000000")
+
+		assert_equal [], results
+	end
+
+	def test_finds_all_by_missing_value_returns_an_empty_array
+		setup
+		assert_empty merchant_repository.find_all_by_id("1000000")
+
+		#assert_empty results
 	end
 end
