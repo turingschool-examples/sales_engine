@@ -18,6 +18,15 @@ class SalesEngine
     @transaction_repository = TransactionRepository.new(self)
   end
 
+  def startup
+    customer_repository.populate_repository
+    invoice_item_repository.populate_repository
+    invoice_repository.populate_repository
+    item_repository.populate_repository
+    merchant_repository.populate_repository
+    transaction_repository.populate_repository
+  end
+
   def distribute
   end
 
