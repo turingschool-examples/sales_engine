@@ -1,8 +1,9 @@
 class MerchantRepository
-	attr_reader :merchants
+	attr_reader :merchants, :sales_engine
 
-	def initialize(merchants)
+	def initialize(merchants, sales_engine)
 		@merchants = merchants
+		@sales_engine = sales_engine
 	end
 
 	def all
@@ -30,4 +31,12 @@ class MerchantRepository
 	def find_all_by_name(value); find_all_by(:name, value.downcase) end
 	def find_all_by_created_at(value); find_all_by(:created_at, value) end
 	def find_all_by_updated_at(value); find_all_by(:updated_at, value) end
+
+	def find_items_for(id)
+		sales_engine.find_items_by(id)
+	end
+
+	def find_invoices_for(id)
+		sales_engine.find_invoices_by(id)
+	end
 end
