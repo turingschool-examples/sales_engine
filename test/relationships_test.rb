@@ -5,8 +5,7 @@ require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
 require_relative '../lib/item'
 require_relative '../lib/customer'
-require_relative '../lib/transaction'
-require 'pry'
+require_relative '../lib/transaction' 
 
 class RelationshipsTest < Minitest::Test
   def setup
