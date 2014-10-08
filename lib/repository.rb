@@ -9,6 +9,10 @@ class Repository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@repo.size} rows>"
+  end
+
   def find_by(attribute, criteria)
     repo.find {|instance| instance.send(attribute.to_sym).downcase == criteria.downcase}
   end

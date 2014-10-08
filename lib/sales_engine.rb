@@ -70,5 +70,3 @@ class SalesEngine
   end
 
 end
-
-SalesEngine.new

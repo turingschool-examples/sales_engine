@@ -9,6 +9,10 @@ class InvoiceRepository < Repository
     @repo = []
   end
 
+  def inspect
+    "#<#{self.class} #{@repo.size} rows>"
+  end
+
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_customer_id(arg); find_by(:customer_id, arg); end
   def find_by_merchant_id(arg); find_by(:merchant_id, arg); end

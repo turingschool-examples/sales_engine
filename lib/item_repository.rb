@@ -10,6 +10,10 @@ class ItemRepository < Repository
     @repo         = []
   end
 
+  def inspect
+    "#<#{self.class} #{@repo.size} rows>"
+  end
+
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_name(arg); find_by(:name, arg); end
   def find_by_description(arg); find_by(:description, arg); end
