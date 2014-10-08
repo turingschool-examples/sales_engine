@@ -1,3 +1,6 @@
+require 'bigdecimal'
+require 'date'
+
 class Item
   attr_reader :id, :description, :name, :unit_price, :merchant_id, :created_at,
               :updated_at, :invoice_items, :merchant
@@ -18,5 +21,22 @@ class Item
 
   def give_merchant(merchant)
     @merchant      = merchant
+  end
+
+  def revenue
+    invoice_items.reduce(0) do |sum, item|
+      sum + (BigDecimal.new(item.unit_price) * BigDecimal.new(item.quantity))
+    end
+  end
+
+  def times_sold
+    invoice_items.reduce(0) do |sum, item|
+      sum + item.quantity.to_i
+    end
+  end
+
+  def best_day
+    best_invoice = invoice_items.max_by { |item| item.quantity.to_i }
+    Date.parse(best_invoice.created_at)
   end
 end
