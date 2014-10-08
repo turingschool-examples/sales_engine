@@ -5,7 +5,8 @@ class Item
               :unit_price,
               :merchant_id,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repository
 
   def initialize(data, repository)
     @id           = data[:id]

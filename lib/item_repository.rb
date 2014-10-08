@@ -2,11 +2,12 @@ require_relative 'repository'
 require_relative 'item'
 
 class ItemRepository < Repository
-  attr_reader :repo
+  attr_reader :repo,
+              :sales_engine
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
-    @repo = []
+    @repo         = []
   end
 
   def find_by_id(arg); find_by(:id, arg); end
@@ -18,7 +19,7 @@ class ItemRepository < Repository
   def find_by_updated_at(arg); find_by(:updated_at, arg); end
 
   def find_merchant_by_id(merchant_id)
-    sales_engine.find_merchant(merchant_id)
+    sales_engine.find_merchant_by_id(merchant_id)
   end
 
   def find_invoice_items_by_item_id(item_id)

@@ -8,23 +8,36 @@ require_relative 'transaction_repository'
 
 class SalesEngine
 
+  attr_reader :parser,
+              :customer_repository,
+              :invoice_item_repository,
+              :invoice_repository,
+              :item_repository,
+              :merchant_repository,
+              :transaction_repository
+
   def initialize
-    @parser = CSVParser.new
-    @customer_repository = CustomerRepository.new(self)
-    @invoice_item_repository = InvoiceItemRepository.new(self)
-    @invoice_repository = InvoiceRepository.new(self)
-    @item_repository = ItemRepository.new(self)
-    @merchant_repository = MerchantRepository.new(self)
-    @transaction_repository = TransactionRepository.new(self)
+    @parser                   = CSVParser.new
+    @customer_repository      = CustomerRepository.new(self)
+    @invoice_item_repository  = InvoiceItemRepository.new(self)
+    @invoice_repository       = InvoiceRepository.new(self)
+    @item_repository          = ItemRepository.new(self)
+    @merchant_repository      = MerchantRepository.new(self)
+    @transaction_repository   = TransactionRepository.new(self)
   end
 
+  def parsed_csv(path)
+    parser.load_csv(path)
+  end
+
+
   def startup
-    customer_repository.populate_repository
-    invoice_item_repository.populate_repository
-    invoice_repository.populate_repository
-    item_repository.populate_repository
-    merchant_repository.populate_repository
-    transaction_repository.populate_repository
+    customer_repository.populate_repository(parsed_csv('./data/customers.csv'), Customer)
+    invoice_item_repository.populate_repository(parsed_csv('./data/invoice_items.csv'), InvoiceItem)
+    invoice_repository.populate_repository(parsed_csv('./data/invoices.csv'), Invoice)
+    item_repository.populate_repository(parsed_csv('./data/items.csv'), Item)
+    merchant_repository.populate_repository(parsed_csv('./data/merchants.csv'), Merchant)
+    transaction_repository.populate_repository(parsed_csv('./data/transactions.csv'), Transaction)
   end
 
   def distribute
@@ -38,3 +51,5 @@ class SalesEngine
     invoice_item_repository.find_all_by_item_id(item_id)
   end
 end
+
+SalesEngine.new
