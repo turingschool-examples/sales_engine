@@ -14,7 +14,7 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-10-08T13:29:27-06:00">2014-10-08T13:29:27-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-10-08T13:38:12-06:00">2014-10-08T13:38:12-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -122,12 +122,12 @@
       
       <tr>
         <td class="strong"><a href="#2be29aea2e8443399873bc87bb06c01ad34a8577" class="src_link" title="lib/item.rb">lib/item.rb</a></td>
-        <td class="green strong">100.0 %</td>
+        <td class="red strong">42.86 %</td>
         <td>31</td>
         <td>14</td>
-        <td>14</td>
-        <td>0</td>
-        <td>9.0</td>
+        <td>6</td>
+        <td>8</td>
+        <td>0.4</td>
       </tr>
       
       <tr>
@@ -137,7 +137,7 @@
         <td>16</td>
         <td>16</td>
         <td>0</td>
-        <td>1.1</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
@@ -182,12 +182,12 @@
       
       <tr>
         <td class="strong"><a href="#c4ae20d5e49b2f67fd43191ed73808a9770f2762" class="src_link" title="lib/transaction.rb">lib/transaction.rb</a></td>
-        <td class="red strong">27.27 %</td>
+        <td class="green strong">100.0 %</td>
         <td>21</td>
         <td>11</td>
-        <td>3</td>
-        <td>8</td>
-        <td>0.3</td>
+        <td>11</td>
+        <td>0</td>
+        <td>11.2</td>
       </tr>
       
       <tr>
@@ -197,7 +197,7 @@
         <td>14</td>
         <td>14</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>1.1</td>
       </tr>
       
     </tbody>
@@ -1257,11 +1257,11 @@
         <div class="source_table" id="2be29aea2e8443399873bc87bb06c01ad34a8577">
   <div class="header">
     <h3>lib/item.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="red">42.86 %</span> covered</h4>
     <div>
       <b>14</b> relevant lines. 
-      <span class="green"><b>14</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <span class="green"><b>6</b> lines covered</span> and
+      <span class="red"><b>8</b> lines missed.</span>
     </div>
   </div>
   
@@ -1328,50 +1328,50 @@
           <code class="ruby">  def initialize(data, repository)</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="11">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="11">
+          
           
           <code class="ruby">    @id           = data[:id]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="12">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="12">
+          
           
           <code class="ruby">    @name         = data[:name]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="13">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="13">
+          
           
           <code class="ruby">    @description  = data[:description]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="14">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="14">
+          
           
           <code class="ruby">    @unit_price   = data[:unit_price]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="15">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="15">
+          
           
           <code class="ruby">    @merchant_id  = data[:merchant_id]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="16">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="16">
+          
           
           <code class="ruby">    @created_at   = data[:created_at]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="17">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="17">
+          
           
           <code class="ruby">    @updated_at   = data[:updated_at]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="18">
-          <span class="hits">15</span>
+        <li class="missed" data-hits="0" data-linenumber="18">
+          
           
           <code class="ruby">    @repository   = repository</code>
         </li>
@@ -1514,14 +1514,14 @@
           <code class="ruby">  def initialize(sales_engine)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="8">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
           
           <code class="ruby">    @sales_engine = sales_engine</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="9">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="9">
+          <span class="hits">1</span>
           
           <code class="ruby">    @repo = []</code>
         </li>
@@ -2355,11 +2355,11 @@
         <div class="source_table" id="c4ae20d5e49b2f67fd43191ed73808a9770f2762">
   <div class="header">
     <h3>lib/transaction.rb</h3>
-    <h4><span class="red">27.27 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>11</b> relevant lines. 
-      <span class="green"><b>3</b> lines covered</span> and
-      <span class="red"><b>8</b> lines missed.</span>
+      <span class="green"><b>11</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -2426,50 +2426,50 @@
           <code class="ruby">  def initialize(data, repository)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="11">
-          
+        <li class="covered" data-hits="15" data-linenumber="11">
+          <span class="hits">15</span>
           
           <code class="ruby">    @id                           = data[:id]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="12">
-          
+        <li class="covered" data-hits="15" data-linenumber="12">
+          <span class="hits">15</span>
           
           <code class="ruby">    @invoice_id                   = data[:invoice_id]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="13">
-          
+        <li class="covered" data-hits="15" data-linenumber="13">
+          <span class="hits">15</span>
           
           <code class="ruby">    @credit_card_number           = data[:credit_card_number]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="14">
-          
+        <li class="covered" data-hits="15" data-linenumber="14">
+          <span class="hits">15</span>
           
           <code class="ruby">    @credit_card_expiration_date  = data[:credit_card_expiration_date]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="15">
-          
+        <li class="covered" data-hits="15" data-linenumber="15">
+          <span class="hits">15</span>
           
           <code class="ruby">    @result                       = data[:result]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="16">
-          
+        <li class="covered" data-hits="15" data-linenumber="16">
+          <span class="hits">15</span>
           
           <code class="ruby">    @created_at                   = data[:created_at]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="17">
-          
+        <li class="covered" data-hits="15" data-linenumber="17">
+          <span class="hits">15</span>
           
           <code class="ruby">    @updated_at                   = data[:updated_at]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="18">
-          
+        <li class="covered" data-hits="15" data-linenumber="18">
+          <span class="hits">15</span>
           
           <code class="ruby">    @repostiory                   = repository</code>
         </li>
@@ -2552,14 +2552,14 @@
           <code class="ruby">  def initialize(sales_engine)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="8">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="8">
+          <span class="hits">2</span>
           
           <code class="ruby">    @sales_engine = sales_engine</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="9">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="9">
+          <span class="hits">2</span>
           
           <code class="ruby">    @repo = []</code>
         </li>
