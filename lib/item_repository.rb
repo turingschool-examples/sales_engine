@@ -2,16 +2,16 @@ require_relative 'repository'
 require_relative 'item'
 
 class ItemRepository < Repository
-  attr_reader :repo,
-              :sales_engine
+  attr_reader :repository, :sales_engine, :filepath
 
-  def initialize(sales_engine)
+  def initialize(sales_engine, filepath)
     @sales_engine = sales_engine
-    @repo         = []
+    @repository = []
+    @filepath = filepath
   end
 
   def inspect
-    "#<#{self.class} #{@repo.size} rows>"
+    "#<#{self.class} #{@repository.size} rows>"
   end
 
   def find_by_id(arg); find_by(:id, arg); end

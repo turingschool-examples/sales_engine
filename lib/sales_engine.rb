@@ -14,16 +14,18 @@ class SalesEngine
               :invoice_repository,
               :item_repository,
               :merchant_repository,
-              :transaction_repository
+              :transaction_repository,
+              :filepath
 
-  def initialize
+def initialize(filepath = "#{File.join(File.expand_path('..',  __FILE__))}/data")
+    @filepath                 = filepath
     @parser                   = CSVParser.new
-    @customer_repository      = CustomerRepository.new(self)
-    @invoice_item_repository  = InvoiceItemRepository.new(self)
-    @invoice_repository       = InvoiceRepository.new(self)
-    @item_repository          = ItemRepository.new(self)
-    @merchant_repository      = MerchantRepository.new(self)
-    @transaction_repository   = TransactionRepository.new(self)
+    @customer_repository      = CustomerRepository.new(self, filepath)
+    @invoice_item_repository  = InvoiceItemRepository.new(self, filepath)
+    @invoice_repository       = InvoiceRepository.new(self, filepath)
+    @item_repository          = ItemRepository.new(self, filepath)
+    @merchant_repository      = MerchantRepository.new(self, filepath)
+    @transaction_repository   = TransactionRepository.new(self, filepath)
   end
 
   def parsed_csv(path)
@@ -32,12 +34,12 @@ class SalesEngine
 
 
   def startup
-    customer_repository.populate_repository(parsed_csv('./data/customers.csv'), Customer)
-    invoice_item_repository.populate_repository(parsed_csv('./data/invoice_items.csv'), InvoiceItem)
-    invoice_repository.populate_repository(parsed_csv('./data/invoices.csv'), Invoice)
-    item_repository.populate_repository(parsed_csv('./data/items.csv'), Item)
-    merchant_repository.populate_repository(parsed_csv('./data/merchants.csv'), Merchant)
-    transaction_repository.populate_repository(parsed_csv('./data/transactions.csv'), Transaction)
+    customer_repository.populate_repository(parsed_csv("#{filepath}/customers.csv"), Customer)
+    invoice_item_repository.populate_repository(parsed_csv("#{filepath}/invoice_items.csv"), InvoiceItem)
+    invoice_repository.populate_repository(parsed_csv("#{filepath}/invoices.csv"), Invoice)
+    item_repository.populate_repository(parsed_csv("#{filepath}/items.csv"), Item)
+    merchant_repository.populate_repository(parsed_csv("#{filepath}/merchants.csv"), Merchant)
+    transaction_repository.populate_repository(parsed_csv("#{filepath}/transactions.csv"), Transaction)
   end
 
   def distribute
@@ -61,7 +63,7 @@ class SalesEngine
 
   # 1 more invoice relationship go here
 
-  def find_invoice_by_id(invoice_id)
+  def find_invoice_by_invoice_id(invoice_id)
     invoice_repository.find_by_id(invoice_id)
   end
 
