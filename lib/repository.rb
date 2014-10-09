@@ -22,9 +22,7 @@ class Repository
   end
 
   def find_by(attribute, criteria)
-    repository.find { |instance|
-      clean(instance.send(attribute.to_sym)) == clean(criteria)
-      }
+    repository.find { |instance| clean(instance.send(attribute.to_sym)) == clean(criteria) }
   end
 
   def find_all_by(attribute, criteria)
