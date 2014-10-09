@@ -4,3 +4,5 @@ gem 'cane'
 gem 'reek'
 gem 'rake'
 gem 'minitest'
+gem 'simplecov'
+
