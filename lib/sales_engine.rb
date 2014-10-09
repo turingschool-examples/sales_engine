@@ -82,6 +82,10 @@ def initialize(filepath = "#{File.join(File.expand_path('../..',  __FILE__))}/da
   def find_customer_by_id(customer_id)
     customer_repository.find_by_id(customer_id)
   end
+
+  def find_invoice_by_id(invoice_id)
+    invoice_repository.find_by_id(invoice_id)
+  end
 end
 
 # engine = SalesEngine.new

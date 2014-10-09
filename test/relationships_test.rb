@@ -72,7 +72,7 @@ class RelationshipsTest < Minitest::Test
 
   def test_transaction_find_by_invoice_id_method
     transaction = @transaction_repository.repository.first
-    assert_instance_of Invoice, transaction.invoices
+    assert_instance_of Invoice, transaction.invoice
   end
 
   def test_customer_find_all_by_invoice_id_method
