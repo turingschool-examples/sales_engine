@@ -33,4 +33,8 @@ class CustomerRepository < Repository
   def find_invoices_by_id(invoice_id)
     sales_engine.find_invoices_by_id(invoice_id)
   end
+
+  def random
+    repository.sample
+  end
 end

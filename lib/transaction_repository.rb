@@ -37,4 +37,8 @@ class TransactionRepository < Repository
   def find_invoice_by_id(invoice_id)
     sales_engine.find_invoice_by_invoice_id(invoice_id)
   end
+  
+  def random
+    repository.sample
+  end
 end

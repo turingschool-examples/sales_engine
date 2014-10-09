@@ -42,4 +42,8 @@ class InvoiceItemRepository < Repository
   def find_item_by_id(item_id)
     sales_engine.find_item_by_id(item_id)
   end
+
+  def random
+    repository.sample
+  end
 end

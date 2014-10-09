@@ -45,4 +45,7 @@ class MerchantRepository < Repository
   def revenue(date, arg)
   end
 
+  def random
+    repository.sample
+  end
 end

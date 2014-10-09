@@ -48,4 +48,7 @@ class ItemRepository < Repository
   def most_items(arg)
   end
 
+  def random
+    repository.sample
+  end
 end

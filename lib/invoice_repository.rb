@@ -52,4 +52,7 @@ class InvoiceRepository < Repository
     sales_engine.find_merchant_by_id(merchant_id)
   end
 
+  def random
+    repository.sample
+  end
 end
