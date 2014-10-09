@@ -19,16 +19,25 @@ class Merchant
     @invoices = invoices
   end
 
-  # def favorite_customer
-  #   invoices.group_by do |invoice|
-  #     invoice.customer
-  #   end.to_a.max_by do |pair|
-  #     pair[1]
-  #      do |transaction|
-  #       transaction.result == "success"
-  #     end
-  #   end.class
-  # end
+  def customers_with_pending_invoices
+    invoices.select do |invoice|
+      invoice.transactions.none? do |transaction|
+        transaction.result == "success"
+      end
+    end.collect(&:customer).uniq
+  end
+
+  def favorite_customer
+    invoices.group_by do |invoice|
+      invoice.customer
+    end.to_a.max_by do |pair|
+      pair[1].reduce(0) do |sum, invoice|
+        sum + invoice.transactions.count do |transaction|
+          transaction.result == "success"
+        end
+      end
+    end[0]
+  end
 
   def revenue(date = nil)
     invoices.reduce(0) do |sum, invoice|
