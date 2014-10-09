@@ -15,7 +15,7 @@ class MerchantRepository < Repository
   end
 
   def make_repo
-    populate_repository("#{filepath}/merchants.csv", Item)
+    populate_repository("#{filepath}/merchants.csv", Merchant)
   end
 
   def find_by_id(arg); find_by(:id, arg); end
