@@ -12,4 +12,18 @@ class Customer
 	def give_invoices(invoices)
 		@invoices = invoices
 	end
+
+	def transactions
+		transactions = []
+		self.invoices.each do |invoice|
+			if invoice.transaction == "success"
+				transactions << invoice
+			end
+		end
+		transactions
+	end
+
+	def favorite_merchant(transaction)
+		# transactions.each do |transaction|
+	end
 end

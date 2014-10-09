@@ -4,6 +4,8 @@ require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
 require_relative '../lib/transaction'
 require_relative '../lib/merchant_repository'
+require_relative '../lib/customer_repository'
+require_relative '../lib/customer'
 require 'bigdecimal'
 
 class BusinessIntelligenceTest < Minitest::Test
@@ -27,5 +29,26 @@ class BusinessIntelligenceTest < Minitest::Test
     merchant.give_invoices(invoices)
     assert_equal BigDecimal.new("13"), merchant.revenue
     assert_instance_of BigDecimal, merchant.revenue
+  end
+
+  def test_gets_customer_transactions
+    customer = Customer.new({})
+    invoices = [Invoice.new({}), Invoice.new({})]
+    invoices[0].give_transactions [Transaction.new({result: "success"}), Transaction.new({result: "success"}), Transaction.new({result: "failed"})]
+    invoices[1].give_transactions [Transaction.new({result: "failed"}), Transaction.new({result: "success"}), Transaction.new({result: "failed"})]
+    all_invoices = customer.give_invoices(invoices)
+
+    assert_equal 3, customer.invoices.transactions.size
+  end
+
+  def test_gets_favorite_merchant
+    customer = Customer.new({})
+    invoices = [Invoice.new({}), Invoice.new({}), Invoice.new({}), Invoice.new({})]
+    invoices[0].give_transactions [Transaction.new({result: "success", merchant: "Mr. Pibb"}), Transaction.new({result: "success", merchant: "Mr. Pibb"}), Transaction.new({result: "failed", merchant: "Donnie Darko"})]
+    invoices[1].give_transactions [Transaction.new({result: "failed", merchant: "Donnie Darko"}), Transaction.new({result: "success", merchant: "Donnie Darko"}), Transaction.new({result: "failed", merchant: "Donnie Darko"})]
+    customer.give_invoices(invoices)
+    merchants = customer.invoices.merchant[0..-1]
+
+    assert_equal "Mr. Pibb", favorite_merchant(merchants)
   end
 end
