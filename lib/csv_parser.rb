@@ -1,8 +1,8 @@
 require 'csv'
 
-class CSVParser
+module CSVParser
 
-  def load_csv(file_name)
+  def self.load_csv(file_name)
     csv = CSV.table(file_name, :header_converters => :symbol, :converters => :all)
   end
 

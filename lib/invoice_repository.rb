@@ -14,6 +14,10 @@ class InvoiceRepository < Repository
     "#<#{self.class} #{@repository.size} rows>"
   end
 
+  def make_repo
+    populate_repository("#{filepath}/invoices.csv", Invoice)
+  end
+
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_customer_id(arg); find_by(:customer_id, arg); end
   def find_by_merchant_id(arg); find_by(:merchant_id, arg); end

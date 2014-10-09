@@ -17,9 +17,8 @@ class SalesEngine
               :transaction_repository,
               :filepath
 
-def initialize(filepath = "#{File.join(File.expand_path('..',  __FILE__))}/data")
+def initialize(filepath = "#{File.join(File.expand_path('../..',  __FILE__))}/data")
     @filepath                 = filepath
-    @parser                   = CSVParser.new
     @customer_repository      = CustomerRepository.new(self, filepath)
     @invoice_item_repository  = InvoiceItemRepository.new(self, filepath)
     @invoice_repository       = InvoiceRepository.new(self, filepath)
@@ -32,14 +31,13 @@ def initialize(filepath = "#{File.join(File.expand_path('..',  __FILE__))}/data"
     parser.load_csv(path)
   end
 
+  def repository_array
+    [customer_repository, invoice_item_repository, invoice_repository,
+    item_repository, merchant_repository, transaction_repository]
+  end
 
   def startup
-    customer_repository.populate_repository(parsed_csv("#{filepath}/customers.csv"), Customer)
-    invoice_item_repository.populate_repository(parsed_csv("#{filepath}/invoice_items.csv"), InvoiceItem)
-    invoice_repository.populate_repository(parsed_csv("#{filepath}/invoices.csv"), Invoice)
-    item_repository.populate_repository(parsed_csv("#{filepath}/items.csv"), Item)
-    merchant_repository.populate_repository(parsed_csv("#{filepath}/merchants.csv"), Merchant)
-    transaction_repository.populate_repository(parsed_csv("#{filepath}/transactions.csv"), Transaction)
+    repository_array.map { |repo| repo.make_repo }
   end
 
   def distribute

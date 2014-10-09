@@ -14,6 +14,10 @@ class TransactionRepository < Repository
     "#<#{self.class} #{@repository.size} rows>"
   end
 
+  def make_repo
+    populate_repository("#{filepath}/transactions.csv", Transaction)
+  end
+
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_invoice_id(arg); find_by(:invoice_id, arg); end
   def find_by_credit_card_number(arg); find_by(:credit_card_number, arg); end
