@@ -119,13 +119,49 @@ class BusinessIntelligenceTest < Minitest::Test
     assert_equal [items_repo.items[3], items_repo.items[1]], items_repo.most_items(2)
   end
 
-  def test_item_returns_best_selling_day
+  def test_item_returns_best_selling_da
     items = [Item.new({}), Item.new({})]
     items[0].give_invoice_items([InvoiceItem.new({quantity: "10", created_at: "2012-03-23 14:54:09 UTC"}), InvoiceItem.new({quantity:  "9", created_at: "2012-03-24 14:54:09 UTC"}), InvoiceItem.new({quantity: "11", created_at: "2012-03-25 14:54:09 UTC"})])
     items[1].give_invoice_items([InvoiceItem.new({quantity: "12", created_at: "2012-03-23 14:54:09 UTC"}), InvoiceItem.new({quantity: "77", created_at: "2014-07-13 14:54:09 UTC"}), InvoiceItem.new({quantity: "16", created_at: "2013-06-13 14:54:09 UTC"})])
 
     assert_equal Date.parse("2012-03-25 14:54:09 UTC"), items[0].best_day
     assert_equal Date.parse("2014-07-13 14:54:09 UTC"), items[1].best_day
+  end
+
+  def test_customers_return_array_of_associated_transaction_instances
+    customers    = [Customer.new({id: 4}),Customer.new({id: 6}) ]
+    invoices     = [Invoice.new({customer_id: 4}), Invoice.new({customer_id:6}), Invoice.new({customer_id: 4}) ]
+    transactions = [Transaction.new({})] * 20
+
+    invoices[0].give_transactions(transactions[0..5] + transactions[16..19])
+    invoices[1].give_transactions(transactions[6..15])
+    customers[0].give_invoices([invoices[0]])
+    customers[1].give_invoices([invoices[1]])
+
+    assert_equal transactions[0..5] + transactions[16..19],  customers[0].transactions
+    assert_equal  transactions[6..15],  customers[1].transactions
+  end
+
+  def test_customers_returns_merchant_with_most_successful_transactions
+    customer     =  Customer.new({id: 4})
+    merchants    = [Merchant.new({id: 5}), Merchant.new({id: 6})]
+    invoices     = [Invoice.new({customer_id: 4, merchant_id: 5}), Invoice.new({customer_id:4, merchant_id: 6})]
+    transactions = [ [Transaction.new({result: "success"})]*40, [Transaction.new({result: "failed"})]*30 ].flatten!.shuffle!
+
+    invoices[0].give_merchant(merchants[0])
+    invoices[1].give_merchant(merchants[1])
+    invoices[0].give_transactions(transactions[0..30])
+    invoices[1].give_transactions(transactions[31..50])
+    transactions[0..30].each do |transaction|
+      transaction.give_invoice(invoices[0])
+    end
+    transactions[31..50].each do |transaction|
+      transaction.give_invoice(invoices[0])
+    end
+
+    customer.give_invoices(invoices)
+    assert_equal merchants[0], customer.favorite_merchant
+
   end
 end
 

@@ -15,12 +15,12 @@ class SalesEngine
   end
 
   def startup(reader = CSVReader.new)
-    @merchant_repository = MerchantRepository.new(reader.read("merchants.csv", @file_dir))
-    @invoice_repository = InvoiceRepository.new(reader.read("invoices.csv", @file_dir))
-    @item_repository = ItemRepository.new(reader.read("items.csv", @file_dir))
+    @merchant_repository     = MerchantRepository.new(reader.read("merchants.csv", @file_dir))
+    @invoice_repository      = InvoiceRepository.new(reader.read("invoices.csv", @file_dir))
+    @item_repository         = ItemRepository.new(reader.read("items.csv", @file_dir))
     @invoice_item_repository = InvoiceItemRepository.new(reader.read("invoice_items.csv", @file_dir))
-    @customer_repository = CustomerRepository.new(reader.read("customers.csv", @file_dir))
-    @transaction_repository = TransactionRepository.new(reader.read("transactions.csv", @file_dir))
+    @customer_repository     = CustomerRepository.new(reader.read("customers.csv", @file_dir))
+    @transaction_repository  = TransactionRepository.new(reader.read("transactions.csv", @file_dir))
 
     make_relationships
   end
