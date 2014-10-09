@@ -1,2 +1,3 @@
 coverage
 guardfile
+test/fake_test.rb

@@ -19,12 +19,33 @@ class Merchant
     @invoices = invoices
   end
 
-  def revenue
+  def customers_with_pending_invoices
+    invoices.select do |invoice|
+      invoice.transactions.none? do |transaction|
+        transaction.result == "success"
+      end
+    end.collect(&:customer).uniq
+  end
+
+  def favorite_customer
+    invoices.group_by do |invoice|
+      invoice.customer
+    end.to_a.max_by do |pair|
+      pair[1].reduce(0) do |sum, invoice|
+        sum + invoice.transactions.count do |transaction|
+          transaction.result == "success"
+        end
+      end
+    end[0]
+  end
+
+  def revenue(date = nil)
     invoices.reduce(0) do |sum, invoice|
       index = -1
       sum + invoice.invoice_items.reduce(0) do |sum_two, invoice_item|
         index += 1
-        unless invoice.transactions[index].result == "failed"
+        transaction = invoice.transactions[index]
+        unless transaction.result == "failed" || (date && Date.parse(date) != Date.parse(transaction.created_at))
           sum_two + (BigDecimal.new(invoice_item.unit_price) * BigDecimal.new(invoice_item.quantity))
         else
           sum_two
