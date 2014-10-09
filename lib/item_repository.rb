@@ -1,6 +1,5 @@
 require_relative 'repository'
 require_relative 'item'
-require 'bigdecimal'
 
 class ItemRepository < Repository
   attr_reader :repository, :sales_engine, :filepath

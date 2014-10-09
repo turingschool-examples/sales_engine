@@ -1,4 +1,4 @@
-require_relative 'csv_parser'             #####add relationships, get tests working, add cleaning for each repository
+require_relative 'csv_parser'
 require_relative 'cleaner'
 
 class Repository
@@ -8,7 +8,7 @@ class Repository
   def populate_repository(csv_path, instance_class)
     parsed_csv     = CSVParser.load_csv(csv_path)
     parsed_csv.map do |raw_element|
-      instance     = instance_class.new(raw_element, self)                      #####(raw_element and self)
+      instance     = instance_class.new(raw_element, self)
       repository << instance
     end
   end
@@ -22,7 +22,8 @@ class Repository
   end
 
   def find_by(attribute, criteria)
-    repository.find { |instance| clean(instance.send(attribute.to_sym)) == clean(criteria) }
+    answer = repository.find { |instance|
+    clean(instance.send(attribute.to_sym)) == clean(criteria) }
   end
 
   def find_all_by(attribute, criteria)

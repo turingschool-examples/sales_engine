@@ -3,8 +3,7 @@ require 'bigdecimal'
 module Cleaner
 
   def self.clean(attribute)
-    return attribute if attribute.is_a? Integer
-    attribute.to_f if attribute.is_a? BigDecimal
+    return attribute unless attribute.is_a? String
     clean_string(attribute) if attribute.is_a? String
   end
 
