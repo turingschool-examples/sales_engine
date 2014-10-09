@@ -26,7 +26,7 @@ class Invoice
   end
 
   def items
-    repository.find_items_by_invoice(self.id)
+    repository.find_items_by_invoice_id(self.id)
   end
 
   def customer

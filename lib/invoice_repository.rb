@@ -32,7 +32,7 @@ class InvoiceRepository < Repository
   def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
   def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
 
-  def find_find_transaction_by_id(transaction_id)
+  def find_transaction_by_id(transaction_id)
     sales_engine.find_transaction_by_id(transaction_id)
   end
 
