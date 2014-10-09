@@ -35,4 +35,12 @@ class InvoiceRepository < Repository
     sales_engine.find_invoice_items(invoice_id)
   end
 
+  def find_items_by_invoice_id(item_id)
+    sales_engine.find_item_by_id(item_id)
+  end
+
+  def find_customer_by_id(customer_id)
+    sales_engine.find_customer_by_id(customer_id)
+  end
+
 end
