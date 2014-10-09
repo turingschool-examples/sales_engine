@@ -32,4 +32,7 @@ class Invoice
 		@merchant = merchant
 	end
 
+	def inspect
+	end
+
 end

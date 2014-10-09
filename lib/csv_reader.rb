@@ -14,7 +14,7 @@ class CSVReader
     type = find_which_object(file_name)
     entries = []
     file_name = File.join dir, file_name
-    CSV.foreach(file_name, headers: true ,header_converters: :symbol, converters: :date) do |row|
+    CSV.foreach(file_name, headers: true ,header_converters: :symbol, converters: :all) do |row|
       entries << type.new(row.to_hash)
     end
     entries
