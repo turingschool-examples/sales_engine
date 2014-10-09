@@ -91,6 +91,4 @@ end
 # engine = SalesEngine.new
 # engine.startup
 # invoice = engine.invoice_repository.find_by_id(1002)
-# puts invoice.id
-# puts invoice.invoice_items.size
-# puts engine.invoice_repository.repository.size
+# puts invoice.items.size
