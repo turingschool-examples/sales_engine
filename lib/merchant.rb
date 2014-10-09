@@ -21,9 +21,6 @@ class Merchant
     repository.find_invoices_by_id(self.id)
   end
 
-  def invoices
-  end
-
   def revenue
     #all revenues must be BigDecimal
   end

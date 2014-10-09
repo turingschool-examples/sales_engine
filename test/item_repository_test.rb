@@ -7,10 +7,10 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_repo_gets_populated
     raw_csv = CSVParser.new.load_csv('./data/items_test.csv')
-    item_repo = ItemRepository.new(SalesEngine.new)
-    item_repo.populate_repository(raw_csv, Item)
-    assert_instance_of Item, item_repo.repo[0], "not instance of Item"
-    assert_instance_of Item, item_repo.repo[-1], "not instance of Item"
+    item_repository = ItemRepository.new(SalesEngine.new)
+    item_repository.populate_repository(raw_csv, Item)
+    assert_instance_of Item, item_repository.repository[0], "not instance of Item"
+    assert_instance_of Item, item_repository.repository[-1], "not instance of Item"
   end
 
   def test_find_by_id

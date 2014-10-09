@@ -4,8 +4,8 @@ require './lib/repository'
 
 class RepositoryTest < Minitest::Test
 
-  def repo
-    @repo = []
+  def repository
+    @repository = []
   end
 
   class Merchant
@@ -24,10 +24,10 @@ class RepositoryTest < Minitest::Test
   end
 
   class MerchantRepository < Repository
-    attr_reader :repo
+    attr_reader :repository
 
     def initialize
-      @repo = []
+      @repository = []
     end
 
     def find_by_id(arg); finder(:id, arg); end
@@ -41,7 +41,7 @@ class RepositoryTest < Minitest::Test
     @merchant_repository = MerchantRepository.new
     @merchant = Merchant
     @merchant_repository.populate_repository(@merchants_test, @merchant)
-    assert_equal 1, @merchant_repository.repo[0].id
+    assert_equal 1, @merchant_repository.repository[0].id
   end
 
 end

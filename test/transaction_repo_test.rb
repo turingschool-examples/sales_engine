@@ -6,10 +6,10 @@ class TransactionRepoTest < Minitest::Test
 
   def test_repo_gets_populated
     raw_csv = CSVParser.new.load_csv('./data/transactions_test.csv')
-    trans_repo = TransactionRepository.new(SalesEngine.new)
-    trans_repo.populate_repository(raw_csv, Transaction)
-    assert_instance_of Transaction, trans_repo.repo[0], "not instance of Transaction"
-    assert_instance_of Transaction, trans_repo.repo[-1], "not instance of Transaction"
+    transaction_repository = TransactionRepository.new(SalesEngine.new)
+    transaction_repository.populate_repository(raw_csv, Transaction)
+    assert_instance_of Transaction, transaction_repository.repository[0], "not instance of Transaction"
+    assert_instance_of Transaction, transaction_repository.repository[-1], "not instance of Transaction"
   end
 
 end

@@ -34,6 +34,7 @@ class Invoice
   end
 
   def merchant
+    repository.find_merchant_by_id(self.id)
   end
 
 end
