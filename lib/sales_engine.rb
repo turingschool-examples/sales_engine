@@ -51,13 +51,21 @@ class SalesEngine
     invoice_repository.find_all_by_merchant_id(invoice_id)
   end
 
-  #invoice relationships go here
+  def find_transactions_by_id(trasaction_id)
+    transaction_repository.find_all_by_id(transaction_id)
+  end
 
-  def find_invoice_by_invoice_id(invoice_id)
+  def find_invoice_items(invoice_id)
+    invoice_item_repository.find_all_by_invoice_id(invoice_id)
+  end
+
+  # 1 more invoice relationship go here
+
+  def find_invoice_by_id(invoice_id)
     invoice_repository.find_by_id(invoice_id)
   end
 
-  def find_item_by_item_id(item_id)
+  def find_item_by_id(item_id)
     item_repository.find_by_id(item_id)
   end
 

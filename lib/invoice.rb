@@ -18,9 +18,11 @@ class Invoice
   end
 
   def transactions
+    repository.find_transaction_by_id(self.id)
   end
 
   def invoice_items
+    repository.find_invoice_items_by_invoice_id(self.id)
   end
 
   def items

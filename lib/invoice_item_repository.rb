@@ -3,7 +3,7 @@ require_relative 'invoice_item'
 
 class InvoiceItemRepository < Repository
 
-  attr_reader :repo
+  attr_reader :repo, :sales_engine
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
@@ -31,12 +31,11 @@ class InvoiceItemRepository < Repository
   def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
 
 
-  def find_invoice_by_invoice_id(invoice_id)
+  def find_invoice_by_id(invoice_id)
     sales_engine.find_invoice_by_id(invoice_id)
   end
 
   def find_item_by_id(item_id)
     sales_engine.find_item_by_id(item_id)
   end
-
 end

@@ -14,12 +14,12 @@ class Repository
   end
 
   def find_by(attribute, criteria)
-    repo.find {|instance| instance.send(attribute.to_sym).downcase == criteria.downcase}
+    repo.find {|instance| instance.send(attribute.to_sym) == criteria}
   end
 
 
   def find_all_by(attribute, criteria)
-    repo.select { |instance| instance.send(attribute.to_sym).downcase == criteria.downcase }
+    repo.select { |instance| instance.send(attribute.to_sym) == criteria }
   end
 
 end
