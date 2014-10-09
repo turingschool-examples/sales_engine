@@ -76,7 +76,11 @@ def initialize(filepath = "#{File.join(File.expand_path('../..',  __FILE__))}/da
   end
 
   def find_invoice_items(invoice_id)
-    invoice_item_repository.find_all_by_item_id(invoice_id)
+    invoice_item_repository.find_all_by_invoice_id(invoice_id)
+  end
+
+  def find_invoice_items_by_item_id(item_id)
+    invoice_item_repository.find_all_by_item_id(item_id)
   end
 
   def find_customer_by_id(customer_id)

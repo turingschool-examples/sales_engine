@@ -30,7 +30,7 @@ class Invoice
   end
 
   def customer
-    repository.find_customer_by_id(self.id)
+    repository.find_customer_by_id(self.customer_id)
   end
 
   def merchant

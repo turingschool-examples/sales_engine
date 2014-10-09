@@ -1,7 +1,10 @@
+require 'bigdecimal'
+
 module Cleaner
 
   def self.clean(attribute)
-    return attribute unless attribute.is_a? String
+    return attribute if attribute.is_a? Integer
+    attribute.to_f if attribute.is_a? BigDecimal
     clean_string(attribute) if attribute.is_a? String
   end
 

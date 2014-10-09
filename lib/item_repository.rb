@@ -1,5 +1,6 @@
 require_relative 'repository'
 require_relative 'item'
+require 'bigdecimal'
 
 class ItemRepository < Repository
   attr_reader :repository, :sales_engine, :filepath
@@ -34,12 +35,13 @@ class ItemRepository < Repository
   def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
   def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
 
+
   def find_merchant_by_id(merchant_id)
     sales_engine.find_merchant_by_id(merchant_id)
   end
 
   def find_invoice_items_by_item_id(item_id)
-    sales_engine.find_invoice_items(item_id)
+    sales_engine.find_invoice_items_by_item_id(item_id)
   end
 
   def most_revenue(arg)
