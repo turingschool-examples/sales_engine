@@ -3,10 +3,12 @@ require_relative 'cleaner'
 
 class Repository
   include Cleaner
+  include CSVParser
 
-  def populate_repository(parsed_csv, instance_class)     #####fix
+  def populate_repository(csv_path, instance_class)
+    parsed_csv     = CSVParser.load_csv(csv_path)
     parsed_csv.map do |raw_element|
-      instance = instance_class.new(raw_element, self)                      #####(raw_element and self)
+      instance     = instance_class.new(raw_element, self)                      #####(raw_element and self)
       repository << instance
     end
   end

@@ -31,6 +31,9 @@ class InvoiceItemRepository < Repository
   def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
   def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
 
+  def make_repo
+    populate_repository("#{filepath}/invoice_items.csv", InvoiceItem)
+  end
 
   def find_invoice_by_id(invoice_id)
     sales_engine.find_invoice_by_id(invoice_id)

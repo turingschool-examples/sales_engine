@@ -14,6 +14,10 @@ class MerchantRepository < Repository
     "#<#{self.class} #{@repository.size} rows>"
   end
 
+  def make_repo
+    populate_repository("#{filepath}/merchants.csv", Item)
+  end
+
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_name(arg); find_by(:name, arg); end
   def find_by_created_at(arg); find_by(:created_at, arg); end

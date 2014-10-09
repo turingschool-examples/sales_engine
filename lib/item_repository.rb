@@ -14,6 +14,10 @@ class ItemRepository < Repository
     "#<#{self.class} #{@repository.size} rows>"
   end
 
+  def make_repo
+    populate_repository("#{filepath}/items.csv", Item)
+  end
+
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_name(arg); find_by(:name, arg); end
   def find_by_description(arg); find_by(:description, arg); end

@@ -26,8 +26,8 @@ class CustomerRepository < Repository
   def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
   def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
 
-  def populate
-    populate_repository('/path/csv', Customer)
+  def make_repo
+    populate_repository("#{filepath}/customers.csv", Customer)
   end
 
   def find_invoices_by_id(invoice_id)
