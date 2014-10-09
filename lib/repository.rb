@@ -21,7 +21,7 @@ module Repository
   end
 
   def inspect
-    "<#{self.class} #{entries.size} rows"
+    "<#{self.class} #{entries.size} rows>"
   end
 
   private
