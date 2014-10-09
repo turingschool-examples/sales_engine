@@ -5,7 +5,7 @@ require_relative '../lib/invoice'
 require_relative '../lib/invoice_item'
 require_relative '../lib/item'
 require_relative '../lib/customer'
-require_relative '../lib/transaction' 
+require_relative '../lib/transaction'
 
 class RelationshipsTest < Minitest::Test
   def setup
@@ -93,7 +93,7 @@ class TestReader
     @transactions = make_transactions
   end
 
-  def read(file_location)
+  def read(file_location, *)
     send file_location.split(".")[0].to_sym
   end
 
