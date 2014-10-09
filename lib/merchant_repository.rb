@@ -32,8 +32,8 @@ class MerchantRepository < Repository
     sales_engine.find_items_by_id(id)
   end
 
-  def find_invoices_by_id(invoice_id)
-    sales_engine.find_invoices_by_id(invoice_id)
+  def find_invoices_by_id(merchant_id)
+    sales_engine.find_invoices_by_merchant_id(merchant_id)
   end
 
   def most_revenue(arg)

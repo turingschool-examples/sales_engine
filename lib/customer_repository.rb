@@ -30,8 +30,8 @@ class CustomerRepository < Repository
     populate_repository("#{filepath}/customers.csv", Customer)
   end
 
-  def find_invoices_by_id(invoice_id)
-    sales_engine.find_invoices_by_id(invoice_id)
+  def find_invoices_by_id(customer_id)
+    sales_engine.find_invoices_by_customer_id(customer_id)
   end
 
   def random
