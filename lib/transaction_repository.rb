@@ -2,15 +2,16 @@ require_relative 'repository'
 require_relative 'transaction'
 
 class TransactionRepository < Repository
-  attr_reader :repo
+  attr_reader :repository, :sales_engine, :filepath
 
-  def initialize(sales_engine)
+  def initialize(sales_engine, filepath)
     @sales_engine = sales_engine
-    @repo = []
+    @repository = []
+    @filepath = filepath
   end
 
   def inspect
-    "#<#{self.class} #{@repo.size} rows>"
+    "#<#{self.class} #{@repository.size} rows>"
   end
 
   def find_by_id(arg); find_by(:id, arg); end
@@ -29,7 +30,7 @@ class TransactionRepository < Repository
   def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
   def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
 
-  def find_invoice_by_invoice_id(invoice_id)
+  def find_invoice_by_id(invoice_id)
     sales_engine.find_invoice_by_invoice_id(invoice_id)
   end
 end
