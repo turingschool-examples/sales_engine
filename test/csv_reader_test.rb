@@ -37,7 +37,7 @@ class CSVReaderTest < Minitest::Test
     assert_equal 539,                       invoice_items[0].item_id
     assert_equal 1,                         invoice_items[0].invoice_id
     assert_equal 5,                         invoice_items[0].quantity
-    assert_equal 13635,                     invoice_items[0].unit_price
+    assert_equal BigDecimal.new("136.35"),  invoice_items[0].unit_price
     assert_equal "2012-03-27 14:54:09 UTC", invoice_items[0].created_at
     assert_equal "2012-03-27 14:54:09 UTC", invoice_items[0].updated_at
   end
@@ -54,7 +54,7 @@ class CSVReaderTest < Minitest::Test
   def test_items_csv_properly_parses_headers_and_values
     assert_equal 1,                         items[0].id
     assert_equal "Item Qui Esse",           items[0].name
-    assert_equal 75107,                     items[0].unit_price
+    assert_equal BigDecimal.new("751.07"),  items[0].unit_price
     assert_equal 1,                         items[0].merchant_id
     assert_equal "2012-03-27 14:53:59 UTC", items[0].created_at
     assert_equal "2012-03-27 14:53:59 UTC", items[0].updated_at

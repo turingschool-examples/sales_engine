@@ -36,7 +36,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_finds_by_unit_price
-    assert_equal @invoice_items[2], @repository.find_by_unit_price("55")
+    assert_equal @invoice_items[2], @repository.find_by_unit_price(BigDecimal.new ("0.55"))
   end
 
   def test_finds_by_created_at
@@ -64,7 +64,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_finds_all_by_unit_price
-    assert_equal 0, @repository.find_all_by_unit_price("11").size
+    assert_equal 0, @repository.find_all_by_unit_price(BigDecimal.new("0.11")).size
   end
 
   def test_finds_all_by_created_at
