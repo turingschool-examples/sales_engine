@@ -4,18 +4,23 @@ require_relative 'item_repository'
 require_relative 'invoice_item_repository'
 require_relative 'customer_repository'
 require_relative 'transaction_repository'
+require_relative 'csv_reader'
 
 class SalesEngine
   attr_reader :merchant_repository, :invoice_repository, :item_repository,
     :invoice_item_repository, :customer_repository, :transaction_repository
 
+  def initialize(file_dir = "test")
+    @file_dir = file_dir
+  end
+
   def startup(reader = CSVReader.new)
-    @merchant_repository = MerchantRepository.new(reader.read("merchants.csv"))
-    @invoice_repository = InvoiceRepository.new(reader.read("invoices.csv"))
-    @item_repository = ItemRepository.new(reader.read("items.csv"))
-    @invoice_item_repository = InvoiceItemRepository.new(reader.read("invoice_items.csv"))
-    @customer_repository = CustomerRepository.new(reader.read("customers.csv"))
-    @transaction_repository = TransactionRepository.new(reader.read("transactions.csv"))
+    @merchant_repository = MerchantRepository.new(reader.read("merchants.csv", @file_dir))
+    @invoice_repository = InvoiceRepository.new(reader.read("invoices.csv", @file_dir))
+    @item_repository = ItemRepository.new(reader.read("items.csv", @file_dir))
+    @invoice_item_repository = InvoiceItemRepository.new(reader.read("invoice_items.csv", @file_dir))
+    @customer_repository = CustomerRepository.new(reader.read("customers.csv", @file_dir))
+    @transaction_repository = TransactionRepository.new(reader.read("transactions.csv", @file_dir))
 
     make_relationships
   end

@@ -20,6 +20,10 @@ module Repository
     entries.sample
   end
 
+  def inspect
+    "<#{self.class} #{entries.size} rows"
+  end
+
   private
   attr_reader :entries
 

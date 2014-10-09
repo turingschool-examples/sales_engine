@@ -10,10 +10,10 @@ require_relative 'invoice'
 require_relative 'transaction'
 
 class CSVReader
-  def read(file_name)
+  def read(file_name, dir = "data")
     type = find_which_object(file_name)
     entries = []
-    file_name = File.join "data", file_name
+    file_name = File.join dir, file_name
     CSV.foreach(file_name, headers: true ,header_converters: :symbol, converters: :date) do |row|
       entries << type.new(row.to_hash)
     end
