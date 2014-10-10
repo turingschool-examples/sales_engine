@@ -20,7 +20,7 @@ class ItemTest < Minitest::Test
     assert_equal                            "4", @item.id
     assert_equal             "Item Nemo Facere", @item.name
     assert_equal      "Sunt eum id eius magni.", @item.description
-    assert_equal                         "4291", @item.unit_price
+    assert_equal        BigDecimal.new("42.91"), @item.unit_price
     assert_equal                            "1", @item.merchant_id
     assert_includes            @item.created_at, "2012"
     assert_includes            @item.updated_at, "2012"

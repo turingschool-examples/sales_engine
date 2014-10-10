@@ -32,7 +32,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_finds_by_unit_price
-  	assert_equal @items[1], @repository.find_by_unit_price("8")
+  	assert_equal @items[1], @repository.find_by_unit_price(BigDecimal.new("0.08"))
   end
 
   def test_finds_by_merchant_id
@@ -61,7 +61,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_finds_all_by_unit_price
-  	assert_equal 1, @repository.find_all_by_unit_price("2").size
+  	assert_equal 1, @repository.find_all_by_unit_price(BigDecimal.new("0.02")).size
   end
 
   def test_finds_all_by_merchant_id

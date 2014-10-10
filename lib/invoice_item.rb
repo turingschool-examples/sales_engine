@@ -7,7 +7,7 @@ class InvoiceItem
     @item_id            = data[:item_id]
     @invoice_id         = data[:invoice_id]
     @quantity           = data[:quantity]
-    @unit_price         = data[:unit_price]
+    @unit_price         = BigDecimal.new("#{data[:unit_price]}") / 100
     @created_at         = data[:created_at]
     @updated_at         = data[:updated_at]
   end
@@ -18,5 +18,13 @@ class InvoiceItem
 
   def give_invoice(invoice)
     @invoice = invoice
+  end
+
+  def successful?
+    invoice.successful?
+  end
+
+  def revenue
+    unit_price * quantity.to_i
   end
 end
