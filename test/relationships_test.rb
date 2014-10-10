@@ -4,8 +4,8 @@ require './lib/sales_engine'
 class RelationshipsTest < Minitest::Test
 
   def setup
-    sales_engine             = SalesEngine.new
-    # sales_engine.startup #change to test files
+    sales_engine             = SalesEngine.new#(test data dir)
+    sales_engine.startup #change to test files
     @item_repository         = sales_engine.item_repository
     @merchant_repository     = sales_engine.merchant_repository
     @invoice_item_repository = sales_engine.invoice_item_repository

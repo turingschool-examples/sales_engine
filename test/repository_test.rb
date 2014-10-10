@@ -4,11 +4,7 @@ require './lib/repository'
 
 class RepositoryTest < Minitest::Test
 
-  def repository
-    @repository = []
-  end
-
-  class Merchant
+  class TestClass
     attr_reader :id,
                 :name,
                 :created_at,
@@ -23,7 +19,7 @@ class RepositoryTest < Minitest::Test
     end
   end
 
-  class MerchantRepository < Repository
+  class TestClassRepository < Repository
     attr_reader :repository
 
     def initialize
@@ -37,11 +33,9 @@ class RepositoryTest < Minitest::Test
   end
 
   def test_it_can_load_an_id
-    @merchants_test = CSVParser.new.load_csv("./data/merchants_test.csv")
-    @merchant_repository = MerchantRepository.new
-    @merchant = Merchant
-    @merchant_repository.populate_repository(@merchants_test, @merchant)
-    assert_equal 1, @merchant_repository.repository[0].id
+    repository = TestClassRepository.new
+    repository.populate_repository("./data/customers_test.csv", TestClass)
+    assert_equal 1, repository.repository[0].id
   end
 
 end
