@@ -33,7 +33,7 @@ class Merchant
     end.first
   end
 
-  def revenue(date = nil) #TODO: BROKEN
+  def revenue(date = nil)
     invoices_on_date(date).select(&:successful?).collect(&:total_revenue).reduce(0, :+)
   end
 
