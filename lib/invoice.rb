@@ -33,7 +33,7 @@ class Invoice
 	end
 
 	def pending?
-		transactions.none? { |transaction| transaction.result == "success" }
+		transactions.none?(&:success?)
 	end
 
 	def successful?

@@ -16,4 +16,7 @@ class Transaction
 		@invoice = invoice
 	end
 
+	def success?
+		result == "success"
+	end
 end
