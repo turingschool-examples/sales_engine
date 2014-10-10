@@ -1,4 +1,5 @@
 require_relative 'repository'
+require_relative 'invoice'
 
 class InvoiceRepository
   include Repository
@@ -34,6 +35,16 @@ class InvoiceRepository
     end
   end
 
+  def create(data)
+    data[:merchant_id] = data[:merchant].id
+    data[:customer_id] = data[:customer].id
+    invoice = Invoice.new(data)
+    invoice.give_customer data[:customer]
+    invoice.give_items    data[:items]
+    invoice.give_merchant data[:merchant]
+    entries << invoice
+    invoice
+  end
 
   private
 

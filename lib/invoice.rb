@@ -1,3 +1,5 @@
+require_relative 'transaction'
+
 class Invoice
 	attr_reader :id, :customer_id, :merchant_id, :status, :created_at,
 							:updated_at, :transactions, :invoice_items, :items,
@@ -30,6 +32,10 @@ class Invoice
 
   def give_merchant(merchant)
 		@merchant = merchant
+	end
+
+	def charge(data)
+		transactions << Transaction.new(data)
 	end
 
 	def pending?
