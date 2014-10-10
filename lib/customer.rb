@@ -14,17 +14,12 @@ class Customer
 	end
 
 	def transactions
-		@invoices.map { |invoice| invoice.transactions }.flatten
-	end
-
-	def successful_purchases
-		transactions.select { |transaction| transaction.result == "success" }
+		invoices.collect(&:transactions).flatten
 	end
 
 	def sales_by_merchant
-		successful_purchases.group_by { |transaction| transaction.invoice.merchant }
+		invoices.select(&:successful?).group_by(&:merchant)
 	end
-
 
 	def favorite_merchant
 		sales_by_merchant.max_by { |merchant, transactions| transactions.size }[0]

@@ -16,7 +16,7 @@ class Merchant
   end
 
   def items_sold
-    invoices.select(&:successful?).collect(&:invoice_items).flatten.collect(&:quantity).reduce(0, :+)
+    successful_invoices.collect(&:invoice_items).flatten.collect(&:quantity).reduce(0, :+)
   end
 
   def give_invoices(invoices)
@@ -28,13 +28,17 @@ class Merchant
   end
 
   def favorite_customer
-    invoices.group_by(&:customer).max_by do |pair|
-      pair[1].count(&:successful?)
+    successful_invoices.group_by(&:customer).max_by do |customer, invoices|
+      invoices.count
     end.first
   end
 
   def revenue(date = nil)
-    invoices_on_date(date).select(&:successful?).collect(&:total_revenue).reduce(0, :+)
+    successful_invoices(date).select(&:successful?).collect(&:total_revenue).reduce(0, :+)
+  end
+
+  def successful_invoices(date = nil)
+    invoices_on_date(date).select(&:successful?)
   end
 
   def invoices_on_date(date)
