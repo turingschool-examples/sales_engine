@@ -25,11 +25,11 @@ class ItemRepository
   end
 
   def most_revenue(top_x)
-    @entries.sort_by {  |item| item.revenue }.reverse[0, top_x]
+    @entries.sort_by { |item| item.revenue }.reverse[0, top_x]
   end
 
   def most_items(top_x)
-    @entries.sort_by {  |item| item.times_sold }.reverse[0, top_x]
+    @entries.sort_by { |item| item.times_sold }[0, top_x]
   end
 
   private

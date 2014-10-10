@@ -19,4 +19,8 @@ class InvoiceItem
   def give_invoice(invoice)
     @invoice = invoice
   end
+
+  def successful?
+    invoice.successful?
+  end
 end

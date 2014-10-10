@@ -32,7 +32,16 @@ class Invoice
 		@merchant = merchant
 	end
 
+	def pending?
+		transactions.none? { |transaction| transaction.result == "success" }
+	end
+
+	def successful?
+		!pending?
+	end
+
 	def inspect
+		"<#{self.class} ID: #{id}>"
 	end
 
 end

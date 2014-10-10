@@ -20,23 +20,27 @@ class Item
   end
 
   def give_merchant(merchant)
-    @merchant      = merchant
+    @merchant = merchant
   end
 
   def revenue
-    invoice_items.reduce(0) do |sum, item|
-      sum + (BigDecimal.new(item.unit_price) * BigDecimal.new(item.quantity))
+    invoice_items.reduce(0) do |sum, invoice_item|
+      sum + (BigDecimal.new(invoice_item.unit_price) * invoice_item.quantity.to_i)
     end
   end
 
   def times_sold
-    invoice_items.reduce(0) do |sum, item|
-      sum + item.quantity.to_i
+    invoice_items.reduce(0) do |sum, invoice_item|
+      invoice_item.invoice.successful? ? sum + invoice_item.quantity.to_i : sum
     end
   end
 
   def best_day
-    best_invoice = invoice_items.max_by { |item| item.quantity.to_i }
-    Date.parse(best_invoice.created_at)
+    successful_invoice_items.group_by{ |invoice_item| Date.parse(invoice_item.created_at) }
+    .max_by { |pair| pair[1].collect(&:quantity).collect(&:to_i).reduce(:+) }[0]
+  end
+
+  def successful_invoice_items
+    invoice_items.select(&:successful?)
   end
 end
