@@ -24,20 +24,16 @@ class Item
   end
 
   def revenue
-    invoice_items.reduce(0) do |sum, invoice_item|
-      sum + (BigDecimal.new(invoice_item.unit_price) * invoice_item.quantity.to_i)
-    end
+    invoice_items.collect(&:revenue).reduce(0, :+)
   end
 
   def times_sold
-    invoice_items.reduce(0) do |sum, invoice_item|
-      invoice_item.invoice.successful? ? sum + invoice_item.quantity.to_i : sum
-    end
+    successful_invoice_items.collect(&:quantity).reduce(0, :+)
   end
 
-  def best_day
+  def best_day # NOT WORKING
     successful_invoice_items.group_by{ |invoice_item| Date.parse(invoice_item.created_at) }
-    .max_by { |pair| pair[1].collect(&:quantity).collect(&:to_i).reduce(:+) }[0]
+    .max_by { |pair| pair[1].collect(&:quantity).collect(&:to_i).reduce(0, :+) }[0]
   end
 
   def successful_invoice_items

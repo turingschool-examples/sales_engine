@@ -21,21 +21,15 @@ class MerchantRepository
   end
 
   def most_items(top_x)
-    most_by(top_x) { |merchant| merchant.items_sold }
+    most_by(top_x, &:items_sold)
   end
 
-  def most_revenue(top_x) # TODO: broken
-    most_by(top_x) { |merchant| merchant.revenue }
+  def most_revenue(top_x)
+    most_by(top_x, &:revenue)
   end
 
-  def most_by(top_x, &block)
-    entries.sort_by{ |merchant| block.call(merchant) }.reverse[0, top_x]
-  end
-
-  def revenue(date) # TODO: BROKEN (probably the base merchant class though)
-    entries.reduce(0) do |sum, merchant|
-      sum + merchant.revenue(date)
-    end
+  def revenue(date)
+    entries.reduce(0) { |sum, merchant| sum + merchant.revenue(date) }
   end
 
   private

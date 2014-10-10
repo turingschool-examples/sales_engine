@@ -34,4 +34,8 @@ module Repository
   def find_all_by(key, value)
     entries.select { |entry| entry.send(key.to_sym) == value }
   end
+
+  def most_by(top_x, &block)
+    entries.sort_by{ |entry| block.call(entry) }.reverse[0, top_x]
+  end
 end
