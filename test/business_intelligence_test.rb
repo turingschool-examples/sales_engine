@@ -21,6 +21,7 @@ class BusinessIntelligenceTest < Minitest::Test
   end
 
   def test_gets_merchant_revenue
+    skip
     merchant = Merchant.new({})
     invoices = [Invoice.new({}), Invoice.new({})]
     invoices[0].give_invoice_items [InvoiceItem.new({unit_price: "1", quantity: "4"}), InvoiceItem.new({unit_price: "2", quantity: "3"}), InvoiceItem.new({unit_price: "2", quantity: "2"})]
@@ -35,6 +36,7 @@ class BusinessIntelligenceTest < Minitest::Test
   end
 
   def test_gets_merchant_revenue_on_date
+    skip
     merchant = Merchant.new({})
     invoices = [Invoice.new({}), Invoice.new({})]
     invoices[0].give_invoice_items [InvoiceItem.new({unit_price: "1", quantity: "4"}), InvoiceItem.new({unit_price: "2", quantity: "3"}), InvoiceItem.new({unit_price: "2", quantity: "2"})]
@@ -95,6 +97,7 @@ class BusinessIntelligenceTest < Minitest::Test
   end
 
   def test_item_repository_returns_x_number_of_highest_revenue_items
+    skip
     items_repo = ItemRepository.new([Item.new({}), Item.new({}), Item.new({}), Item.new({})])
     items_repo.items[0].give_invoice_items([InvoiceItem.new({unit_price: "1", quantity: "2"}), InvoiceItem.new({unit_price: "3", quantity: "1"}), InvoiceItem.new({unit_price: "4", quantity: "6"})])
     items_repo.items[1].give_invoice_items([InvoiceItem.new({unit_price: "5", quantity: "10"}), InvoiceItem.new({unit_price: "9", quantity: "9"}), InvoiceItem.new({unit_price: "4", quantity: "11"})])

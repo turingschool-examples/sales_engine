@@ -34,17 +34,13 @@ class Merchant
   end
 
   def revenue(date = nil) #TODO: BROKEN
-    invoices.reduce(0) do |sum, invoice|
-      index = -1
-      sum + invoice.invoice_items.reduce(0) do |sum_two, invoice_item|
-        index += 1
-        transaction = invoice.transactions[index]
-        unless transaction.result == "failed" || (date && date != transaction.created_at)
-          sum_two + (invoice_item.unit_price * invoice_item.quantity.to_i)
-        else
-          sum_two
-        end
-      end
+    invoices_on_date(date).select(&:successful?).collect(&:total_revenue).reduce(0, :+)
+  end
+
+  def invoices_on_date(date)
+    return invoices unless date
+    invoices.select do |invoice|
+      date == Date.parse(invoice.created_at)
     end
   end
 

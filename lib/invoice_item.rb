@@ -23,4 +23,8 @@ class InvoiceItem
   def successful?
     invoice.successful?
   end
+
+  def revenue
+    unit_price * quantity.to_i
+  end
 end

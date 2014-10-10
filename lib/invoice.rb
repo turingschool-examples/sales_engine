@@ -40,6 +40,10 @@ class Invoice
 		!pending?
 	end
 
+	def total_revenue
+		invoice_items.collect(&:revenue).reduce(:+)
+	end
+
 	def inspect
 		"<#{self.class} ID: #{id}>"
 	end
