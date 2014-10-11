@@ -43,9 +43,7 @@ class Merchant
 
   def invoices_on_date(date)
     return invoices unless date
-    invoices.select do |invoice|
-      date == Date.parse(invoice.created_at)
-    end
+    invoices.select { |invoice| date == Date.parse(invoice.created_at) }
   end
 
 end
