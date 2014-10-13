@@ -1,8 +1,13 @@
 # Sales Engine
 
-(insert project completion goals for first check-in here)
+Thursday
+full skeleton complete
+listing & searching collections complete
+testing for listing & searching & relationships
 
-(insert project completion goals for second check-in here)
+Tuesday
+all tests
+majority of functionality and plan for the remaining days
 
 # Check-in Rubrics
 
