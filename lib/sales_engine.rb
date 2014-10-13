@@ -10,38 +10,50 @@ class SalesEngine
   attr_reader :merchant_repository, :invoice_repository, :item_repository,
     :invoice_item_repository, :customer_repository, :transaction_repository
 
-  def initialize(file_dir = "test")
-    @file_dir = file_dir
+  def initialize(file_dir = "test", reader = CSVReader.new)
+    @merchant_data             = reader.read("merchants.csv", file_dir)
+    @invoice_data              = reader.read("invoices.csv", file_dir)
+    @item_data                 = reader.read("items.csv", file_dir)
+    @invoice_item_data         = reader.read("invoice_items.csv", file_dir)
+    @customer_data             = reader.read("customers.csv", file_dir)
+    @transaction_data          = reader.read("transactions.csv", file_dir)
   end
 
-  def startup(reader = CSVReader.new)
-    @merchant_repository     = MerchantRepository.new(reader.read("merchants.csv", @file_dir))
-    @invoice_repository      = InvoiceRepository.new(reader.read("invoices.csv", @file_dir))
-    @item_repository         = ItemRepository.new(reader.read("items.csv", @file_dir))
-    @invoice_item_repository = InvoiceItemRepository.new(reader.read("invoice_items.csv", @file_dir))
-    @customer_repository     = CustomerRepository.new(reader.read("customers.csv", @file_dir))
-    @transaction_repository  = TransactionRepository.new(reader.read("transactions.csv", @file_dir))
-
+  def startup
+    initialize_repos
+    initialize_dependencies
     make_relationships
   end
 
+  def initialize_repos
+    @merchant_repository     = MerchantRepository.new(@merchant_data)
+    @invoice_repository      = InvoiceRepository.new(@invoice_data)
+    @item_repository         = ItemRepository.new(@item_data)
+    @invoice_item_repository = InvoiceItemRepository.new(@invoice_item_data)
+    @customer_repository     = CustomerRepository.new(@customer_data)
+    @transaction_repository  = TransactionRepository.new(@transaction_data)
+  end
+
+  def initialize_dependencies
+    @merchant_dependencies     = [item_repository, invoice_repository]
+    @invoice_item_dependencies = [invoice_repository, item_repository]
+    @item_dependencies         = [invoice_item_repository, merchant_repository]
+    @transaction_dependency    = [invoice_repository]
+    @customer_dependency       = [invoice_repository]
+    @invoice_dependencies      = [
+                                  transaction_repository,
+                                  invoice_item_repository,
+                                  customer_repository,
+                                  merchant_repository
+                                ]
+  end
+
   def make_relationships
-    merchant_repository.give_items_from(item_repository)
-    merchant_repository.give_invoices_from(invoice_repository)
-
-    invoice_item_repository.give_invoices_from(invoice_repository)
-    invoice_item_repository.give_items_from(item_repository)
-
-    invoice_repository.give_transactions_from(transaction_repository)
-    invoice_repository.give_invoice_items_from(invoice_item_repository)
-    invoice_repository.give_customers_from(customer_repository)
-    invoice_repository.give_merchants_from(merchant_repository)
-
-    item_repository.give_invoice_items_from(invoice_item_repository)
-    item_repository.give_merchants_from(merchant_repository)
-
-    transaction_repository.give_invoices_from(invoice_repository)
-
-    customer_repository.give_invoices_from(invoice_repository)
+    merchant_repository.set_relations(@merchant_dependencies)
+    invoice_item_repository.set_relations(@invoice_item_dependencies)
+    invoice_repository.set_relations(@invoice_dependencies)
+    item_repository.set_relations(@item_dependencies)
+    transaction_repository.set_relations(@transaction_dependency)
+    customer_repository.set_relations(@customer_dependency)
   end
 end

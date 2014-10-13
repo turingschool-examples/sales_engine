@@ -8,10 +8,14 @@ class CustomerRepository
     create_methods
   end
 
-  def give_invoices_from(invoice_repository)
-  	entries.each do |customer|
-  		customer.give_invoices(invoice_repository.find_all_by_customer_id(customer.id))
-  	end
+  def set_relations(repo)
+    set_invoices(repo.first)
+  end
+
+  def set_invoices(inv_repo)
+    entries.each do |customer|
+      customer.assign_invoices(inv_repo.find_all_by_customer_id(customer.id))
+    end
   end
 
   private

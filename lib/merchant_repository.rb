@@ -8,15 +8,20 @@ class MerchantRepository
     create_methods
   end
 
-  def give_items_from(item_repository)
+  def set_relations(repositories)
+    set_items(repositories[0])
+    set_invoices(repositories[1])
+  end
+
+  def set_items(item_repo)
     entries.each do |merchant|
-      merchant.give_items(item_repository.find_all_by_merchant_id(merchant.id))
+      merchant.assign_items(item_repo.find_all_by_merchant_id(merchant.id))
     end
   end
 
-  def give_invoices_from(invoice_repository)
+  def set_invoices(inv_repo)
     entries.each do |merchant|
-      merchant.give_invoices(invoice_repository.find_all_by_merchant_id(merchant.id))
+      merchant.assign_invoices(inv_repo.find_all_by_merchant_id(merchant.id))
     end
   end
 

@@ -11,15 +11,15 @@ class Merchant
     @updated_at         = data[:updated_at]
   end
 
-  def give_items(items)
+  def assign_items(items)
     @items = items
   end
 
   def items_sold
-    successful_invoices.collect(&:invoice_items).flatten.collect(&:quantity).reduce(0, :+)
+    successful_invoices.flat_map(&:invoice_items).map(&:quantity).reduce(0, :+)
   end
 
-  def give_invoices(invoices)
+  def assign_invoices(invoices)
     @invoices = invoices
   end
 
@@ -34,7 +34,7 @@ class Merchant
   end
 
   def revenue(date = nil)
-    successful_invoices(date).select(&:successful?).collect(&:total_revenue).reduce(0, :+)
+    successful_invoices(date).collect(&:total_revenue).reduce(0, :+)
   end
 
   def successful_invoices(date = nil)

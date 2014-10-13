@@ -15,11 +15,11 @@ class Item
     @updated_at         = data[:updated_at]
   end
 
-  def give_invoice_items(invoice_items)
+  def assign_invoice_items(invoice_items)
     @invoice_items = invoice_items
   end
 
-  def give_merchant(merchant)
+  def assign_merchant(merchant)
     @merchant = merchant
   end
 
@@ -32,11 +32,15 @@ class Item
   end
 
   def best_day
-    grouped_invoice_items.max_by { |date, invoice_items| invoice_items.collect(&:quantity).reduce(0, :+) }[0]
+    grouped_invoice_items.max_by do |date, invoice_items|
+      invoice_items.collect(&:quantity).reduce(0, :+)
+    end.first
   end
 
   def grouped_invoice_items
-    successful_invoice_items.group_by { |invoice_item| Date.parse(invoice_item.invoice.created_at) }
+    successful_invoice_items.group_by do |invoice_item|
+      Date.parse(invoice_item.invoice.created_at)
+    end
   end
 
   def successful_invoice_items

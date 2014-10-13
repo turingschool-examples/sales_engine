@@ -8,15 +8,20 @@ class TransactionRepository
     create_methods
   end
 
-  def give_invoices_from(invoice_repository)
-  	entries.each do |transaction|
-  		transaction.give_invoice(invoice_repository.find_by_id(transaction.invoice_id))
-  	end
+  def set_relations(repo)
+    set_invoices(repo.first)
+  end
+
+  def set_invoices(invoice_repo)
+    entries.each do |transaction|
+    transaction.assign_invoice(invoice_repo.find_by_id(transaction.invoice_id))
+    end
   end
 
   private
 
   def attributes
-    %w(id invoice_id credit_card_number credit_card_expiration_date result created_at updated_at)
+    %w(id invoice_id credit_card_number credit_card_expiration_date result
+       created_at updated_at)
   end
 end

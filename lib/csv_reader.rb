@@ -14,14 +14,16 @@ class CSVReader
     type = find_which_object(file_name)
     entries = []
     file_name = File.join dir, file_name
-    CSV.foreach(file_name, headers: true ,header_converters: :symbol, converters: :all) do |row|
+    options =  { headers: true ,header_converters: :symbol, converters: :all }
+    CSV.foreach(file_name, options) do |row|
       entries << type.new(row.to_hash)
     end
     entries
   end
 
   def find_which_object(file_name)
-    [Merchant, InvoiceItem, Item, Customer, Invoice, Transaction].find do |class_name|
+    objects = [Merchant, InvoiceItem, Item, Customer, Invoice, Transaction]
+    objects.find do |class_name|
       file_name.gsub("_", "") =~ Regexp.new(class_name.to_s, "i")
     end
   end

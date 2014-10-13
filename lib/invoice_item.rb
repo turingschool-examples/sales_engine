@@ -12,11 +12,11 @@ class InvoiceItem
     @updated_at         = data[:updated_at]
   end
 
-  def give_item(item)
+  def assign_item(item)
     @item = item
   end
 
-  def give_invoice(invoice)
+  def assign_invoice(invoice)
     @invoice = invoice
   end
 
