@@ -10,8 +10,8 @@ require_relative '../lib/transaction'
 class RelationshipsTest < Minitest::Test
   def setup
     @reader = TestReader.new
-    @engine = SalesEngine.new
-    @engine.startup(@reader)
+    @engine = SalesEngine.new("data", @reader)
+    @engine.startup
   end
 
   def test_merchants_have_correct_relations
