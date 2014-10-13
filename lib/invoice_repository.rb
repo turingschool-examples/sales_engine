@@ -42,8 +42,7 @@ class InvoiceRepository
     invoice.give_customer data[:customer]
     invoice.give_items    data[:items]
     invoice.give_merchant data[:merchant]
-    entries << invoice
-    invoice
+    entries[entries.size] = invoice
   end
 
   private
