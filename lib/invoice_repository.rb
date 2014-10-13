@@ -9,39 +9,46 @@ class InvoiceRepository
     create_methods
   end
 
-  def give_transactions_from(transaction_repository)
+  def set_relations(repositories)
+    set_transactions(repositories[0])
+    set_invoice_items(repositories[1])
+    set_customers(repositories[2])
+    set_merchants(repositories[3])
+  end
+
+  def set_transactions(trans_repo)
     entries.each do |invoice|
-      invoice.give_transactions(transaction_repository.find_all_by_invoice_id(invoice.id))
+      invoice.assign_transactions(trans_repo.find_all_by_invoice_id(invoice.id))
     end
   end
 
-  def give_invoice_items_from(invoice_item_repository)
+  def set_invoice_items(invoice_item_repo)
     entries.each do |invoice|
-      invoice_items = invoice_item_repository.find_all_by_invoice_id(invoice.id)
-      invoice.give_invoice_items(invoice_items)
-      invoice.give_items(invoice_items.collect(&:item))
+      invoice_items = invoice_item_repo.find_all_by_invoice_id(invoice.id)
+      invoice.assign_invoice_items(invoice_items)
+      invoice.assign_items(invoice_items.collect(&:item))
     end
   end
 
-  def give_customers_from(customer_repository)
+  def set_customers(customer_repo)
     entries.each do |invoice|
-      invoice.give_customer(customer_repository.find_by_id(invoice.customer_id))
+      invoice.assign_customer(customer_repo.find_by_id(invoice.customer_id))
     end
   end
 
-  def give_merchants_from(merchant_repository)
+  def set_merchants(merchant_repo)
     entries.each do |invoice|
-      invoice.give_merchant(merchant_repository.find_by_id(invoice.merchant_id))
+      invoice.assign_merchant(merchant_repo.find_by_id(invoice.merchant_id))
     end
   end
 
   def create(data)
-    data[:merchant_id] = data[:merchant].id
-    data[:customer_id] = data[:customer].id
-    invoice = Invoice.new(data)
-    invoice.give_customer data[:customer]
-    invoice.give_items    data[:items]
-    invoice.give_merchant data[:merchant]
+    data[:merchant_id]    =  data[:merchant].id
+    data[:customer_id]    =  data[:customer].id
+    invoice               =  Invoice.new(data)
+    invoice.assign_customer  data[:customer]
+    invoice.assign_items     data[:items]
+    invoice.assign_merchant  data[:merchant]
     entries[entries.size] = invoice
   end
 

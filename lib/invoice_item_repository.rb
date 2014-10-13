@@ -8,15 +8,20 @@ class InvoiceItemRepository
     create_methods
   end
 
-  def give_invoices_from(invoice_repo)
+  def set_relations(repositories)
+    set_invoices(repositories[0])
+    set_items(repositories[1])
+  end
+
+  def set_invoices(inv_repo)
     @entries.each do |invoice_item|
-      invoice_item.give_invoice(invoice_repo.find_by_id(invoice_item.invoice_id))
+    invoice_item.assign_invoice(inv_repo.find_by_id(invoice_item.invoice_id))
     end
   end
 
-  def give_items_from(item_repo)
+  def set_items(item_repo)
     @entries.each do |invoice_item|
-      invoice_item.give_item(item_repo.find_by_id(invoice_item.item_id))
+      invoice_item.assign_item(item_repo.find_by_id(invoice_item.item_id))
     end
   end
 
