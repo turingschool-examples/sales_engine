@@ -32,8 +32,11 @@ class Item
   end
 
   def best_day
+    grouped_invoice_items.max_by { |date, invoice_items| invoice_items.collect(&:quantity).reduce(0, :+) }[0]
+  end
+
+  def grouped_invoice_items
     successful_invoice_items.group_by { |invoice_item| Date.parse(invoice_item.invoice.created_at) }
-    .max_by { |date, invoice_items| invoice_items.collect(&:quantity).reduce(0, :+) }[0]
   end
 
   def successful_invoice_items

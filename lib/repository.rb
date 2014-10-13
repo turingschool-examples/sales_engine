@@ -2,11 +2,11 @@ module Repository
 
   def create_methods
     attributes.each do |attribute|
-      self.class.send :define_method, "find_by_#{attribute}" do |value|
+      define_singleton_method "find_by_#{attribute}" do |value|
         find_by(attribute, value)
       end
 
-      self.class.send :define_method, "find_all_by_#{attribute}" do |value|
+      define_singleton_method "find_all_by_#{attribute}" do |value|
         find_all_by(attribute, value)
       end
     end

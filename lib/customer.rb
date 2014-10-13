@@ -14,7 +14,7 @@ class Customer
 	end
 
 	def transactions
-		invoices.collect(&:transactions).flatten
+		invoices.flat_map(&:transactions)
 	end
 
 	def sales_by_merchant
