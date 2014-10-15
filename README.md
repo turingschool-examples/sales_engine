@@ -1,8 +1,12 @@
 # Sales Engine
 
-(insert project completion goals for first check-in here)
+By Thursday:
+- All 6 repository-item couples completed
+- relationships
+- CSV reading
 
-(insert project completion goals for second check-in here)
+By Tuesday:
+- Completely working API, ready to be refactored
 
 # Check-in Rubrics
 
