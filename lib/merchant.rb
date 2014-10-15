@@ -28,9 +28,8 @@ class Merchant
   end
 
   def favorite_customer
-    successful_invoices.group_by(&:customer).max_by do |customer, invoices|
-      invoices.count
-    end.first
+    customers = successful_invoices.collect(&:customer)
+    customers.uniq.max_by { |customer| customers.count(customer)}
   end
 
   def revenue(date = nil)
