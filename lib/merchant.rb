@@ -29,7 +29,7 @@ class Merchant
 
   def favorite_customer
     customers = successful_invoices.collect(&:customer)
-    customers.uniq.max_by { |customer| customers.count(customer)}
+    customers.uniq.max_by { |customer| customers.count(customer) }
   end
 
   def revenue(date = nil)
