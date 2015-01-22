@@ -33,36 +33,4 @@ RSpec.describe "SalesEngine customers" do
     end
 
   end
-
-  context "Relationships" do
-    let(:customer) { engine.customer_repository.find_by_id 999 }
-
-    describe "#invoices" do
-      it "returns all of a customer's invoices" do
-        expect(customer.invoices.size).to eq 7
-      end
-
-      it "returns invoices belonging to the customer" do
-        customer.invoices.each do |invoice|
-          expect(invoice.customer_id).to eq 999
-        end
-      end
-    end
-  end
-
-  context "Business Intelligence" do
-    let(:customer) { engine.customer_repository.find_by_id 2 }
-
-    describe "#transactions" do
-      it "returns a list of transactions the customer has had" do
-        expect(customer.transactions.size).to eq 1
-      end
-    end
-
-    describe "#favorite_merchant" do
-      it "returns the merchant where the customer has had the most transactions" do
-        expect(customer.favorite_merchant.name).to eq "Shields, Hirthe and Smith"
-      end
-    end
-  end
 end
