@@ -9,6 +9,9 @@ class ItemRepositoryTest < Minitest::Test
     @i.make_items_array
   end
 
+  def test_that_random_returns_random_item_object
+    assert_equal true, i.random.is_a?(Item)
+  end
   def test_can_find_by_id
     assert_equal "1", i.find_by_id("1").id
   end

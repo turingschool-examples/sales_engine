@@ -9,6 +9,10 @@ class MerchantRepositoryTest < Minitest::Test
     @m.make_merchants_array
   end
 
+  def test_that_random_returns_random_merchant_object
+    assert_equal true, m.random.is_a?(Merchant)
+  end
+
   def test_can_find_by_id
     assert_equal "Schroeder-Jerde", m.find_by_id("1").name
   end
