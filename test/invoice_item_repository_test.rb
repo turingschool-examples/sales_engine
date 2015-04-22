@@ -2,8 +2,9 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice_item_repository'
 
-class ItemRepositoryTest < Minitest::Test
+class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :i
+
   def setup
     @i = InvoiceItemRepository.new
     @i.make_invoice_items_array

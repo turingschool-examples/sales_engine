@@ -4,6 +4,7 @@ require './lib/item_repository'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :i
+
   def setup
     @i = ItemRepository.new
     @i.make_items_array
