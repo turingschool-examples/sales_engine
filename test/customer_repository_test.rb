@@ -4,6 +4,7 @@ require './lib/customer_repository'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :c
+
   def setup
     @c = CustomerRepository.new
     @c.make_customers_array
@@ -25,6 +26,7 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 5, c.find_all_by_last_name("Schamberger").length
   end
 
-
-
+  def test_that_random_returns_random_customer_object
+    assert_equal true, c.random.is_a?(Customer)
+  end
 end
