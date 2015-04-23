@@ -8,6 +8,8 @@ class InvoiceTest < Minitest::Test
   def setup
     @i = Invoice.new
     i.id = "1"
+    i.customer_id = "1"
+    i.merchant_id = "1"
   end
 
   def test_invoice_object_exists_after_initialization
@@ -25,6 +27,14 @@ class InvoiceTest < Minitest::Test
 
   def test_items_method_returns_all_items_with_invoice_id
     assert_equal 8, i.items.length
-    assert_equal true, i.items.first[0].is_a?(Item)
+    assert_equal true, i.items.first.is_a?(Item)
+  end
+
+  def test_customer_method_returns_a_single_customer_with_id
+    assert_equal "Joey", i.customer.first_name
+  end
+
+  def test_merchant_method_returns_a_single_merchant_with_id
+    assert_equal "Schroeder-Jerde", i.merchant.name
   end
 end

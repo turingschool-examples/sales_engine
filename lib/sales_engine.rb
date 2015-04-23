@@ -16,6 +16,7 @@ class SalesEngine
     invoice_repo
     transaction_repo
     invoice_item_repo
+    customer_repo
   end
 
   def merchant_repo
@@ -36,6 +37,10 @@ class SalesEngine
 
   def invoice_item_repo
     InvoiceItemRepository.new
+  end
+
+  def customer_repo
+    CustomerRepository.new
   end
 end
 
