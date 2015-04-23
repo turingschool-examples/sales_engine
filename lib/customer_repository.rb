@@ -9,7 +9,7 @@ class CustomerRepository
   end
 
   def contents
-    CSV.open "./data/customers.csv", headers: true, header_converters: :symbol
+    CSV.open "./fixtures/customers.csv", headers: true, header_converters: :symbol
   end
 
   def create_customers

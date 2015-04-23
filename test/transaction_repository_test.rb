@@ -26,7 +26,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_invoice_id
-    assert_equal 1, t.find_all_by_invoice_id("1").length
+    assert_equal 3, t.find_all_by_invoice_id("12").length
   end
 
   def test_find_by_cc_number

@@ -9,7 +9,7 @@ class TransactionRepository
   end
 
   def contents
-    CSV.open "./data/transactions.csv", headers: true, header_converters: :symbol
+    CSV.open "./fixtures/transactions.csv", headers: true, header_converters: :symbol
   end
 
   def create_transactions

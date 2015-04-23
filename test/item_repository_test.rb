@@ -42,7 +42,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_unit_price
-    assert_equal 2, i.find_all_by_unit_price("75107").length
+    assert_equal 1, i.find_all_by_unit_price("75107").length
   end
 
   def test_find_by_merchant_id
@@ -50,7 +50,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_merchant_id
-    assert_equal 38, i.find_all_by_merchant_id("2").length
+    assert_equal 2, i.find_all_by_merchant_id("2").length
   end
 
   def test_find_by_created_at
@@ -58,7 +58,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_created_at
-    assert_equal 170, i.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 13, i.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
   end
 
   def test_find_by_updated_at
@@ -66,7 +66,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_updated_at
-    assert_equal 170, i.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 13, i.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
   end
 
 end
