@@ -24,4 +24,8 @@ class SalesEngineTest < Minitest::Test
   def test_that_transaction_repo_returns_transaction_object
     assert_equal true, engine.transaction_repo.is_a?(TransactionRepository)
   end
+
+  def test_that_invoice_item_repo_returns_invoice_item_object
+    assert_equal true, engine.invoice_item_repo.is_a?(InvoiceItemRepository)
+  end
 end

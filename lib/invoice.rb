@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'sales_engine'
 
 class Invoice
@@ -15,5 +16,17 @@ class Invoice
   def transactions
     engine = SalesEngine.new
     engine.transaction_repo.find_all_by_invoice_id(id)
+  end
+
+  def invoice_items
+    engine = SalesEngine.new
+    engine.invoice_item_repo.find_all_by_invoice_id(id)
+  end
+
+  def items
+    engine = SalesEngine.new
+    invoice_items.map do |element|
+      engine.item_repo.find_all_by_id(element.item_id)
+    end
   end
 end

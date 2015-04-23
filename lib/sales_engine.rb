@@ -15,6 +15,7 @@ class SalesEngine
     item_repo
     invoice_repo
     transaction_repo
+    invoice_item_repo
   end
 
   def merchant_repo
@@ -32,8 +33,10 @@ class SalesEngine
   def transaction_repo
     TransactionRepository.new
   end
+
+  def invoice_item_repo
+    InvoiceItemRepository.new
+  end
 end
 
 
-#want to know all items associated with that merchant
-#compare item(object).merchant_id to merchant(object).id

@@ -6,7 +6,6 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :m
   def setup
     @m = MerchantRepository.new
-    @m.make_merchants_array
   end
 
   def test_that_random_returns_random_merchant_object

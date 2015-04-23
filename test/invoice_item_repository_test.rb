@@ -7,7 +7,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def setup
     @i = InvoiceItemRepository.new
-    @i.make_invoice_items_array
   end
 
   def test_that_random_returns_random_invoice_item_object
@@ -69,5 +68,4 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_find_all_by_updated_at
     assert_equal 15, i.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
   end
-
 end

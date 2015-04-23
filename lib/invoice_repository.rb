@@ -1,5 +1,5 @@
-require "csv"
-require_relative "invoice"
+require 'csv'
+require_relative 'invoice'
 
 class InvoiceRepository
   attr_accessor :invoices
