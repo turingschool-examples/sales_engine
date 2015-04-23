@@ -1,22 +1,27 @@
 require 'csv'
-require_relative "item"
-require 'pry'
+require_relative 'item'
 
 class ItemRepository
   attr_accessor :items
 
-  def make_items_array
-    contents = CSV.open "./data/items.csv", headers: true, header_converters: :symbol
+  def initialize
+    @items = make_items
+  end
 
-    @items = contents.map do |row|
-      item = Item.new
-      item.id = row[:id]
-      item.name = row[:name]
-      item.description = row[:description]
-      item.unit_price = row[:unit_price]
-      item.merchant_id = row[:merchant_id]
-      item.created_at = row[:created_at]
-      item.updated_at = row[:updated_at]
+  def contents
+    CSV.open "./data/items.csv", headers: true, header_converters: :symbol
+  end
+
+  def make_items
+    contents.map do |row|
+      item              = Item.new
+      item.id           = row[:id]
+      item.name         = row[:name]
+      item.description  = row[:description]
+      item.unit_price   = row[:unit_price]
+      item.merchant_id  = row[:merchant_id]
+      item.created_at   = row[:created_at]
+      item.updated_at   = row[:updated_at]
       item
     end
   end

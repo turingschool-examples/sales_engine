@@ -7,7 +7,6 @@ class ItemRepositoryTest < Minitest::Test
 
   def setup
     @i = ItemRepository.new
-    @i.make_items_array
   end
 
   def test_that_random_returns_random_item_object

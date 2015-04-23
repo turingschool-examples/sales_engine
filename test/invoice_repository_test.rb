@@ -7,7 +7,6 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def setup
     @i = InvoiceRepository.new
-    @i.make_invoices_array
   end
 
   def test_that_random_returns_random_invoice_repository_object

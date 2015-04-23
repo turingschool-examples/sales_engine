@@ -1,15 +1,20 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "./lib/invoice"
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/invoice'
 
 class InvoiceTest < Minitest::Test
-  def test_invoice_object_exists_after_initialization
-    invoice = Invoice.new
-    assert invoice
+  attr_reader :i
+
+  def setup
+    @i = Invoice.new
+    i.id = "34"
   end
 
-  def test_creates_invoice_object_with_empty_instance_variable
-    invoice = Invoice.new
-    assert_equal nil, invoice.id
+  def test_invoice_object_exists_after_initialization
+    assert i
+  end
+
+  def test_that_transactions_returns_all_transactions_with_invoice_id
+    assert_equal 3, i.transactions.length
   end
 end

@@ -1,22 +1,27 @@
 require 'csv'
-require_relative "transaction"
-require 'pry'
+require_relative 'transaction'
 
 class TransactionRepository
   attr_accessor :transactions
 
-  def make_transactions_array
-    contents = CSV.open "./data/transactions.csv", headers: true, header_converters: :symbol
+  def initialize
+    @transactions = create_transactions
+  end
 
-    @transactions = contents.map do |row|
-      transaction = Transaction.new
-      transaction.id = row[:id]
-      transaction.invoice_id = row[:invoice_id]
-      transaction.credit_card_number = row[:credit_card_number]
-      transaction.credit_card_expiration_date = row[:credit_card_expiration_date]
-      transaction.result = row[:result]
-      transaction.created_at = row[:created_at]
-      transaction.updated_at = row[:updated_at]
+  def contents
+    CSV.open "./data/transactions.csv", headers: true, header_converters: :symbol
+  end
+
+  def create_transactions
+    contents.map do |row|
+      transaction                    = Transaction.new
+      transaction.id                 = row[:id]
+      transaction.invoice_id         = row[:invoice_id]
+      transaction.cc_number          = row[:credit_card_number]
+      transaction.cc_expiration_date = row[:credit_card_expiration_date]
+      transaction.result             = row[:result]
+      transaction.created_at         = row[:created_at]
+      transaction.updated_at         = row[:updated_at]
       transaction
     end
   end
@@ -41,20 +46,20 @@ class TransactionRepository
     transactions.select { |transaction| transaction.invoice_id == invoice_id}
   end
 
-  def find_by_credit_card_number(credit_card_number)
-    transactions.detect { |transaction| transaction.credit_card_number == credit_card_number}
+  def find_by_cc_number(cc_number)
+    transactions.detect { |transaction| transaction.cc_number == cc_number}
   end
 
-  def find_all_by_credit_card_number(credit_card_number)
-    transactions.select { |transaction| transaction.credit_card_number == credit_card_number}
+  def find_all_by_cc_number(cc_number)
+    transactions.select { |transaction| transaction.cc_number == cc_number}
   end
 
-  def find_by_credit_card_expiration_date(credit_card_expiration_date)
-    transactions.detect { |transaction| transaction.credit_card_expiration_date == credit_card_expiration_date}
+  def find_by_cc_expiration_date(cc_expiration_date)
+    transactions.detect { |transaction| transaction.cc_expiration_date == cc_expiration_date}
   end
 
-  def find_all_by_credit_card_expiration_date(credit_card_expiration_date)
-    transactions.select { |transaction| transaction.credit_card_expiration_date == credit_card_expiration_date}
+  def find_all_by_cc_expiration_date(cc_expiration_date)
+    transactions.select { |transaction| transaction.cc_expiration_date == cc_expiration_date}
   end
 
   def find_by_result(result)

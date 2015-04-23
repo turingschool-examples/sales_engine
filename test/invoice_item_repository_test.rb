@@ -20,7 +20,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_find_all_by_id
     assert_equal 1, i.find_all_by_id("1").length
-  end
+    end
 
   def test_find_by_item_id
     assert_equal "1", i.find_by_item_id("539").id

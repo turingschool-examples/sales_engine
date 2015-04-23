@@ -7,7 +7,6 @@ class CustomerRepositoryTest < Minitest::Test
 
   def setup
     @c = CustomerRepository.new
-    @c.make_customers_array
   end
 
   def test_can_find_by_first_name

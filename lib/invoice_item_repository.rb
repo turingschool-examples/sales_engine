@@ -6,7 +6,7 @@ class InvoiceItemRepository
   attr_accessor :invoice_items
 
   def make_invoice_items_array
-    contents = CSV.open "./data/invoice_items.csv", headers: true, header_converters: :symbol
+    contents ||= CSV.open "./data/invoice_items.csv", headers: true, header_converters: :symbol
 
     @invoice_items = contents.map do |row|
       item = InvoiceItem.new

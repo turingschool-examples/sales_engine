@@ -1,12 +1,12 @@
 require 'csv'
 require_relative "merchant"
-require 'pry'
+require_relative "sales_engine"
 
 class MerchantRepository
   attr_accessor :merchants
 
   def make_merchants_array
-    contents = CSV.open "./data/merchants.csv", headers: true, header_converters: :symbol
+    contents ||= CSV.open "./data/merchants.csv", headers: true, header_converters: :symbol
 
     @merchants = contents.map do |row|
       merchant = Merchant.new
