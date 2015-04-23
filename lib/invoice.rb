@@ -26,7 +26,17 @@ class Invoice
   def items
     engine = SalesEngine.new
     invoice_items.map do |element|
-      engine.item_repo.find_all_by_id(element.item_id)
+      engine.item_repo.find_by_id(element.item_id)
     end
+  end
+
+  def customer
+    engine = SalesEngine.new
+    engine.customer_repo.find_by_id(customer_id)
+  end
+
+  def merchant
+    engine = SalesEngine.new
+    engine.merchant_repo.find_by_id(merchant_id)
   end
 end

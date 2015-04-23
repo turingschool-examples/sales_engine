@@ -1,15 +1,21 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "./lib/item"
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/item'
 
 class ItemTest < Minitest::Test
+  attr_reader :i
 
-  def test_customer_exists
-    assert Item.new
+  def setup
+    @i = Item.new
+    i.id = "539"
+    i.merchant_id = "1"
   end
 
-  def test_creates_hash_upon_initialization
-    i = Item.new
-    assert i.hash
+  def test_invoice_items_returns_all_items
+    assert_equal 7, i.invoice_items.length
+  end
+
+  def test_merchant_returns_a_merchant_instance
+    assert_equal "Schroeder-Jerde", i.merchant.name
   end
 end

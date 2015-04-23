@@ -1,15 +1,16 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "./lib/transaction"
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/transaction'
 
-class ItemTest < Minitest::Test
+class TransactionTest < Minitest::Test
+  attr_reader :t
 
-  def test_customer_exists
-    assert Transaction.new
+  def setup
+    @t = Transaction.new
+    t.invoice_id = "2"
   end
 
-  def test_creates_hash_upon_initialization
-    i = Transaction.new
-    assert i.hash
+  def test_that_invoice_returns_instance_of_invoice
+    assert_equal "75", t.invoice.merchant_id
   end
 end
