@@ -10,7 +10,7 @@ class MerchantRepository
   end
 
   def contents
-    CSV.open "./data/merchants.csv", headers: true, header_converters: :symbol
+    CSV.open "./fixtures/merchants.csv", headers: true, header_converters: :symbol
   end
 
   def create_merchants

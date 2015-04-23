@@ -34,7 +34,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_merchant_id
-    assert_equal 59, i.find_all_by_merchant_id("1").length
+    assert_equal 3, i.find_all_by_merchant_id("1").length
   end
 
   def test_can_find_by_status
@@ -42,7 +42,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_by_status
-    assert_equal 4843, i.find_all_by_status("shipped").length
+    assert_equal 17, i.find_all_by_status("shipped").length
   end
 
   def test_can_find_by_created_at

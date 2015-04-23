@@ -11,10 +11,10 @@ class MerchantTest < Minitest::Test
   end
 
   def test_that_items_method_returns_items_that_merchant_sells
-    assert_equal 15, m.items.length
+    assert_equal 11, m.items.length
   end
 
   def test_that_invoices_method_returns_invoices_for_that_merchant
-    assert_equal 59, m.invoices.length
+    assert_equal 3, m.invoices.length
   end
 end

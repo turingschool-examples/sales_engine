@@ -9,7 +9,7 @@ class InvoiceItemRepository
   end
 
   def contents
-    CSV.open "./data/invoice_items.csv", headers: true, header_converters: :symbol
+    CSV.open "./fixtures/invoice_items.csv", headers: true, header_converters: :symbol
   end
 
   def create_invoice_items

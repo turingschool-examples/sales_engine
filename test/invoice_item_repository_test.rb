@@ -42,7 +42,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_quantity
-    assert_equal 2164, i.find_all_by_quantity("5").length
+    assert_equal 5, i.find_all_by_quantity("5").length
   end
 
   def test_find_by_unit_price
