@@ -8,19 +8,10 @@ class InvoiceItemRepository
   def initialize(data, engine)
     @engine = engine
     @data = data
-    @invoice_items ||= create_invoice_items
+    @invoice_items = create_invoice_items
   end
-
-  def load_data
-    @invoice_items ||= create_invoice_items
-  end
-
-  # def contents
-  #   CSV.open "./data/invoice_items.csv", headers: true, header_converters: :symbol
-  # end
 
   def create_invoice_items
-    # puts "READING INVOICE ITEMS"
     data.map do |attributes|
       InvoiceItem.new(attributes, self)
     end

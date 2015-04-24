@@ -1,13 +1,14 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/item_repository'
-require './lib/sales_engine'
+require './lib/load_data'
 
 class ItemRepositoryTest < Minitest::Test
+  include LoadData
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.item_repo
+    @i = ItemRepository.new(item_data("fixtures"), nil)
   end
 
   def test_that_random_returns_random_item_object

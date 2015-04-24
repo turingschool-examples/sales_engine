@@ -23,48 +23,27 @@ class SalesEngine
   end
 
   def merchant_repo
-
-    @merchant_repository ||= begin
-      data = load_data("merchants", "data")
-      MerchantRepository.new(data, self)
-    end
+    @merchant_repository ||= MerchantRepository.new(merchant_data, self)
   end
 
   def item_repo
-
-    @item_repository ||= begin
-    data = load_data("items", "data")
-    ItemRepository.new(data, self)
-    end
+    @item_repository ||= ItemRepository.new(item_data, self)
   end
 
   def invoice_repo
-
-    @invoice_repository ||= begin
-      data = load_data("invoices", "data")
-      InvoiceRepository.new(data, self)
-    end
+    @invoice_repository ||= InvoiceRepository.new(invoice_data, self)
   end
 
   def transaction_repo
-    @transaction_repository ||= begin
-    data = load_data("transactions", "data")
-    TransactionRepository.new(data, self)
-    end
+    @transaction_repository ||= TransactionRepository.new(transaction_data, self)
   end
 
   def invoice_item_repo
-    @invoice_item_repository ||= begin
-      data = load_data("invoice_items", "data")
-      InvoiceItemRepository.new(data, self)
-    end
+    @invoice_item_repository ||= InvoiceItemRepository.new(invoice_item_data, self)
   end
 
   def customer_repo
-    @customer_repository ||= begin
-    data = load_data("customers", "data")
-    CustomerRepository.new(data, self)
+    @customer_repository ||= CustomerRepository.new(customer_data, self)
   end
-end
 end
 

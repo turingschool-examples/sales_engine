@@ -9,19 +9,10 @@ class ItemRepository
   def initialize(data, engine)
     @engine = engine
     @data = data
-    @items ||= create_items
+    @items = create_items
   end
-
-  def load_data
-    @items ||= create_items
-  end
-
-  # def contents
-  #   CSV.open "./data/items.csv", headers: true, header_converters: :symbol
-  # end
 
   def create_items
-    # puts "READING ITEMS"
     data.map do |attributes|
       Item.new(attributes, self)
     end
@@ -44,7 +35,7 @@ class ItemRepository
   end
 
   def find_by_id(id)
-    items.find { |item| item.id == id }
+    items.detect { |item| item.id == id }
   end
 
   def find_all_by_id(id)
@@ -52,7 +43,7 @@ class ItemRepository
   end
 
   def find_by_name(name)
-    items.find { |item| item.name == name }
+    items.detect { |item| item.name == name }
   end
 
   def find_all_by_name(name)
@@ -60,7 +51,7 @@ class ItemRepository
   end
 
   def find_by_description(description)
-    items.find { |item| item.description == description }
+    items.detect { |item| item.description == description }
   end
 
   def find_all_by_description(description)
@@ -68,7 +59,7 @@ class ItemRepository
   end
 
   def find_by_unit_price(unit_price)
-    items.find { |item| item.unit_price == unit_price }
+    items.detect { |item| item.unit_price == unit_price }
   end
 
   def find_all_by_unit_price(unit_price)
@@ -76,7 +67,7 @@ class ItemRepository
   end
 
   def find_by_merchant_id(merchant_id)
-    items.find { |item| item.merchant_id == merchant_id }
+    items.detect { |item| item.merchant_id == merchant_id }
   end
 
   def find_all_by_merchant_id(merchant_id)
@@ -84,7 +75,7 @@ class ItemRepository
   end
 
   def find_by_created_at(created_at)
-    items.find { |item| item.created_at == created_at }
+    items.detect { |item| item.created_at == created_at }
   end
 
   def find_all_by_created_at(created_at)
@@ -92,7 +83,7 @@ class ItemRepository
   end
 
   def find_by_updated_at(updated_at)
-    items.find { |item| item.updated_at == updated_at }
+    items.detect { |item| item.updated_at == updated_at }
   end
 
   def find_all_by_updated_at(updated_at)

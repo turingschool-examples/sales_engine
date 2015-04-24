@@ -1,13 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice_item_repository'
-require './lib/sales_engine'
+require './lib/load_data'
 
 class InvoiceItemRepositoryTest < Minitest::Test
+  include LoadData
+
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.invoice_item_repo
+    @i = InvoiceItemRepository.new(invoice_item_data("fixtures"), nil)
   end
 
   def test_that_random_returns_random_invoice_item_object

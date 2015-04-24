@@ -9,19 +9,10 @@ class CustomerRepository
   def initialize(data, engine)
     @engine = engine
     @data = data
-    @customers ||= create_customers
+    @customers = create_customers
   end
-
-  def load_data
-    @customers ||= create_customers
-  end
-
-  # def contents
-  #   CSV.open "./data/customers.csv", headers: true, header_converters: :symbol
-  # end
 
   def create_customers
-    # puts "READING CUSTOMERS"
     data.map do |attributes|
       Customer.new(attributes, self)
     end

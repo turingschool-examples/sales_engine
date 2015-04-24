@@ -9,19 +9,10 @@ class InvoiceRepository
   def initialize(data, engine)
     @engine = engine
     @data = data
-    @invoices ||= create_invoices
+    @invoices = create_invoices
   end
-
-  def load_data
-    @invoices ||= create_invoices
-  end
-
-  # def contents
-  #   CSV.open "./data/invoices.csv", headers: true, header_converters: :symbol
-  # end
 
   def create_invoices
-    # puts "READING INVOICE REPO"
     data.map do |attributes|
       Invoice.new(attributes, self)
     end
@@ -56,7 +47,7 @@ class InvoiceRepository
   end
 
   def find_by_id(id)
-    invoices.find { |invoice| invoice.id == id }
+    invoices.detect { |invoice| invoice.id == id }
   end
 
   def find_all_by_id(id)
@@ -64,7 +55,7 @@ class InvoiceRepository
   end
 
   def find_by_customer_id(customer_id)
-    invoices.find { |invoice| invoice.customer_id == customer_id }
+    invoices.detect { |invoice| invoice.customer_id == customer_id }
   end
 
   def find_all_by_customer_id(customer_id)
@@ -72,7 +63,7 @@ class InvoiceRepository
   end
 
   def find_by_merchant_id(merchant_id)
-    invoices.find { |invoice| invoice.merchant_id == merchant_id }
+    invoices.detect { |invoice| invoice.merchant_id == merchant_id }
   end
 
   def find_all_by_merchant_id(merchant_id)
@@ -80,7 +71,7 @@ class InvoiceRepository
   end
 
   def find_by_status(status)
-    invoices.find { |invoice| invoice.status == status }
+    invoices.detect { |invoice| invoice.status == status }
   end
 
   def find_all_by_status(status)
@@ -88,7 +79,7 @@ class InvoiceRepository
   end
 
   def find_by_created_at(created_at)
-    invoices.find { |invoice| invoice.created_at == created_at }
+    invoices.detect { |invoice| invoice.created_at == created_at }
   end
 
   def find_all_by_created_at(created_at)
@@ -96,7 +87,7 @@ class InvoiceRepository
   end
 
   def find_by_updated_at(updated_at)
-    invoices.find { |invoice| invoice.updated_at == updated_at }
+    invoices.detect { |invoice| invoice.updated_at == updated_at }
   end
 
   def find_all_by_updated_at(updated_at)

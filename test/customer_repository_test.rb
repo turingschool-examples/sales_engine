@@ -1,13 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/customer_repository'
-require './lib/sales_engine'
+require './lib/load_data'
 
 class CustomerRepositoryTest < Minitest::Test
-  attr_reader :c, :engine
+  include LoadData
+
+  attr_reader :c
 
   def setup
-    @c = SalesEngine.new.customer_repo
+    @c = CustomerRepository.new(customer_data("fixtures"), nil)
   end
 
   def test_can_find_by_id

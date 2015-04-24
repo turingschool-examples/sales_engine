@@ -8,19 +8,10 @@ class TransactionRepository
   def initialize(data, engine)
     @engine = engine
     @data = data
-    @transactions ||= create_transactions
+    @transactions = create_transactions
   end
-
-  def load_data
-    @transactions ||= create_transactions
-  end
-
-  # def contents
-  #   CSV.open "./data/transactions.csv", headers: true, header_converters: :symbol
-  # end
 
   def create_transactions
-    # puts "READING TRANSACTIONS"
     data.map do |attributes|
       Transaction.new(attributes, self)
     end

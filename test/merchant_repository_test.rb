@@ -1,13 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/merchant_repository'
-require './lib/sales_engine'
+require './lib/load_data'
 
 class MerchantRepositoryTest < Minitest::Test
+  include LoadData
+
   attr_reader :m
 
   def setup
-    @m = SalesEngine.new.merchant_repo
+    @m = MerchantRepository.new(merchant_data("fixtures"), nil)
   end
 
   def test_that_random_returns_random_merchant_object
