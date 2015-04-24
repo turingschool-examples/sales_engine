@@ -1,28 +1,52 @@
 require 'csv'
 require_relative 'invoice'
+require_relative 'sales_engine'
 
 class InvoiceRepository
   attr_accessor :invoices
+  attr_reader :engine
 
-  def initialize
-    @invoices = make_invoices
+  def initialize(engine)
+    @engine = engine
+  end
+
+  def load_data
+    @invoices ||= create_invoices
   end
 
   def contents
     CSV.open "./fixtures/invoices.csv", headers: true, header_converters: :symbol
   end
 
-  def make_invoices
-    contents.map do |row|
-      invoice               = Invoice.new
-      invoice.id            = row[:id]
-      invoice.customer_id   = row[:customer_id]
-      invoice.merchant_id   = row[:merchant_id]
-      invoice.status        = row[:status]
-      invoice.created_at    = row[:created_at]
-      invoice.updated_at    = row[:updated_at]
-      invoice
+  def create_invoices
+    puts "READING INVOICE REPO"
+    contents.map do |attributes|
+      Invoice.new(attributes, self)
     end
+  end
+
+  def find_transactions_by_invoice_id(invoice_id)
+    engine.transaction_repo.find_all_by_invoice_id(invoice_id)
+  end
+
+  def find_invoice_items_by_invoice_id(invoice_id)
+    engine.invoice_item_repo.find_all_by_invoice_id(invoice_id)
+  end
+
+  def find_customer_by_customer_id(customer_id)
+    engine.customer_repo.find_by_id(customer_id)
+  end
+
+  def find_merchant_by_merchant_id(merchant_id)
+    engine.merchant_repo.find_by_id(merchant_id)
+  end
+
+  def find_items_by_item_id_through_invoice_items(item_id)
+    engine.item_repo.find_by_id(item_id)
+  end
+
+  def all
+    invoices
   end
 
   def random

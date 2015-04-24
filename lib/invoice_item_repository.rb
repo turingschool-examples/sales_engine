@@ -3,9 +3,14 @@ require_relative 'invoice_item'
 
 class InvoiceItemRepository
   attr_accessor :invoice_items
+  attr_reader :engine
 
-  def initialize
-    @invoice_items = create_invoice_items
+  def initialize(engine)
+    @engine = engine
+  end
+
+  def load_data
+    @invoice_items ||= create_invoice_items
   end
 
   def contents
@@ -13,17 +18,22 @@ class InvoiceItemRepository
   end
 
   def create_invoice_items
-    contents.map do |row|
-      item            = InvoiceItem.new
-      item.id         = row[:id]
-      item.item_id    = row[:item_id]
-      item.invoice_id = row[:invoice_id]
-      item.quantity   = row[:quantity]
-      item.unit_price = row[:unit_price]
-      item.created_at = row[:created_at]
-      item.updated_at = row[:updated_at]
-      item
+    puts "READING INVOICE ITEMS"
+    contents.map do |attributes|
+      InvoiceItem.new(attributes, self)
     end
+  end
+
+  def find_invoice_by_invoice_id(invoice_id)
+    engine.invoice_repo.find_by_id(invoice_id)
+  end
+
+  def find_item_by_item_id(item_id)
+    engine.item_repo.find_by_id(item_id)
+  end
+
+  def all
+    invoice_items
   end
 
   def random

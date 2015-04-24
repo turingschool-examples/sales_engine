@@ -4,9 +4,14 @@ require_relative 'sales_engine'
 
 class MerchantRepository
   attr_accessor :merchants
+  attr_reader :engine
 
-  def initialize
-    @merchants = create_merchants
+  def initialize(engine)
+    @engine = engine
+  end
+
+  def load_data
+    @merchants ||= create_merchants
   end
 
   def contents
@@ -14,14 +19,22 @@ class MerchantRepository
   end
 
   def create_merchants
-    contents.map do |row|
-      merchant            = Merchant.new
-      merchant.id         = row[:id]
-      merchant.name       = row[:name]
-      merchant.created_at = row[:created_at]
-      merchant.updated_at = row[:updated_at]
-      merchant
+    puts "READING MERCHANTS"
+    contents.map do |attributes|
+      Merchant.new(attributes, self)
     end
+  end
+
+  def find_all_items_by_merchant_id(merchant_id)
+    engine.item_repo.find_all_by_merchant_id(merchant_id)
+  end
+
+  def find_all_invoices_by_merchant_id(merchant_id)
+    engine.invoice_repo.find_all_by_merchant_id(merchant_id)
+  end
+
+  def all
+    merchants
   end
 
   def random

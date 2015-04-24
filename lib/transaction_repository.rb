@@ -3,9 +3,14 @@ require_relative 'transaction'
 
 class TransactionRepository
   attr_accessor :transactions
+  attr_reader :engine
 
-  def initialize
-    @transactions = create_transactions
+  def initialize(engine)
+    @engine = engine
+  end
+
+  def load_data
+    @transactions ||= create_transactions
   end
 
   def contents
@@ -13,17 +18,18 @@ class TransactionRepository
   end
 
   def create_transactions
-    contents.map do |row|
-      transaction                    = Transaction.new
-      transaction.id                 = row[:id]
-      transaction.invoice_id         = row[:invoice_id]
-      transaction.cc_number          = row[:credit_card_number]
-      transaction.cc_expiration_date = row[:credit_card_expiration_date]
-      transaction.result             = row[:result]
-      transaction.created_at         = row[:created_at]
-      transaction.updated_at         = row[:updated_at]
-      transaction
+    puts "READING TRANSACTIONS"
+    contents.map do |attributes|
+      Transaction.new(attributes, self)
     end
+  end
+
+  def find_invoice_by_invoice_id(invoice_id)
+    engine.invoice_repo.find_by_id(invoice_id)
+  end
+
+  def all
+    transactions
   end
 
   def random

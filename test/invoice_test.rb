@@ -1,15 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice'
+require './lib/sales_engine'
 
 class InvoiceTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = Invoice.new
-    i.id = "1"
-    i.customer_id = "1"
-    i.merchant_id = "1"
+    @i = SalesEngine.new.invoice_repo.find_by_id("1")
+    # i.customer_id = "1"
+    # i.merchant_id = "1"
   end
 
   def test_invoice_object_exists_after_initialization
@@ -35,6 +35,6 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_merchant_method_returns_a_single_merchant_with_id
-    assert_equal "Schroeder-Jerde", i.merchant.name
+    assert_equal "Balistreri, Schaefer and Kshlerin", i.merchant.name
   end
 end

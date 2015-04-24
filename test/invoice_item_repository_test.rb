@@ -1,12 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice_item_repository'
+require './lib/sales_engine'
 
 class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = InvoiceItemRepository.new
+    @i = SalesEngine.new.invoice_item_repo
   end
 
   def test_that_random_returns_random_invoice_item_object
@@ -42,7 +43,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_quantity
-    assert_equal 5, i.find_all_by_quantity("5").length
+    assert_equal 6, i.find_all_by_quantity("5").length
   end
 
   def test_find_by_unit_price

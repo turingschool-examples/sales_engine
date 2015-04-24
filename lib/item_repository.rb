@@ -1,29 +1,40 @@
 require 'csv'
 require_relative 'item'
+require_relative 'sales_engine'
 
 class ItemRepository
   attr_accessor :items
+  attr_reader :engine
 
-  def initialize
-    @items = make_items
+  def initialize(engine)
+    @engine = engine
+  end
+
+  def load_data
+    @items ||= create_items
   end
 
   def contents
     CSV.open "./fixtures/items.csv", headers: true, header_converters: :symbol
   end
 
-  def make_items
-    contents.map do |row|
-      item              = Item.new
-      item.id           = row[:id]
-      item.name         = row[:name]
-      item.description  = row[:description]
-      item.unit_price   = row[:unit_price]
-      item.merchant_id  = row[:merchant_id]
-      item.created_at   = row[:created_at]
-      item.updated_at   = row[:updated_at]
-      item
+  def create_items
+    puts "READING ITEMS"
+    contents.map do |attributes|
+      Item.new(attributes, self)
     end
+  end
+
+  def all
+    items
+  end
+
+  def find_invoice_items_by_item_id(item_id)
+    engine.invoice_item_repo.find_all_by_item_id(item_id)
+  end
+
+  def find_merchant_by_id(merchant_id)
+    engine.merchant_repo.find_by_id(merchant_id)
   end
 
   def random

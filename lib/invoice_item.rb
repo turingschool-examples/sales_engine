@@ -2,24 +2,24 @@ require_relative 'sales_engine'
 
 class InvoiceItem
   attr_accessor :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
+  attr_reader :repo
 
-  def initialize
-    @id
-    @item_id
-    @invoice_id
-    @quantity
-    @unit_price
-    @created_at
-    @updated_at
+  def initialize(attributes, repo)
+    @repo       = repo
+    @id         = attributes[:id]
+    @item_id    = attributes[:item_id]
+    @invoice_id = attributes[:invoice_id]
+    @quantity   = attributes[:quantity]
+    @unit_price = attributes[:unit_price]
+    @created_at = attributes[:created_at]
+    @updated_at = attributes[:updated_at]
   end
 
   def invoice
-    engine = SalesEngine.new
-    engine.invoice_repo.find_by_id(invoice_id)
+    repo.find_invoice_by_invoice_id(invoice_id)
   end
 
   def item
-    engine = SalesEngine.new
-    engine.item_repo.find_by_id(item_id)
+    repo.find_item_by_item_id(item_id)
   end
 end

@@ -11,36 +11,36 @@ class SalesEngine
   end
 
   def startup
-    merchant_repo
-    item_repo
-    invoice_repo
-    transaction_repo
-    invoice_item_repo
-    customer_repo
+    merchant_repo.load_data
+    item_repo.load_data
+    invoice_repo.load_data
+    transaction_repo.load_data
+    invoice_item_repo.load_data
+    customer_repo.load_data
   end
 
   def merchant_repo
-    MerchantRepository.new
+    @merchant_repository ||= MerchantRepository.new(self)
   end
 
   def item_repo
-    ItemRepository.new
+    @item_repository ||= ItemRepository.new(self)
   end
 
   def invoice_repo
-    InvoiceRepository.new
+    @invoice_repository ||= InvoiceRepository.new(self)
   end
 
   def transaction_repo
-    TransactionRepository.new
+    @transaction_repository ||= TransactionRepository.new(self)
   end
 
   def invoice_item_repo
-    InvoiceItemRepository.new
+    @invoice_item_repository ||= InvoiceItemRepository.new(self)
   end
 
   def customer_repo
-    CustomerRepository.new
+    @customer_repository ||= CustomerRepository.new(self)
   end
 end
 

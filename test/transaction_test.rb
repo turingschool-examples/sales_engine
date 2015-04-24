@@ -1,13 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/transaction'
+require './lib/sales_engine'
 
 class TransactionTest < Minitest::Test
   attr_reader :t
 
   def setup
-    @t = Transaction.new
-    t.invoice_id = "2"
+    @t = SalesEngine.new.transaction_repo.find_by_invoice_id("2")
   end
 
   def test_that_invoice_returns_instance_of_invoice

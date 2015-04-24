@@ -6,7 +6,7 @@ class InvoiceRepositoryTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = InvoiceRepository.new
+    @i = SalesEngine.new.invoice_repo
   end
 
   def test_that_random_returns_random_invoice_repository_object

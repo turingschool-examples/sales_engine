@@ -1,11 +1,17 @@
 require 'csv'
 require_relative 'customer'
+require_relative 'sales_engine'
 
 class CustomerRepository
   attr_accessor :customers
+  attr_reader :engine
 
-  def initialize
-    @customers = create_customers
+  def initialize(engine)
+    @engine = engine
+  end
+
+  def load_data
+    @customers ||= create_customers
   end
 
   def contents
@@ -13,15 +19,18 @@ class CustomerRepository
   end
 
   def create_customers
-    contents.map do |row|
-      customer            = Customer.new
-      customer.id         = row[:id]
-      customer.first_name = row[:first_name]
-      customer.last_name  = row[:last_name]
-      customer.created_at = row[:created_at]
-      customer.updated_at = row[:updated_at]
-      customer
+    puts "READING CUSTOMERS"
+    contents.map do |attributes|
+      Customer.new(attributes, self)
     end
+  end
+
+  def all
+    customers
+  end
+
+  def find_invoice_by_customer_id(id)
+    engine.invoice_repo.find_all_by_customer_id(id)
   end
 
   def random
