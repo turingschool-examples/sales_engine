@@ -1,23 +1,23 @@
-require './lib/merchant_repository'
+require_relative 'merchant_repository'
 
 class Merchant
   attr_accessor :id, :name, :created_at, :updated_at
+  attr_reader :repo
 
-  def initialize
-    @id
-    @name
-    @created_at
-    @updated_at
+  def initialize(attributes, repo)
+    @repo       = repo
+    @id         = attributes[:id]
+    @name       = attributes[:name]
+    @created_at = attributes[:created_at]
+    @updated_at = attributes[:updated_at]
   end
 
   def items
-    engine = SalesEngine.new
-    engine.item_repo.find_all_by_merchant_id(@id)
+    repo.find_all_items_by_merchant_id(id)
   end
 
   def invoices
-    engine = SalesEngine.new
-    engine.invoice_repo.find_all_by_merchant_id(@id)
+    repo.find_all_invoices_by_merchant_id(id)
   end
 end
 

@@ -1,42 +1,38 @@
-require 'pry'
-require_relative 'sales_engine'
+require_relative 'invoice_repository'
 
 class Invoice
   attr_accessor :id, :customer_id, :merchant_id, :status, :created_at, :updated_at
+  attr_reader :repo
 
-  def initialize
-    @id
-    @customer_id
-    @merchant_id
-    @status
-    @created_at
-    @updated_at
+  def initialize(attributes, repo)
+    @repo          = repo
+    @id            = attributes[:id]
+    @customer_id   = attributes[:customer_id]
+    @merchant_id   = attributes[:merchant_id]
+    @status        = attributes[:status]
+    @created_at    = attributes[:created_at]
+    @updated_at    = attributes[:updated_at]
   end
 
   def transactions
-    engine = SalesEngine.new
-    engine.transaction_repo.find_all_by_invoice_id(id)
+    repo.find_transactions_by_invoice_id(id)
   end
 
   def invoice_items
-    engine = SalesEngine.new
-    engine.invoice_item_repo.find_all_by_invoice_id(id)
+    repo.find_invoice_items_by_invoice_id(id)
   end
 
   def items
-    engine = SalesEngine.new
     invoice_items.map do |element|
-      engine.item_repo.find_by_id(element.item_id)
+      repo.find_items_by_item_id_through_invoice_items(element.item_id)
     end
   end
 
   def customer
-    engine = SalesEngine.new
-    engine.customer_repo.find_by_id(customer_id)
+    repo.find_customer_by_customer_id(customer_id)
   end
 
   def merchant
-    engine = SalesEngine.new
-    engine.merchant_repo.find_by_id(merchant_id)
+    repo.find_merchant_by_merchant_id(merchant_id)
   end
 end

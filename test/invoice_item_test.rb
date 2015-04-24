@@ -1,14 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice_item'
+require './lib/sales_engine'
 
 class InvoiceItemTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = InvoiceItem.new
-    i.invoice_id = "1"
-    i.item_id = "529"
+    @i = SalesEngine.new.invoice_item_repo.find_by_id("1")
   end
 
   def test_that_invoice_returns_an_invoice_instance
@@ -16,6 +15,6 @@ class InvoiceItemTest < Minitest::Test
   end
 
   def test_that_item_returns_item_instance
-    assert_equal "Item Eius Et", i.item.name
+    assert_equal "Item Sunt Saepe", i.item.name
   end
 end

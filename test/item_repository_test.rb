@@ -1,12 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/item_repository'
+require './lib/sales_engine'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = ItemRepository.new
+    @i = SalesEngine.new.item_repo
   end
 
   def test_that_random_returns_random_item_object
@@ -68,5 +69,4 @@ class ItemRepositoryTest < Minitest::Test
   def test_find_all_by_updated_at
     assert_equal 13, i.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
   end
-
 end

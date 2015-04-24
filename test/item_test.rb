@@ -6,9 +6,7 @@ class ItemTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = Item.new
-    i.id = "539"
-    i.merchant_id = "1"
+    @i = SalesEngine.new.item_repo.find_by_id("539")
   end
 
   def test_invoice_items_returns_all_items
@@ -16,6 +14,6 @@ class ItemTest < Minitest::Test
   end
 
   def test_merchant_returns_a_merchant_instance
-    assert_equal "Schroeder-Jerde", i.merchant.name
+    assert_equal "Balistreri, Schaefer and Kshlerin", i.merchant.name
   end
 end

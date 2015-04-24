@@ -1,25 +1,25 @@
-require_relative 'sales_engine'
+require_relative 'item_repository'
 
 class Item
   attr_accessor :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
+  attr_reader :repo
 
-  def initialize
-    @id
-    @name
-    @description
-    @unit_price
-    @merchant_id
-    @created_at
-    @updated_at
+  def initialize(attributes, repo)
+    @repo         = repo
+    @id           = attributes[:id]
+    @name         = attributes[:name]
+    @description  = attributes[:description]
+    @unit_price   = attributes[:unit_price]
+    @merchant_id  = attributes[:merchant_id]
+    @created_at   = attributes[:created_at]
+    @updated_at   = attributes[:updated_at]
   end
 
   def invoice_items
-    engine = SalesEngine.new
-    engine.invoice_item_repo.find_all_by_item_id(id)
+    repo.find_invoice_items_by_item_id(id)
   end
 
   def merchant
-    engine = SalesEngine.new
-    engine.merchant_repo.find_by_id(merchant_id)
+    repo.find_merchant_by_id(merchant_id)
   end
 end
