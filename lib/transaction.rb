@@ -1,4 +1,4 @@
-require_relative 'sales_engine'
+require_relative 'transaction_repository'
 
 class Transaction
   attr_accessor :id, :invoice_id, :cc_number, :cc_expiration_date, :result, :created_at, :updated_at

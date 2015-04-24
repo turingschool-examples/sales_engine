@@ -3,23 +3,16 @@ require_relative 'invoice_item'
 
 class InvoiceItemRepository
   attr_accessor :invoice_items
-  attr_reader :engine
+  attr_reader :engine, :data
 
-  def initialize(engine)
+  def initialize(data, engine)
     @engine = engine
-  end
-
-  def load_data
-    @invoice_items ||= create_invoice_items
-  end
-
-  def contents
-    CSV.open "./fixtures/invoice_items.csv", headers: true, header_converters: :symbol
+    @data = data
+    @invoice_items = create_invoice_items
   end
 
   def create_invoice_items
-    puts "READING INVOICE ITEMS"
-    contents.map do |attributes|
+    data.map do |attributes|
       InvoiceItem.new(attributes, self)
     end
   end

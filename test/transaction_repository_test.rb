@@ -1,13 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/transaction_repository'
-require './lib/sales_engine'
+require './lib/load_data'
 
 class TransactionRepositoryTest < Minitest::Test
+  include LoadData
+
   attr_reader :t
 
   def setup
-    @t = SalesEngine.new.transaction_repo
+    @t = TransactionRepository.new(transaction_data("fixtures"), nil)
   end
 
   def test_that_random_returns_random_transaction_object

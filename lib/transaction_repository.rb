@@ -3,23 +3,16 @@ require_relative 'transaction'
 
 class TransactionRepository
   attr_accessor :transactions
-  attr_reader :engine
+  attr_reader :engine, :data
 
-  def initialize(engine)
+  def initialize(data, engine)
     @engine = engine
-  end
-
-  def load_data
-    @transactions ||= create_transactions
-  end
-
-  def contents
-    CSV.open "./fixtures/transactions.csv", headers: true, header_converters: :symbol
+    @data = data
+    @transactions = create_transactions
   end
 
   def create_transactions
-    puts "READING TRANSACTIONS"
-    contents.map do |attributes|
+    data.map do |attributes|
       Transaction.new(attributes, self)
     end
   end
