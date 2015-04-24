@@ -4,23 +4,25 @@ require_relative 'sales_engine'
 
 class ItemRepository
   attr_accessor :items
-  attr_reader :engine
+  attr_reader :engine, :data
 
-  def initialize(engine)
+  def initialize(data, engine)
     @engine = engine
+    @data = data
+    @items ||= create_items
   end
 
   def load_data
     @items ||= create_items
   end
 
-  def contents
-    CSV.open "./fixtures/items.csv", headers: true, header_converters: :symbol
-  end
+  # def contents
+  #   CSV.open "./data/items.csv", headers: true, header_converters: :symbol
+  # end
 
   def create_items
-    puts "READING ITEMS"
-    contents.map do |attributes|
+    # puts "READING ITEMS"
+    data.map do |attributes|
       Item.new(attributes, self)
     end
   end

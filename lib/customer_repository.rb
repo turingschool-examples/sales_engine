@@ -4,23 +4,25 @@ require_relative 'sales_engine'
 
 class CustomerRepository
   attr_accessor :customers
-  attr_reader :engine
+  attr_reader :engine, :data
 
-  def initialize(engine)
+  def initialize(data, engine)
     @engine = engine
+    @data = data
+    @customers ||= create_customers
   end
 
   def load_data
     @customers ||= create_customers
   end
 
-  def contents
-    CSV.open "./fixtures/customers.csv", headers: true, header_converters: :symbol
-  end
+  # def contents
+  #   CSV.open "./data/customers.csv", headers: true, header_converters: :symbol
+  # end
 
   def create_customers
-    puts "READING CUSTOMERS"
-    contents.map do |attributes|
+    # puts "READING CUSTOMERS"
+    data.map do |attributes|
       Customer.new(attributes, self)
     end
   end

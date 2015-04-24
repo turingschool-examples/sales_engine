@@ -4,23 +4,25 @@ require_relative 'sales_engine'
 
 class MerchantRepository
   attr_accessor :merchants
-  attr_reader :engine
+  attr_reader :engine, :data
 
-  def initialize(engine)
+  def initialize(data, engine)
     @engine = engine
+    @data = data
+    @merchants ||= create_merchants
   end
 
   def load_data
     @merchants ||= create_merchants
   end
 
-  def contents
-    CSV.open "./fixtures/merchants.csv", headers: true, header_converters: :symbol
-  end
+  # def contents
+  #   CSV.open "./data/merchants.csv", headers: true, header_converters: :symbol
+  # end
 
   def create_merchants
-    puts "READING MERCHANTS"
-    contents.map do |attributes|
+    # puts "READING MERCHANTS"
+    data.map do |attributes|
       Merchant.new(attributes, self)
     end
   end

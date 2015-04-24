@@ -4,23 +4,25 @@ require_relative 'sales_engine'
 
 class InvoiceRepository
   attr_accessor :invoices
-  attr_reader :engine
+  attr_reader :engine, :data
 
-  def initialize(engine)
+  def initialize(data, engine)
     @engine = engine
+    @data = data
+    @invoices ||= create_invoices
   end
 
   def load_data
     @invoices ||= create_invoices
   end
 
-  def contents
-    CSV.open "./fixtures/invoices.csv", headers: true, header_converters: :symbol
-  end
+  # def contents
+  #   CSV.open "./data/invoices.csv", headers: true, header_converters: :symbol
+  # end
 
   def create_invoices
-    puts "READING INVOICE REPO"
-    contents.map do |attributes|
+    # puts "READING INVOICE REPO"
+    data.map do |attributes|
       Invoice.new(attributes, self)
     end
   end
