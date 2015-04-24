@@ -5,6 +5,9 @@ require_relative 'transaction_repository'
 require_relative 'customer_repository'
 require_relative 'invoice_repository'
 require_relative 'load_data'
+require 'bigdecimal'
+require 'bigdecimal/util'
+require 'pry'
 
 class SalesEngine
   include LoadData
@@ -45,5 +48,20 @@ class SalesEngine
   def customer_repo
     @customer_repository ||= CustomerRepository.new(customer_data, self)
   end
+
+  def merchant_revenue(merchant_id)
+    inv_id = invoice_repo.find_all_by_merchant_id(merchant_id)
+    inv_items = invoice_item_repo.find_all_by_invoice_id(inv_id)
+    inv_items.reduce(0) { |sum, element| sum + (element.unit_price.to_d/100) * element.quantity.to_i }.round(2).to_digits
+  end
+
+  def merchant_revenue_for_specific_date(merchant_id, date)
+    inv_id = invoice_repo.find_by_merchant_id(merchant_id).id
+    inv_items = invoice_item_repo.find_all_by_invoice_id(inv_id)
+    inv_items_by_date = inv_items.find_all_by_created_at(date)
+    revenue = inv_items_by_date.reduce(0) { |sum, element| sum + (BigDecimal(element.unit_price) * element.quantity.to_i) }
+    revenue.round(2).to_digits
+  end
 end
+
 

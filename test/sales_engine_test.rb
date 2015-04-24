@@ -28,4 +28,16 @@ class SalesEngineTest < Minitest::Test
   def test_that_invoice_item_repo_returns_invoice_item_object
     assert_equal true, engine.invoice_item_repo.is_a?(InvoiceItemRepository)
   end
+  
+  def test_that_customer_repo_returns_customer_object
+    assert_equal true, engine.customer_repo.is_a?(CustomerRepository)
+  end
+
+  def test_that_merchant_revenue_returns_total_revenue_for_that_merchant
+    assert_equal "21067.77", engine.merchant_revenue("26")
+  end
+
+  def test_merchant_revenue_for_specific_date
+    assert_equal "68175.0", engine.merchant_revenue_for_specific_date("26", "2012-03-28 14:54:09 UTC")
+  end
 end
