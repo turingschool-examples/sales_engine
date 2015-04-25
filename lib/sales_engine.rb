@@ -49,10 +49,27 @@ class SalesEngine
     @customer_repository ||= CustomerRepository.new(customer_data, self)
   end
 
+  def find_invoices_by_merchant_id(merchant_id)
+    invoice_repo.find_all_by_merchant_id(merchant_id)
+  end
+
+  def find_invoice_items_by_invoice_ids(invoice_ids)
+    invoice_ids.map { |inv_id| invoice_item_repo.find_all_by_invoice_id(inv_id) }
+  end
+
+  def calculate_revenue_of_invoice_items(invoice_items)
+    invoice_items.reduce(0) { |sum, inv_item| sum + (inv_item.unit_price.to_d/100) * inv_item.quantity.to_i }
+  end
+
+  def format_big_decimal(number)
+    number.round(2).to_digits
+  end
+
   def merchant_revenue(merchant_id)
-    inv_id = invoice_repo.find_all_by_merchant_id(merchant_id)
-    inv_items = invoice_item_repo.find_all_by_invoice_id(inv_id)
-    inv_items.reduce(0) { |sum, element| sum + (element.unit_price.to_d/100) * element.quantity.to_i }.round(2).to_digits
+    inv_ids = find_invoices_by_merchant_id(merchant_id).map { |invoice| invoice.id }
+    inv_items = find_invoice_items_by_invoice_ids(inv_ids)
+    revenue = inv_items.map { |subarray| calculate_revenue_of_invoice_items(subarray) }.reduce(:+)
+    format_big_decimal(revenue)
   end
 
   def merchant_revenue_for_specific_date(merchant_id, date)

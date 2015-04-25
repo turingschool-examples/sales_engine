@@ -19,6 +19,10 @@ class Merchant
   def invoices
     repo.find_all_invoices_by_merchant_id(id)
   end
+
+  def revenue
+    repo.calculate_total_revenue_by_merchant_id
+  end
 end
 
 

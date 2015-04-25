@@ -34,10 +34,6 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_that_merchant_revenue_returns_total_revenue_for_that_merchant
-    assert_equal "21067.77", engine.merchant_revenue("26")
-  end
-
-  def test_merchant_revenue_for_specific_date
-    assert_equal "68175.0", engine.merchant_revenue_for_specific_date("26", "2012-03-28 14:54:09 UTC")
+    assert_equal "24763.31", engine.merchant_revenue("1")
   end
 end
