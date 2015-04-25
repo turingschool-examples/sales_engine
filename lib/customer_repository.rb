@@ -28,7 +28,7 @@ class CustomerRepository
   end
 
   def find_invoices_by_customer_id(id)
-    engine.find_all_customer_invoices(id)
+    engine.invoice_repository.find_all_by_customer_id(id)
   end
 
   def random

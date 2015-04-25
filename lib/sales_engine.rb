@@ -50,10 +50,6 @@ class SalesEngine
     @customer_repository ||= CustomerRepository.new(customer_data(@filepath), self)
   end
 
-  def find_all_customer_invoices(id)
-    invoice_repository.find_all_by_customer_id(id)
-  end
-
   def find_invoices_by_merchant_id(merchant_id)
     invoice_repository.find_all_by_merchant_id(merchant_id)
   end
@@ -63,11 +59,11 @@ class SalesEngine
   end
 
   def calculate_revenue_of_invoice_items(invoice_items)
-    invoice_items.reduce(0) { |sum, inv_item| sum + (inv_item.unit_price.to_d/100) * inv_item.quantity.to_i }
+    invoice_items.reduce(0) { |sum, inv_item| sum + inv_item.unit_price * inv_item.quantity }
   end
 
   def format_big_decimal(number)
-    number.round(2).to_digits
+    (number/100).to_digits.to_f
   end
 
   def merchant_revenue(merchant_id)

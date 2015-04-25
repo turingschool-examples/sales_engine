@@ -1,6 +1,8 @@
 require 'csv'
 require_relative 'item'
 require_relative 'sales_engine'
+require 'bigdecimal'
+require 'bigdecimal/util'
 
 class ItemRepository
   attr_accessor :items
@@ -63,11 +65,11 @@ class ItemRepository
   end
 
   def find_by_unit_price(unit_price)
-    items.detect { |item| item.unit_price == unit_price }
+    items.detect { |item| (item.unit_price / 100).to_digits == unit_price.to_digits }
   end
 
   def find_all_by_unit_price(unit_price)
-    items.select { |item| item.unit_price == unit_price }
+    items.select { |item| (item.unit_price / 100).to_digits == unit_price.to_digits }
   end
 
   def find_by_merchant_id(merchant_id)

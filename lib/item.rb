@@ -1,4 +1,5 @@
 require_relative 'item_repository'
+require 'bigdecimal'
 
 class Item
   attr_accessor :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
@@ -6,11 +7,11 @@ class Item
 
   def initialize(attributes, repo)
     @repo         = repo
-    @id           = attributes[:id]
+    @id           = attributes[:id].to_i
     @name         = attributes[:name]
     @description  = attributes[:description]
-    @unit_price   = attributes[:unit_price]
-    @merchant_id  = attributes[:merchant_id]
+    @unit_price   = BigDecimal.new(attributes[:unit_price])
+    @merchant_id  = attributes[:merchant_id].to_i
     @created_at   = attributes[:created_at]
     @updated_at   = attributes[:updated_at]
   end

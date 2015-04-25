@@ -6,7 +6,7 @@ class Customer
 
   def initialize(attributes, repo)
     @repo       = repo
-    @id         = attributes[:id]
+    @id         = attributes[:id].to_i
     @first_name = attributes[:first_name]
     @last_name  = attributes[:last_name]
     @created_at = attributes[:created_at]

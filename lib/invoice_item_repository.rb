@@ -1,5 +1,7 @@
 require 'csv'
 require_relative 'invoice_item'
+require 'bigdecimal'
+require 'bigdecimal/util'
 
 class InvoiceItemRepository
   attr_accessor :invoice_items
@@ -70,11 +72,11 @@ class InvoiceItemRepository
   end
 
   def find_by_unit_price(unit_price)
-    invoice_items.detect { |item| item.unit_price == unit_price }
+    invoice_items.detect { |item| (item.unit_price / 100).to_digits == unit_price.to_digits }
   end
 
   def find_all_by_unit_price(unit_price)
-    invoice_items.select { |item| item.unit_price == unit_price }
+    invoice_items.select { |item| (item.unit_price / 100).to_digits == unit_price.to_digits }
   end
 
   def find_by_created_at(created_at)

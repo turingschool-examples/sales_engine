@@ -31,8 +31,8 @@ class MerchantRepository
     engine.invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
-  def calculate_total_revenue_by_merchant_id
-    engine.merchant_revenue
+  def calculate_total_revenue_by_merchant_id(merchant_id)
+    engine.merchant_revenue(merchant_id)
   end
 
   def all
