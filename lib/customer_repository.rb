@@ -1,6 +1,7 @@
 require 'csv'
 require_relative 'customer'
 require_relative 'sales_engine'
+require_relative 'load_data'
 
 class CustomerRepository
   attr_accessor :customers
@@ -19,10 +20,6 @@ class CustomerRepository
   end
 
   def inspect
-    "#<#{self.class} #{customers.size} rows>"
-  end
-
-  def inspect
     "#<#{self.class} #{@customers.size} rows>"
   end
 
@@ -30,8 +27,8 @@ class CustomerRepository
     customers
   end
 
-  def find_invoice_by_customer_id(id)
-    engine.invoice_repo.find_all_by_customer_id(id)
+  def find_invoices_by_customer_id(id)
+    engine.find_all_customer_invoices(id)
   end
 
   def random

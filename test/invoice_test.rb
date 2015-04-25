@@ -7,7 +7,7 @@ class InvoiceTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.invoice_repo.find_by_id("1")
+    @i = SalesEngine.new.invoice_repository.find_by_id("1")
     # i.customer_id = "1"
     # i.merchant_id = "1"
   end
