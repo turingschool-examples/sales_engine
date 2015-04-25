@@ -12,7 +12,8 @@ require 'pry'
 class SalesEngine
   include LoadData
 
-  def initialize
+  def initialize(filepath = "fixtures")
+    @filepath = filepath
     startup
   end
 
@@ -26,27 +27,27 @@ class SalesEngine
   end
 
   def merchant_repo
-    @merchant_repository ||= MerchantRepository.new(merchant_data, self)
+    @merchant_repository ||= MerchantRepository.new(merchant_data(@filepath), self)
   end
 
   def item_repo
-    @item_repository ||= ItemRepository.new(item_data, self)
+    @item_repository ||= ItemRepository.new(item_data(@filepath), self)
   end
 
   def invoice_repo
-    @invoice_repository ||= InvoiceRepository.new(invoice_data, self)
+    @invoice_repository ||= InvoiceRepository.new(invoice_data(@filepath), self)
   end
 
   def transaction_repo
-    @transaction_repository ||= TransactionRepository.new(transaction_data, self)
+    @transaction_repository ||= TransactionRepository.new(transaction_data(@filepath), self)
   end
 
   def invoice_item_repo
-    @invoice_item_repository ||= InvoiceItemRepository.new(invoice_item_data, self)
+    @invoice_item_repository ||= InvoiceItemRepository.new(invoice_item_data(@filepath), self)
   end
 
   def customer_repo
-    @customer_repository ||= CustomerRepository.new(customer_data, self)
+    @customer_repository ||= CustomerRepository.new(customer_data(@filepath), self)
   end
 
   def find_invoices_by_merchant_id(merchant_id)

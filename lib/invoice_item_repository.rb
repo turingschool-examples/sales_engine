@@ -17,6 +17,10 @@ class InvoiceItemRepository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{invoice_items.size} rows>"
+  end
+
   def find_invoice_by_invoice_id(invoice_id)
     engine.invoice_repo.find_by_id(invoice_id)
   end
