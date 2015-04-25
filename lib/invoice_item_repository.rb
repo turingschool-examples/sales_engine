@@ -22,11 +22,11 @@ class InvoiceItemRepository
   end
 
   def find_invoice_by_invoice_id(invoice_id)
-    engine.invoice_repo.find_by_id(invoice_id)
+    engine.invoice_repository.find_by_id(invoice_id)
   end
 
   def find_item_by_item_id(item_id)
-    engine.item_repo.find_by_id(item_id)
+    engine.item_repository.find_by_id(item_id)
   end
 
   def all

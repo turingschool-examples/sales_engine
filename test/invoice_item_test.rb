@@ -7,7 +7,7 @@ class InvoiceItemTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.invoice_item_repo.find_by_id("1")
+    @i = SalesEngine.new.invoice_item_repository.find_by_id("1")
   end
 
   def test_that_invoice_returns_an_invoice_instance

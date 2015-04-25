@@ -6,7 +6,7 @@ class ItemTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.item_repo.find_by_id("539")
+    @i = SalesEngine.new.item_repository.find_by_id("539")
   end
 
   def test_invoice_items_returns_all_items

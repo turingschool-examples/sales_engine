@@ -24,11 +24,11 @@ class MerchantRepository
   end
 
   def find_all_items_by_merchant_id(merchant_id)
-    engine.item_repo.find_all_by_merchant_id(merchant_id)
+    engine.item_repository.find_all_by_merchant_id(merchant_id)
   end
 
   def find_all_invoices_by_merchant_id(merchant_id)
-    engine.invoice_repo.find_all_by_merchant_id(merchant_id)
+    engine.invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
   def calculate_total_revenue_by_merchant_id

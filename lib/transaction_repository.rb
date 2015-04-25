@@ -18,7 +18,7 @@ class TransactionRepository
   end
 
   def find_invoice_by_invoice_id(invoice_id)
-    engine.invoice_repo.find_by_id(invoice_id)
+    engine.invoice_repository.find_by_id(invoice_id)
   end
 
   def inspect
