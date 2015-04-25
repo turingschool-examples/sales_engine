@@ -49,12 +49,12 @@ class TransactionRepository
     transactions.select { |transaction| transaction.invoice_id == invoice_id}
   end
 
-  def find_by_cc_number(cc_number)
-    transactions.detect { |transaction| transaction.cc_number == cc_number}
+  def find_by_credit_card_number(cc_number)
+    transactions.detect { |transaction| transaction.cc_number == cc_number }
   end
 
-  def find_all_by_cc_number(cc_number)
-    transactions.select { |transaction| transaction.cc_number == cc_number}
+  def find_all_by_credit_card_number(cc_number)
+    transactions.select { |transaction| transaction.cc_number == cc_number }
   end
 
   def find_by_cc_expiration_date(cc_expiration_date)

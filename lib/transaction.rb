@@ -6,8 +6,8 @@ class Transaction
 
   def initialize(attributes, repo)
     @repo               = repo
-    @id                 = attributes[:id]
-    @invoice_id         = attributes[:invoice_id]
+    @id                 = attributes[:id].to_i
+    @invoice_id         = attributes[:invoice_id].to_i
     @cc_number          = attributes[:credit_card_number]
     @cc_expiration_date = attributes[:credit_card_expiration_date]
     @result             = attributes[:result]

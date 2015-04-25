@@ -6,7 +6,7 @@ class Merchant
 
   def initialize(attributes, repo)
     @repo       = repo
-    @id         = attributes[:id]
+    @id         = attributes[:id].to_i
     @name       = attributes[:name]
     @created_at = attributes[:created_at]
     @updated_at = attributes[:updated_at]
@@ -21,7 +21,7 @@ class Merchant
   end
 
   def revenue
-    repo.calculate_total_revenue_by_merchant_id
+    repo.calculate_total_revenue_by_merchant_id(id)
   end
 end
 
