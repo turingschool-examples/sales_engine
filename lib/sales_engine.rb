@@ -54,8 +54,8 @@ class SalesEngine
     invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
-  def find_invoice_items_by_invoice_ids(invoice_ids)
-    invoice_ids.map { |inv_id| invoice_item_repository.find_all_by_invoice_id(inv_id) }
+  def find_invoice_items_with_invoices(id)
+    invoice_item_repository.find_all_by_invoice_id(id)
   end
 
   def calculate_revenue_of_invoice_items(invoice_items)
@@ -66,19 +66,23 @@ class SalesEngine
     (number/100).to_digits.to_f
   end
 
-  def merchant_revenue(merchant_id)
-    inv_ids = find_invoices_by_merchant_id(merchant_id).map { |invoice| invoice.id }
-    inv_items = find_invoice_items_by_invoice_ids(inv_ids)
-    revenue = inv_items.map { |subarray| calculate_revenue_of_invoice_items(subarray) }.reduce(:+)
-    format_big_decimal(revenue)
+  def successful_invoices
+    transaction_repository.successful_transactions.map do |transaction|
+      invoice_repository.find_all_by_id(transaction.invoice_id)
+    end.flatten
   end
 
-  def merchant_revenue_for_specific_date(merchant_id, date)
-    inv_id = invoice_repository.find_by_merchant_id(merchant_id).id
-    inv_items = invoice_item_repository.find_all_by_invoice_id(inv_id)
-    inv_items_by_date = inv_items.find_all_by_created_at(date)
-    revenue = inv_items_by_date.reduce(0) { |sum, element| sum + (BigDecimal(element.unit_price) * element.quantity.to_i) }
-    revenue.round(2).to_digits
+  def successful_invoices_by_merchant_id(merchant_id)
+    successful_invoices.select { |invoice| invoice.merchant_id == merchant_id }
+  end
+
+  def merchant_revenue(merchant_id)
+    inv_items = successful_invoices_by_merchant_id(merchant_id)
+    x = inv_items.map do |invoice|
+      find_invoice_items_with_invoices(invoice.id)
+    end.flatten
+    number = calculate_revenue_of_invoice_items(x)
+    format_big_decimal(number)
   end
 end
 
