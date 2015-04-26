@@ -52,11 +52,11 @@ class MerchantRepository
   end
 
   def find_by_name(name)
-    merchants.find { |merchant| merchant.name == name }
+    merchants.find { |merchant| merchant.name.downcase == name.downcase }
   end
 
   def find_all_by_name(name)
-    merchants.select { |merchant| merchant.name == name }
+    merchants.select { |merchant| merchant.name.downcase == name.downcase }
   end
 
   def find_by_created_at(created_at)

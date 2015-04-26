@@ -55,4 +55,8 @@ class TransactionRepositoryTest < Minitest::Test
   def test_find_all_by_updated_at
     assert_equal 2, t.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
   end
+
+  # def test_find_all_by_result
+  #   assert_equal
+  # end
 end

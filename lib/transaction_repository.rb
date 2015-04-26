@@ -33,6 +33,10 @@ class TransactionRepository
     transactions.sample
   end
 
+  def successful_transactions
+    find_all_by_result("success")
+  end
+
   def find_by_id(id)
     transactions.detect { |transaction| transaction.id == id }
   end
@@ -66,11 +70,11 @@ class TransactionRepository
   end
 
   def find_by_result(result)
-    transactions.detect { |transaction| transaction.result == result}
+    transactions.detect { |transaction| transaction.result == result }
   end
 
   def find_all_by_result(result)
-    transactions.select { |transaction| transaction.result == result}
+    transactions.select { |transaction| transaction.result == result }
   end
 
   def find_by_created_at(created_at)
