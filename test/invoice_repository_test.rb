@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/invoice_repository'
 require './lib/load_data'
 require 'bigdecimal'
+require 'date'
 
 class InvoiceRepositoryTest < Minitest::Test
   include LoadData

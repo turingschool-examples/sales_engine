@@ -1,14 +1,15 @@
-require 'csv'
 require_relative 'merchant'
+require 'csv'
 
 class MerchantRepository
-  attr_accessor :merchants
-  attr_reader :engine, :data
+  attr_reader :merchants,
+              :engine,
+              :data
 
   def initialize(data, engine)
-    @engine = engine
-    @data = data
-    @merchants = create_merchants
+    @engine     = engine
+    @data       = data
+    @merchants  = create_merchants
   end
 
   def create_merchants
@@ -33,8 +34,16 @@ class MerchantRepository
     engine.invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
-  def calculate_total_revenue_by_merchant_id(merchant_id)
-    engine.merchant_revenue(merchant_id)
+  def successful_invoices_by_merchant_id(merchant_id)
+    engine.successful_invoices_by_merchant_id(merchant_id)
+  end
+
+  def calculate_total_revenue_by_merchant_id(merchant_id, date)
+    engine.merchant_revenue(merchant_id, date)
+  end
+
+  def pending_invoices(merchant_id)
+    engine.customers_with_pending_invoices(merchant_id)
   end
 
   def all

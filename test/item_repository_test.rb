@@ -17,6 +17,7 @@ class ItemRepositoryTest < Minitest::Test
   def test_that_random_returns_random_item_object
     assert_equal true, i.random.is_a?(Item)
   end
+
   def test_can_find_by_id
     assert_equal 1, i.find_by_id(1).id
   end
@@ -43,11 +44,11 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_unit_price
-    assert_equal 75107, i.find_by_unit_price(BigDecimal.new("75107")).to_digits
+    assert_equal 1, i.find_by_unit_price(BigDecimal.new("75107") / 100).id
   end
 
   def test_find_all_by_unit_price
-    assert_equal 1, i.find_all_by_unit_price(BigDecimal.new("75107")).length
+    assert_equal 1, i.find_all_by_unit_price(BigDecimal.new("75107") / 100).length
   end
 
   def test_find_by_merchant_id

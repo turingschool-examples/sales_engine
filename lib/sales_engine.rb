@@ -6,10 +6,10 @@ require_relative 'customer_repository'
 require_relative 'invoice_repository'
 require_relative 'load_data'
 require 'bigdecimal/util'
-require 'pry'
 
 class SalesEngine
   include LoadData
+
   attr_reader :filepath
 
   def initialize(filepath = "fixtures")
@@ -27,27 +27,33 @@ class SalesEngine
   end
 
   def merchant_repository
-    @merchant_repository ||= MerchantRepository.new(merchant_data(filepath), self)
+    @merchant_repository ||=
+      MerchantRepository.new(merchant_data(filepath), self)
   end
 
   def item_repository
-    @item_repository ||= ItemRepository.new(item_data(filepath), self)
+    @item_repository ||=
+      ItemRepository.new(item_data(filepath), self)
   end
 
   def invoice_repository
-    @invoice_repository ||= InvoiceRepository.new(invoice_data(filepath), self)
+    @invoice_repository ||=
+      InvoiceRepository.new(invoice_data(filepath), self)
   end
 
   def transaction_repository
-    @transaction_repository ||= TransactionRepository.new(transaction_data(filepath), self)
+    @transaction_repository ||=
+      TransactionRepository.new(transaction_data(filepath), self)
   end
 
   def invoice_item_repository
-    @invoice_item_repository ||= InvoiceItemRepository.new(invoice_item_data(filepath), self)
+    @invoice_item_repository ||=
+      InvoiceItemRepository.new(invoice_item_data(filepath), self)
   end
 
   def customer_repository
-    @customer_repository ||= CustomerRepository.new(customer_data(filepath), self)
+    @customer_repository ||=
+      CustomerRepository.new(customer_data(filepath), self)
   end
 
   def find_invoices_by_merchant_id(merchant_id)
@@ -58,17 +64,22 @@ class SalesEngine
     invoice_item_repository.find_all_by_invoice_id(id)
   end
 
-  def calculate_revenue_of_invoice_items(invoice_items)
-    invoice_items.reduce(0) { |sum, inv_item| sum + inv_item.unit_price * inv_item.quantity }
+  def find_all_invoice_items_with_multiple_invoices(invoices)
+    invoices.map do |invoice|
+      find_invoice_items_with_invoices(invoice.id)
+    end.flatten
   end
 
-  def format_big_decimal(number)
-    (number/100).to_digits.to_f
+  def calculate_revenue_of_invoice_items(invoice_items)
+    invoice_items.reduce(0) do |sum, inv_item|
+      sum + (inv_item.unit_price / 100) * inv_item.quantity
+    end
   end
 
   def successful_invoices
-    transaction_repository.successful_transactions.map do |transaction|
-      invoice_repository.find_all_by_id(transaction.invoice_id)
+    @successful_invoices ||=
+      transaction_repository.successful_transactions.map do |transaction|
+        invoice_repository.find_all_by_id(transaction.invoice_id)
     end.flatten
   end
 
@@ -76,17 +87,42 @@ class SalesEngine
     successful_invoices.select { |invoice| invoice.merchant_id == merchant_id }
   end
 
-  def merchant_revenue(merchant_id)
-    inv_items = successful_invoices_by_merchant_id(merchant_id)
-    x = inv_items.map do |invoice|
-      find_invoice_items_with_invoices(invoice.id)
+  def pending_invoices(merchant_id)
+    invoices = find_invoices_by_merchant_id(merchant_id)
+    successful_invoices = successful_invoices_by_merchant_id(merchant_id)
+    invoices - successful_invoices
+  end
+
+  def customers_with_pending_invoices(merchant_id)
+    pending_invoices(merchant_id).map do |invoice|
+      customer_repository.find_all_by_id(invoice.customer_id)
     end.flatten
-    number = calculate_revenue_of_invoice_items(x)
-    format_big_decimal(number)
+  end
+
+  def successful_invoices_by_date(merchant_id, date)
+    successful_invoices_by_merchant_id(merchant_id).select do |invoice|
+      Date.parse(invoice.created_at) == date
+    end
+  end
+
+  def date?(merchant_id, date)
+    if date.nil?
+      successful_invoices_by_merchant_id(merchant_id)
+    else
+      successful_invoices_by_date(merchant_id, date)
+    end
+  end
+
+  def merchant_revenue(merchant_id, date = nil)
+    invoices = date?(merchant_id, date)
+    invoice_items = find_all_invoice_items_with_multiple_invoices(invoices)
+    calculate_revenue_of_invoice_items(invoice_items)
   end
 
   def merchant_fave_customer(merchant_id)
-    customers = successful_invoices_by_merchant_id(merchant_id).map { |invoice| invoice.customer }
+    customers = successful_invoices_by_merchant_id(merchant_id).map do |invoice|
+      invoice.customer
+    end
     customers.max_by { |customer| customers.count(customer) }
   end
 end

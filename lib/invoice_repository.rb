@@ -1,13 +1,14 @@
-require 'csv'
 require_relative 'invoice'
+require 'csv'
 
 class InvoiceRepository
-  attr_accessor :invoices
-  attr_reader :engine, :data
+  attr_reader :invoices,
+              :engine,
+              :data
 
   def initialize(data, engine)
-    @engine = engine
-    @data = data
+    @engine   = engine
+    @data     = data
     @invoices = create_invoices
   end
 

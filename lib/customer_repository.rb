@@ -2,13 +2,14 @@ require 'csv'
 require_relative 'customer'
 
 class CustomerRepository
-  attr_accessor :customers
-  attr_reader :engine, :data
+  attr_reader :customers,
+              :engine,
+              :data
 
   def initialize(data, engine)
-    @engine = engine
-    @data = data
-    @customers = create_customers
+    @engine     = engine
+    @data       = data
+    @customers  = create_customers
   end
 
   def create_customers

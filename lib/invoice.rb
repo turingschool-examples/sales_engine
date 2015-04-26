@@ -1,6 +1,13 @@
+require 'date'
+
 class Invoice
-  attr_accessor :id, :customer_id, :merchant_id, :status, :created_at, :updated_at
-  attr_reader :repo
+  attr_reader :id,
+              :customer_id,
+              :merchant_id,
+              :status,
+              :created_at,
+              :updated_at,
+              :repo
 
   def initialize(attributes, repo)
     @repo          = repo
