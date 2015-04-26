@@ -84,6 +84,11 @@ class SalesEngine
     number = calculate_revenue_of_invoice_items(x)
     format_big_decimal(number)
   end
+
+  def merchant_fave_customer(merchant_id)
+    customers = successful_invoices_by_merchant_id(merchant_id).map { |invoice| invoice.customer }
+    customers.max_by { |customer| customers.count(customer) }
+  end
 end
 
 
