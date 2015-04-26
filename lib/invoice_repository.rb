@@ -1,6 +1,5 @@
 require 'csv'
 require_relative 'invoice'
-require_relative 'sales_engine'
 
 class InvoiceRepository
   attr_accessor :invoices

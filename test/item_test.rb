@@ -1,12 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/item'
+require './lib/sales_engine'
 
 class ItemTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.item_repository.find_by_id("539")
+    @x = SalesEngine.new
+    @i = @x.item_repository.find_by_id(539)
   end
 
   def test_invoice_items_returns_all_items

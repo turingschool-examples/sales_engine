@@ -1,4 +1,3 @@
-require_relative 'item_repository'
 require 'bigdecimal'
 
 class Item

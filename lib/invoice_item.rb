@@ -1,4 +1,3 @@
-require_relative 'sales_engine'
 require 'bigdecimal'
 
 class InvoiceItem
@@ -11,7 +10,9 @@ class InvoiceItem
     @item_id    = attributes[:item_id].to_i
     @invoice_id = attributes[:invoice_id].to_i
     @quantity   = attributes[:quantity].to_i
-    @unit_price = BigDecimal.new(attributes[:unit_price])
+    require 'pry'; binding.pry
+    @unit_price = BigDecimal.new(attributes[:unit_price].to_s)
+    # @unit_price = attributes[:unit_price]
     @created_at = attributes[:created_at]
     @updated_at = attributes[:updated_at]
   end

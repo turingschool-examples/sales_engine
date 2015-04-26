@@ -1,5 +1,3 @@
-require_relative 'merchant_repository'
-
 class Merchant
   attr_accessor :id, :name, :created_at, :updated_at
   attr_reader :repo

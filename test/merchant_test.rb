@@ -7,7 +7,8 @@ class MerchantTest < Minitest::Test
   attr_reader :m
 
   def setup
-    @m = SalesEngine.new.merchant_repository.find_by_id("1")
+    @x = SalesEngine.new
+    @m = @x.merchant_repository.find_by_id(1)
   end
 
   def test_that_items_method_returns_items_that_merchant_sells

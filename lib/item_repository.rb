@@ -1,8 +1,6 @@
 require 'csv'
-require_relative 'item'
-require_relative 'sales_engine'
-require 'bigdecimal'
 require 'bigdecimal/util'
+require_relative 'item'
 
 class ItemRepository
   attr_accessor :items

@@ -2,9 +2,12 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/item_repository'
 require './lib/load_data'
+require 'bigdecimal'
+require 'bigdecimal/util'
 
 class ItemRepositoryTest < Minitest::Test
   include LoadData
+
   attr_reader :i
 
   def setup
@@ -15,11 +18,11 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal true, i.random.is_a?(Item)
   end
   def test_can_find_by_id
-    assert_equal "1", i.find_by_id("1").id
+    assert_equal 1, i.find_by_id(1).id
   end
 
   def test_find_all_by_id
-    assert_equal 1, i.find_all_by_id("1").length
+    assert_equal 1, i.find_all_by_id(1).length
   end
 
   def test_find_by_name
@@ -31,7 +34,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_description
-    assert_equal "13", i.find_by_description("Nostrum doloribus quia. Expedita vitae beatae cumque. Aut ut illo aut eum.").id
+    assert_equal 13, i.find_by_description("Nostrum doloribus quia. Expedita vitae beatae cumque. Aut ut illo aut eum.").id
   end
 
   def test_find_all_by_description
@@ -40,23 +43,23 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_unit_price
-    assert_equal "75107", i.find_by_unit_price("75107").unit_price
+    assert_equal 75107, i.find_by_unit_price(BigDecimal.new("75107")).to_digits
   end
 
   def test_find_all_by_unit_price
-    assert_equal 1, i.find_all_by_unit_price("75107").length
+    assert_equal 1, i.find_all_by_unit_price(BigDecimal.new("75107")).length
   end
 
   def test_find_by_merchant_id
-    assert_equal "16", i.find_by_merchant_id("2").id
+    assert_equal 16, i.find_by_merchant_id(2).id
   end
 
   def test_find_all_by_merchant_id
-    assert_equal 2, i.find_all_by_merchant_id("2").length
+    assert_equal 2, i.find_all_by_merchant_id(2).length
   end
 
   def test_find_by_created_at
-    assert_equal "1", i.find_by_created_at("2012-03-27 14:53:59 UTC").id
+    assert_equal 1, i.find_by_created_at("2012-03-27 14:53:59 UTC").id
   end
 
   def test_find_all_by_created_at
@@ -64,7 +67,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_updated_at
-    assert_equal "1", i.find_by_updated_at("2012-03-27 14:53:59 UTC").id
+    assert_equal 1, i.find_by_updated_at("2012-03-27 14:53:59 UTC").id
   end
 
   def test_find_all_by_updated_at

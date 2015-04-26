@@ -13,11 +13,11 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_can_find_by_id
-    assert_equal "Joey", c.find_by_id("1").first_name
+    assert_equal "Joey", c.find_by_id(1).first_name
   end
 
   def test_can_find_all_by_id
-    assert_equal 1, c.find_all_by_id("1").length
+    assert_equal 1, c.find_all_by_id(1).length
   end
 
   def test_can_find_by_first_name
@@ -41,7 +41,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_find_by_created_at
-    assert_equal "2", c.find_by_created_at("2012-03-27 14:54:10 UTC").id
+    assert_equal 2, c.find_by_created_at("2012-03-27 14:54:10 UTC").id
   end
 
   def test_find_all_by_created_at
@@ -49,7 +49,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_find_by_updated_at
-    assert_equal "2", c.find_by_updated_at("2012-03-27 14:54:10 UTC").id
+    assert_equal 2, c.find_by_updated_at("2012-03-27 14:54:10 UTC").id
   end
 
   def test_find_all_by_updated_at

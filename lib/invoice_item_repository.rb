@@ -1,7 +1,5 @@
 require 'csv'
 require_relative 'invoice_item'
-require 'bigdecimal'
-require 'bigdecimal/util'
 
 class InvoiceItemRepository
   attr_accessor :invoice_items

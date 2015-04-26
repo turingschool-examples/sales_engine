@@ -8,7 +8,7 @@ class CustomerTest < Minitest::Test
 
   def setup
     @c = SalesEngine.new("data")
-    @asdf = c.customer_repository.find_by_id("999")
+    @asdf = c.customer_repository.find_by_id(999)
   end
 
   def test_invoices_returns_collection_of_invoices

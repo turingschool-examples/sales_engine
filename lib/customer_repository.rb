@@ -1,7 +1,5 @@
 require 'csv'
 require_relative 'customer'
-require_relative 'sales_engine'
-require_relative 'load_data'
 
 class CustomerRepository
   attr_accessor :customers
