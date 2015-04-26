@@ -1,6 +1,9 @@
 class Merchant
-  attr_accessor :id, :name, :created_at, :updated_at
-  attr_reader :repo
+  attr_reader :id,
+              :name,
+              :created_at,
+              :updated_at,
+              :repo
 
   def initialize(attributes, repo)
     @repo       = repo
@@ -18,12 +21,16 @@ class Merchant
     repo.find_all_invoices_by_merchant_id(id)
   end
 
-  def revenue
-    repo.calculate_total_revenue_by_merchant_id(id)
+  def revenue(date = nil)
+    repo.calculate_total_revenue_by_merchant_id(id, date)
   end
 
   def favorite_customer
     repo.find_favorite_customer_by_merchant_id(id)
+  end
+
+  def customers_with_pending_invoices
+    repo.pending_invoices(id)
   end
 end
 

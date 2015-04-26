@@ -50,11 +50,11 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_find_by_unit_price
-    assert_equal 1, i.find_by_unit_price(BigDecimal.new("13635")).id
+    assert_equal 1, i.find_by_unit_price(BigDecimal.new("13635") / 100).id
   end
 
   def test_find_all_by_unit_price
-    assert_equal 7, i.find_all_by_unit_price(BigDecimal.new("13635")).length
+    assert_equal 7, i.find_all_by_unit_price(BigDecimal.new("13635") / 100).length
   end
 
   def test_find_by_created_at

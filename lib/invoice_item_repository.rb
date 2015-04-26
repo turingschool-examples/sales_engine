@@ -1,14 +1,15 @@
-require 'csv'
 require_relative 'invoice_item'
+require 'csv'
 
 class InvoiceItemRepository
-  attr_accessor :invoice_items
-  attr_reader :engine, :data
+  attr_reader :engine,
+              :data,
+              :invoice_items
 
   def initialize(data, engine)
-    @engine = engine
-    @data = data
-    @invoice_items = create_invoice_items
+    @engine         = engine
+    @data           = data
+    @invoice_items  = create_invoice_items
   end
 
   def create_invoice_items
@@ -70,11 +71,15 @@ class InvoiceItemRepository
   end
 
   def find_by_unit_price(unit_price)
-    invoice_items.detect { |item| (item.unit_price / 100).to_digits == unit_price.to_digits }
+    invoice_items.detect do |item|
+      (item.unit_price / 100).to_digits == unit_price.to_digits
+    end
   end
 
   def find_all_by_unit_price(unit_price)
-    invoice_items.select { |item| (item.unit_price / 100).to_digits == unit_price.to_digits }
+    invoice_items.select do |item|
+      (item.unit_price / 100).to_digits == unit_price.to_digits
+    end
   end
 
   def find_by_created_at(created_at)

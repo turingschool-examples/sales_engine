@@ -1,8 +1,14 @@
 require 'bigdecimal'
 
 class InvoiceItem
-  attr_accessor :id, :item_id, :invoice_id, :quantity, :unit_price, :created_at, :updated_at
-  attr_reader :repo
+  attr_reader :id,
+              :item_id,
+              :invoice_id,
+              :quantity,
+              :unit_price,
+              :created_at,
+              :updated_at,
+              :repo
 
   def initialize(attributes, repo)
     @repo       = repo

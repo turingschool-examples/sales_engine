@@ -7,8 +7,7 @@ class InvoiceTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @x = SalesEngine.new
-    @i = @x.invoice_repository.find_by_id(1)
+    @i = SalesEngine.new.invoice_repository.find_by_id(1)
   end
 
   def test_invoice_object_exists_after_initialization
@@ -16,8 +15,7 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_transactions_returns_all_transactions_with_invoice_id
-    i.id = 12
-    assert_equal 3, i.transactions.length
+    assert_equal 1, i.transactions.length
   end
 
   def test_invoice_items_returns_all_invoice_items_with_invoice_id

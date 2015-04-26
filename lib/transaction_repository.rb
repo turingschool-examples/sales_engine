@@ -1,13 +1,14 @@
-require 'csv'
 require_relative 'transaction'
+require 'csv'
 
 class TransactionRepository
-  attr_accessor :transactions
-  attr_reader :engine, :data
+  attr_reader :transactions,
+              :engine,
+              :data
 
   def initialize(data, engine)
-    @engine = engine
-    @data = data
+    @engine       = engine
+    @data         = data
     @transactions = create_transactions
   end
 
@@ -37,12 +38,20 @@ class TransactionRepository
     find_all_by_result("success")
   end
 
+  def grouped_by_invoice_id
+    transactions.group_by { |transaction| transaction.invoice_id }
+  end
+
+  def pending_transactions
+    grouped_by_invoice_id.delete_if { |key, value| value.include? "success" }
+  end
+
   def find_by_id(id)
     transactions.detect { |transaction| transaction.id == id }
   end
 
   def find_all_by_id(id)
-    transactions.select { |transaction| transaction.id == id}
+    transactions.select { |transaction| transaction.id == id }
   end
 
   def find_by_invoice_id(invoice_id)
@@ -50,7 +59,7 @@ class TransactionRepository
   end
 
   def find_all_by_invoice_id(invoice_id)
-    transactions.select { |transaction| transaction.invoice_id == invoice_id}
+    transactions.select { |transaction| transaction.invoice_id == invoice_id }
   end
 
   def find_by_credit_card_number(cc_number)
@@ -62,11 +71,15 @@ class TransactionRepository
   end
 
   def find_by_cc_expiration_date(cc_expiration_date)
-    transactions.detect { |transaction| transaction.cc_expiration_date == cc_expiration_date}
+    transactions.detect do |transaction|
+      transaction.cc_expiration_date == cc_expiration_date
+    end
   end
 
   def find_all_by_cc_expiration_date(cc_expiration_date)
-    transactions.select { |transaction| transaction.cc_expiration_date == cc_expiration_date}
+    transactions.select do |transaction|
+      transaction.cc_expiration_date == cc_expiration_date
+    end
   end
 
   def find_by_result(result)
@@ -78,19 +91,18 @@ class TransactionRepository
   end
 
   def find_by_created_at(created_at)
-    transactions.detect { |transaction| transaction.created_at == created_at}
+    transactions.detect { |transaction| transaction.created_at == created_at }
   end
 
   def find_all_by_created_at(created_at)
-    transactions.select { |transaction| transaction.created_at == created_at}
+    transactions.select { |transaction| transaction.created_at == created_at }
   end
 
   def find_by_updated_at(updated_at)
-    transactions.detect { |transaction| transaction.updated_at == updated_at}
+    transactions.detect { |transaction| transaction.updated_at == updated_at }
   end
 
   def find_all_by_updated_at(updated_at)
-    transactions.select { |transaction| transaction.updated_at == updated_at}
+    transactions.select { |transaction| transaction.updated_at == updated_at }
   end
-
 end

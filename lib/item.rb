@@ -1,8 +1,14 @@
 require 'bigdecimal'
 
 class Item
-  attr_accessor :id, :name, :description, :unit_price, :merchant_id, :created_at, :updated_at
-  attr_reader :repo
+  attr_reader :id,
+              :name,
+              :description,
+              :unit_price,
+              :merchant_id,
+              :created_at,
+              :updated_at,
+              :repo
 
   def initialize(attributes, repo)
     @repo         = repo
