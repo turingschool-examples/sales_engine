@@ -23,6 +23,10 @@ class MerchantRepository
     "#<#{self.class} #{merchants.size} rows>"
   end
 
+  def find_favorite_customer_by_merchant_id(merchant_id)
+    engine.merchant_fave_customer(merchant_id)
+  end
+
   def find_all_items_by_merchant_id(merchant_id)
     engine.item_repository.find_all_by_merchant_id(merchant_id)
   end
