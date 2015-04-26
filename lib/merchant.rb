@@ -21,6 +21,10 @@ class Merchant
   def revenue
     repo.calculate_total_revenue_by_merchant_id(id)
   end
+
+  def favorite_customer
+    repo.find_favorite_customer_by_merchant_id(id)
+  end
 end
 
 
