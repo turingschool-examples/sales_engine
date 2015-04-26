@@ -17,11 +17,11 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_by_id
-    assert_equal "Schroeder-Jerde", m.find_by_id("1").name
+    assert_equal "Schroeder-Jerde", m.find_by_id(1).name
   end
 
   def test_find_all_by_id
-    assert_equal 1, m.find_all_by_id("1").length
+    assert_equal 1, m.find_all_by_id(1).length
   end
 
   def test_find_by_name
@@ -33,7 +33,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_find_by_created_at
-    assert_equal "1", m.find_by_created_at("2012-03-27 14:53:59 UTC").id
+    assert_equal 1, m.find_by_created_at("2012-03-27 14:53:59 UTC").id
   end
 
   def test_find_all_by_created_at
@@ -41,7 +41,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_find_by_updated_at
-    assert_equal "1", m.find_by_updated_at("2012-03-27 14:53:59 UTC").id
+    assert_equal 1, m.find_by_updated_at("2012-03-27 14:53:59 UTC").id
   end
 
   def test_find_all_by_updated_at

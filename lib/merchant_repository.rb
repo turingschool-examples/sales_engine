@@ -1,7 +1,5 @@
 require 'csv'
 require_relative 'merchant'
-require_relative 'sales_engine'
-require_relative 'load_data'
 
 class MerchantRepository
   attr_accessor :merchants
@@ -48,7 +46,7 @@ class MerchantRepository
   end
 
   def find_by_id(id)
-    merchants.find { |merchant| merchant.id == id }
+    merchants.detect { |merchant| merchant.id == id }
   end
 
   def find_all_by_id(id)
@@ -56,7 +54,7 @@ class MerchantRepository
   end
 
   def find_by_name(name)
-    merchants.find { |merchant| merchant.name.downcase == name.downcase }
+    merchants.detect { |merchant| merchant.name.downcase == name.downcase }
   end
 
   def find_all_by_name(name)
@@ -64,7 +62,7 @@ class MerchantRepository
   end
 
   def find_by_created_at(created_at)
-    merchants.find { |merchant| merchant.created_at == created_at }
+    merchants.detect { |merchant| merchant.created_at == created_at }
   end
 
   def find_all_by_created_at(created_at)
@@ -72,7 +70,7 @@ class MerchantRepository
   end
 
   def find_by_updated_at(updated_at)
-    merchants.find { |merchant| merchant.updated_at == updated_at }
+    merchants.detect { |merchant| merchant.updated_at == updated_at }
   end
 
   def find_all_by_updated_at(updated_at)

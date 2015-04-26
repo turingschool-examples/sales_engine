@@ -1,4 +1,3 @@
-require_relative 'item_repository'
 require 'bigdecimal'
 
 class Item
@@ -10,7 +9,7 @@ class Item
     @id           = attributes[:id].to_i
     @name         = attributes[:name]
     @description  = attributes[:description]
-    @unit_price   = BigDecimal.new(attributes[:unit_price])
+    @unit_price   = BigDecimal.new(attributes[:unit_price].to_s)
     @merchant_id  = attributes[:merchant_id].to_i
     @created_at   = attributes[:created_at]
     @updated_at   = attributes[:updated_at]

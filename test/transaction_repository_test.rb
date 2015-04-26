@@ -17,27 +17,27 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_can_find_by_id
-    assert_equal "1", t.find_by_id("1").invoice_id
+    assert_equal 1, t.find_by_id(1).invoice_id
   end
 
   def test_find_all_by_id
-    assert_equal 1, t.find_all_by_id("1").length
+    assert_equal 1, t.find_all_by_id(1).length
   end
 
   def test_find_by_invoice_id
-    assert_equal "1", t.find_by_invoice_id("1").id
+    assert_equal 1, t.find_by_invoice_id(1).id
   end
 
   def test_find_all_by_invoice_id
-    assert_equal 3, t.find_all_by_invoice_id("12").length
+    assert_equal 3, t.find_all_by_invoice_id(12).length
   end
 
   def test_find_by_cc_number
-    assert_equal "1", t.find_by_cc_number("4654405418249632").id
+    assert_equal 1, t.find_by_credit_card_number("4654405418249632").id
   end
 
   def test_find_all_by_cc_number
-    assert_equal 1, t.find_all_by_cc_number("4654405418249632").length
+    assert_equal 1, t.find_all_by_credit_card_number("4654405418249632").length
   end
 
   def test_find_by_created_at
@@ -55,8 +55,4 @@ class TransactionRepositoryTest < Minitest::Test
   def test_find_all_by_updated_at
     assert_equal 2, t.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
   end
-
-  # def test_find_all_by_result
-  #   assert_equal
-  # end
 end
