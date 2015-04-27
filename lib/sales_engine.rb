@@ -130,6 +130,13 @@ class SalesEngine
     end
     customers.max_by { |customer| customers.count(customer) }
   end
+
+  def customer_fave_merchant(customer_id)
+    merchants = invoice_repository.find_all_by_customer_id(customer_id).map do |invoice|
+      invoice.merchant
+    end
+    merchants.max_by { |merchant| merchants.count(merchant) }
+  end
 end
 
 
