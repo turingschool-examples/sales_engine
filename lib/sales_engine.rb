@@ -87,6 +87,7 @@ class SalesEngine
     successful_invoices.select { |invoice| invoice.merchant_id == merchant_id }
   end
 
+
   def pending_invoices(merchant_id)
     invoices = find_invoices_by_merchant_id(merchant_id)
     successful_invoices = successful_invoices_by_merchant_id(merchant_id)
