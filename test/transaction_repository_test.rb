@@ -25,6 +25,10 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 1 , t.find_invoice_by_invoice_id(1).id
   end
 
+  def test_all_method
+    assert_equal 38, t.all.length
+  end
+
   def test_can_find_by_id
     assert_equal 1, t.find_by_id(1).invoice_id
   end

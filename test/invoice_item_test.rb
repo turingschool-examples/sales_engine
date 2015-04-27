@@ -9,6 +9,12 @@ class InvoiceItemTest < Minitest::Test
     @i = SalesEngine.new.invoice_item_repository.find_by_id(1)
   end
 
+  def test_invoice_item_intializes_correctly
+    assert_equal 539, i.item_id
+    assert_equal 1, i.invoice_id
+    assert_equal 5, i.quantity
+  end
+
   def test_that_invoice_returns_an_invoice_instance
     assert_equal 26, i.invoice.merchant_id
   end
