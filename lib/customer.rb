@@ -18,4 +18,12 @@ class Customer
   def invoices
     repo.find_invoices_by_customer_id(id)
   end
+
+  def transactions
+    invoices.map { |invoice| invoice.transactions }
+  end
+
+  def favorite_merchant
+    repo.find_favorite_merchant_by_customer_id(id)
+  end
 end

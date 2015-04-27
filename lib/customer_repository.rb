@@ -30,6 +30,10 @@ class CustomerRepository
     engine.invoice_repository.find_all_by_customer_id(id)
   end
 
+  def find_favorite_merchant_by_customer_id(id)
+    engine.customer_fave_merchant(id)
+  end
+
   def random
     customers.sample
   end

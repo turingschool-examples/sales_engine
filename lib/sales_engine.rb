@@ -132,9 +132,15 @@ class SalesEngine
   end
 
   def best_day_for_item(item_id)
-    invoice_item_repository.
-    successful_invoices
+    # invoice_item_repository.
+    # successful_invoices
+  end
 
+  def customer_fave_merchant(customer_id)
+    merchants = invoice_repository.find_all_by_customer_id(customer_id).map do |invoice|
+      invoice.merchant
+    end
+    merchants.max_by { |merchant| merchants.count(merchant) }
   end
 end
 
