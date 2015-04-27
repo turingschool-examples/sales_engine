@@ -78,9 +78,9 @@ class SalesEngine
 
   def successful_invoices
     @successful_invoices ||=
-      transaction_repository.successful_transactions.map do |transaction|
+      transaction_repository.successful_transactions.flat_map do |transaction|
         invoice_repository.find_all_by_id(transaction.invoice_id)
-    end.flatten
+    end
   end
 
   def successful_invoices_by_merchant_id(merchant_id)
@@ -99,9 +99,9 @@ class SalesEngine
   end
 
   def customers_with_pending_invoices(merchant_id)
-    pending_invoices(merchant_id).map do |invoice|
+    pending_invoices(merchant_id).flat_map do |invoice|
       find_all_customers_by_invoice_customer_id(invoice)
-    end.flatten
+    end
   end
 
   def successful_invoices_by_date(merchant_id, date)
@@ -131,9 +131,9 @@ class SalesEngine
     customers.max_by { |customer| customers.count(customer) }
   end
 
-  def best_day_for_item(item_id)
-    # invoice_item_repository.
-    # successful_invoices
+  def best_day_for_item(date)
+    invoices = successful_invoices.find_by_created_at(date)
+    invoice_items = invoice_item_repository.find_all_by_invoice_id(invoices).flatten
   end
 
   def customer_fave_merchant(customer_id)

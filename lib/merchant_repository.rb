@@ -1,6 +1,5 @@
 require_relative 'merchant'
 require 'csv'
-require 'pry'
 
 class MerchantRepository
   attr_reader :merchants,
