@@ -9,7 +9,11 @@ class TransactionTest < Minitest::Test
     @t = SalesEngine.new.transaction_repository.find_by_invoice_id(2)
   end
 
-  def test_that_invoice_returns_instance_of_invoice
+  def test_that_invoice_returns_merchant_id
     assert_equal 75, t.invoice.merchant_id
+  end
+
+  def test_that_invoice_returns_customer_id
+    assert_equal 1, t.invoice.customer_id
   end
 end

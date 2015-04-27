@@ -38,7 +38,7 @@ class MerchantRepository
     engine.successful_invoices_by_merchant_id(merchant_id)
   end
 
-  def calculate_total_revenue_by_merchant_id(merchant_id, date)
+  def calculate_total_revenue_by_merchant_id(merchant_id, date = nil)
     engine.merchant_revenue(merchant_id, date)
   end
 

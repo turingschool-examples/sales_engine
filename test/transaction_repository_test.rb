@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/transaction_repository'
 require './lib/load_data'
+require './lib/sales_engine'
 
 class TransactionRepositoryTest < Minitest::Test
   include LoadData
@@ -9,11 +10,19 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :t
 
   def setup
-    @t = TransactionRepository.new(transaction_data("fixtures"), nil)
+    @t = TransactionRepository.new(transaction_data("fixtures"), SalesEngine.new)
+  end
+
+  def test_find_all_transaction_objects
+    assert_equal 38, t.all.length
   end
 
   def test_that_random_returns_random_transaction_object
     assert_equal true, t.random.is_a?(Transaction)
+  end
+
+  def test_find_invoice_by_invoice_id
+    assert_equal 1 , t.find_invoice_by_invoice_id(1).id
   end
 
   def test_can_find_by_id
@@ -32,12 +41,28 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 3, t.find_all_by_invoice_id(12).length
   end
 
-  def test_find_by_cc_number
+  def test_find_by_credit_card_number
     assert_equal 1, t.find_by_credit_card_number("4654405418249632").id
   end
 
-  def test_find_all_by_cc_number
+  def test_find_all_by_credit_card_number
     assert_equal 1, t.find_all_by_credit_card_number("4654405418249632").length
+  end
+
+  def test_can_find_by_credit_card_expiration_date
+    assert_equal nil, t.find_by_credit_card_expiration_date("")
+  end
+
+  def test_can_find_all_by_credit_card_expiration_date
+    assert_equal [], t.find_all_by_credit_card_expiration_date("")
+  end
+
+  def test_can_find_by_result
+    assert_equal 1, t.find_by_result("success").id
+  end
+
+  def test_can_find_all_by_result
+    assert_equal 7, t.find_all_by_result("failed").length
   end
 
   def test_find_by_created_at
