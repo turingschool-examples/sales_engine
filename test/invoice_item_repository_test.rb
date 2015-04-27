@@ -17,7 +17,11 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal true, i.random.is_a?(InvoiceItem)
   end
 
-  def test_can_find_by_id
+  def test_all_method
+    assert_equal 34, i.all.length
+  end
+
+  def test_find_by_id
     assert_equal 1, i.find_by_id(1).id
   end
 

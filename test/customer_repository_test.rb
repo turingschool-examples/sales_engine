@@ -12,6 +12,14 @@ class CustomerRepositoryTest < Minitest::Test
     @c = CustomerRepository.new(customer_data("fixtures"), nil)
   end
 
+  def test_all_method
+    assert_equal 18, c.all.length
+  end
+
+  def test_random_method
+    assert_equal true, c.random.is_a?(Customer)
+  end
+
   def test_can_find_by_id
     assert_equal "Joey", c.find_by_id(1).first_name
   end
@@ -34,10 +42,6 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_can_find_all_by_last_name
     assert_equal 5, c.find_all_by_last_name("Schamberger").length
-  end
-
-  def test_that_random_returns_random_customer_object
-    assert_equal true, c.random.is_a?(Customer)
   end
 
   def test_find_by_created_at

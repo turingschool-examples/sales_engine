@@ -1,5 +1,5 @@
-require 'csv'
 require_relative 'customer'
+require 'csv'
 
 class CustomerRepository
   attr_reader :customers,

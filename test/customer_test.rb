@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/customer'
 require './lib/sales_engine'
 
 class CustomerTest < Minitest::Test
@@ -8,6 +7,16 @@ class CustomerTest < Minitest::Test
 
   def setup
     @c = SalesEngine.new.customer_repository.find_by_id(1)
+  end
+
+  def test_that_exists
+    assert c
+  end
+
+  def test_that_customer_initializes_correctly
+    assert_equal "Joey", c.first_name
+    assert_equal "Ondricka", c.last_name
+    assert_equal 1, c.id
   end
 
   def test_invoices_returns_collection_of_invoices
