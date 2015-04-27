@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/merchant_repository'
 require './lib/load_data'
+require './lib/sales_engine'
 
 class MerchantRepositoryTest < Minitest::Test
   include LoadData
@@ -9,7 +10,39 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :m
 
   def setup
-    @m = MerchantRepository.new(merchant_data("fixtures"), nil)
+    @m = MerchantRepository.new(merchant_data("fixtures"), SalesEngine.new)
+  end
+
+  def test_can_find_fave_customer_by_merchant_id
+    assert_equal 1, m.find_favorite_customer_by_merchant_id(26).id
+  end
+
+  def test_can_find_all_items_by_merchant_id
+    assert_equal 8, m.find_all_items_by_merchant_id(26).length
+  end
+
+  def test_can_find_all_invoices_by_merchant_id
+    assert_equal 1, m.find_all_invoices_by_merchant_id(26).length
+  end
+
+  def test_can_find_successful_invoices_by_merchant_id
+    assert_equal 1, m.successful_invoices_by_merchant_id(26).length
+  end
+
+  def test_can_calculate_total_revenue_by_merchant_id_no_date
+    assert_equal BigDecimal.new("21067.77"), m.calculate_total_revenue_by_merchant_id(26)
+  end
+
+  def test_can_calculate_total_revenue_by_merchant_id_and_date
+    assert_equal BigDecimal.new("21067.77"), m.calculate_total_revenue_by_merchant_id(26, Date.parse("2012-03-25 09:54:09 UTC"))
+  end
+
+  def test_can_return_customers_with_pending_invoices
+    assert_equal "Mariah", m.pending_invoices(34).first.first_name
+  end
+
+  def test_can_find_all_merchants
+    assert_equal 12, m.all.length
   end
 
   def test_that_random_returns_random_merchant_object

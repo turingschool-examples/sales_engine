@@ -18,10 +18,6 @@ class TransactionRepository
     end
   end
 
-  def find_invoice_by_invoice_id(invoice_id)
-    engine.invoice_repository.find_by_id(invoice_id)
-  end
-
   def inspect
     "#<#{self.class} #{transactions.size} rows>"
   end
@@ -38,12 +34,8 @@ class TransactionRepository
     find_all_by_result("success")
   end
 
-  def grouped_by_invoice_id
-    transactions.group_by { |transaction| transaction.invoice_id }
-  end
-
-  def pending_transactions
-    grouped_by_invoice_id.delete_if { |key, value| value.include? "success" }
+  def find_invoice_by_invoice_id(invoice_id)
+    engine.invoice_repository.find_by_id(invoice_id)
   end
 
   def find_by_id(id)
@@ -70,13 +62,13 @@ class TransactionRepository
     transactions.select { |transaction| transaction.cc_number == cc_number }
   end
 
-  def find_by_cc_expiration_date(cc_expiration_date)
+  def find_by_credit_card_expiration_date(cc_expiration_date)
     transactions.detect do |transaction|
       transaction.cc_expiration_date == cc_expiration_date
     end
   end
 
-  def find_all_by_cc_expiration_date(cc_expiration_date)
+  def find_all_by_credit_card_expiration_date(cc_expiration_date)
     transactions.select do |transaction|
       transaction.cc_expiration_date == cc_expiration_date
     end
