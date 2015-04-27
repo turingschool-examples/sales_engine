@@ -130,6 +130,12 @@ class SalesEngine
     end
     customers.max_by { |customer| customers.count(customer) }
   end
+
+  def best_day_for_item(item_id)
+    invoice_item_repository.
+    successful_invoices
+
+  end
 end
 
 

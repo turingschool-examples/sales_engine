@@ -28,4 +28,8 @@ class Item
   def merchant
     repo.find_merchant_by_id(merchant_id)
   end
+
+  def best_day
+    repo.find_best_day_for_item(id)
+  end
 end
