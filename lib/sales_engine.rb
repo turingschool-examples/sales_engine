@@ -93,9 +93,13 @@ class SalesEngine
     invoices - successful_invoices
   end
 
+  def find_all_customers_by_invoice_customer_id(invoice)
+    customer_repository.find_all_by_id(invoice.customer_id)
+  end
+
   def customers_with_pending_invoices(merchant_id)
     pending_invoices(merchant_id).map do |invoice|
-      customer_repository.find_all_by_id(invoice.customer_id)
+      find_all_customers_by_invoice_customer_id(invoice)
     end.flatten
   end
 

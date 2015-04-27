@@ -9,6 +9,11 @@ class ItemTest < Minitest::Test
     @i = SalesEngine.new.item_repository.find_by_id(539)
   end
 
+  def test_that_intializes_correctly
+    assert_equal "Item Sunt Saepe", i.name
+    assert_equal 26, i.merchant_id
+  end
+
   def test_invoice_items_returns_all_items
     assert_equal 7, i.invoice_items.length
   end
