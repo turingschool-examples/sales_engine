@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/customer_repository'
 require './lib/load_data'
+require './lib/sales_engine'
 
 class CustomerRepositoryTest < Minitest::Test
   include LoadData
@@ -9,11 +10,15 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :c
 
   def setup
-    @c = CustomerRepository.new(customer_data("fixtures"), nil)
+    @c = CustomerRepository.new(customer_data("fixtures"), SalesEngine.new)
   end
 
-  def test_all_method
+  def test_all_returns_all_customers
     assert_equal 18, c.all.length
+  end
+
+  def test_can_find_favorite_merchant_by_customer_id
+    assert_equal 26, c.find_favorite_merchant_by_customer_id(1).id
   end
 
   def test_random_method
