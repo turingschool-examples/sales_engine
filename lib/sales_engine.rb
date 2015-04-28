@@ -15,46 +15,40 @@ class SalesEngine
 
   def initialize(filepath = "fixtures")
     @filepath = filepath
-    startup
   end
 
   def startup
-    merchant_repository
-    item_repository
-    invoice_repository
-    transaction_repository
-    invoice_item_repository
-    customer_repository
+    # Sally and Justin's Sales Engine!
   end
 
   def merchant_repository
-    @merchant_repository ||=
-      MerchantRepository.new(merchant_data(filepath), self)
+    @merchant_repo ||=
+      MerchantRepository.new(load_csv(filepath, "merchants.csv"), self)
   end
 
   def item_repository
-    @item_repository ||=
-      ItemRepository.new(item_data(filepath), self)
+    @item_repo ||=
+      ItemRepository.new(load_csv(filepath, "items.csv"), self)
   end
 
   def invoice_repository
-    @invoice_repository ||=
-      InvoiceRepository.new(invoice_data(filepath), self)
+    @invoice_repo ||=
+      InvoiceRepository.new(load_csv(filepath, "invoices.csv"), self)
   end
 
   def transaction_repository
-    @transaction_repository ||=
-      TransactionRepository.new(transaction_data(filepath), self)
+    @transaction_repo ||=
+      TransactionRepository.new(load_csv(filepath, "transactions.csv"), self)
   end
 
   def invoice_item_repository
-    @invoice_item_repository ||=
-      InvoiceItemRepository.new(invoice_item_data(filepath), self)
+    @invoice_item_repo ||=
+      InvoiceItemRepository.new(load_csv(filepath, "invoice_items.csv"), self)
   end
 
   def customer_repository
-    @customer_repository ||=
-      CustomerRepository.new(customer_data(filepath), self)
+    @customer_repo ||=
+      CustomerRepository.new(load_csv(filepath, "customers.csv"), self)
   end
 
   def find_invoices_by_merchant_id(merchant_id)

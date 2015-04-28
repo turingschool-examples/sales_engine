@@ -14,7 +14,7 @@ class ItemRepositoryTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = ItemRepository.new(item_data("fixtures"), SalesEngine.new)
+    @i = ItemRepository.new(load_csv("fixtures", "items.csv"), SalesEngine.new)
   end
 
   def test_all_method

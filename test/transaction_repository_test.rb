@@ -12,7 +12,7 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :t
 
   def setup
-    @t = TransactionRepository.new(transaction_data("fixtures"), SalesEngine.new)
+    @t = TransactionRepository.new(load_csv("fixtures", "transactions.csv"), SalesEngine.new)
   end
 
   def test_find_all_transaction_objects
