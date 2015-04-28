@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/customer_repository'
 require './lib/load_data'
 require './lib/sales_engine'
+require 'simplecov'
 
 class CustomerRepositoryTest < Minitest::Test
   include LoadData

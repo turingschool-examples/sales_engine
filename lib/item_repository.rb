@@ -27,6 +27,10 @@ class ItemRepository
     items
   end
 
+  def find_best_day_for_item(item_id)
+    engine.best_day_for_item(item_id)
+  end
+
   def find_invoice_items_by_item_id(item_id)
     engine.invoice_item_repository.find_all_by_item_id(item_id)
   end

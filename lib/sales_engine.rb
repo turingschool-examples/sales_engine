@@ -6,6 +6,7 @@ require_relative 'customer_repository'
 require_relative 'invoice_repository'
 require_relative 'load_data'
 require 'bigdecimal/util'
+require 'pry'
 
 class SalesEngine
   include LoadData
@@ -78,15 +79,14 @@ class SalesEngine
 
   def successful_invoices
     @successful_invoices ||=
-      transaction_repository.successful_transactions.map do |transaction|
+      transaction_repository.successful_transactions.flat_map do |transaction|
         invoice_repository.find_all_by_id(transaction.invoice_id)
-    end.flatten
+    end
   end
 
   def successful_invoices_by_merchant_id(merchant_id)
     successful_invoices.select { |invoice| invoice.merchant_id == merchant_id }
   end
-
 
   def pending_invoices(merchant_id)
     invoices = find_invoices_by_merchant_id(merchant_id)
@@ -99,9 +99,9 @@ class SalesEngine
   end
 
   def customers_with_pending_invoices(merchant_id)
-    pending_invoices(merchant_id).map do |invoice|
+    pending_invoices(merchant_id).flat_map do |invoice|
       find_all_customers_by_invoice_customer_id(invoice)
-    end.flatten
+    end
   end
 
   def successful_invoices_by_date(merchant_id, date)
@@ -129,6 +129,12 @@ class SalesEngine
       invoice.customer
     end
     customers.max_by { |customer| customers.count(customer) }
+  end
+
+  def best_day_for_item(item_id)
+    invoice_items = invoice_item_repository.find_all_by_item_id(item_id)
+    invoice_item = invoice_items.max_by { |invoice_item| invoice_item.quantity }
+    Date.parse(invoice_repository.find_by_id(invoice_item.invoice_id).created_at)
   end
 
   def customer_fave_merchant(customer_id)
