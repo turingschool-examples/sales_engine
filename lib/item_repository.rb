@@ -36,8 +36,10 @@ class ItemRepository
     items.max_by(number) { |item| item.revenue }
   end
 
-    def find_best_day_for_item(item_id)
-    engine.best_day_for_item(item_id)
+  def find_best_day_for_item(item_id)
+    invoice_items = find_invoice_items_by_item_id(item_id)
+    invoice_item = invoice_items.max_by { |invoice_item| invoice_item.quantity }
+    Date.parse(engine.find_invoice_date_by_invoice_id(invoice_item.invoice_id))
   end
 
   def most_items(x)
@@ -45,7 +47,7 @@ class ItemRepository
   end
 
   def find_successful_invoice_items_by_item_id(item_id)
-    engine.all_successful_invoice_items_by_item_id(item_id)
+    engine.successful_invoice_items_by_item_id(item_id)
   end
 
   def find_invoice_items_by_item_id(item_id)

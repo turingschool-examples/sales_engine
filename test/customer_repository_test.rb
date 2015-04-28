@@ -19,10 +19,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 18, c.all.length
   end
 
-  def test_can_find_favorite_merchant_by_customer_id
-    assert_equal 26, c.find_favorite_merchant_by_customer_id(1).id
-  end
-
   def test_random_method
     assert_equal true, c.random.is_a?(Customer)
   end
@@ -69,5 +65,9 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_inspect_returns_number_of_rows
     assert_equal "#<CustomerRepository 18 rows>", c.inspect
+  end
+
+  def test_customers_with_pending_invoices
+    assert_equal 1, c.customers_with_pending_invoices(34).length
   end
 end

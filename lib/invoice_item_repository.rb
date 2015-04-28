@@ -22,11 +22,6 @@ class InvoiceItemRepository
     "#<#{self.class} #{invoice_items.size} rows>"
   end
 
-  # def successful_invoice_items
-  #   @successful_invoice_items ||=
-  #     invoice_items.select { |invoice_item| invoice_item.successful? }
-  # end
-
   def find_invoice_by_invoice_id(invoice_id)
     engine.invoice_repository.find_by_id(invoice_id)
   end
@@ -40,7 +35,8 @@ class InvoiceItemRepository
   end
 
   def successful_invoice_items
-   @successful_invoice_items ||= engine.successful_invoices.flat_map(&:invoice_items)
+   @successful_invoice_items ||=
+     engine.successful_invoices.flat_map(&:invoice_items)
   end
 
   def random

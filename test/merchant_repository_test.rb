@@ -33,11 +33,11 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_calculate_total_revenue_by_merchant_id_no_date
-    assert_equal BigDecimal.new("21067.77"), m.calculate_total_revenue_by_merchant_id(26)
+    assert_equal BigDecimal.new("21067.77"), m.merchant_revenue(26)
   end
 
   def test_can_calculate_total_revenue_by_merchant_id_and_date
-    assert_equal BigDecimal.new("21067.77"), m.calculate_total_revenue_by_merchant_id(26, Date.parse("2012-03-25 09:54:09 UTC"))
+    assert_equal BigDecimal.new("21067.77"), m.merchant_revenue(26, Date.parse("2012-03-25 09:54:09 UTC"))
   end
 
   def test_can_return_customers_with_pending_invoices

@@ -23,7 +23,13 @@ class Customer
     invoices.map { |invoice| invoice.transactions }
   end
 
+  def find_merchants_by_invoices
+    invoices.map { |invoice| invoice.merchant }
+  end
+
   def favorite_merchant
-    repo.find_favorite_merchant_by_customer_id(id)
+    find_merchants_by_invoices.max_by do |merchant|
+      find_merchants_by_invoices.count(merchant)
+    end
   end
 end

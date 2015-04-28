@@ -30,8 +30,10 @@ class CustomerRepository
     engine.invoice_repository.find_all_by_customer_id(id)
   end
 
-  def find_favorite_merchant_by_customer_id(id)
-    engine.customer_fave_merchant(id)
+  def customers_with_pending_invoices(merchant_id)
+    engine.pending_invoices(merchant_id).flat_map do |invoice|
+      find_all_by_id(invoice.customer_id)
+    end
   end
 
   def random

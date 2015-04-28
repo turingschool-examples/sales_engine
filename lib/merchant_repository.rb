@@ -22,6 +22,20 @@ class MerchantRepository
     "#<#{self.class} #{merchants.size} rows>"
   end
 
+  def merchant_revenue(merchant_id, date = nil)
+    invoices = date?(merchant_id, date)
+    inv_items = engine.find_all_invoice_items_with_multiple_invoices(invoices)
+    engine.calculate_revenue_of_invoice_items(inv_items)
+  end
+
+  def date?(merchant_id, date)
+    if date.nil?
+      engine.successful_invoices_by_merchant_id(merchant_id)
+    else
+      engine.successful_invoices_by_date(merchant_id, date)
+    end
+  end
+
   def most_revenue(number)
     merchants.max_by(number) { |merchant| merchant.revenue }
   end
@@ -43,7 +57,10 @@ class MerchantRepository
   end
 
   def find_favorite_customer_by_merchant_id(merchant_id)
-    engine.merchant_fave_customer(merchant_id)
+    customers = successful_invoices_by_merchant_id(merchant_id).map do |invoice|
+      invoice.customer
+    end
+    customers.max_by { |customer| customers.count(customer) }
   end
 
   def find_all_items_by_merchant_id(merchant_id)
@@ -51,15 +68,11 @@ class MerchantRepository
   end
 
   def find_all_invoices_by_merchant_id(merchant_id)
-    engine.invoice_repository.find_all_by_merchant_id(merchant_id)
+    engine.find_invoices_by_merchant_id(merchant_id)
   end
 
   def successful_invoices_by_merchant_id(merchant_id)
     engine.successful_invoices_by_merchant_id(merchant_id)
-  end
-
-  def calculate_total_revenue_by_merchant_id(merchant_id, date = nil)
-    engine.merchant_revenue(merchant_id, date)
   end
 
   def pending_invoices(merchant_id)

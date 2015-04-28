@@ -22,7 +22,7 @@ class Merchant
   end
 
   def revenue(date = nil)
-    repo.calculate_total_revenue_by_merchant_id(id, date)
+    repo.merchant_revenue(id, date)
   end
 
   def favorite_customer
