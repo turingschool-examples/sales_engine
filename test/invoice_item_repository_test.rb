@@ -19,7 +19,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_all_successful_invoice_items_returns_all
-    assert_equal 12, i.all_successful_invoice_items.length
+    assert_equal 12, i.successful_invoice_items.length
   end
 
   def test_all_method
@@ -80,5 +80,13 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_find_all_by_updated_at
     assert_equal 15, i.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
+  end
+
+  def test_inspect_returns_rows_in_ii_repository
+    assert_equal "#<InvoiceItemRepository 34 rows>", i.inspect
+  end
+
+  def test_successful_invoice_items_returns_all_successful
+    assert_equal 12, i.successful_invoice_items.length
   end
 end

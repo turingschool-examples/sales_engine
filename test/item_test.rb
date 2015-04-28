@@ -1,6 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/sales_engine'
+require_relative './test_helper'
+
 
 class ItemTest < Minitest::Test
   attr_reader :i
@@ -24,5 +26,10 @@ class ItemTest < Minitest::Test
 
   def test_can_find_successful_invoice_items_by_id
     assert_equal 1, i.successful_invoice_items.length
+  end
+
+  def test_best_day_returns_best_date_for_item_id
+    item = SalesEngine.new.item_repository.find_by_id(1)
+    assert_equal Date.parse("2012-03-19"), item.best_day
   end
 end

@@ -3,6 +3,8 @@ require 'minitest/pride'
 require './lib/transaction_repository'
 require './lib/load_data'
 require './lib/sales_engine'
+require_relative './test_helper'
+
 
 class TransactionRepositoryTest < Minitest::Test
   include LoadData
@@ -83,5 +85,13 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_find_all_by_updated_at
     assert_equal 2, t.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
+  end
+
+  def test_inspect_returns_rows_in_repository
+    assert_equal "#<TransactionRepository 38 rows>", t.inspect
+  end
+
+  def test_successful_transactions_returns_all
+    assert_equal 31, t.successful_transactions.length
   end
 end

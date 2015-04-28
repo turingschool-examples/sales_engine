@@ -5,6 +5,8 @@ require './lib/sales_engine'
 require './lib/load_data'
 require 'bigdecimal'
 require 'date'
+require_relative './test_helper'
+
 
 class InvoiceRepositoryTest < Minitest::Test
   include LoadData
@@ -86,4 +88,13 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_find_items_by_item_id_through_invoice_items
     assert_equal "Item Voluptatem Sint", i.find_items_by_item_id_through_invoice_items(13).name
   end
+
+  def test_inspect_returns_number_of_rows_in_repository
+    assert_equal "#<InvoiceRepository 18 rows>", i.inspect
+  end
+
+  def test_all_returns_all_invoices
+    assert_equal 18, i.all.length
+  end
+
 end

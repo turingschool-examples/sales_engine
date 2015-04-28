@@ -3,6 +3,9 @@ require 'minitest/pride'
 require './lib/merchant_repository'
 require './lib/load_data'
 require './lib/sales_engine'
+require_relative './test_helper'
+require 'bigdecimal/util'
+
 
 class MerchantRepositoryTest < Minitest::Test
   include LoadData
@@ -81,4 +84,23 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 8, m.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
   end
 
+  def test_inspects_rows
+    assert_equal "#<MerchantRepository 12 rows>", m.inspect
+  end
+
+  def test_most_revenue_returns_top_number
+    assert_equal "Balistreri, Schaefer and Kshlerin", m.most_revenue(3).first.name
+  end
+
+  def test_revenue_returns_revenue_for_a_date
+    assert_equal "21067.77", m.revenue(Date.parse("2012-03-25 09:54:09 UTC")).to_digits
+  end
+
+  def test_total_items_sold_for_a_merchant
+    assert_equal 47, m.total_items_sold(26)
+  end
+
+  def test_most_items_returns_top_number_given
+    assert_equal "Balistreri, Schaefer and Kshlerin", m.most_items(3).first.name
+  end
 end

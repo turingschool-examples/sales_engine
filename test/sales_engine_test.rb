@@ -1,6 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/sales_engine'
+require_relative './test_helper'
+
 
 class SalesEngineTest < Minitest::Test
   attr_reader :engine
@@ -13,9 +15,6 @@ class SalesEngineTest < Minitest::Test
 
   end
 
-  def test_can_find_all_successful_invoice_items
-    assert_equal 12, engine.all_successful_invoice_items.length
-  end
   def test_that_merchant_repo_returns_merchant_object
     assert_equal true, engine.merchant_repository.is_a?(MerchantRepository)
   end

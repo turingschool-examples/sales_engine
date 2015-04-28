@@ -2,6 +2,8 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/merchant'
 require './lib/sales_engine'
+require_relative './test_helper'
+
 
 class MerchantTest < Minitest::Test
   attr_reader :m

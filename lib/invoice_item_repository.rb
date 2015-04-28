@@ -18,14 +18,14 @@ class InvoiceItemRepository
     end
   end
 
-  def successful_invoice_items
-    @successful_invoice_items ||=
-      invoice_items.select { |invoice_item| invoice_item.successful? }
-  end
-
   def inspect
     "#<#{self.class} #{invoice_items.size} rows>"
   end
+
+  # def successful_invoice_items
+  #   @successful_invoice_items ||=
+  #     invoice_items.select { |invoice_item| invoice_item.successful? }
+  # end
 
   def find_invoice_by_invoice_id(invoice_id)
     engine.invoice_repository.find_by_id(invoice_id)
@@ -39,22 +39,12 @@ class InvoiceItemRepository
     invoice_items
   end
 
-  def all_successful_invoice_items
-   @all_successful_invoices = engine.successful_invoices
-    @successful_invoice_items = @all_successful_invoices.flat_map(&:invoice_items)
+  def successful_invoice_items
+   @successful_invoice_items ||= engine.successful_invoices.flat_map(&:invoice_items)
   end
 
   def random
     invoice_items.sample
-  end
-
-  def find_if_successful(invoice_item_invoice_id)
-    x = engine.successful_invoices.any? { |invoice| invoice.id == invoice_item_invoice_id }
-    if x
-      true
-    else
-      false
-    end
   end
 
   def find_by_id(id)

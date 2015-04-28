@@ -2,6 +2,8 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice'
 require './lib/sales_engine'
+require_relative './test_helper'
+
 
 class InvoiceTest < Minitest::Test
   attr_reader :i

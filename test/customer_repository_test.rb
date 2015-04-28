@@ -1,3 +1,4 @@
+require_relative './test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/customer_repository'
@@ -64,5 +65,9 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_find_all_by_updated_at
     assert_equal 6, c.find_all_by_updated_at("2012-03-27 14:54:10 UTC").length
+  end
+
+  def test_inspect_returns_number_of_rows
+    assert_equal "#<CustomerRepository 18 rows>", c.inspect
   end
 end
