@@ -21,4 +21,8 @@ class ItemTest < Minitest::Test
   def test_merchant_returns_a_merchant_instance
     assert_equal "Balistreri, Schaefer and Kshlerin", i.merchant.name
   end
+
+  def test_can_find_successful_invoice_items_by_id
+    assert_equal 1, i.successful_invoice_items.length
+  end
 end

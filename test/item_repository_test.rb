@@ -19,6 +19,10 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 21, i.all.length
   end
 
+  def test_most_items_returns_top_number
+    assert_equal "Item Quae Dolore", i.most_items(3).first.name
+  end
+
   def test_that_random_returns_random_item_object
     assert_equal true, i.random.is_a?(Item)
   end

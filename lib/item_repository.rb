@@ -43,12 +43,16 @@ class ItemRepository
     items.max_by(number) { |item| item.revenue }
   end
 
-  def most_items(number)
-    items.max_by(number) { |item| item.total_sold }
+    def find_best_day_for_item(item_id)
+    engine.best_day_for_item(item_id)
   end
 
-  def find_best_day_for_item(item_id)
-    engine.best_day_for_item(item_id)
+  def most_items(x)
+    items.max_by(x) {|item| item.total_sold}
+  end
+
+  def find_successful_invoice_items_by_item_id(item_id)
+    engine.all_successful_invoice_items_by_item_id(item_id)
   end
 
   def find_invoice_items_by_item_id(item_id)
