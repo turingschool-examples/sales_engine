@@ -13,7 +13,7 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :m
 
   def setup
-    @m = MerchantRepository.new(merchant_data("fixtures"), SalesEngine.new)
+    @m = MerchantRepository.new(load_csv("fixtures", "merchants.csv"), SalesEngine.new)
   end
 
   def test_can_find_fave_customer_by_merchant_id

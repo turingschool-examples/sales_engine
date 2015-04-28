@@ -14,7 +14,7 @@ class InvoiceRepositoryTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = InvoiceRepository.new(invoice_data("fixtures"), SalesEngine.new)
+    @i = InvoiceRepository.new(load_csv("fixtures", "invoices.csv"), SalesEngine.new)
   end
 
   def test_that_random_returns_random_invoice_repository_object

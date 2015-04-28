@@ -12,7 +12,7 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :c
 
   def setup
-    @c = CustomerRepository.new(customer_data("fixtures"), SalesEngine.new)
+    @c = CustomerRepository.new(load_csv("fixtures", "customers.csv"), SalesEngine.new)
   end
 
   def test_all_returns_all_customers

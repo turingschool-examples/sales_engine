@@ -11,10 +11,6 @@ class SalesEngineTest < Minitest::Test
     @engine = SalesEngine.new
   end
 
-  def test_can_find_invoices_by_merchant_id
-
-  end
-
   def test_that_merchant_repo_returns_merchant_object
     assert_equal true, engine.merchant_repository.is_a?(MerchantRepository)
   end
