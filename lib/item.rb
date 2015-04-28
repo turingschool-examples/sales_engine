@@ -32,4 +32,12 @@ class Item
   def best_day
     repo.find_best_day_for_item(id)
   end
+
+  def revenue
+    repo.find_total_revenue(id)
+  end
+
+  def total_sold
+    repo.find_total_sold(id)
+  end
 end

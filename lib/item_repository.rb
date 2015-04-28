@@ -27,6 +27,26 @@ class ItemRepository
     items
   end
 
+  def find_total_revenue(item_id)
+    invoice_items = find_invoice_items_by_item_id(item_id)
+    engine.calculate_revenue_of_invoice_items(invoice_items)
+  end
+
+  def find_total_sold(item_id)
+    invoice_items = engine.invoice_item_repository.successful_invoice_items do |invoice_item|
+      invoice_item.find_all_by_item_id(item_id)
+    end.flatten
+    invoice_items.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }
+  end
+
+  def most_revenue(number)
+    items.max_by(number) { |item| item.revenue }
+  end
+
+  def most_items(number)
+    items.max_by(number) { |item| item.total_sold }
+  end
+
   def find_best_day_for_item(item_id)
     engine.best_day_for_item(item_id)
   end

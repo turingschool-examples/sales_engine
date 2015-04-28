@@ -22,25 +22,25 @@ class MerchantRepository
     "#<#{self.class} #{merchants.size} rows>"
   end
 
-  def most_revenue(number)
-    merchants.max_by(number) { |merchant| merchant.revenue }
-  end
-
-  def revenue(date)
-    merchants.reduce(0) do |sum, merchant|
-      sum + merchant.revenue(date)
-    end
-  end
-
-  def total_items_sold(merchant_id)
-    successful_invoices_by_merchant_id(merchant_id).map do |invoice|
-      engine.find_invoice_items_with_invoices(invoice.id)
-    end.flatten.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }
-  end
-
-  def most_items(number)
-    merchants.max_by(number) { |merchant| total_items_sold(merchant.id) }
-  end
+  # def most_revenue(number)
+  #   merchants.max_by(number) { |merchant| merchant.revenue }
+  # end
+  #
+  # def revenue(date)
+  #   merchants.reduce(0) do |sum, merchant|
+  #     sum + merchant.revenue(date)
+  #   end
+  # end
+  #
+  # def total_items_sold(merchant_id)
+  #   successful_invoices_by_merchant_id(merchant_id).map do |invoice|
+  #     engine.find_invoice_items_with_invoices(invoice.id)
+  #   end.flatten.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }
+  # end
+  #
+  # def most_items(number)
+  #   merchants.max_by(number) { |merchant| total_items_sold(merchant.id) }
+  # end
 
   def find_favorite_customer_by_merchant_id(merchant_id)
     engine.merchant_fave_customer(merchant_id)
