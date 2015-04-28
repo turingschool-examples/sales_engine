@@ -32,4 +32,13 @@ class Item
   def best_day
     repo.find_best_day_for_item(id)
   end
+
+  def find_successful
+    repo.find_successful_invoice_items_by_item_id(id)
+  end
+
+  def total_sold
+    ii = repo.find_successful_invoice_items_by_item_id(id)
+    ii.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity}
+  end
 end

@@ -6,7 +6,7 @@ class ItemTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = SalesEngine.new.item_repository.find_by_id(539)
+    @i = SalesEngine.new('data').item_repository.find_by_id(539)
   end
 
   def test_that_intializes_correctly
@@ -20,5 +20,9 @@ class ItemTest < Minitest::Test
 
   def test_merchant_returns_a_merchant_instance
     assert_equal "Balistreri, Schaefer and Kshlerin", i.merchant.name
+  end
+
+  def test_can_find_successful_invoice_items_by_id
+    assert_equal 1, i.find_successful.length
   end
 end

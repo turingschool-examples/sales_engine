@@ -34,6 +34,11 @@ class InvoiceItemRepository
     invoice_items
   end
 
+  def all_successful_invoice_items
+   @all_successful_invoices = engine.successful_invoices
+    @successful_invoice_items = @all_successful_invoices.flat_map(&:invoice_items)
+  end
+
   def random
     invoice_items.sample
   end

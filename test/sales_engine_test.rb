@@ -12,6 +12,10 @@ class SalesEngineTest < Minitest::Test
   def test_can_find_invoices_by_merchant_id
 
   end
+
+  def test_can_find_all_successful_invoice_items
+    assert_equal 12, engine.all_successful_invoice_items.length
+  end
   def test_that_merchant_repo_returns_merchant_object
     assert_equal true, engine.merchant_repository.is_a?(MerchantRepository)
   end

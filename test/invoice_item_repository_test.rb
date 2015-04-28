@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/invoice_item_repository'
 require './lib/load_data'
+require './lib/sales_engine'
 require 'bigdecimal'
 
 class InvoiceItemRepositoryTest < Minitest::Test
@@ -10,11 +11,15 @@ class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :i
 
   def setup
-    @i = InvoiceItemRepository.new(invoice_item_data("fixtures"), nil)
+    @i = InvoiceItemRepository.new(invoice_item_data("fixtures"), SalesEngine.new)
   end
 
   def test_that_random_returns_random_invoice_item_object
     assert_equal true, i.random.is_a?(InvoiceItem)
+  end
+
+  def test_all_successful_invoice_items_returns_all
+    assert_equal 12, i.all_successful_invoice_items.length
   end
 
   def test_all_method

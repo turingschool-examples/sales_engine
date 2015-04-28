@@ -27,8 +27,20 @@ class ItemRepository
     items
   end
 
+  def most_revenue(x)
+    engine.most_revenue_sorted_by_item(x)
+  end
+
   def find_best_day_for_item(item_id)
     engine.best_day_for_item(item_id)
+  end
+
+  def most_items(x)
+    items.max_by(x) {|item| item.total_sold}
+  end
+
+  def find_successful_invoice_items_by_item_id(item_id)
+    engine.all_successful_invoice_items_by_item_id(item_id)
   end
 
   def find_invoice_items_by_item_id(item_id)

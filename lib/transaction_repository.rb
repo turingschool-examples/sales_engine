@@ -26,6 +26,10 @@ class TransactionRepository
     transactions
   end
 
+  def successful_transactions
+    transactions.select { |trans| trans.result == "success"}
+  end
+
   def random
     transactions.sample
   end

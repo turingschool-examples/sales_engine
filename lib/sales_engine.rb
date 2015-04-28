@@ -84,6 +84,15 @@ class SalesEngine
     end
   end
 
+  def all_successful_invoice_items
+    @successful_invoice_items ||=
+      invoice_item_repository.all_successful_invoice_items
+  end
+
+  def all_successful_invoice_items_by_item_id(item_id)
+    all_successful_invoice_items.select { |ii| ii.item_id == item_id }
+  end
+
   def successful_invoices_by_merchant_id(merchant_id)
     successful_invoices.select { |invoice| invoice.merchant_id == merchant_id }
   end
@@ -123,6 +132,8 @@ class SalesEngine
     invoice_items = find_all_invoice_items_with_multiple_invoices(invoices)
     calculate_revenue_of_invoice_items(invoice_items)
   end
+
+
 
   def merchant_fave_customer(merchant_id)
     customers = successful_invoices_by_merchant_id(merchant_id).map do |invoice|
