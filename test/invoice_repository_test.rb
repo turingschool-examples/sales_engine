@@ -12,10 +12,10 @@ require_relative './test_helper'
 class InvoiceRepositoryTest < Minitest::Test
   include LoadData
 
-  attr_reader :i
+  attr_reader :i, :engine
 
   def setup
-    @i = InvoiceRepository.new(load_csv("fixtures", "invoices.csv"), SalesEngine.new)
+    @i = InvoiceRepository.new(load_csv("fixtures", "invoices.csv"), @engine = SalesEngine.new)
   end
 
   def test_that_random_returns_random_invoice_repository_object
@@ -106,7 +106,11 @@ class InvoiceRepositoryTest < Minitest::Test
     merchant = MerchantRepository.new(load_csv("fixtures", "merchants.csv"), SalesEngine.new).find_by_id(26)
     i.create(customer: customer, merchant: merchant, status: "shipped", items:[item1, item2, item3])
     assert_equal 4438, i.all.last.id
+  end
 
+  def test_add_transaction_adds_a_new_transaction
+    i.add_transaction(id: 100, invoice_id: 101, credit_card_number: "4444333322221111", credit_card_expiration: "10/13", result: "success")
+    assert_equal 100, engine.transaction_repository.all.last.id
   end
 
 end
