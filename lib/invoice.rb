@@ -41,7 +41,6 @@ class Invoice
     repo.find_merchant_by_merchant_id(merchant_id)
   end
 
-
   def charge(attributes)
     transaction_data = {
       invoice_id: id,
@@ -52,4 +51,5 @@ class Invoice
 
     repo.add_transaction(transaction_data)
   end
+
 end

@@ -36,4 +36,13 @@ class InvoiceTest < Minitest::Test
   def test_merchant_method_returns_a_single_merchant_with_id
     assert_equal "Balistreri, Schaefer and Kshlerin", i.merchant.name
   end
+
+  def test_charge_adds_new_transaction_to_trans_repository
+    engine = SalesEngine.new
+    first_count = engine.transaction_repository.all.count
+    invoice = engine.invoice_repository.find_by_id(1)
+    invoice.charge(invoice_id: 1, credit_card_number: '1111222233334444',  credit_card_expiration_date: "10/14", result: "success")
+    second_count = engine.transaction_repository.all.count
+    assert_equal 1, second_count - first_count
+  end
 end

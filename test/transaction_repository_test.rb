@@ -94,4 +94,11 @@ class TransactionRepositoryTest < Minitest::Test
   def test_successful_transactions_returns_all
     assert_equal 31, t.successful_transactions.length
   end
+
+  def test_create_new_transactions_adds_a_new_transaction
+    first_count = t.all.count
+    t.create_new_transaction(id: 100, invoice_id: 110,credit_card_number: "4444333322221111", credit_card_expiration: "10/13", result: "success")
+    second_count = t.all.count
+    assert_equal 1, second_count - first_count
+  end
 end
