@@ -111,6 +111,10 @@ class SalesEngine
   def add_invoice_items(items,invoice_data)
     invoice_item_repository.create_new_invoice_items(items, invoice_data)
   end
+
+  def add_transaction(transaction_data)
+    transaction_repository.create_new_transaction(transaction_data)
+  end
 end
 
 

@@ -34,6 +34,10 @@ class TransactionRepository
     find_all_by_result("success")
   end
 
+  def create_new_transaction(transaction_data)
+    transactions << Transaction.new(transaction_data, self)
+  end
+
   def find_invoice_by_invoice_id(invoice_id)
     engine.invoice_repository.find_by_id(invoice_id)
   end
