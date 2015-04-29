@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/invoice_repository'
 require './lib/sales_engine'
 require './lib/load_data'
+require './lib/item_repository'
 require 'bigdecimal'
 require 'date'
 require_relative './test_helper'
@@ -90,11 +91,20 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_inspect_returns_number_of_rows_in_repository
-    assert_equal "#<InvoiceRepository 18 rows>", i.inspect
+    assert_equal "#<InvoiceRepository 17 rows>", i.inspect
   end
 
   def test_all_returns_all_invoices
-    assert_equal 18, i.all.length
+    assert_equal 17, i.all.length
+  end
+
+  def test_create_makes_invoices
+    item1 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
+    item2 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
+    item3 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(1)
+    i.create(customer: 1, merchant: 26, status: "shipped", items:[item1, item2, item3])
+    assert_equal 4438, i.all.last.id
+
   end
 
 end

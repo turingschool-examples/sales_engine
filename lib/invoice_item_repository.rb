@@ -18,6 +18,30 @@ class InvoiceItemRepository
     end
   end
 
+  def create_new_invoice_items(items, invoice_data)
+    my_hash = {}
+
+    items.each do |item|
+      if my_hash[item.id].nil?
+        my_hash[item.id] = []
+      end
+      my_hash[item.id] << item
+    end
+
+    my_hash.each do |item_id, items|
+      data = {
+        id:         invoice_items.last.id + 1,
+        invoice_id: invoice_data[:id],
+        item_id:    item_id,
+        quantity:   items.length,
+        unit_price: items.first.unit_price,
+        created_at: Time.new,
+        updated_at: Time.new
+        }
+      invoice_items << InvoiceItem.new(data, self)
+    end
+  end
+
   def inspect
     "#<#{self.class} #{invoice_items.size} rows>"
   end

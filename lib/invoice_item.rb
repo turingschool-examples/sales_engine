@@ -28,8 +28,4 @@ class InvoiceItem
   def item
     repo.find_item_by_item_id(item_id)
   end
-  #
-  # def successful?
-  #   repo.find_if_successful(invoice_id)
-  # end
 end

@@ -107,6 +107,10 @@ class SalesEngine
       Date.parse(invoice.created_at) == date
     end
   end
+
+  def add_invoice_items(items,invoice_data)
+    invoice_item_repository.create_new_invoice_items(items, invoice_data)
+  end
 end
 
 
