@@ -1,5 +1,6 @@
 require_relative 'invoice'
 require 'csv'
+require 'pry'
 
 class InvoiceRepository
   attr_reader :invoices,
@@ -20,24 +21,26 @@ class InvoiceRepository
 
   def create(attributes)
     invoice_data = {
-    id:            add_id,
-    customer_id:   attributes[:customer].to_s,
-    merchant_id:   attributes[:merchant].to_s,
-    status:       "shipped",
-    created_at:   Time.new,
-    updated_at:   Time.new
-    }
-
-    invoices << Invoice.new(invoice_data,self)
-
-    attributes[:items].each do |item|
+      id:           add_id,
+      customer_id:  attributes[:customer].id,
+      merchant_id:  attributes[:merchant].id,
+      status:       attributes[:status],
+      created_at:   Time.new,
+      updated_at:   Time.new
+      }
+    new_invoice = Invoice.new(invoice_data, self)
+    invoices << new_invoice
     engine.add_invoice_items(attributes[:items], invoice_data)
-    end
+
+    new_invoice
   end
 
+  def charge
+    
+  end
 
   def add_id
-    (invoices.last.id.to_i) + 1
+    (invoices.last.id) + 1
   end
 
   def inspect
