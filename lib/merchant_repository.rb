@@ -22,18 +22,12 @@ class MerchantRepository
     "#<#{self.class} #{merchants.size} rows>"
   end
 
-  def merchant_revenue(merchant_id, date = nil)
-    invoices = date?(merchant_id, date)
-    inv_items = engine.find_all_invoice_items_with_multiple_invoices(invoices)
-    engine.calculate_revenue_of_invoice_items(inv_items)
+  def successful_invoices
+    engine.successful_invoices
   end
 
-  def date?(merchant_id, date)
-    if date.nil?
-      engine.successful_invoices_by_merchant_id(merchant_id)
-    else
-      engine.successful_invoices_by_date(merchant_id, date)
-    end
+  def successful_invoice_items
+    engine.successful_invoice_items
   end
 
   def most_revenue(number)
@@ -46,21 +40,8 @@ class MerchantRepository
     end
   end
 
-  def total_items_sold(merchant_id)
-    successful_invoices_by_merchant_id(merchant_id).map do |invoice|
-      engine.find_invoice_items_with_invoices(invoice.id)
-    end.flatten.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity }
-  end
-
   def most_items(number)
-    merchants.max_by(number) { |merchant| total_items_sold(merchant.id) }
-  end
-
-  def find_favorite_customer_by_merchant_id(merchant_id)
-    customers = successful_invoices_by_merchant_id(merchant_id).map do |invoice|
-      invoice.customer
-    end
-    customers.max_by { |customer| customers.count(customer) }
+    merchants.max_by(number) { |merchant| merchant.total_items_sold }
   end
 
   def find_all_items_by_merchant_id(merchant_id)
@@ -71,12 +52,8 @@ class MerchantRepository
     engine.find_invoices_by_merchant_id(merchant_id)
   end
 
-  def successful_invoices_by_merchant_id(merchant_id)
-    engine.successful_invoices_by_merchant_id(merchant_id)
-  end
-
-  def pending_invoices(merchant_id)
-    engine.customers_with_pending_invoices(merchant_id)
+  def find_customers_with_pending_invoices(invoice)
+    engine.customers_with_pending_invoices(invoice)
   end
 
   def all

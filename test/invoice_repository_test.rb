@@ -113,4 +113,7 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 100, engine.transaction_repository.all.last.id
   end
 
+  def test_successful_invoices_returns_successful_invoices
+    assert_equal 6, i.successful_invoices.length
+  end
 end

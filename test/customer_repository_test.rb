@@ -66,8 +66,4 @@ class CustomerRepositoryTest < Minitest::Test
   def test_inspect_returns_number_of_rows
     assert_equal "#<CustomerRepository 18 rows>", c.inspect
   end
-
-  def test_customers_with_pending_invoices
-    assert_equal 1, c.customers_with_pending_invoices(34).length
-  end
 end

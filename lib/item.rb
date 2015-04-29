@@ -30,20 +30,27 @@ class Item
   end
 
   def best_day
-    repo.find_best_day_for_item(id)
+    best_day = invoice_items.max_by do |invoice_item|
+      invoice_item.quantity
+    end
+    Date.parse(repo.find_invoice_date_by_invoice_id(best_day.invoice_id))
   end
 
   def successful_invoice_items
-    repo.find_successful_invoice_items_by_item_id(id)
+    repo.successful_invoice_items.select do |invoice_item|
+      invoice_item.item_id == id
+    end
   end
 
   def total_sold
-    ii = successful_invoice_items
-    ii.reduce(0) { |sum, invoice_item| sum + invoice_item.quantity}
+    successful_invoice_items.reduce(0) do |sum, invoice_item|
+      sum + invoice_item.quantity
+    end
   end
 
   def revenue
-    repo.find_total_revenue(id)
+    successful_invoice_items.reduce(0) do |sum, inv_item|
+      sum + (inv_item.unit_price / 100) * inv_item.quantity
+    end
   end
-
 end
