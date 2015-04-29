@@ -35,8 +35,8 @@ class InvoiceRepository
     new_invoice
   end
 
-  def charge
-    
+  def add_transaction(attributes)
+    engine.add_transaction(attributes)
   end
 
   def add_id

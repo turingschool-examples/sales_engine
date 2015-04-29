@@ -40,4 +40,15 @@ class Invoice
   def merchant
     repo.find_merchant_by_merchant_id(merchant_id)
   end
+
+
+  def charge(attributes)
+    transaction_data = {
+      cc_number: attributes[:credit_card_number],
+      cc_expiration_date: attributes[:credit_card_expiration],
+      result: attributes[:result]
+    }
+
+    repo.add_transaction(transaction_data)
+  end
 end
