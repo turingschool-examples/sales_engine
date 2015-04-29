@@ -102,7 +102,9 @@ class InvoiceRepositoryTest < Minitest::Test
     item1 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
     item2 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
     item3 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(1)
-    i.create(customer: 1, merchant: 26, status: "shipped", items:[item1, item2, item3])
+    customer = CustomerRepository.new(load_csv("fixtures", "customers.csv"), SalesEngine.new).find_by_id(1)
+    merchant = MerchantRepository.new(load_csv("fixtures", "merchants.csv"), SalesEngine.new).find_by_id(26)
+    i.create(customer: customer, merchant: merchant, status: "shipped", items:[item1, item2, item3])
     assert_equal 4438, i.all.last.id
 
   end
