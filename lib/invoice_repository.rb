@@ -19,6 +19,13 @@ class InvoiceRepository
     end
   end
 
+  def successful_invoices
+    @successful_invoices ||=
+      engine.successful_transactions.flat_map do |transaction|
+        find_all_by_id(transaction.invoice_id)
+      end
+  end
+
   def create(attributes)
     invoice_data = {
       id:           add_id,
@@ -48,7 +55,7 @@ class InvoiceRepository
   end
 
   def find_transactions_by_invoice_id(invoice_id)
-    engine.transaction_repository.find_all_by_invoice_id(invoice_id)
+    engine.find_transactions_by_invoice_id(invoice_id)
   end
 
   def find_invoice_items_by_invoice_id(invoice_id)

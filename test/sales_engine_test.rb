@@ -43,34 +43,7 @@ class SalesEngineTest < Minitest::Test
     assert_equal 4, engine.find_invoice_items_with_invoices(2).length
   end
 
-  def test_find_all_invoice_items_with_multiple_invoices
-    invoices = []
-    invoices << engine.invoice_repository.find_by_id(1)
-    invoices << engine.invoice_repository.find_by_id(2)
-    assert_equal 12, engine.find_all_invoice_items_with_multiple_invoices(invoices).length
-  end
-
-  def test_calculate_revenue_of_invoice_items
-    invoices = []
-    invoices << engine.invoice_repository.find_by_id(1)
-    invoices << engine.invoice_repository.find_by_id(2)
-    invoice_items = engine.find_all_invoice_items_with_multiple_invoices(invoices)
-    assert_equal "26356.9", engine.calculate_revenue_of_invoice_items(invoice_items).to_digits
-  end
-
   def test_successful_invoices
     assert_equal 6, engine.successful_invoices.length
-  end
-
-  def test_successful_invoices_by_merchant_id
-    assert_equal 1, engine.successful_invoices_by_merchant_id(26).length
-  end
-
-  def test_pending_invoices
-    assert_equal 3, engine.pending_invoices(1).length
-  end
-
-  def test_successful_invoices_by_date
-    assert_equal 1, engine.successful_invoices_by_date(26, Date.parse("2012-03-25 09:54:09 UTC")).length
   end
 end

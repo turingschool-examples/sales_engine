@@ -93,19 +93,11 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal "Willms and Sons", i.find_merchant_by_id(3).name
   end
 
-  def test_total_revenue_returns_revenue_for_item
-    assert_equal "5454.0", i.find_total_revenue(539).to_digits
-  end
-
   def test_inspect_returns_number_of_rows_in_repository
     assert_equal "#<ItemRepository 21 rows>", i.inspect
   end
 
   def test_most_revenue_returns_top_number_of_items
-    assert_equal "Item Qui Esse", i.most_revenue(1).first.name
-  end
-
-  def test_find_best_day_for_item_returns_best_day
-    assert_equal Date.parse("2012-03-23"), i.find_best_day_for_item(13)
+    assert_equal "Item Eius Et", i.most_revenue(1).first.name
   end
 end
