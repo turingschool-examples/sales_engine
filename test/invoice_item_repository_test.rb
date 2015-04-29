@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/invoice_item_repository'
 require './lib/load_data'
 require './lib/sales_engine'
+require './lib/item_repository'
 require 'bigdecimal'
 
 class InvoiceItemRepositoryTest < Minitest::Test
@@ -23,7 +24,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_all_method
-    assert_equal 34, i.all.length
+    assert_equal 32, i.all.length
   end
 
   def test_find_by_id
@@ -83,10 +84,19 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_inspect_returns_rows_in_ii_repository
-    assert_equal "#<InvoiceItemRepository 34 rows>", i.inspect
+    assert_equal "#<InvoiceItemRepository 32 rows>", i.inspect
   end
 
   def test_successful_invoice_items_returns_all_successful
     assert_equal 12, i.successful_invoice_items.length
+  end
+
+  def test_create_new_invoice_items_creates_new_invoice_items
+    item_rep = ItemRepository.new(load_csv("fixtures", "items.csv"), SalesEngine.new)
+    item_1 = item_rep.find_by_id(539)
+    item_2 = item_rep.find_by_id(1)
+    items = [item_1, item_2, item_1]
+    i.create_new_invoice_items(items, id: 1)
+    assert_equal 21664, i.invoice_items.last.id
   end
 end

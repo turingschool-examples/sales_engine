@@ -18,6 +18,28 @@ class InvoiceRepository
     end
   end
 
+  def create(attributes)
+    invoice_data = {
+    id:            add_id,
+    customer_id:   attributes[:customer].to_s,
+    merchant_id:   attributes[:merchant].to_s,
+    status:       "shipped",
+    created_at:   Time.new,
+    updated_at:   Time.new
+    }
+
+    invoices << Invoice.new(invoice_data,self)
+
+    attributes[:items].each do |item|
+    engine.add_invoice_items(attributes[:items], invoice_data)
+    end
+  end
+
+
+  def add_id
+    (invoices.last.id.to_i) + 1
+  end
+
   def inspect
     "#<#{self.class} #{invoices.size} rows>"
   end
