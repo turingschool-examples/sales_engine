@@ -23,21 +23,34 @@ class Merchant
   end
 
   def revenue(date = nil)
-    invoice_items = successful_invoice_items(date)
-    calculate_revenue_of_invoice_items(invoice_items)
+    if date.nil?
+      total_revenue
+    else
+      revenue_for_date(date)
+    end
+  end
+
+  def total_revenue
+    @total_revenue ||=
+      calculate_revenue_of_invoice_items(successful_invoice_items)
+  end
+
+  def invoice_items_by_date(date)
+    invoices = successful_invoices_by_date(date)
+    repo.successful_invoice_items.select do |invoice_item|
+      invoices.any? do |invoice|
+        invoice.id == invoice_item.invoice_id
+      end
+    end
+  end
+
+  def revenue_for_date(date)
+    calculate_revenue_of_invoice_items(invoice_items_by_date(date))
   end
 
   def calculate_revenue_of_invoice_items(invoice_items)
     invoice_items.reduce(0) do |sum, inv_item|
       sum + (inv_item.unit_price / 100) * inv_item.quantity
-    end
-  end
-
-  def date?(date)
-    if date.nil?
-      successful_invoices
-    else
-      successful_invoices_by_date(date)
     end
   end
 
@@ -59,12 +72,13 @@ class Merchant
     end
   end
 
-  def successful_invoice_items(date = nil)
-    repo.successful_invoice_items.select do |invoice_item|
-      date?(date).any? do |invoice|
-        invoice.id == invoice_item.invoice_id
-      end 
-    end
+  def successful_invoice_items
+    @successful_invoice_items ||=
+      repo.successful_invoice_items.select do |invoice_item|
+        successful_invoices.any? do |invoice|
+          invoice.id == invoice_item.invoice_id
+        end
+      end
   end
 
   def successful_invoices
@@ -79,9 +93,10 @@ class Merchant
   end
 
   def total_items_sold
-    successful_invoice_items.reduce(0) do |sum, invoice_item|
-      sum + invoice_item.quantity
-    end
+    @total_items_sold ||=
+      successful_invoice_items.reduce(0) do |sum, invoice_item|
+        sum + invoice_item.quantity
+      end
   end
 end
 
