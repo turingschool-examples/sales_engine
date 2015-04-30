@@ -37,20 +37,23 @@ class Item
   end
 
   def successful_invoice_items
-    repo.successful_invoice_items.select do |invoice_item|
-      invoice_item.item_id == id
-    end
+    @successful_invoice_items ||=
+      repo.successful_invoice_items.select do |invoice_item|
+        invoice_item.item_id == id
+      end
   end
 
   def total_sold
-    successful_invoice_items.reduce(0) do |sum, invoice_item|
-      sum + invoice_item.quantity
-    end
+    @total_sold ||=
+      successful_invoice_items.reduce(0) do |sum, invoice_item|
+        sum + invoice_item.quantity
+      end
   end
 
   def revenue
-    successful_invoice_items.reduce(0) do |sum, inv_item|
-      sum + (inv_item.unit_price / 100) * inv_item.quantity
-    end
+    @revenue ||=
+      successful_invoice_items.reduce(0) do |sum, inv_item|
+        sum + (inv_item.unit_price / 100) * inv_item.quantity
+      end
   end
 end

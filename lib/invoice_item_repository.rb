@@ -19,16 +19,7 @@ class InvoiceItemRepository
   end
 
   def create_new_invoice_items(items, invoice_data)
-    items_hash = {}
-
-    items.each do |item|
-      if items_hash[item.id].nil?
-        items_hash[item.id] = []
-      end
-      items_hash[item.id] << item
-    end
-
-    items_hash.each do |item_id, items|
+    group_items(items).each do |item_id, items|
       data = {
         id:           invoice_items.last.id + 1,
         invoice_id:   invoice_data[:id],
@@ -42,8 +33,20 @@ class InvoiceItemRepository
     end
   end
 
-  def inspect
-    "#<#{self.class} #{invoice_items.size} rows>"
+  def group_items(items)
+    items_hash = {}
+    items.each do |item|
+      if items_hash[item.id].nil?
+        items_hash[item.id] = []
+      end
+      items_hash[item.id] << item
+    end
+    items_hash
+  end
+
+  def successful_invoice_items
+    @successful_invoice_items ||=
+      engine.successful_invoices.flat_map(&:invoice_items)
   end
 
   def find_invoice_by_invoice_id(invoice_id)
@@ -54,13 +57,12 @@ class InvoiceItemRepository
     engine.item_repository.find_by_id(item_id)
   end
 
-  def all
-    invoice_items
+  def inspect
+    "#<#{self.class} #{invoice_items.size} rows>"
   end
 
-  def successful_invoice_items
-   @successful_invoice_items ||=
-     engine.successful_invoices.flat_map(&:invoice_items)
+  def all
+    invoice_items
   end
 
   def random

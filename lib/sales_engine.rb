@@ -79,12 +79,6 @@ class SalesEngine
     invoice_item_repository.successful_invoice_items
   end
 
-  # def invoice_items_by_item_id(item_id)
-  #   invoice_item_repository.successful_invoice_items.select do |invoice_item|
-  #     invoice_item.item_id == item_id
-  #   end
-  # end
-
   def customers_with_pending_invoices(invoice)
     customer_repository.customers_with_pending_invoices(invoice)
   end
