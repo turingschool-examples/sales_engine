@@ -1,5 +1,4 @@
 require_relative 'transaction'
-require 'csv'
 
 class TransactionRepository
   attr_reader :transactions,

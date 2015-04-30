@@ -5,8 +5,6 @@ require_relative 'transaction_repository'
 require_relative 'customer_repository'
 require_relative 'invoice_repository'
 require_relative 'load_data'
-require 'bigdecimal/util'
-require 'pry'
 
 class SalesEngine
   include LoadData

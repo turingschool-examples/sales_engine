@@ -1,22 +1,33 @@
 require_relative 'item'
-require 'csv'
 require 'bigdecimal/util'
 
 class ItemRepository
   attr_reader :items,
               :engine,
-              :data
+              :data,
+              :i_by_id,
+              :i_by_merchant_id
 
   def initialize(data, engine)
-    @engine = engine
-    @data   = data
-    @items  = create_items
+    @engine           = engine
+    @data             = data
+    @items            = create_items
+    @i_by_id          = group_by_id
+    @i_by_merchant_id = group_by_merchant_id
   end
 
   def create_items
     data.map do |attributes|
       Item.new(attributes, self)
     end
+  end
+
+  def group_by_id
+    items.group_by(&:id)
+  end
+
+  def group_by_merchant_id
+    items.group_by(&:merchant_id)
   end
 
   def inspect
@@ -36,7 +47,7 @@ class ItemRepository
   end
 
   def most_items(x)
-    items.max_by(x) {|item| item.total_sold }
+    items.max_by(x) { |item| item.total_sold }
   end
 
   def successful_invoice_items
@@ -56,11 +67,11 @@ class ItemRepository
   end
 
   def find_by_id(id)
-    items.detect { |item| item.id == id }
+    i_by_id[id].first
   end
 
   def find_all_by_id(id)
-    items.select { |item| item.id == id }
+    i_by_id[id]
   end
 
   def find_by_name(name)
@@ -92,11 +103,11 @@ class ItemRepository
   end
 
   def find_by_merchant_id(merchant_id)
-    items.detect { |item| item.merchant_id == merchant_id }
+    i_by_merchant_id[merchant_id].first
   end
 
   def find_all_by_merchant_id(merchant_id)
-    items.select { |item| item.merchant_id == merchant_id }
+    i_by_merchant_id[merchant_id]
   end
 
   def find_by_created_at(created_at)

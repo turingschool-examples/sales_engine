@@ -1,5 +1,3 @@
-require 'date'
-
 class Invoice
   attr_reader :id,
               :customer_id,
@@ -28,8 +26,8 @@ class Invoice
   end
 
   def items
-    invoice_items.map do |element|
-      repo.find_items_by_item_id_through_invoice_items(element.item_id)
+    invoice_items.map do |invoice_item|
+      repo.find_items_by_item_id_through_invoice_items(invoice_item.item_id)
     end
   end
 
@@ -43,13 +41,11 @@ class Invoice
 
   def charge(attributes)
     transaction_data = {
-      invoice_id: id,
-      cc_number: attributes[:credit_card_number],
+      invoice_id:         id,
+      cc_number:          attributes[:credit_card_number],
       cc_expiration_date: attributes[:credit_card_expiration],
-      result: attributes[:result]
+      result:             attributes[:result]
     }
-
     repo.add_transaction(transaction_data)
   end
-
 end

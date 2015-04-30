@@ -3,8 +3,7 @@ class Merchant
               :name,
               :created_at,
               :updated_at,
-              :repo,
-              :successful_invoices
+              :repo
 
   def initialize(attributes, repo)
     @repo       = repo

@@ -1,15 +1,32 @@
 require_relative 'invoice_item'
-require 'csv'
 
 class InvoiceItemRepository
   attr_reader :engine,
               :data,
-              :invoice_items
+              :invoice_items,
+              :ii_by_id,
+              :ii_by_item_id,
+              :ii_by_invoice_id
 
   def initialize(data, engine)
-    @engine         = engine
-    @data           = data
-    @invoice_items  = create_invoice_items
+    @engine           = engine
+    @data             = data
+    @invoice_items    = create_invoice_items
+    @ii_by_id         = group_by_id
+    @ii_by_item_id    = group_by_item_id
+    @ii_by_invoice_id = group_by_invoice_id
+  end
+
+  def group_by_id
+    invoice_items.group_by(&:id)
+  end
+
+  def group_by_item_id
+    invoice_items.group_by(&:item_id)
+  end
+
+  def group_by_invoice_id
+    invoice_items.group_by(&:invoice_id)
   end
 
   def create_invoice_items
@@ -19,6 +36,7 @@ class InvoiceItemRepository
   end
 
   def create_new_invoice_items(items, invoice_data)
+    ii_by_invoice_id[invoice_data[:id]] = []
     group_items(items).each do |item_id, items|
       data = {
         id:           invoice_items.last.id + 1,
@@ -29,7 +47,9 @@ class InvoiceItemRepository
         created_at:   Time.new,
         updated_at:   Time.new
         }
-      invoice_items << InvoiceItem.new(data, self)
+      ii = InvoiceItem.new(data, self)
+      ii_by_invoice_id[invoice_data[:id]] << ii
+      invoice_items << ii
     end
   end
 
@@ -46,7 +66,7 @@ class InvoiceItemRepository
 
   def successful_invoice_items
     @successful_invoice_items ||=
-      engine.successful_invoices.flat_map(&:invoice_items)
+      engine.successful_invoices.flat_map(&:invoice_items).compact
   end
 
   def find_invoice_by_invoice_id(invoice_id)
@@ -70,27 +90,27 @@ class InvoiceItemRepository
   end
 
   def find_by_id(id)
-    invoice_items.detect { |item| item.id == id }
+    ii_by_id[id].first
   end
 
   def find_all_by_id(id)
-    invoice_items.select { |item| item.id == id }
+    ii_by_id[id]
   end
 
   def find_by_item_id(item_id)
-    invoice_items.detect { |item| item.item_id == item_id }
+    ii_by_item_id[item_id].first
   end
 
   def find_all_by_item_id(item_id)
-    invoice_items.select { |item| item.item_id == item_id }
+    ii_by_item_id[item_id]
   end
 
   def find_by_invoice_id(invoice_id)
-    invoice_items.detect { |item| item.invoice_id == invoice_id }
+    ii_by_invoice_id[invoice_id].first
   end
 
   def find_all_by_invoice_id(invoice_id)
-    invoice_items.select { |item| item.invoice_id == invoice_id }
+    ii_by_invoice_id[invoice_id]
   end
 
   def find_by_quantity(quantity)
