@@ -1,16 +1,18 @@
 require_relative 'invoice'
-require 'csv'
-require 'pry'
 
 class InvoiceRepository
   attr_reader :invoices,
               :engine,
-              :data
+              :data,
+              :i_by_id,
+              :i_by_merchant_id
 
   def initialize(data, engine)
-    @engine   = engine
-    @data     = data
-    @invoices = create_invoices
+    @engine           = engine
+    @data             = data
+    @invoices         = create_invoices
+    @i_by_id          = group_by_id
+    @i_by_merchant_id = group_by_merchant_id
   end
 
   def create_invoices
@@ -19,11 +21,19 @@ class InvoiceRepository
     end
   end
 
+  def group_by_id
+    invoices.group_by(&:id)
+  end
+
+  def group_by_merchant_id
+    invoices.group_by(&:merchant_id)
+  end
+
   def successful_invoices
     @successful_invoices ||=
       engine.successful_transactions.flat_map do |transaction|
         find_all_by_id(transaction.invoice_id)
-      end
+      end.compact
   end
 
   def create(attributes)
@@ -37,13 +47,16 @@ class InvoiceRepository
       }
     new_invoice = Invoice.new(invoice_data, self)
     invoices << new_invoice
-    engine.add_invoice_items(attributes[:items], invoice_data)
-
+    add_invoice_items(attributes[:items], invoice_data)
     new_invoice
   end
 
   def add_transaction(attributes)
     engine.add_transaction(attributes)
+  end
+
+  def add_invoice_items(items, data)
+    engine.add_invoice_items(items, data)
   end
 
   def add_id
@@ -83,11 +96,11 @@ class InvoiceRepository
   end
 
   def find_by_id(id)
-    invoices.detect { |invoice| invoice.id == id }
+    i_by_id[id].first
   end
 
   def find_all_by_id(id)
-    invoices.select { |invoice| invoice.id == id }
+    i_by_id[id]
   end
 
   def find_by_customer_id(customer_id)
@@ -99,11 +112,11 @@ class InvoiceRepository
   end
 
   def find_by_merchant_id(merchant_id)
-    invoices.detect { |invoice| invoice.merchant_id == merchant_id }
+    i_by_merchant_id[merchant_id].first
   end
 
   def find_all_by_merchant_id(merchant_id)
-    invoices.select { |invoice| invoice.merchant_id == merchant_id }
+    i_by_merchant_id[merchant_id]
   end
 
   def find_by_status(status)
