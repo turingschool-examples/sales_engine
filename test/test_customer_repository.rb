@@ -2,7 +2,7 @@ require_relative '../lib/sales_engine'
 
 class TestCustomerRepository < Minitest::Test
   def test_it_finds_customers_by_first_name
-    data_directory = File.expand_path '../data', __dir__
+    data_directory = File.expand_path 'fixtures', __dir__
 
     # find_all_by_X(match) works just like find_by_X except it returns a collection of all matches.
     # If there is no match, it returns an empty Array.
